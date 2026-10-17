@@ -47,10 +47,13 @@ Series Prometheus: `expctl prom query --url` contra el port-forward propio (cons
 
 ## Criterios (`criteria.yaml`)
 
-Los de 03-experiments.md 5/E1, con dos precisiones:
+Los de 03-experiments.md 5/E1, recortados a lo que demuestra EDA (pérdida 0, duplicados 0, errores del emisor 0, lag/cola que crece y vuelve a 0 con drenado <= 60 s, keys de la vista sin expulsar). Cada recorte, en una línea:
 
-- "Lag crece ~ tasa x D (+/- 10 %)": se mide el crecimiento entre el instante de caer y el de reanudar (no el pico, que ocurre
-  unos segundos después de reanudar porque el consumidor tarda en arrancar y el exporter se lee cada ~1,5 s).
+- `a-lag-growth-lo/hi` y `b-depth-growth-lo/hi` (crecimiento = tasa x D, +/- 10 %) pasan a `a-lag-grows` / `b-depth-grows` (crecimiento > 0): el valor exacto depende del instante de muestreo (exporter cada ~1,5 s, Prometheus 15 s) y no añade evidencia de EDA.
+- `b-matches` baja de 3000 a >= 2000: con la horizon de la fase b parte de las posiciones caducan antes de proyectarse (no es pérdida) y el conteo depende de esa ventana.
+- `a-emitter-rate`: quitado; con p95 y errores del emisor ya se ve que sigue trabajando, y la tasa depende de la carga de meter-sim.
+- `a-emitter-outbox` y `b-emitter-outbox`: quitados; la cota (100) era arbitraria y la pérdida real ya se mide contra device-sim y billing-sim.
+- `a-delta-device`, `a-delta-billing`: quitados; redundantes con `*-loss-*` y `*-dup-*` por matchId, que miden lo mismo uno a uno.
 - La línea base del p95 es la ventana de 30 s previa a la caída en la misma corrida (no una corrida aparte).
 
 ## Variante `TRANSFER_MODE=sync` (no implementada)
