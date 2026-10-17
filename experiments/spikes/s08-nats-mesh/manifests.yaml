@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: s08-mesh
+  labels: {istio-injection: enabled}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: s08-plain
+  labels: {istio-injection: disabled}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: toolbox
+  namespace: s08-mesh
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toolbox
+  namespace: s08-mesh
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: toolbox}
+  template:
+    metadata:
+      labels: {app: toolbox}
+    spec:
+      serviceAccountName: toolbox
+      containers:
+        - name: toolbox
+          image: natsio/nats-box:0.20.0-nonroot
+          command: ["sleep", "infinity"]
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+            limits: {memory: 64Mi}
+---
+# Control negativo: mismo cliente fuera del mesh (sin sidecar)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toolbox-plain
+  namespace: s08-plain
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: toolbox-plain}
+  template:
+    metadata:
+      labels: {app: toolbox-plain}
+    spec:
+      containers:
+        - name: toolbox
+          image: natsio/nats-box:0.20.0-nonroot
+          command: ["sleep", "infinity"]
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+            limits: {memory: 64Mi}
