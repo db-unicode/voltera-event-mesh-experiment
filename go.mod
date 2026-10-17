@@ -9,6 +9,7 @@ require (
 	github.com/nats-io/nats.go v1.54.0
 	github.com/prometheus/client_golang v1.25.0
 	github.com/prometheus/client_model v0.6.3
+	github.com/rabbitmq/amqp091-go v1.15.0
 	github.com/redis/go-redis/v9 v9.23.0
 	github.com/stretchr/testify v1.12.1
 	github.com/twmb/franz-go v1.22.2

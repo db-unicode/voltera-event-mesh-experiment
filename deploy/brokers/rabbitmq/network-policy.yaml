@@ -1,0 +1,26 @@
+# Capa L3/L4 sobre el acceso de KEDA al management API (15672): solo los pods del operador de KEDA.
+# Es defensa en profundidad junto a la AuthorizationPolicy por identidad (security.yaml). El resto de puertos queda
+# abierto a la red de pods porque ahí mandan mTLS STRICT y la AuthorizationPolicy.
+# kindnet aplica NetworkPolicy (comprobado: un curl desde otro namespace a 15672 expira).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: rabbitmq
+spec:
+  podSelector:
+    matchLabels: {app: rabbitmq}
+  policyTypes: [Ingress]
+  ingress:
+    - ports:
+        - {port: 5672, protocol: TCP}    # AMQP (mTLS, entra por el sidecar)
+        - {port: 15692, protocol: TCP}   # plugin prometheus (mTLS)
+        - {port: 15020, protocol: TCP}   # métricas fusionadas del sidecar (las scrapea Prometheus)
+        - {port: 15021, protocol: TCP}   # readiness del sidecar
+        - {port: 15090, protocol: TCP}   # estadísticas de Envoy
+    - from:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: keda}
+          podSelector:
+            matchLabels: {app.kubernetes.io/name: keda-operator}
+      ports:
+        - {port: 15672, protocol: TCP}   # management API para el scaler rabbitmq

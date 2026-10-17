@@ -1,0 +1,28 @@
+# El mesh ya exige mTLS STRICT (istio-system/default); este workload no lo relaja en ningún puerto.
+# KEDA corre con sidecar (identidad cluster.local/ns/keda/sa/keda-operator) y llega al management API por mTLS.
+#
+# Con una política ALLOW, lo que no coincide con ninguna regla se rechaza.
+#  1. Cualquier workload con identidad mTLS de la malla, en todos los puertos salvo 15672 (AMQP y demás). El control
+#     fino por servicio (SPIFFE) queda para la matriz Zero Trust; hoy la restricción efectiva son los permisos de RabbitMQ.
+#  2. Solo el ServiceAccount del operador de KEDA hacia el puerto 15672 (management API).
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: rabbitmq
+spec:
+  selector:
+    matchLabels: {app: rabbitmq}
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals: ["*"]
+      to:
+        - operation:
+            notPorts: ["15672"]
+    - from:
+        - source:
+            principals: ["cluster.local/ns/keda/sa/keda-operator"]
+      to:
+        - operation:
+            ports: ["15672"]

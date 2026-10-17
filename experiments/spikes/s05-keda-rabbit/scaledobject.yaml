@@ -1,0 +1,26 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: declaration-gateway-probe
+  namespace: s05-keda-rabbit
+spec:
+  scaleTargetRef:
+    name: declaration-gateway-probe
+  minReplicaCount: 0
+  maxReplicaCount: 10
+  pollingInterval: 5
+  cooldownPeriod: 30
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 30   # el default de HPA (300 s) ocultaría el scale-in
+  triggers:
+    - type: rabbitmq
+      metadata:
+        protocol: http          # con amqp no se cuentan los unacked; con http sí
+        queueName: meter-declarations
+        mode: QueueLength
+        value: "100"            # msgs por réplica; se recalcula como C_pod x 5
+      authenticationRef:
+        name: rabbitmq-http

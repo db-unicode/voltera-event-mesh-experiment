@@ -1,0 +1,59 @@
+# S5: consumidor de prueba de declaration-gateway y la autenticación de KEDA contra el management API.
+# Los Secrets (rabbitmq-users, keda-rabbitmq-uri) los crea run.sh a partir del Secret de voltera-infra.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: s05-keda-rabbit
+  labels: {istio-injection: enabled}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: declaration-gateway-probe
+  namespace: s05-keda-rabbit
+  labels: {app: declaration-gateway-probe}
+spec:
+  replicas: 0   # run.sh lo sube a 1 para medir C_pod; luego lo gobierna el ScaledObject
+  selector:
+    matchLabels: {app: declaration-gateway-probe}
+  template:
+    metadata:
+      labels: {app: declaration-gateway-probe}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: /metrics
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: probe
+          image: voltera/amqp-probe:dev
+          args: [work, --vhost=r1, --queue=meter-declarations, --prefetch=10, --delay=20ms, --listen=:8080]
+          env:
+            - {name: AMQP_USER, value: declaration-gateway-r1}
+            - name: AMQP_PASSWORD
+              valueFrom:
+                secretKeyRef: {name: rabbitmq-users, key: declaration-gateway-r1}
+          ports:
+            - {name: http-metrics, containerPort: 8080}
+          readinessProbe:
+            httpGet: {path: /readyz, port: http-metrics}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /healthz, port: http-metrics}
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 20m, memory: 16Mi}
+            limits: {memory: 64Mi}
+---
+# El scaler rabbitmq con protocol=http lee la profundidad (ready + unacked) del management API.
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: rabbitmq-http
+  namespace: s05-keda-rabbit
+spec:
+  secretTargetRef:
+    - parameter: host
+      name: keda-rabbitmq-uri
+      key: host

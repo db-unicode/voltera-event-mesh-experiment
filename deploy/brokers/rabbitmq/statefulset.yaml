@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rabbitmq
+  labels: {app: rabbitmq}
+spec:
+  serviceName: rabbitmq-headless
+  replicas: 1
+  selector:
+    matchLabels: {app: rabbitmq}
+  template:
+    metadata:
+      labels: {app: rabbitmq}
+      annotations:
+        # Prometheus corre fuera de la malla (STRICT): el sidecar fusiona estas métricas en :15020 (metrics merging)
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "15692"
+        prometheus.io/path: /metrics/per-object
+    spec:
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+      initContainers:
+        - name: render-definitions
+          image: rabbitmq:4.3.6-management
+          command: [sh, /template/render-definitions.sh]
+          volumeMounts:
+            - {name: config, mountPath: /template, readOnly: true}
+            - {name: users, mountPath: /secrets, readOnly: true}
+            - {name: definitions, mountPath: /out}
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 64Mi}
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:4.3.6-management
+          ports:
+            - {name: tcp-amqp, containerPort: 5672}
+            - {name: http-management, containerPort: 15672}
+            - {name: http-prometheus, containerPort: 15692}
+          env:
+            # Sin esto la imagen crea guest/guest (loopback_users.guest=false); con el sidecar el origen local pasa por 127.0.0.6
+            - name: RABBITMQ_DEFAULT_USER
+              value: admin
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef: {name: rabbitmq-users, key: admin}
+          startupProbe:
+            exec: {command: [rabbitmq-diagnostics, -q, ping]}
+            periodSeconds: 5
+            failureThreshold: 36
+            timeoutSeconds: 10
+          readinessProbe:
+            exec: {command: [rabbitmq-diagnostics, -q, check_running]}
+            periodSeconds: 10
+            timeoutSeconds: 10
+          livenessProbe:
+            exec: {command: [rabbitmq-diagnostics, -q, ping]}
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 4
+          resources:
+            requests: {cpu: 100m, memory: 384Mi}
+            limits: {memory: 640Mi}
+          volumeMounts:
+            - {name: data, mountPath: /var/lib/rabbitmq}
+            - {name: config, mountPath: /etc/rabbitmq/conf.d/20-voltera.conf, subPath: rabbitmq.conf, readOnly: true}
+            - {name: definitions, mountPath: /etc/rabbitmq/definitions, readOnly: true}
+      volumes:
+        - name: config
+          configMap: {name: rabbitmq-config}
+        - name: users
+          secret: {secretName: rabbitmq-users}
+        - name: definitions
+          emptyDir: {medium: Memory, sizeLimit: 8Mi}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests: {storage: 1Gi}
