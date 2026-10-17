@@ -22,6 +22,13 @@ MESH_TOOLS_NS=${MESH_TOOLS_NS:-bus-tools}
 MESH_PAIR_METERS=${MESH_PAIR_METERS:-400}
 
 mesh_tools_up() {
+  # el namespace de una corrida anterior puede seguir terminando (mesh_tools_down no espera)
+  _tu_i=0
+  while [ "$(k get namespace "$MESH_TOOLS_NS" -o jsonpath='{.status.phase}' 2>/dev/null)" = Terminating ]; do
+    [ "$_tu_i" -lt 180 ] || { log "el namespace $MESH_TOOLS_NS sigue terminando"; return 1; }
+    sleep 2
+    _tu_i=$((_tu_i + 2))
+  done
   k apply -f - >/dev/null <<YAML
 apiVersion: v1
 kind: Namespace
