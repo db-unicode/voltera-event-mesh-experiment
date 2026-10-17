@@ -1,0 +1,50 @@
+# Vista efímera: sin persistencia (un FLUSHALL o un reinicio se repuebla con las declaraciones).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: view
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels: {}
+  template:
+    metadata:
+      labels: {}
+    spec:
+      containers:
+        - name: redis
+          image: redis:8.10.2
+          command: ["sh", "-c"]
+          args:
+            - exec redis-server --requirepass "$REDIS_PASSWORD" --save "" --appendonly no
+              --maxmemory 64mb --maxmemory-policy volatile-ttl
+          ports:
+            - name: tcp-redis
+              containerPort: 6379
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: view-credentials
+                  key: REDIS_PASSWORD
+            - name: REDISCLI_AUTH
+              valueFrom:
+                secretKeyRef:
+                  name: view-credentials
+                  key: REDIS_PASSWORD
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "redis-cli ping | grep -q PONG"]
+            periodSeconds: 5
+            timeoutSeconds: 3
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "redis-cli ping | grep -q PONG"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 3
+          resources:
+            requests: {cpu: 20m, memory: 32Mi}
+            limits: {cpu: 500m, memory: 128Mi}

@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: voltera-r2
+namePrefix: matches-
+nameSuffix: -r2
+resources:
+  - ../../postgres
+labels:
+  - pairs:
+      app: matches-db-r2
+      app.kubernetes.io/instance: matches-db-r2
+    includeSelectors: true

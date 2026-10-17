@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: voltera-r1
+namePrefix: transfer-
+resources:
+  - ../../postgres
+labels:
+  - pairs:
+      app: transfer-db
+      app.kubernetes.io/instance: transfer-db
+    includeSelectors: true
