@@ -1,0 +1,50 @@
+#!/bin/sh
+#MISE description="Corrida final: reconstruye y redespliega desde el árbol actual y corre todos los experimentos en serie (arg: reps)"
+#USAGE arg "[reps]" help="repeticiones por experimento" default="1"
+# Env: EXP_LIST (ids separados por espacio; por defecto todos), EXP_PROMOTE=1 copia la última corrida que pasa de cada
+# experimento a experiments/results/final/<exp>/ (los archivos > 500 KB se podan y se listan en PRUNED.txt),
+# EXP_ALLOW_DIRTY=1 permite correr con cambios sin commitear (la evidencia queda marcada -dirty).
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+need git
+require_cluster
+
+reps=${1:-1}
+case "$reps" in '' | *[!0-9]*) die "reps debe ser un entero: $reps" ;; esac
+list=${EXP_LIST:-e00 e01 e02 e02b e03 e04 e05 e06 e07 e08 e09 e10}
+[ "${EXP_ALLOW_DIRTY:-0}" = 1 ] || git -C "$ROOT" diff --quiet HEAD \
+  || die "hay cambios sin commitear: commitea o usa EXP_ALLOW_DIRTY=1"
+
+summary="$ROOT/experiments/results/all-$(date -u +%Y%m%dT%H%M%SZ).tsv"
+mkdir -p "$(dirname "$summary")"
+printf 'exp\trep\tresult\tevidence\n' >"$summary"
+
+log "redespliegue desde $(git -C "$ROOT" rev-parse --short HEAD)"
+mise run images:build
+mise run apps:write-side all
+mise run apps:match-side all
+mise run security:up all
+
+fails=0
+for rep in $(seq 1 "$reps"); do
+  for id in $list; do
+    if sh "$ROOT/experiments/run.sh" "$id" "$rep"; then res=PASS; else res=FAIL; fails=$((fails + 1)); fi
+    dir=$(cd "$ROOT/experiments/results" && for d in "$id"-*/latest "$id"/latest; do [ -e "$d" ] && echo "$d"; done | head -n 1)
+    ev=$(readlink "$ROOT/experiments/results/$dir" 2>/dev/null || echo "?")
+    printf '%s\t%s\t%s\t%s\n' "$id" "$rep" "$res" "${dir%/latest}/$ev" | tee -a "$summary"
+    if [ "$res" = PASS ] && [ "${EXP_PROMOTE:-0}" = 1 ]; then
+      exp=${dir%/latest}
+      dst="$ROOT/experiments/results/final/$exp"
+      rm -rf "$dst"
+      cp -R "$ROOT/experiments/results/$exp/$ev" "$dst"
+      find "$dst" -type f -size +500k -print | sed "s|^$dst/||" >"$dst/PRUNED.txt"
+      find "$dst" -type f -size +500k -delete
+      [ -s "$dst/PRUNED.txt" ] || rm -f "$dst/PRUNED.txt"
+    fi
+  done
+done
+
+mise run exp:report
+log "resumen: ${summary#"$ROOT"/} ($fails corridas fallidas)"
+[ "$fails" -eq 0 ]
