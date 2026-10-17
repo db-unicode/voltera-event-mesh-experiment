@@ -135,7 +135,9 @@ e1_phase() {
     sleep 20   # al menos un scrape de Prometheus del pod nuevo
   fi
   _dev0=$(curl -fsS -m 20 "http://127.0.0.1:$LX_PF_DEVICE/state" | jq -c '{total, distinct, duplicates}')
-  _bil0=$(curl -fsS -m 20 "http://127.0.0.1:$LX_PF_BILLING/state" | jq -c '.byRegion.r1 | {total, distinct, duplicates}')
+  # billing-sim recién reiniciado aún no tiene la región: su línea base es 0, no null
+  _bil0=$(curl -fsS -m 20 "http://127.0.0.1:$LX_PF_BILLING/state" \
+    | jq -c '.byRegion.r1 // {total: 0, distinct: 0, duplicates: 0} | {total, distinct, duplicates}')
   _t_start=$(lx_now)
   lx_sample "$OUT/raw/series-$_tag.csv" 3000 "$E1_COLS" e1_row &
   _sampler=$!
@@ -271,7 +273,7 @@ e1_phase_metrics() {
   # delta de efectos nuevos en device-sim y billing-sim vs matches creados en la fase
   _created=$(lx_sql "$E1_NS/matches-db" "select count(*) from matches where created_at >= to_timestamp($_tstart) and created_at <= to_timestamp($_ts)")
   _dev1=$(jq -c '{total, distinct, duplicates}' "$OUT/raw/device-$_tag.json")
-  _bil1=$(jq -c '.byRegion.r1 | {total, distinct, duplicates}' "$OUT/raw/billing-$_tag.json")
+  _bil1=$(jq -c '.byRegion.r1 // {total: 0, distinct: 0, duplicates: 0} | {total, distinct, duplicates}' "$OUT/raw/billing-$_tag.json")
 
   # vista (solo fase b): keys del prefijo antes de la caída, mínimo durante y después, y al final de la carga
   _keys_before=-1 _keys_min=-1 _keys_end=-1
