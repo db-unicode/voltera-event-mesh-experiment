@@ -65,7 +65,7 @@ e7_wait_full() {
 # e7_mark <nombre>: añade el instante del reloj de Redis (µs) a raw/markers.csv y lo deja en MARK_US
 e7_mark() {
   MARK_US=$(rv_now_us) || return 1
-  printf '%s,%s\n' "$1" "$MARK_US" >>"$OUT/raw/markers.csv"
+  printf '%s,%s\n' "$1" "$MARK_US" >>"$OUT/data/markers.csv"
 }
 
 exp_reset() {
@@ -98,7 +98,8 @@ drive() {
   PFX=e07-$RUN-
   GLOB="pos:*:$PFX*"
   WATCH=$OUT/raw/redis_watch.txt
-  printf 'name,us\n' >"$OUT/raw/markers.csv"
+  mkdir -p "$OUT/data"
+  printf 'name,us\n' >"$OUT/data/markers.csv"
   printf '%s\n' "$PFX" >"$OUT/raw/prefix.txt"
 
   rv_watch_start "$GLOB" "$WATCH" 1
@@ -144,7 +145,7 @@ drive() {
 }
 
 # e7_marker <nombre>: µs del marcador
-e7_marker() { awk -F, -v n="$1" '$1 == n { print $2 }' "$OUT/raw/markers.csv"; }
+e7_marker() { awk -F, -v n="$1" '$1 == n { print $2 }' "$OUT/data/markers.csv"; }
 
 # e7_window_stats <desde_us> <hasta_us>: "min_keys min_pttl_ms" en la ventana (min_pttl solo con keys presentes)
 e7_window_stats() {
@@ -175,8 +176,8 @@ e7_expiry() {
       for (i = 4; i <= n; i++) { split(a[i], f, ","); cur[f[1]] = 1; lastseen[f[1]] = t; proj[f[1]] = f[3]; seen[f[1]] = 1 }
       for (k in seen) if (!(k in cur) && !(k in gone)) {
         gone[k] = t
-        exp = proj[k] + ttl * 1000000
-        printf "%s,%d,%d,%d,%d,%.3f\n", k, lastseen[k], proj[k], t, exp, (t - exp) / 1000000
+        expiry = proj[k] + ttl * 1000000
+        printf "%s,%.0f,%.0f,%.0f,%.0f,%.3f\n", k, lastseen[k], proj[k], t, expiry, (t - expiry) / 1000000
       }
     }' "$WATCH"
 }
@@ -184,7 +185,7 @@ e7_expiry() {
 # e7_drop_stats <desde_us> <hasta_us>: "meterId_distintos max_por_medidor total" de las líneas dropped del proyector
 e7_drop_stats() {
   awk -F, -v from="$1" -v to="$2" 'NR > 1 && $2 >= from && $2 <= to { c[$1]++; tot++ }
-    END { m = 0; d = 0; for (k in c) { d++; if (c[k] > m) m = c[k] } print d + 0, m, tot + 0 }' "$OUT/raw/drops.csv"
+    END { m = 0; d = 0; for (k in c) { d++; if (c[k] > m) m = c[k] } print d + 0, m, tot + 0 }' "$OUT/data/drops.csv"
 }
 
 collect() {
@@ -196,7 +197,7 @@ collect() {
     printf 'meterId,us\n'
     jq -r 'select(.result == "dropped") | [.meterId, ((.ts | sub("\\.[0-9]+Z$"; "Z") | fromdate) * 1000000)] | @csv' \
       "$OUT/logs/market-projector.log" 2>/dev/null | tr -d '"'
-  } >"$OUT/raw/drops.csv"
+  } >"$OUT/data/drops.csv"
 
   a_on=$(e7_marker a_on) a_off=$(e7_marker a_off) a_end=$(e7_marker a_end)
   b_on=$(e7_marker b_on) b_off=$(e7_marker b_off)
@@ -212,7 +213,7 @@ EOS
   a_recover=$(e7_first_full "$a_off")
 
   # 7b
-  e7_expiry "$b_on" "$b_off" "$E7_TTL" >"$OUT/raw/expiry_7b.csv"
+  e7_expiry "$b_on" "$b_off" "$E7_TTL" >"$OUT/data/expiry_7b.csv"
   read -r b_min_keys _ <<EOS
 $(e7_window_stats "$b_on" "$b_off")
 EOS
@@ -249,9 +250,9 @@ EOS
 
 # e7_expiry_json: resume expiry_7b.csv en {vanished, err_min_s, err_max_s} y devuelve la ruta del JSON
 e7_expiry_json() {
-  _f=$OUT/raw/expiry_7b.json
+  _f=$OUT/data/expiry_7b.json
   awk -F, 'NR > 1 { n++; if (n == 1 || $6 < mn) mn = $6; if (n == 1 || $6 > mx) mx = $6 }
     END { if (n == 0) { mn = 0; mx = 0 } printf "{\"vanished\": %d, \"err_min_s\": %s, \"err_max_s\": %s}\n", n, mn, mx }' \
-    "$OUT/raw/expiry_7b.csv" >"$_f"
+    "$OUT/data/expiry_7b.csv" >"$_f"
   printf '%s\n' "$_f"
 }

@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Experimento e03: CQRS, retraso escritura -> vista (PASS/FAIL)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e03-cqrs-lag "$@"
