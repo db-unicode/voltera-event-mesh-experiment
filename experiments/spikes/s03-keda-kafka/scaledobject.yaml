@@ -1,0 +1,24 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: energy-transfer-probe
+  namespace: s03-keda-kafka
+spec:
+  scaleTargetRef: {name: energy-transfer-probe}
+  pollingInterval: 5
+  cooldownPeriod: 30
+  minReplicaCount: 0
+  maxReplicaCount: 6   # = particiones del topic
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown: {stabilizationWindowSeconds: 30}
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: kafka.voltera-infra.svc:9092
+        consumerGroup: energy-transfer-probe
+        topic: r1.energy-matched
+        lagThreshold: "50"
+        offsetResetPolicy: earliest
+        limitToPartitionsWithLag: "true"

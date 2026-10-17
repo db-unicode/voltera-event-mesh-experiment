@@ -1,0 +1,39 @@
+# Consumidor lento (50 ms por evento) que simula energy-transfer. KEDA lo escala de 0 a 6.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: energy-transfer-probe
+  namespace: s03-keda-kafka
+  labels: {app: energy-transfer-probe}
+spec:
+  replicas: 0
+  selector:
+    matchLabels: {app: energy-transfer-probe}
+  template:
+    metadata:
+      labels: {app: energy-transfer-probe}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: /metrics
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: probe
+          image: voltera/kafka-probe:dev
+          args:
+            - work
+            - --topic=r1.energy-matched
+            - --group=energy-transfer-probe
+            - --delay=50ms
+          env:
+            - {name: KAFKA_BROKERS, value: "kafka.voltera-infra.svc:9092"}
+            - {name: METRICS_ADDR, value: ":8080"}
+          ports:
+            - {name: http-metrics, containerPort: 8080}
+          readinessProbe:
+            httpGet: {path: /healthz, port: http-metrics}
+            periodSeconds: 5
+          resources:
+            requests: {cpu: 25m, memory: 32Mi}
+            limits: {memory: 128Mi}
