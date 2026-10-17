@@ -215,7 +215,9 @@ phase_b() {
   _bdup0=$(jq '.byRegion.r1.duplicates // 0' "$OUT/raw/billing-before.json")
 
   # sobres tal cual los guardó la outbox (mismo eventId, misma clave matchId), K veces cada uno
-  psql_m "SELECT key || '|' || payload::text FROM outbox WHERE key IN (SELECT match_id FROM matches WHERE $(in_prefix "$PFX_B")) ORDER BY id" \
+  # solo los matches de b-ids.txt: con posiciones aún vigentes el motor puede crear alguno más con el mismo prefijo
+  _ids=$(awk 'NF { printf "%s\x27%s\x27", (n++ ? "," : ""), $1 }' "$OUT/raw/b-ids.txt")
+  psql_m "SELECT key || '|' || payload::text FROM outbox WHERE key IN ($_ids) ORDER BY id" \
     >"$OUT/raw/b-envelopes.txt"
   [ "$(wc -l <"$OUT/raw/b-envelopes.txt" | tr -d ' ')" = "$_n" ] || { log "faltan sobres en la outbox"; return 1; }
   : >"$OUT/raw/b-resend.txt"
