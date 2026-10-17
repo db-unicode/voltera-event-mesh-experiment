@@ -1,0 +1,21 @@
+{
+  "device": {
+    "b_not_once": 0,
+    "c_not_once": 0,
+    "b_dups_delta": 0
+  },
+  "transfers": {
+    "b_rows": 100,
+    "b_sent": 100,
+    "c_sent": 300,
+    "c_not_sent": 0
+  },
+  "gateway": {
+    "a_outbox_rows": 300,
+    "c_outbox_rows": 600
+  },
+  "billing": {
+    "ids_with_two": 100,
+    "ids_other": 0
+  }
+}

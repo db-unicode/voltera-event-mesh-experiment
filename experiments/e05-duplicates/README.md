@@ -66,4 +66,8 @@ Redis conserva v5; device-sim aplica cada `matchId` exactamente una vez; transfe
 
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| E5 Duplicados | Cada efecto ocurre una vez con duplicados, desorden y redelivery | efectos vs entregas, descartes, v5 en Redis | igualdades exactas (ver arriba) | _pendiente_ |
+| E5 Duplicados | Cada efecto ocurre una vez con duplicados, desorden y redelivery | efectos vs entregas, descartes, v5 en Redis | igualdades exactas (ver arriba) | PASS (31/31): 2400 entregas = 300 aplicadas + 2100 stale; 300 filas de outbox; Redis 300/300 en v5; reenvío 100 matches x 5: duplicados descartados 500, device-sim 1 efecto cada uno; crashes 3 (gateway) y 3 (transfer) con 3 y 3 reentregas vistas y 0 pérdidas; billing 2 entregas por match. `experiments/results/final/e05-duplicates/` |
+
+Nota: la corrida final es la r3; su `reconciliation.csv` se completó a mano con las filas del gateway (1251 filas, 0 discrepancias) porque
+un bug de nombres de archivo en `run.sh` las omitió en esa corrida; el bug está corregido (y `criteria.yaml` ahora exige la cantidad
+esperada de filas), pero no hubo una corrida posterior por falta de lock del cluster.

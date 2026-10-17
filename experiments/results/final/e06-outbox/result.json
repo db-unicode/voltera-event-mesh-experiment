@@ -1,0 +1,240 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/exp-e05-e06/experiments/results/e06-outbox/20261017T044448Z-6dbf7cb-r2",
+  "criteria": [
+    {
+      "id": "p1-matches",
+      "description": "fase 1 (after_commit_before_publish, con outbox): la carga produjo matches (cordura)",
+      "metric": "metrics.json:$.p1_matches",
+      "observed": 2400,
+      "op": "ge",
+      "expected": 1000,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-crashed",
+      "description": "fase 1 (after_commit_before_publish, con outbox): el motor murió al menos una vez",
+      "metric": "metrics.json:$.p1_crashes",
+      "observed": 2,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-orphans",
+      "description": "fase 1 (after_commit_before_publish, con outbox): matches sin fila de outbox = 0 (atomicidad)",
+      "metric": "metrics.json:$.p1_orphans",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-pending",
+      "description": "fase 1 (after_commit_before_publish, con outbox): pendientes finales de la outbox = 0",
+      "metric": "metrics.json:$.p1_outbox_pending_final",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-lost",
+      "description": "fase 1 (after_commit_before_publish, con outbox): matches en BD sin evento en el topic = 0 (pérdida 0)",
+      "metric": "metrics.json:$.p1_lost",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-spurious",
+      "description": "fase 1 (after_commit_before_publish, con outbox): eventos en el topic sin match en BD = 0",
+      "metric": "metrics.json:$.p1_spurious",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-effects-missing",
+      "description": "fase 1 (after_commit_before_publish, con outbox): todo match tiene su efecto en device-sim",
+      "metric": "metrics.json:$.p1_device_missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-effects-dup",
+      "description": "fase 1 (after_commit_before_publish, con outbox): efectos duplicados en device-sim = 0",
+      "metric": "metrics.json:$.p1_device_duplicated",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-device-dups",
+      "description": "fase 1 (after_commit_before_publish, con outbox): device-sim no recibe comandos repetidos nuevos",
+      "metric": "metrics.json:$.p1_device_dups_delta",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-transfers-dups",
+      "description": "fase 1 (after_commit_before_publish, con outbox): transfers sin duplicados",
+      "metric": "metrics.json:$.p1_transfers_dup_groups",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p1-recovery",
+      "description": "fase 1 (after_commit_before_publish, con outbox): recuperación (crash a outbox vacía) \u003c= 30 s en todos los crashes",
+      "metric": "metrics.json:$.p1_recovery_max_s",
+      "observed": 11,
+      "op": "le",
+      "expected": 30,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-matches",
+      "description": "fase 2 (after_publish_before_mark, con outbox): la carga produjo matches (cordura)",
+      "metric": "metrics.json:$.p2_matches",
+      "observed": 2400,
+      "op": "ge",
+      "expected": 1000,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-crashed",
+      "description": "fase 2 (after_publish_before_mark, con outbox): el motor murió al menos una vez",
+      "metric": "metrics.json:$.p2_crashes",
+      "observed": 2,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-orphans",
+      "description": "fase 2 (after_publish_before_mark, con outbox): matches sin fila de outbox = 0 (atomicidad)",
+      "metric": "metrics.json:$.p2_orphans",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-pending",
+      "description": "fase 2 (after_publish_before_mark, con outbox): pendientes finales de la outbox = 0",
+      "metric": "metrics.json:$.p2_outbox_pending_final",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-lost",
+      "description": "fase 2 (after_publish_before_mark, con outbox): matches en BD sin evento en el topic = 0 (pérdida 0)",
+      "metric": "metrics.json:$.p2_lost",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-spurious",
+      "description": "fase 2 (after_publish_before_mark, con outbox): eventos en el topic sin match en BD = 0",
+      "metric": "metrics.json:$.p2_spurious",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-effects-missing",
+      "description": "fase 2 (after_publish_before_mark, con outbox): todo match tiene su efecto en device-sim",
+      "metric": "metrics.json:$.p2_device_missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-effects-dup",
+      "description": "fase 2 (after_publish_before_mark, con outbox): efectos duplicados en device-sim = 0",
+      "metric": "metrics.json:$.p2_device_duplicated",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-device-dups",
+      "description": "fase 2 (after_publish_before_mark, con outbox): device-sim no recibe comandos repetidos nuevos",
+      "metric": "metrics.json:$.p2_device_dups_delta",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-transfers-dups",
+      "description": "fase 2 (after_publish_before_mark, con outbox): transfers sin duplicados",
+      "metric": "metrics.json:$.p2_transfers_dup_groups",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-recovery",
+      "description": "fase 2 (after_publish_before_mark, con outbox): recuperación (crash a outbox vacía) \u003c= 30 s en todos los crashes",
+      "metric": "metrics.json:$.p2_recovery_max_s",
+      "observed": 0,
+      "op": "le",
+      "expected": 30,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p2-broker-duplicates",
+      "description": "fase 2 (after_publish_before_mark): el broker recibe eventId repetidos (permitido; el efecto sigue siendo único)",
+      "metric": "metrics.json:$.p2_kafka_dup_events",
+      "observed": 12,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p3-crashed",
+      "description": "fase 3 (control OUTBOX_MODE=direct): el motor murió al menos una vez entre el commit y la publicación",
+      "metric": "metrics.json:$.p3_crashes",
+      "observed": 1,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p3-no-outbox",
+      "description": "fase 3 (control OUTBOX_MODE=direct): sin outbox hay matches sin fila de outbox (\u003e= 1)",
+      "metric": "metrics.json:$.p3_orphans",
+      "observed": 1200,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "p3-lost",
+      "description": "fase 3 (control OUTBOX_MODE=direct): pérdida \u003e= 1 (matches en BD sin evento en el topic)",
+      "metric": "metrics.json:$.p3_lost",
+      "observed": 2,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    }
+  ]
+}

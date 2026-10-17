@@ -1,0 +1,1 @@
+{"profile":"dup","region":"r1","seed":5,"meters":300,"rate":300,"planned":1800,"scheduled":1800,"published":1800,"errors":0,"late":0,"dropped":0,"maxLatenessMs":4.513301,"byVendor":{"acme-v1":906,"voltix-2":894},"startedAt":"2026-10-17T06:21:03.658147576Z","endedAt":"2026-10-17T06:21:09.660718354Z","elapsedSec":6.002570819,"achievedRate":299.87151410233116,"csv":"/dev/stdout"}

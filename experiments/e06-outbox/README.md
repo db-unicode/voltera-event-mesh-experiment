@@ -63,4 +63,8 @@ pérdida >= 1.
 
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| E6 Outbox | Ningún evento se pierde por caída entre commit y publish; sin outbox sí | huérfanos, pendientes finales, pérdida, recuperación | 0 / 0 / 0 / <= 30 s; control con pérdida >= 1 | _pendiente_ |
+| E6 Outbox | Ningún evento se pierde por caída entre commit y publish; sin outbox sí | huérfanos, pendientes finales, pérdida, recuperación | 0 / 0 / 0 / <= 30 s; control con pérdida >= 1 | PASS (26/26, corrida r2): 2400 matches por fase con outbox, 2 crashes cada una, huérfanos 0, pendientes 0, pérdida 0, 6 y 12 eventId repetidos en el broker con efecto único, recuperación <= 11 s; control `direct`: 1200 matches sin fila de outbox y 2 sin evento en el topic. `experiments/results/final/e06-outbox/` |
+
+Nota: la corrida final (r2) midió la recuperación como "primera muestra con `pending == 0` tras el crash" (sin exigir el reinicio del
+contenedor), lo que da 0 s en la fase 2. El `run.sh` actual exige además que el contenedor ya haya reiniciado; sobre los mismos datos da 2 a 13 s
+(todos <= 30 s). No se repitió la corrida por falta de lock.
