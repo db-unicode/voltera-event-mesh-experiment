@@ -46,7 +46,7 @@ a3,kafka,consume,r1.energy-matched
 
 func TestClassify(t *testing.T) {
 	for want, msgs := range map[string][]string{
-		ClassAuthn:   {"nats: Authorization Violation", "Exception (403) Reason: \"ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN\""},
+		ClassAuthn:   {"nats: Authorization Violation", "conectar: Exception (403) Reason: \"username or password not allowed\"", "Exception (403) Reason: \"ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN\""},
 		ClassACL:     {"nats: Permissions Violation for Publish to \"x\"", "Exception (403) Reason: \"ACCESS_REFUSED - access to exchange 'x' in vhost 'r1' refused\""},
 		ClassNetwork: {"read tcp: connection reset by peer", "EOF", "context deadline exceeded", "dial tcp: connection refused"},
 		ClassOther:   {"algo raro"},

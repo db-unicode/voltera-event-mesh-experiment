@@ -122,7 +122,8 @@ func Classify(err error) string {
 	}
 	s := strings.ToLower(err.Error())
 	switch {
-	case strings.Contains(s, "login was refused"), strings.Contains(s, "authorization violation"),
+	case strings.Contains(s, "login was refused"), strings.Contains(s, "username or password not allowed"),
+		strings.Contains(s, "authorization violation"),
 		strings.Contains(s, "authentication"), strings.Contains(s, "sasl"):
 		return ClassAuthn
 	case strings.Contains(s, "access_refused"), strings.Contains(s, "permissions violation"),
