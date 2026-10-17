@@ -130,9 +130,10 @@ kafka_read() {
     | tr -d '"' >>"$_dest" || true
 }
 
-# recovery_s <crash_ts> <samples.csv>: segundos desde el crash hasta la primera muestra con pending == 0
+# recovery_s <crash_ts> <reinicios tras el crash> <samples.csv>: segundos desde el crash hasta la primera muestra con el
+# contenedor ya reiniciado (columna restarts) y la outbox vacía (pending == 0)
 recovery_s() {
-  _first=$(awk -F, -v c="$1" 'NR > 1 && $1 >= c && $2 == 0 { print $1; exit }' "$2")
+  _first=$(awk -F, -v c="$1" -v r="$2" 'NR > 1 && $1 >= c && $4 + 0 >= r && $2 == 0 { print $1; exit }' "$3")
   [ -n "$_first" ] || { echo null; return 0; }
   expctl elapsed "$1" "$_first"
 }
@@ -225,9 +226,9 @@ e6_phase() {
   _rec_json="["
   _sep=""
   if [ "$(wc -l <"$OUT/raw/$_tag-crashes.csv")" -gt 1 ]; then
-    awk -F, 'NR > 1 { print $1 }' "$OUT/raw/$_tag-crashes.csv" >"$OUT/raw/$_tag-crash-ts.txt"
-    while read -r _ts; do
-      _r=$(recovery_s "$_ts" "$OUT/raw/$_tag-samples.csv")
+    awk -F, 'NR > 1 { print $1, $4 }' "$OUT/raw/$_tag-crashes.csv" >"$OUT/raw/$_tag-crash-ts.txt"
+    while read -r _ts _rst; do
+      _r=$(recovery_s "$_ts" "$_rst" "$OUT/raw/$_tag-samples.csv")
       _rec_json="$_rec_json$_sep{\"crashAt\":\"$_ts\",\"recoverySec\":$_r}"
       _sep=","
       case $_r in null) _max_rec=null ;; *) [ "$_max_rec" = null ] || _max_rec=$(awk -v a="$_max_rec" -v b="$_r" 'BEGIN { print (b > a) ? b : a }') ;; esac
@@ -261,6 +262,8 @@ collect() {
       "$_dir/raw/m.json" >>"$_dir/outbox_before_after.csv" 2>/dev/null || true
     cp "$_dir/raw/p$_n-kafka_event_ids.txt" "$_dir/kafka_event_ids-p$_n.txt" 2>/dev/null || true
     cp "$_dir/raw/p$_n-matches_ids.txt" "$_dir/matches_ids-p$_n.txt" 2>/dev/null || true
+    # comm -3: columna 1 = match en BD sin evento en el topic; columna 2 (con tabulador) = evento en el topic sin match
+    comm -3 "$_dir/raw/p$_n-matches_ids.txt" "$_dir/raw/p$_n-kafka_event_ids.txt" >"$_dir/diff-p$_n.txt" 2>/dev/null || true
   done
   jq --arg t0 "$_t0" --arg t1 "$_t1" '. + {tStart: $t0, tEnd: $t1}' "$_dir/raw/m.json" >"$_dir/metrics.json"
 }

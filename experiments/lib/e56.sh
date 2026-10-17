@@ -254,8 +254,12 @@ N=\$((E-S))
 EOS
 }
 
+_e56_ns_not_terminating() { [ "$(k get ns "$1" -o jsonpath='{.status.phase}' 2>/dev/null)" != Terminating ]; }
+
 # e56_ensure_ns <ns>: namespace de prueba con sidecar
 e56_ensure_ns() {
+  # un namespace recién borrado tarda en desaparecer y no admite objetos mientras termina
+  e56_wait 300 _e56_ns_not_terminating "$1" || return 1
   k apply -f - >/dev/null <<YAML
 apiVersion: v1
 kind: Namespace
