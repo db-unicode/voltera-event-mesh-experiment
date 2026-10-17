@@ -118,7 +118,7 @@ outbox_pending_zero() { [ "$(psql_pos "SELECT count(*) FROM outbox WHERE publish
 
 # --- (a) gateway: k copias y desorden v5 -> v3 --------------------------------------------
 
-gw_consumed() { e56_metric_sum "$NS" "$GW" events_consumed_total 'event_type="MeterDeclaration"' "result=\"$1\""; }
+gw_consumed() { e56_metric_sum "$NS" "$GW" events_consumed_total 'channel="meter-declarations"' "result=\"$1\""; }
 
 gw_processed_is() { # <esperado>
   _t=$(($(gw_consumed ok) + $(gw_consumed stale) + $(gw_consumed error)))
@@ -138,7 +138,7 @@ phase_a() {
   _ok0=$(gw_consumed ok)
   _st0=$(gw_consumed stale)
   _er0=$(gw_consumed error)
-  _dd0=$(e56_metric_sum "$NS" "$GW" events_duplicates_dropped_total 'event_type="MeterDeclaration"')
+  _dd0=$(e56_metric_sum "$NS" "$GW" events_duplicates_dropped_total 'event_type="PositionDeclared"')
   _t0=$(($(gw_consumed ok) + $(gw_consumed stale) + $(gw_consumed error)))
   run_load "$OUT/raw/a-v5.log" --profile dup --meters "$E5_METERS" --dup-k "$E5_K" --version-base 5 \
     --prefix "$PFX_A" --seed 5 --rate 300 || return 1
@@ -157,7 +157,7 @@ phase_a() {
   mset a_applied "$_ok"
   mset a_stale "$_st"
   mset a_errors "$_er"
-  mset a_duplicates_dropped "$(($(e56_metric_sum "$NS" "$GW" events_duplicates_dropped_total 'event_type="MeterDeclaration"') - _dd0))"
+  mset a_duplicates_dropped "$(($(e56_metric_sum "$NS" "$GW" events_duplicates_dropped_total 'event_type="PositionDeclared"') - _dd0))"
   # balance: aplicados + descartados (stale incluye los duplicados exactos: misma versión) - entregas
   mset a_balance_diff "$((_ok + _st + _er - _deliveries))"
   mset a_meters "$E5_METERS"
@@ -261,6 +261,15 @@ phase_b() {
 
 # --- (c) redelivery real: before_ack con crash bajo carga pairs ---------------------------
 
+# pod_logs <deploy>: logs del contenedor actual y del anterior de todos los pods
+pod_logs() {
+  _sel=$(_chaos_selector "$NS" "$1") || return 0
+  for _pod in $(_chaos_pods "$NS" "$_sel"); do
+    k -n "$NS" logs "$_pod" -c "$1" --tail=-1 2>/dev/null || true
+    k -n "$NS" logs "$_pod" -c "$1" --previous --tail=-1 2>/dev/null || true
+  done
+}
+
 phase_c() {
   log "E5 (c): before_ack=crash-after en $GW (N=$E5_C_GW_N) y $TR (N=$E5_C_TR_N) bajo carga pairs"
   e56_bg e56_rearm_loop "$NS" "$GW" before_ack "crash-after:$E5_C_GW_N" "$E5_C_MAX" "$OUT/raw/crashes-gateway.csv"
@@ -280,8 +289,12 @@ phase_c() {
   _pub=$(jq .published "$OUT/raw/c-pairs.log.json")
   mset c_published "$_pub"
   mset c_lost_in_sender "$(($(jq .errors "$OUT/raw/c-pairs.log.json") + $(jq .dropped "$OUT/raw/c-pairs.log.json")))"
-  mset c_gw_crashes "$(($(wc -l <"$OUT/raw/crashes-gateway.csv") - 1))"
-  mset c_tr_crashes "$(($(wc -l <"$OUT/raw/crashes-transfer.csv") - 1))"
+  mset c_gw_crashes "$(awk -F, 'NR > 1 { s += $5 } END { print s + 0 }' "$OUT/raw/crashes-gateway.csv")"
+  mset c_tr_crashes "$(awk -F, 'NR > 1 { s += $5 } END { print s + 0 }' "$OUT/raw/crashes-transfer.csv")"
+  # redelivery observada en los logs (contenedor actual y anterior de cada pod): el gateway ve como stale una declaración
+  # del prefijo (cada (medidor, versión) se envió una vez, luego es una reentrega); energy-transfer registra duplicados de inbox
+  mset c_gw_redelivered "$(pod_logs "$GW" | grep -F "\"meterId\":\"$PFX_C" | grep -c '"result":"stale"' || true)"
+  mset c_tr_redelivered "$(pod_logs "$TR" | grep -c '"stage":"apply","result":"duplicate"' || true)"
   psql_pos "SELECT event_id::text FROM outbox WHERE aggregate_id LIKE '$PFX_C%'" >"$OUT/raw/c-effects.txt"
   mset c_outbox_rows "$(psql_pos "SELECT count(*) FROM outbox WHERE aggregate_id LIKE '$PFX_C%'")"
   mset c_outbox_dup_groups "$(psql_pos "SELECT count(*) FROM (SELECT aggregate_id, payload->>'version' FROM outbox WHERE aggregate_id LIKE '$PFX_C%' GROUP BY 1, 2 HAVING count(*) > 1) g")"
@@ -321,7 +334,7 @@ collect() {
     awk -F, -v ch="gateway:$_run" -v want="$_want" -v eff="$_eff" '
       FILENAME == eff { e[$1]++; next }
       { d[$1]++ }
-      END { for (id in d) print ch "," id "," d[id] "," (e[id] + 0) "," want }' "$_eff" "$_dir/raw/$_run.log.csv" | sort >>"$_rec"
+      END { for (id in d) print ch "," id "," d[id] "," (e[id] + 0) "," want }' "$_eff" "$_dir/raw/$_run.sent" | sort >>"$_rec"
   done
   # transfer y billing (b): el original + K reenvíos; device-sim aplica 1 comando y billing-sim registra 2 entregas (original + 1 aceptada por el stream)
   jq -r --rawfile ids "$_dir/raw/b-ids.txt" --argjson k "$E5_RESEND_K" \

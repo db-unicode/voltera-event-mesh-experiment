@@ -1,151 +1,161 @@
 # E5: idempotencia por duplicados. Los valores salen de metrics.json (los arma run.sh); las comparaciones con un conteo medido se expresan como diferencia == 0.
 # (a) gateway: k copias y desorden v5 -> v3
 - id: a-sender-clean
-  description: (a) meter-sim publicó todo (sin errores ni descartes en el emisor)
+  description: "(a) meter-sim publicó todo (sin errores ni descartes en el emisor)"
   metric: "metrics.json:$.a_published_errors"
   op: eq
   value: 0
 - id: a-outbox-one-per-version
-  description: (a) 1 fila de outbox por (medidor, versión) aceptada, sin grupos repetidos
+  description: "(a) 1 fila de outbox por (medidor, versión) aceptada, sin grupos repetidos"
   metric: "metrics.json:$.a_outbox_dup_groups"
   op: eq
   value: 0
 - id: a-outbox-rows
-  description: (a) filas de outbox - medidores únicos = 0 (solo v5; ninguna v3)
+  description: "(a) filas de outbox - medidores únicos = 0 (solo v5; ninguna v3)"
   metric: "metrics.json:$.a_outbox_rows_diff"
   op: eq
   value: 0
 - id: a-outbox-only-v5
-  description: (a) ninguna fila de outbox con versión distinta de 5
+  description: "(a) ninguna fila de outbox con versión distinta de 5"
   metric: "metrics.json:$.a_outbox_not_v5"
   op: eq
   value: 0
 - id: a-positions-v5
-  description: (a) positions-db conserva v5 en todos los medidores
+  description: "(a) positions-db conserva v5 en todos los medidores"
   metric: "metrics.json:$.a_positions_v5_diff"
   op: eq
   value: 0
 - id: a-balance
-  description: (a) aplicados + stale/duplicados + error == entregas (balance exacto)
+  description: "(a) aplicados + stale/duplicados + error == entregas (balance exacto)"
   metric: "metrics.json:$.a_balance_diff"
   op: eq
   value: 0
 - id: a-applied
-  description: (a) efectos aplicados == medidores únicos
+  description: "(a) efectos aplicados == medidores únicos"
   metric: "metrics.json:$.a_applied_diff"
   op: eq
   value: 0
 - id: a-redis-checked
-  description: (a) todas las keys del prefijo siguen en la vista Redis
+  description: "(a) todas las keys del prefijo siguen en la vista Redis"
   metric: "metrics.json:$.a_redis_diff"
   op: eq
   value: 0
 - id: a-redis-v5
-  description: (a) Redis conserva v5 tras la v3 (0 keys con otra versión)
+  description: "(a) Redis conserva v5 tras la v3 (0 keys con otra versión)"
   metric: "metrics.json:$.a_redis_not_v5"
   op: eq
   value: 0
 # (b) energy-transfer: reenvío de EnergyMatched ya procesados
 - id: b-device-once
-  description: (b) device-sim aplica cada matchId exactamente 1 vez (0 con otro conteo)
+  description: "(b) device-sim aplica cada matchId exactamente 1 vez (0 con otro conteo)"
   metric: "metrics.json:$.b_device_not_once"
   op: eq
   value: 0
 - id: b-device-no-new-duplicates
-  description: (b) device-sim no registra comandos repetidos nuevos (delta de duplicates)
+  description: "(b) device-sim no registra comandos repetidos nuevos (delta de duplicates)"
   metric: "metrics.json:$.b_device_dups_delta"
   op: eq
   value: 0
 - id: b-transfers-one-each
-  description: (b) transfers sin duplicados por matchId
+  description: "(b) transfers sin duplicados por matchId"
   metric: "metrics.json:$.b_transfers_dup_groups"
   op: eq
   value: 0
 - id: b-transfers-sent
-  description: (b) una transferencia SENT por match
+  description: "(b) una transferencia SENT por match"
   metric: "metrics.json:$.b_transfers_sent_diff"
   op: eq
   value: 0
 - id: b-inbox
-  description: (b) una marca de inbox por match
+  description: "(b) una marca de inbox por match"
   metric: "metrics.json:$.b_inbox_diff"
   op: eq
   value: 0
 - id: b-duplicates-dropped
-  description: (b) events_duplicates_dropped_total sube exactamente N x k (todas las copias reenviadas son duplicados)
+  description: "(b) events_duplicates_dropped_total sube exactamente N x k (todas las copias reenviadas son duplicados)"
   metric: "metrics.json:$.b_dup_dropped_diff"
   op: eq
   value: 0
 - id: b-no-new-effects
-  description: (b) ninguna copia reenviada se aplicó como nueva (consumed ok delta == 0)
+  description: "(b) ninguna copia reenviada se aplicó como nueva (consumed ok delta == 0)"
   metric: "metrics.json:$.b_consumed_ok_delta"
   op: eq
   value: 0
 # (c) redelivery real con before_ack=crash-after:N
 - id: c-gw-crashed
-  description: (c) el gateway murió al menos una vez entre el commit y el ack
+  description: "(c) el gateway murió al menos una vez entre el commit y el ack"
   metric: "metrics.json:$.c_gw_crashes"
   op: ge
   value: 1
 - id: c-tr-crashed
-  description: (c) energy-transfer murió al menos una vez entre aplicar y ackear
+  description: "(c) energy-transfer murió al menos una vez entre aplicar y ackear"
   metric: "metrics.json:$.c_tr_crashes"
   op: ge
   value: 1
+- id: c-gw-redelivered
+  description: "(c) el gateway vio reentregas (declaraciones del prefijo descartadas como stale tras el crash)"
+  metric: "metrics.json:$.c_gw_redelivered"
+  op: ge
+  value: 1
+- id: c-tr-redelivered
+  description: "(c) energy-transfer vio reentregas (duplicados de inbox registrados tras el crash)"
+  metric: "metrics.json:$.c_tr_redelivered"
+  op: ge
+  value: 1
 - id: c-gw-outbox-rows
-  description: (c) 1 fila de outbox por declaración enviada (sin pérdida ni duplicados tras los crashes)
+  description: "(c) 1 fila de outbox por declaración enviada (sin pérdida ni duplicados tras los crashes)"
   metric: "metrics.json:$.c_outbox_rows_diff"
   op: eq
   value: 0
 - id: c-gw-outbox-dups
-  description: (c) sin (medidor, versión) repetidos en la outbox
+  description: "(c) sin (medidor, versión) repetidos en la outbox"
   metric: "metrics.json:$.c_outbox_dup_groups"
   op: eq
   value: 0
 - id: c-outbox-pending
-  description: (c) outbox sin pendientes al final
+  description: "(c) outbox sin pendientes al final"
   metric: "metrics.json:$.c_outbox_pending"
   op: eq
   value: 0
 - id: c-device-once
-  description: (c) device-sim aplica cada matchId exactamente 1 vez
+  description: "(c) device-sim aplica cada matchId exactamente 1 vez"
   metric: "metrics.json:$.c_device_not_once"
   op: eq
   value: 0
 - id: c-transfers-all-sent
-  description: (c) toda transferencia terminó SENT (ninguna PENDING/FAILED)
+  description: "(c) toda transferencia terminó SENT (ninguna PENDING/FAILED)"
   metric: "metrics.json:$.c_transfers_not_sent"
   op: eq
   value: 0
 - id: c-transfers-no-dups
-  description: (c) transfers sin duplicados
+  description: "(c) transfers sin duplicados"
   metric: "metrics.json:$.c_transfers_dup_groups"
   op: eq
   value: 0
 # (d) billing-sim: reenvíos fuera de la duplicate_window
 - id: d-two-each
-  description: (d) billing-sim registra exactamente 2 entregas de cada matchId reenviado
+  description: "(d) billing-sim registra exactamente 2 entregas de cada matchId reenviado"
   metric: "metrics.json:$.d_two_diff"
   op: eq
   value: 0
 - id: d-no-other-counts
-  description: (d) ningún matchId con otro conteo
+  description: "(d) ningún matchId con otro conteo"
   metric: "metrics.json:$.d_ids_other"
   op: eq
   value: 0
 - id: d-distinct-unchanged
-  description: (d) distinct de los matchId reenviados no cambia
+  description: "(d) distinct de los matchId reenviados no cambia"
   metric: "metrics.json:$.d_distinct_diff"
   op: eq
   value: 0
 - id: d-duplicates-up
-  description: (d) duplicates de billing-sim sube exactamente 1 por matchId (el stream aceptó 1 copia fuera de la ventana)
+  description: "(d) duplicates de billing-sim sube exactamente 1 por matchId (el stream aceptó 1 copia fuera de la ventana)"
   metric: "metrics.json:$.d_dups_diff"
   op: eq
   value: 0
 # conciliación por id
 - id: reconciliation
-  description: conciliación por eventId/matchId sin discrepancias entre entregas y efectos esperados
+  description: "conciliación por eventId/matchId sin discrepancias entre entregas y efectos esperados"
   metric: "metrics.json:$.reconciliation_mismatches"
   op: eq
   value: 0

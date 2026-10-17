@@ -14,6 +14,7 @@
 #   e56_keda_pause <ns> <so> <n>      fija réplicas con la anotación (recuerda el valor original)
 #   e56_keda_restore                  devuelve los ScaledObject a su estado original
 #   mset <clave> <valor> / msets <clave> <texto>   acumulan métricas en $OUT/raw/m.json
+#   e56_kafka_dump_script <topic>     script de kafka_job que vuelca un topic completo
 #   kafka_job <ns> <nombre> <cm> <script>          Job con apache/kafka (ConfigMap <cm> montado en /in; "-" = sin ConfigMap), espera y devuelve su log
 
 E56_PIDS=""
@@ -38,6 +39,7 @@ e56_stop_bg() {
 e56_kill() {
   pkill -P "$1" 2>/dev/null || true
   kill "$1" 2>/dev/null || true
+  { wait "$1"; } 2>/dev/null || true
 }
 
 # e56_pf <ns> <target> <local> <remote>
@@ -107,16 +109,19 @@ e56_arm() {
   _pods=$(_chaos_pods "$1" "$_sel")
   [ -n "$_pods" ] || return 1
   for _pod in $_pods; do
+    # primero off: borra la marca de "ya disparó" que deja un crash previo (FAILPOINT_STATE_DIR); sin eso el
+    # re-armado con el mismo modo en un proceso nuevo nacería agotado
+    expctl http-get --method POST "$1/pod/$_pod:9090/admin/failpoint?name=$3&mode=off" >/dev/null || return 1
     expctl http-get --method POST "$1/pod/$_pod:9090/admin/failpoint?name=$3&mode=$4" >/dev/null || return 1
   done
 }
 
 # e56_rearm_loop <ns> <deploy> <failpoint> <modo> <máx crashes> <csv>
 # Arma el failpoint y, cada vez que el contenedor se reinicia (el crash ya ocurrió), lo vuelve a armar
-# hasta <máx> crashes. Escribe ts,deploy,failpoint,restarts en el csv (ts = fin del contenedor caído).
+# hasta <máx> crashes. Escribe ts,deploy,failpoint,restarts,new en el csv (ts = fin del último contenedor caído; new = reinicios nuevos).
 e56_rearm_loop() {
   _ns=$1 _dep=$2 _fp=$3 _mode=$4 _max=$5 _csv=$6
-  [ -s "$_csv" ] || echo "ts,deploy,failpoint,restarts" >"$_csv"
+  [ -s "$_csv" ] || echo "ts,deploy,failpoint,restarts,new" >"$_csv"
   _base=$(e56_pod_restarts "$_ns" "$_dep" || echo 0)
   _seen=$_base
   e56_wait 60 e56_arm "$_ns" "$_dep" "$_fp" "$_mode" || log "no se pudo armar $_fp en $_dep"
@@ -124,7 +129,7 @@ e56_rearm_loop() {
     sleep 1
     _now=$(e56_pod_restarts "$_ns" "$_dep" 2>/dev/null || echo "$_seen")
     [ "$_now" -gt "$_seen" ] || continue
-    printf '%s,%s,%s,%s\n' "$(e56_last_crash "$_ns" "$_dep")" "$_dep" "$_fp" "$_now" >>"$_csv"
+    printf '%s,%s,%s,%s,%s\n' "$(e56_last_crash "$_ns" "$_dep")" "$_dep" "$_fp" "$_now" "$((_now - _seen))" >>"$_csv"
     _seen=$_now
     [ $((_seen - _base)) -lt "$_max" ] || break
     wait_ready "$_ns" "$_dep" 120 || true
@@ -234,6 +239,19 @@ YAML
   k -n "$_ns" logs "job/$_name" -c kafka 2>/dev/null || true
   k -n "$_ns" delete job "$_name" --ignore-not-found --wait=false >/dev/null 2>&1 || true
   return "$_rc"
+}
+
+# e56_kafka_dump_script <topic>: script para kafka_job que vuelca el topic entero (clave<TAB>valor) leyendo exactamente
+# (fin - inicio) mensajes; sin --timeout-ms corto, que cortaría la lectura si el primer fetch tarda
+e56_kafka_dump_script() {
+  cat <<EOS
+B=kafka.voltera-infra.svc:9092; T=$1
+E=\$(/opt/kafka/bin/kafka-get-offsets.sh --bootstrap-server \$B --topic \$T --time -1 | awk -F: '{s+=\$3} END{print s+0}')
+S=\$(/opt/kafka/bin/kafka-get-offsets.sh --bootstrap-server \$B --topic \$T --time -2 | awk -F: '{s+=\$3} END{print s+0}')
+N=\$((E-S))
+[ "\$N" -gt 0 ] || exit 0
+/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server \$B --topic \$T --from-beginning --max-messages \$N --timeout-ms 120000 --property print.key=true 2>/dev/null
+EOS
 }
 
 # e56_ensure_ns <ns>: namespace de prueba con sidecar

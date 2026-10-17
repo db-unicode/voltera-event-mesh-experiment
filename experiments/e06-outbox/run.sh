@@ -20,7 +20,7 @@ E6_CONTROL_S=${E6_CONTROL_S:-60}        # duración del control
 E6_CRASH_N=${E6_CRASH_N:-200}           # crash-after:N
 E6_CRASHES=${E6_CRASHES:-2}             # crashes máximos por fase con outbox
 E6_DRAIN_S=${E6_DRAIN_S:-180}           # espera máxima de drenaje tras la carga
-E6_KAFKA_TRIES=${E6_KAFKA_TRIES:-3}     # lecturas del topic (se unen) hasta que no falte ningún match
+E6_KAFKA_TRIES=${E6_KAFKA_TRIES:-2}     # lecturas del topic (se unen) hasta que no falte ningún match
 
 RUN=$(date -u +%d%H%M%S)
 MODE_ORIG=""
@@ -122,7 +122,7 @@ device_has_all() { # <idsfile>
 kafka_read() {
   _pfx=$1 _dest=$2
   : >"$_dest"
-  _script="/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka.voltera-infra.svc:9092 --topic $TOPIC --from-beginning --timeout-ms 20000 --property print.key=true 2>/dev/null"
+  _script=$(e56_kafka_dump_script "$TOPIC")
   kafka_job "$TESTNS" e06-read - "$_script" >"$OUT/raw/kafka-read.raw" || log "lectura del topic con errores"
   # key<TAB>sobre JSON; se queda con los registros del prefijo
   cut -f2- "$OUT/raw/kafka-read.raw" \
@@ -151,6 +151,10 @@ e6_phase() {
   if [ "$_mode" = direct ]; then
     set_mode direct || return 1
     engine_started_with direct || { log "el motor no arrancó con outboxMode=direct"; return 1; }
+  else
+    # pod nuevo en cada fase: sin reinicios previos (kubelet duplica la espera entre reinicios) ni marcas de crash anteriores
+    k -n "$NS" rollout restart "deploy/$ENG" >/dev/null && wait_rollout "deploy/$ENG" "$NS" 180s && wait_ready "$NS" "$ENG" 120 || return 1
+    MODE_CHANGED=1
   fi
   e56_wait 120 pending_zero || return 1
   dev_state >"$OUT/raw/$_tag-device-before.json" || return 1
