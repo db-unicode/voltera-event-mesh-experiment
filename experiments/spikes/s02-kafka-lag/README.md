@@ -37,4 +37,4 @@ El exporter calcula el lag en cada petición; la latencia visible en Prometheus 
 
 Ver `experiments/results/s02/<UTC>-<sha>/result.txt` (PASS/FAIL por check, con los segundos en `checks/<n>.log`), `exporter-series.txt` (salida de curl) y `exporter-metrics.txt`.
 
-Medido: el lag llega a 5000 a los ~7 s de terminar la producción y vuelve a 0 a los pocos segundos de terminar el consumo.
+Medido (dos corridas): el lag llega a 5000 a los 6-7 s de terminar la producción (límite 30 s) y vuelve a 0 ~2-4 s después de terminar el consumo.

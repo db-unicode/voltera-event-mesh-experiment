@@ -23,6 +23,10 @@ mise run brokers:kafka && mise run platform:up && mise run spike:s03
 
 Evidencia: `experiments/results/s03/<UTC>-<sha>/` con `s03-samples.csv`, `scaledobject.json`, `scaledobject-hpa.yaml`, `scaledobject-describe.txt`, `keda-operator.log` y `prom-events-consumed.json` (suma de `events_consumed_total` de todos los pods: 3000).
 
+## Resultado medido
+
+Dos corridas idénticas: 0 -> 1 réplica a los ~8 s de empezar a producir, 5-6 réplicas a los ~16 s (el HPA decide cada 15 s), pico de 6, lag máximo ~2850, lag 0 unos 55 s después de producir y 0 réplicas ~61 s después de producir (30 s de cooldown + 30 s de estabilización). Los 3000 eventos se procesan una vez (`prom-events-consumed.json` = 3000).
+
 ## Cómo llega KEDA a Kafka (decisión Zero Trust)
 
 Problema: el operador de KEDA corre en `keda` sin sidecar y el broker exige mTLS STRICT. Sin cambios, el ScaledObject queda `Ready=False` con `KEDAScalerFailed: error creating kafka client: ... read: connection reset by peer`.
