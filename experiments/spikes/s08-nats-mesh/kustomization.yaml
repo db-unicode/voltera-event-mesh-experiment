@@ -1,0 +1,17 @@
+# Cargas de prueba de S8: namespaces, credenciales de las identidades NATS y cajas de herramientas.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+generatorOptions:
+  disableNameSuffixHash: true
+resources:
+  - manifests.yaml
+secretGenerator:
+  # Mismas credenciales de desarrollo que deploy/mesh/nats/*/nats.conf
+  - name: mesh-creds
+    namespace: s08-mesh
+    literals:
+      - admin=dev-admin-c0de
+      - bridge-r1=dev-bridge-r1-41c7
+      - bridge-r2=dev-bridge-r2-8e60
+      - billing=dev-billing-2a94
+      - rogue=dev-rogue-77d2

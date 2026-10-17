@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S8: event mesh NATS entre dos regiones con autorización (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s08-nats-mesh/run.sh"

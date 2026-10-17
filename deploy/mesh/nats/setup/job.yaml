@@ -1,0 +1,26 @@
+# Job de mesh:up: aplica el stream y el consumer en el nodo global. Corre con sidecar (mTLS STRICT).
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nats-setup
+spec:
+  backoffLimit: 3
+  template:
+    metadata:
+      labels: {app: nats-setup}
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: nats-box
+          image: natsio/nats-box:0.20.0-nonroot
+          command: ["sh", "/config/setup.sh"]
+          envFrom:
+            - secretRef: {name: nats-admin}
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 64Mi}
+          volumeMounts:
+            - {name: config, mountPath: /config, readOnly: true}
+      volumes:
+        - name: config
+          configMap: {name: nats-setup}
