@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S16: lado de escritura en r1 (meter-sim, ACL del gateway, proyector, precio, KEDA) (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s16-write-side/run.sh"

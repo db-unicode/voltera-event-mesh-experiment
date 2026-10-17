@@ -1,0 +1,11 @@
+# El scaler rabbitmq con protocol=http lee la profundidad (ready + unacked) del management API con el usuario keda
+# (tag monitoring). El Secret keda-rabbitmq-uri lo crea `mise run apps:write-side` (patrón de S5).
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: rabbitmq-http
+spec:
+  secretTargetRef:
+    - parameter: host
+      name: keda-rabbitmq-uri
+      key: host

@@ -1,0 +1,57 @@
+# Consume energy-positions y kwh-prices y escribe la vista Redis market-view. Sin DSN ni driver de Postgres:
+# el proyector nunca lee positions-db. Una réplica (el orden por versión lo resuelve view.Store, pero no hace falta más).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: market-projector
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {}
+  template:
+    metadata:
+      labels: {}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      serviceAccountName: market-projector
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: market-projector
+          image: voltera/market-projector:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: AMQP_USER
+              valueFrom: {secretKeyRef: {name: market-projector-rabbitmq, key: AMQP_USER}}
+            - name: AMQP_PASSWORD
+              valueFrom: {secretKeyRef: {name: market-projector-rabbitmq, key: AMQP_PASSWORD}}
+            - name: REDIS_PASSWORD
+              valueFrom: {secretKeyRef: {name: market-view-credentials, key: REDIS_PASSWORD}}
+            - {name: VIEW_TTL_S, value: "150"}
+            - {name: PRICE_TTL_S, value: "300"}
+            - {name: PREFETCH, value: "50"}
+            - {name: FAILPOINT_STATE_DIR, value: /var/run/failpoints}
+            - {name: EXPERIMENTS, value: "1"}
+            - {name: GOMEMLIMIT, value: 100MiB}
+          ports:
+            - {name: http-ops, containerPort: 9090}
+          readinessProbe:
+            httpGet: {path: /readyz, port: http-ops}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /healthz, port: http-ops}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 25m, memory: 32Mi}
+            limits: {memory: 128Mi}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          volumeMounts:
+            - {name: failpoints, mountPath: /var/run/failpoints}
+      volumes:
+        - name: failpoints
+          emptyDir: {}

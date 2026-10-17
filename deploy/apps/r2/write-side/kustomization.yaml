@@ -1,0 +1,18 @@
+# Lado de escritura de la región r2: meter-sim (0 réplicas), declaration-gateway (KEDA), price-feed-simulator y
+# market-projector. Mismos nombres de recursos en r1 y r2; cambian namespace y REGION (el vhost y el usuario de
+# RabbitMQ salen de ella). Requiere en el namespace: positions-db y market-view (deploy/data/r2) y los Secrets
+# <servicio>-rabbitmq y keda-rabbitmq-uri, que crea `mise run apps:write-side`.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: voltera-r2
+resources:
+  - ../../base/meter-sim
+  - ../../base/declaration-gateway
+  - ../../base/price-feed-simulator
+  - ../../base/market-projector
+patches:
+  - target: {kind: Deployment}
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value: {name: REGION, value: r2}
