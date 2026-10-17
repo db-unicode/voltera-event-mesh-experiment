@@ -1,0 +1,77 @@
+# E2 parte B: KEDA sobre el lag de Kafka (energy-transfer) con 3000 EnergyMatched publicados en ~10 s.
+# Umbrales de 03-experiments.md sección 5/E2 (B): réplicas <= particiones (6), lag final 0, vuelve a 0 réplicas en <= 90 s tras lag 0.
+- id: produced
+  description: kafka-probe publicó los 3000 EnergyMatched
+  metric: "metrics.json:$.produced"
+  op: eq
+  value: true
+- id: transfers-sent
+  description: Transferencias SENT en transfer-db con el prefijo (3000)
+  metric: "metrics.json:$.transfersSent"
+  op: eq
+  value: 3000
+- id: transfers-not-sent
+  description: Transferencias del prefijo que no están SENT
+  metric: "metrics.json:$.transfersNotSent"
+  op: eq
+  value: 0
+- id: device-loss
+  description: matchId sin efecto en device-sim
+  metric: "metrics.json:$.device.missing"
+  op: eq
+  value: 0
+- id: device-dups
+  description: matchId con efecto duplicado en device-sim
+  metric: "metrics.json:$.device.dups"
+  op: eq
+  value: 0
+- id: device-delta
+  description: Efectos distintos nuevos en device-sim (>= 3000)
+  metric: "metrics.json:$.device.deltaDistinct"
+  op: ge
+  value: 3000
+- id: billing-loss
+  description: matchId sin registro en billing-sim
+  metric: "metrics.json:$.billing.missing"
+  op: eq
+  value: 0
+- id: replicas-start
+  description: energy-transfer parte de 0 réplicas
+  metric: "metrics.json:$.replicasStart"
+  op: eq
+  value: 0
+- id: replicas-scaled
+  description: energy-transfer escala (pico de réplicas >= 2)
+  metric: "metrics.json:$.peakReplicas"
+  op: ge
+  value: 2
+- id: replicas-max
+  description: Pico de réplicas <= particiones del topic (6)
+  metric: "metrics.json:$.peakReplicas"
+  op: le
+  value: 6
+- id: lag-peak
+  description: El lag llegó a al menos un tercio de lo publicado (>= 1000)
+  metric: "metrics.json:$.peakLag"
+  op: ge
+  value: 1000
+- id: lag-end
+  description: Lag final
+  metric: "metrics.json:$.lagEnd"
+  op: eq
+  value: 0
+- id: replicas-end
+  description: Réplicas finales
+  metric: "metrics.json:$.replicasEnd"
+  op: eq
+  value: 0
+- id: scale-to-zero-min
+  description: scale_to_zero_s medido (-1 = nunca)
+  metric: "metrics.json:$.scaleToZeroS"
+  op: ge
+  value: 0
+- id: scale-to-zero
+  description: Segundos desde lag 0 hasta 0 réplicas (<= 90)
+  metric: "metrics.json:$.scaleToZeroS"
+  op: le
+  value: 90

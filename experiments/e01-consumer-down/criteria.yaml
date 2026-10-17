@@ -1,0 +1,169 @@
+# E1: consumidor caído, el emisor no se entera.
+#   a = energy-transfer a 0 réplicas 60 s (emisor: matching-engine -> Kafka)
+#   b = market-projector a 0 réplicas 60 s (< TTL de 150 s; emisor: declaration-gateway -> RabbitMQ)
+# Umbrales de 03-experiments.md sección 5/E1. Cambios respecto al plan (justificados en README):
+#   lag/cola crece ~ tasa x D se mide con el valor al reanudar menos el valor al caer (+/-10 %), no con el pico.
+
+# ---- fase a: energy-transfer ----
+- id: a-settled
+  description: A. Sistema asentado tras la caída (lag 0, outbox vacías, efectos completos) dentro del plazo
+  metric: "metrics.json:$.a.settled"
+  op: eq
+  value: true
+- id: a-matches
+  description: A. Matches creados con el prefijo (20 pares/s durante 180 s esperan ~3600)
+  metric: "metrics.json:$.a.matches"
+  op: ge
+  value: 3000
+- id: a-loss-device
+  description: A. Matches sin efecto en device-sim (pérdida)
+  metric: "metrics.json:$.a.device.missing"
+  op: eq
+  value: 0
+- id: a-dup-device
+  description: A. Matches con efecto duplicado en device-sim
+  metric: "metrics.json:$.a.device.dups"
+  op: eq
+  value: 0
+- id: a-loss-billing
+  description: A. Matches sin registro en billing-sim
+  metric: "metrics.json:$.a.billing.missing"
+  op: eq
+  value: 0
+- id: a-dup-billing
+  description: A. Matches duplicados en billing-sim
+  metric: "metrics.json:$.a.billing.dups"
+  op: eq
+  value: 0
+- id: a-delta-device
+  description: A. Matches creados en la fase menos efectos distintos nuevos en device-sim
+  metric: "metrics.json:$.a.deviceDeltaGap"
+  op: eq
+  value: 0
+- id: a-delta-billing
+  description: A. Matches creados en la fase menos efectos distintos nuevos en billing-sim
+  metric: "metrics.json:$.a.billingDeltaGap"
+  op: eq
+  value: 0
+- id: a-emitter-errors
+  description: A. Errores de publicación de matching-engine durante toda la fase
+  metric: "metrics.json:$.a.emitter.publishErrors"
+  op: eq
+  value: 0
+- id: a-emitter-p95
+  description: A. p95 de match_window_seconds durante la caída / antes
+  metric: "metrics.json:$.a.emitter.p95Ratio"
+  op: le
+  value: 1.2
+- id: a-emitter-rate
+  description: A. Matches/s durante la caída / antes (el emisor sigue a su ritmo)
+  metric: "metrics.json:$.a.emitter.rateRatio"
+  op: ge
+  value: 0.8
+- id: a-emitter-outbox
+  description: A. outbox_pending máximo de matching-engine (acotado)
+  metric: "metrics.json:$.a.emitter.outboxPendingMax"
+  op: le
+  value: 100
+- id: a-lag-growth-lo
+  description: A. Crecimiento del lag en la caída / matches creados en la caída (>= 0.9)
+  metric: "metrics.json:$.a.growthRatio"
+  op: ge
+  value: 0.9
+- id: a-lag-growth-hi
+  description: A. Crecimiento del lag en la caída / matches creados en la caída (<= 1.1)
+  metric: "metrics.json:$.a.growthRatio"
+  op: le
+  value: 1.1
+- id: a-drain
+  description: A. Segundos desde Ready de energy-transfer hasta lag 0 (<= 60; -1 = nunca)
+  metric: "metrics.json:$.a.drainS"
+  op: ge
+  value: 0
+- id: a-drain-max
+  description: A. Segundos desde Ready de energy-transfer hasta lag 0
+  metric: "metrics.json:$.a.drainS"
+  op: le
+  value: 60
+- id: a-lag-end
+  description: A. Lag final
+  metric: "metrics.json:$.a.final"
+  op: eq
+  value: 0
+
+# ---- fase b: market-projector ----
+- id: b-settled
+  description: B. Sistema asentado tras la caída
+  metric: "metrics.json:$.b.settled"
+  op: eq
+  value: true
+- id: b-matches
+  description: B. Matches creados con el prefijo
+  metric: "metrics.json:$.b.matches"
+  op: ge
+  value: 3000
+- id: b-loss-device
+  description: B. Matches sin efecto en device-sim
+  metric: "metrics.json:$.b.device.missing"
+  op: eq
+  value: 0
+- id: b-dup-device
+  description: B. Matches con efecto duplicado en device-sim
+  metric: "metrics.json:$.b.device.dups"
+  op: eq
+  value: 0
+- id: b-loss-billing
+  description: B. Matches sin registro en billing-sim
+  metric: "metrics.json:$.b.billing.missing"
+  op: eq
+  value: 0
+- id: b-keys-before
+  description: B. Medidores del prefijo en la vista antes de la caída (todos los de la carga)
+  metric: "metrics.json:$.b.keys.before"
+  op: ge
+  value: 400
+- id: b-keys-lost
+  description: B. Medidores que salen de la vista (antes - mínimo durante la caída y la recuperación)
+  metric: "metrics.json:$.b.keys.lost"
+  op: eq
+  value: 0
+- id: b-keys-end
+  description: B. Medidores del prefijo en la vista al terminar la carga
+  metric: "metrics.json:$.b.keys.atLoadEnd"
+  op: ge
+  value: 400
+- id: b-emitter-errors
+  description: B. Errores de publicación del gateway durante toda la fase
+  metric: "metrics.json:$.b.emitter.publishErrors"
+  op: eq
+  value: 0
+- id: b-emitter-p95
+  description: B. p95 de event_processing_seconds del gateway durante la caída / antes
+  metric: "metrics.json:$.b.emitter.p95Ratio"
+  op: le
+  value: 1.2
+- id: b-emitter-outbox
+  description: B. outbox_pending máximo del gateway (acotado)
+  metric: "metrics.json:$.b.emitter.outboxPendingMax"
+  op: le
+  value: 100
+- id: b-depth-growth-lo
+  description: B. Crecimiento de energy-positions en la caída / eventos publicados en la caída (>= 0.9)
+  metric: "metrics.json:$.b.growthRatio"
+  op: ge
+  value: 0.9
+- id: b-depth-growth-hi
+  description: B. Crecimiento de energy-positions en la caída / eventos publicados en la caída (<= 1.1)
+  metric: "metrics.json:$.b.growthRatio"
+  op: le
+  value: 1.1
+- id: b-drain
+  description: B. Segundos desde Ready del proyector hasta cola 0 (-1 = nunca)
+  metric: "metrics.json:$.b.drainS"
+  op: ge
+  value: 0
+- id: b-drain-max
+  description: B. Segundos desde Ready del proyector hasta cola 0
+  metric: "metrics.json:$.b.drainS"
+  op: le
+  value: 60

@@ -1,0 +1,9 @@
+{
+  "prefix": "e02k-1792217306-",
+  "mode": "keda",
+  "tEnd": 1792217415,
+  "tDrainWait": 1792217429,
+  "tZeroWait": 1792217462,
+  "drained": true,
+  "zeroed": true
+}

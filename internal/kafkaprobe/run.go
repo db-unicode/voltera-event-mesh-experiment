@@ -13,7 +13,7 @@ import (
 	"github.com/twmb/franz-go/pkg/kgo"
 )
 
-const usage = "usage: kafka-probe <produce|consume|work|seek> [flags]"
+const usage = "usage: kafka-probe <produce|produce-matched|consume|work|seek> [flags]"
 
 // Run ejecuta el subcomando args[0]. Los resultados van a out; los logs, a slog.
 func Run(ctx context.Context, args []string, getenv func(string) string, out io.Writer) error {
@@ -50,6 +50,29 @@ func Run(ctx context.Context, args []string, getenv func(string) string, out io.
 		}
 		defer cl.Close()
 		return Produce(ctx, cl, o, out)
+
+	case "produce-matched":
+		var o MatchedOptions
+		fs.StringVar(&o.Topic, "topic", "", "topic")
+		fs.StringVar(&o.Region, "region", "", "region of the envelopes (r1|r2)")
+		fs.IntVar(&o.Count, "count", 0, "events to produce")
+		fs.StringVar(&o.Prefix, "prefix", "", "meter id prefix (<prefix>-s<n> / <prefix>-b<n>)")
+		fs.IntVar(&o.Rate, "rate", 0, "events per second (0 = unlimited)")
+		if err := fs.Parse(rest); err != nil {
+			return err
+		}
+		if err := o.validate(); err != nil {
+			return err
+		}
+		cl, err := kgo.NewClient(append(baseOpts(cfg),
+			kgo.RequiredAcks(kgo.AllISRAcks()),
+			kgo.DefaultProduceTopic(o.Topic),
+		)...)
+		if err != nil {
+			return fmt.Errorf("new client: %w", err)
+		}
+		defer cl.Close()
+		return ProduceMatched(ctx, cl, o, out)
 
 	case "consume":
 		o := ConsumeOptions{Timeout: 60 * time.Second}

@@ -1,0 +1,15 @@
+{
+  "prefix": "e02b-1792217236",
+  "device0": {
+    "total": 132069,
+    "distinct": 132068,
+    "duplicates": 1
+  },
+  "tProd": 1792217246,
+  "tProdEnd": 1792217263,
+  "tLag0Wait": 1792217265,
+  "tZeroWait": 1792217292,
+  "produced": true,
+  "drained": true,
+  "zeroed": true
+}

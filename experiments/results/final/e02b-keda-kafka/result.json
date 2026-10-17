@@ -1,0 +1,141 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/exp-e01-e02/experiments/results/e02b-keda-kafka/20261017T060655Z-f02de76-r3",
+  "criteria": [
+    {
+      "id": "produced",
+      "description": "kafka-probe publicó los 3000 EnergyMatched",
+      "metric": "metrics.json:$.produced",
+      "observed": true,
+      "op": "eq",
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "id": "transfers-sent",
+      "description": "Transferencias SENT en transfer-db con el prefijo (3000)",
+      "metric": "metrics.json:$.transfersSent",
+      "observed": 3000,
+      "op": "eq",
+      "expected": 3000,
+      "verdict": "PASS"
+    },
+    {
+      "id": "transfers-not-sent",
+      "description": "Transferencias del prefijo que no están SENT",
+      "metric": "metrics.json:$.transfersNotSent",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "device-loss",
+      "description": "matchId sin efecto en device-sim",
+      "metric": "metrics.json:$.device.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "device-dups",
+      "description": "matchId con efecto duplicado en device-sim",
+      "metric": "metrics.json:$.device.dups",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "device-delta",
+      "description": "Efectos distintos nuevos en device-sim (\u003e= 3000)",
+      "metric": "metrics.json:$.device.deltaDistinct",
+      "observed": 3000,
+      "op": "ge",
+      "expected": 3000,
+      "verdict": "PASS"
+    },
+    {
+      "id": "billing-loss",
+      "description": "matchId sin registro en billing-sim",
+      "metric": "metrics.json:$.billing.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "replicas-start",
+      "description": "energy-transfer parte de 0 réplicas",
+      "metric": "metrics.json:$.replicasStart",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "replicas-scaled",
+      "description": "energy-transfer escala (pico de réplicas \u003e= 2)",
+      "metric": "metrics.json:$.peakReplicas",
+      "observed": 5,
+      "op": "ge",
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "replicas-max",
+      "description": "Pico de réplicas \u003c= particiones del topic (6)",
+      "metric": "metrics.json:$.peakReplicas",
+      "observed": 5,
+      "op": "le",
+      "expected": 6,
+      "verdict": "PASS"
+    },
+    {
+      "id": "lag-peak",
+      "description": "El lag llegó a al menos un tercio de lo publicado (\u003e= 1000)",
+      "metric": "metrics.json:$.peakLag",
+      "observed": 1865,
+      "op": "ge",
+      "expected": 1000,
+      "verdict": "PASS"
+    },
+    {
+      "id": "lag-end",
+      "description": "Lag final",
+      "metric": "metrics.json:$.lagEnd",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "replicas-end",
+      "description": "Réplicas finales",
+      "metric": "metrics.json:$.replicasEnd",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "scale-to-zero-min",
+      "description": "scale_to_zero_s medido (-1 = nunca)",
+      "metric": "metrics.json:$.scaleToZeroS",
+      "observed": 26,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "scale-to-zero",
+      "description": "Segundos desde lag 0 hasta 0 réplicas (\u003c= 90)",
+      "metric": "metrics.json:$.scaleToZeroS",
+      "observed": 26,
+      "op": "le",
+      "expected": 90,
+      "verdict": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "prefix": "e02c-1792217469-",
+  "mode": "control",
+  "tEnd": 1792217551,
+  "tDrainWait": 1792217868,
+  "tZeroWait": 1792217868,
+  "drained": true,
+  "zeroed": true
+}

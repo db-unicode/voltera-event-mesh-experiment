@@ -1,0 +1,281 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "autoscaling/v2",
+            "kind": "HorizontalPodAutoscaler",
+            "metadata": {
+                "annotations": {
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"keda.sh/v1alpha1\",\"kind\":\"ScaledObject\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"declaration-gateway\",\"app.kubernetes.io/component\":\"write-side\",\"app.kubernetes.io/name\":\"declaration-gateway\",\"app.kubernetes.io/part-of\":\"voltera\"},\"name\":\"declaration-gateway\",\"namespace\":\"voltera-r1\"},\"spec\":{\"advanced\":{\"horizontalPodAutoscalerConfig\":{\"behavior\":{\"scaleDown\":{\"stabilizationWindowSeconds\":30}}}},\"cooldownPeriod\":30,\"maxReplicaCount\":10,\"minReplicaCount\":0,\"pollingInterval\":5,\"scaleTargetRef\":{\"name\":\"declaration-gateway\"},\"triggers\":[{\"authenticationRef\":{\"name\":\"rabbitmq-http\"},\"metadata\":{\"mode\":\"QueueLength\",\"protocol\":\"http\",\"queueName\":\"meter-declarations\",\"value\":\"100\"},\"type\":\"rabbitmq\"}]}}\n"
+                },
+                "creationTimestamp": "2026-10-17T06:06:51Z",
+                "generation": 1,
+                "labels": {
+                    "app": "declaration-gateway",
+                    "app.kubernetes.io/component": "write-side",
+                    "app.kubernetes.io/managed-by": "keda-operator",
+                    "app.kubernetes.io/name": "declaration-gateway",
+                    "app.kubernetes.io/part-of": "voltera",
+                    "app.kubernetes.io/version": "2.21.0",
+                    "scaledobject.keda.sh/name": "declaration-gateway"
+                },
+                "name": "keda-hpa-declaration-gateway",
+                "namespace": "voltera-r1",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "keda.sh/v1alpha1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ScaledObject",
+                        "name": "declaration-gateway",
+                        "uid": "3fb41cca-2768-45cc-8dce-4ec050be6800"
+                    }
+                ],
+                "resourceVersion": "91891",
+                "uid": "3c2f07d5-90d3-4acd-a810-1cf8b1401a51"
+            },
+            "spec": {
+                "behavior": {
+                    "scaleDown": {
+                        "policies": [
+                            {
+                                "periodSeconds": 15,
+                                "type": "Percent",
+                                "value": 100
+                            }
+                        ],
+                        "selectPolicy": "Max",
+                        "stabilizationWindowSeconds": 30
+                    },
+                    "scaleUp": {
+                        "policies": [
+                            {
+                                "periodSeconds": 15,
+                                "type": "Pods",
+                                "value": 4
+                            },
+                            {
+                                "periodSeconds": 15,
+                                "type": "Percent",
+                                "value": 100
+                            }
+                        ],
+                        "selectPolicy": "Max",
+                        "stabilizationWindowSeconds": 0
+                    }
+                },
+                "maxReplicas": 10,
+                "metrics": [
+                    {
+                        "external": {
+                            "metric": {
+                                "name": "s0-rabbitmq-meter-declarations",
+                                "selector": {
+                                    "matchLabels": {
+                                        "scaledobject.keda.sh/name": "declaration-gateway"
+                                    }
+                                }
+                            },
+                            "target": {
+                                "averageValue": "100",
+                                "type": "AverageValue"
+                            }
+                        },
+                        "type": "External"
+                    }
+                ],
+                "minReplicas": 1,
+                "scaleTargetRef": {
+                    "apiVersion": "apps/v1",
+                    "kind": "Deployment",
+                    "name": "declaration-gateway"
+                }
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-17T06:06:51Z",
+                        "message": "the HPA controller was able to update the target scale to 1",
+                        "reason": "SucceededRescale",
+                        "status": "True",
+                        "type": "AbleToScale"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-17T06:09:21Z",
+                        "message": "the HPA was able to successfully calculate a replica count from external metric s0-rabbitmq-meter-declarations(\u0026LabelSelector{MatchLabels:map[string]string{scaledobject.keda.sh/name: declaration-gateway,},MatchExpressions:[]LabelSelectorRequirement{},})",
+                        "reason": "ValidMetricFound",
+                        "status": "True",
+                        "type": "ScalingActive"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-17T06:10:51Z",
+                        "message": "the desired replica count is less than the minimum replica count",
+                        "reason": "TooFewReplicas",
+                        "status": "True",
+                        "type": "ScalingLimited"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-17T06:09:21Z",
+                        "message": "the HPA controller did not scale the workload to zero",
+                        "reason": "NotScaledToZero",
+                        "status": "False",
+                        "type": "ScaledToZero"
+                    }
+                ],
+                "currentMetrics": [
+                    {
+                        "external": {
+                            "current": {
+                                "averageValue": "0"
+                            },
+                            "metric": {
+                                "name": "s0-rabbitmq-meter-declarations",
+                                "selector": {
+                                    "matchLabels": {
+                                        "scaledobject.keda.sh/name": "declaration-gateway"
+                                    }
+                                }
+                            }
+                        },
+                        "type": "External"
+                    }
+                ],
+                "currentReplicas": 10,
+                "desiredReplicas": 1,
+                "lastScaleTime": "2026-10-17T06:10:51Z",
+                "observedGeneration": 1
+            }
+        },
+        {
+            "apiVersion": "autoscaling/v2",
+            "kind": "HorizontalPodAutoscaler",
+            "metadata": {
+                "annotations": {
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"keda.sh/v1alpha1\",\"kind\":\"ScaledObject\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"energy-transfer\",\"app.kubernetes.io/component\":\"match-side\",\"app.kubernetes.io/name\":\"energy-transfer\",\"app.kubernetes.io/part-of\":\"voltera\"},\"name\":\"energy-transfer\",\"namespace\":\"voltera-r1\"},\"spec\":{\"advanced\":{\"horizontalPodAutoscalerConfig\":{\"behavior\":{\"scaleDown\":{\"stabilizationWindowSeconds\":30}}}},\"cooldownPeriod\":30,\"maxReplicaCount\":6,\"minReplicaCount\":0,\"pollingInterval\":5,\"scaleTargetRef\":{\"name\":\"energy-transfer\"},\"triggers\":[{\"metadata\":{\"bootstrapServers\":\"kafka.voltera-infra.svc:9092\",\"consumerGroup\":\"energy-transfer\",\"lagThreshold\":\"50\",\"limitToPartitionsWithLag\":\"true\",\"offsetResetPolicy\":\"earliest\",\"topic\":\"r1.energy-matched\"},\"type\":\"kafka\"}]}}\n"
+                },
+                "creationTimestamp": "2026-10-17T06:02:20Z",
+                "generation": 1,
+                "labels": {
+                    "app": "energy-transfer",
+                    "app.kubernetes.io/component": "match-side",
+                    "app.kubernetes.io/managed-by": "keda-operator",
+                    "app.kubernetes.io/name": "energy-transfer",
+                    "app.kubernetes.io/part-of": "voltera",
+                    "app.kubernetes.io/version": "2.21.0",
+                    "scaledobject.keda.sh/name": "energy-transfer"
+                },
+                "name": "keda-hpa-energy-transfer",
+                "namespace": "voltera-r1",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "keda.sh/v1alpha1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ScaledObject",
+                        "name": "energy-transfer",
+                        "uid": "5557b0fe-70cd-4e81-af2e-1b993a2fa6b6"
+                    }
+                ],
+                "resourceVersion": "91118",
+                "uid": "1dd0dfe1-3e0a-4c41-9a2c-c45996e22879"
+            },
+            "spec": {
+                "behavior": {
+                    "scaleDown": {
+                        "policies": [
+                            {
+                                "periodSeconds": 15,
+                                "type": "Percent",
+                                "value": 100
+                            }
+                        ],
+                        "selectPolicy": "Max",
+                        "stabilizationWindowSeconds": 30
+                    },
+                    "scaleUp": {
+                        "policies": [
+                            {
+                                "periodSeconds": 15,
+                                "type": "Pods",
+                                "value": 4
+                            },
+                            {
+                                "periodSeconds": 15,
+                                "type": "Percent",
+                                "value": 100
+                            }
+                        ],
+                        "selectPolicy": "Max",
+                        "stabilizationWindowSeconds": 0
+                    }
+                },
+                "maxReplicas": 6,
+                "metrics": [
+                    {
+                        "external": {
+                            "metric": {
+                                "name": "s0-kafka-r1-energy-matched",
+                                "selector": {
+                                    "matchLabels": {
+                                        "scaledobject.keda.sh/name": "energy-transfer"
+                                    }
+                                }
+                            },
+                            "target": {
+                                "averageValue": "50",
+                                "type": "AverageValue"
+                            }
+                        },
+                        "type": "External"
+                    }
+                ],
+                "minReplicas": 1,
+                "scaleTargetRef": {
+                    "apiVersion": "apps/v1",
+                    "kind": "Deployment",
+                    "name": "energy-transfer"
+                }
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-17T06:02:20Z",
+                        "message": "the HPA controller was able to get the target's current scale",
+                        "reason": "SucceededGetScale",
+                        "status": "True",
+                        "type": "AbleToScale"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-17T06:08:20Z",
+                        "message": "scaling is disabled since the replica count of the target is zero",
+                        "reason": "ScalingDisabled",
+                        "status": "False",
+                        "type": "ScalingActive"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-17T06:08:05Z",
+                        "message": "the desired replica count is less than the minimum replica count",
+                        "reason": "TooFewReplicas",
+                        "status": "True",
+                        "type": "ScalingLimited"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-17T06:03:05Z",
+                        "message": "the HPA controller did not scale the workload to zero",
+                        "reason": "NotScaledToZero",
+                        "status": "False",
+                        "type": "ScaledToZero"
+                    }
+                ],
+                "currentMetrics": null,
+                "desiredReplicas": 0,
+                "lastScaleTime": "2026-10-17T06:08:05Z",
+                "observedGeneration": 1
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
