@@ -1,0 +1,26 @@
+#!/bin/sh
+#MISE description="Construye cmd/<nombre> como voltera/<nombre>:dev y lo carga en kind (sin args: todos)"
+#USAGE arg "[names]..." help="binarios de cmd/ a construir"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+
+need docker
+need kind
+require_cluster
+
+if [ "$#" -eq 0 ]; then
+  set --
+  for d in "$ROOT"/cmd/*/; do
+    [ -f "$d/main.go" ] && set -- "$@" "$(basename "$d")"
+  done
+fi
+[ "$#" -gt 0 ] || die "no hay binarios en cmd/"
+
+for name in "$@"; do
+  [ -f "$ROOT/cmd/$name/main.go" ] || die "no existe cmd/$name"
+  log "build voltera/$name:dev"
+  docker build -q --build-arg CMD="$name" -t "voltera/$name:dev" "$ROOT" >/dev/null
+  kind load docker-image --name "$CLUSTER_NAME" "voltera/$name:dev" >/dev/null
+done
+log "imágenes cargadas: $*"
