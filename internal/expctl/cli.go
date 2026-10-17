@@ -26,7 +26,7 @@ Subcomandos:
   quantile --file x.csv --col c --q 0.5,0.95,0.99
   trace <id>... [--namespaces a,b] [--since 10m] [--out f.json] [--json]
   assert --criteria criteria.yaml --data <dir> --out result.json
-  plot --csv x.csv --x ts [--y c1,c2] --out fig.png
+  plot --csv x.csv --x ts [--y c1,c2] --out fig.png [--dpi 96] [--size 8x4]
   report --results experiments/results --out experiments/results/summary.md
 
 T = RFC3339, epoch en segundos, "now" o relativo ("-5m").

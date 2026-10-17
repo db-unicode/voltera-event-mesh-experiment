@@ -3,6 +3,8 @@ package expctl
 import (
 	"fmt"
 	"io"
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -11,7 +13,60 @@ import (
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/plotutil"
 	"gonum.org/v1/plot/vg"
+	"gonum.org/v1/plot/vg/draw"
+	"gonum.org/v1/plot/vg/vgimg"
 )
+
+const (
+	defaultDPI    = 96
+	defaultWidth  = 8.0 // pulgadas
+	defaultHeight = 4.0
+)
+
+// PlotOpts ajusta el tamaño de salida. El cero equivale a 8x4 pulgadas a 96 dpi (PNG 768x384).
+// Las fuentes están en puntos, así que escalan solas con el dpi.
+type PlotOpts struct {
+	DPI    int
+	Width  float64 // pulgadas
+	Height float64
+}
+
+// parseSize interpreta "WxH" en pulgadas.
+func parseSize(s string) (w, h float64, err error) {
+	ws, hs, ok := strings.Cut(strings.ToLower(strings.TrimSpace(s)), "x")
+	if ok {
+		if w, err = strconv.ParseFloat(ws, 64); err == nil {
+			h, err = strconv.ParseFloat(hs, 64)
+		}
+	}
+	if !ok || err != nil || w <= 0 || h <= 0 {
+		return 0, 0, fmt.Errorf("--size %q inválido, se espera WxH en pulgadas (p. ej. 9x4.5)", s)
+	}
+	return w, h, nil
+}
+
+// savePlot guarda p; los PNG con dpi distinto de 96 se renderizan con vgimg.
+func savePlot(p *plot.Plot, o PlotOpts, out string) error {
+	w, h := o.Width, o.Height
+	if w <= 0 || h <= 0 {
+		w, h = defaultWidth, defaultHeight
+	}
+	vw, vh := vg.Length(w)*vg.Inch, vg.Length(h)*vg.Inch
+	if o.DPI <= 0 || o.DPI == defaultDPI || !strings.EqualFold(filepath.Ext(out), ".png") {
+		return p.Save(vw, vh, out)
+	}
+	c := vgimg.NewWith(vgimg.UseWH(vw, vh), vgimg.UseDPI(o.DPI))
+	p.Draw(draw.New(c))
+	f, err := os.Create(out)
+	if err != nil {
+		return err
+	}
+	if _, err := (vgimg.PngCanvas{Canvas: c}).WriteTo(f); err != nil {
+		_ = f.Close()
+		return err
+	}
+	return f.Close()
+}
 
 // xValues convierte la columna X: timestamps RFC3339 pasan a segundos desde el primero;
 // si no, deben ser números. Devuelve también la etiqueta del eje.
@@ -67,6 +122,11 @@ func numericColumns(t *Table, x string) []string {
 // PlotCSV dibuja las columnas ys (o todas las numéricas si ys está vacío) contra x y guarda out
 // (formato por extensión: png, svg, pdf). Devuelve las columnas dibujadas.
 func PlotCSV(csvPath, x string, ys []string, out, title string) ([]string, error) {
+	return PlotCSVOpts(csvPath, x, ys, out, title, PlotOpts{})
+}
+
+// PlotCSVOpts es PlotCSV con tamaño y dpi configurables.
+func PlotCSVOpts(csvPath, x string, ys []string, out, title string, o PlotOpts) ([]string, error) {
 	t, err := ReadCSV(csvPath)
 	if err != nil {
 		return nil, err
@@ -112,7 +172,7 @@ func PlotCSV(csvPath, x string, ys []string, out, title string) ([]string, error
 		p.Add(line)
 		p.Legend.Add(col, line)
 	}
-	if err := p.Save(8*vg.Inch, 4*vg.Inch, out); err != nil {
+	if err := savePlot(p, o, out); err != nil {
 		return nil, err
 	}
 	return ys, nil
@@ -125,12 +185,21 @@ func cmdPlot(args []string, stderr io.Writer) error {
 	y := fs.String("y", "", "columnas Y separadas por coma (por defecto todas las numéricas)")
 	out := fs.String("out", "", "imagen de salida (.png, .svg)")
 	title := fs.String("title", "", "título (por defecto el nombre del CSV)")
+	dpi := fs.Int("dpi", defaultDPI, "resolución del PNG (la imagen mide tamaño*dpi píxeles)")
+	size := fs.String("size", "8x4", "tamaño WxH en pulgadas")
 	pos, err := parseFlags(fs, args)
 	if err != nil {
 		return err
 	}
 	if len(pos) != 0 || *csvPath == "" || *out == "" {
-		return usageErr("uso: plot --csv x.csv --x ts --y col1,col2 --out fig.png")
+		return usageErr("uso: plot --csv x.csv --x ts --y col1,col2 --out fig.png [--dpi 96] [--size 8x4]")
+	}
+	if *dpi <= 0 {
+		return usageErr("--dpi debe ser > 0")
+	}
+	w, h, err := parseSize(*size)
+	if err != nil {
+		return usageErr("%s", err)
 	}
 	var ys []string
 	for _, c := range strings.Split(*y, ",") {
@@ -141,7 +210,7 @@ func cmdPlot(args []string, stderr io.Writer) error {
 	if *title == "" {
 		*title = *csvPath
 	}
-	cols, err := PlotCSV(*csvPath, *x, ys, *out, *title)
+	cols, err := PlotCSVOpts(*csvPath, *x, ys, *out, *title, PlotOpts{DPI: *dpi, Width: w, Height: h})
 	if err != nil {
 		return err
 	}
