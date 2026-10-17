@@ -1,0 +1,19 @@
+#!/bin/sh
+#MISE description="Crea el cluster kind 'voltera' (idempotente)"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+
+need docker
+need kind
+need kubectl
+
+if kind get clusters 2>/dev/null | grep -qx "$CLUSTER_NAME"; then
+  log "el cluster '$CLUSTER_NAME' ya existe"
+else
+  log "creando cluster '$CLUSTER_NAME'"
+  kind create cluster --config "$ROOT/deploy/kind/cluster.yaml" --wait 180s
+fi
+
+k wait --for=condition=Ready node --all --timeout=180s
+log "cluster listo (contexto $KUBE_CONTEXT)"

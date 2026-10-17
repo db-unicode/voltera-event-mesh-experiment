@@ -1,0 +1,8 @@
+# KEDA queda fuera de la malla: sus pods consultan Kafka/RabbitMQ y el API server directamente.
+podAnnotations:
+  keda:
+    sidecar.istio.io/inject: "false"
+  metricsAdapter:
+    sidecar.istio.io/inject: "false"
+  webhooks:
+    sidecar.istio.io/inject: "false"

@@ -1,0 +1,13 @@
+# kind usa certificados de kubelet autofirmados: --kubelet-insecure-tls es necesario aquí.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - components.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: metrics-server
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --kubelet-insecure-tls

@@ -1,0 +1,9 @@
+# En el root namespace aplica a toda la malla: los workloads con sidecar solo aceptan mTLS.
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  mtls:
+    mode: STRICT

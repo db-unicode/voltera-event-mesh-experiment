@@ -29,6 +29,10 @@ El spike imprime `PASS` o `FAIL` y deja la evidencia en `experiments/results/s00
 | Task | Qué hace |
 |---|---|
 | `doctor` | Verifica herramientas, Docker, RAM de Docker e inotify |
+| `cluster:up` | Crea el cluster kind `voltera` (idempotente) |
+| `cluster:down` | Elimina el cluster |
+| `platform:up` | Istio 1.31.2, KEDA 2.21.0, Prometheus, Kiali, Grafana, Jaeger y metrics-server (idempotente) |
+| `spike:s00` | Valida la plataforma base e imprime `PASS` o `FAIL` ([detalle](experiments/spikes/s00-platform/README.md)) |
 | `lint` | `go vet`, golangci-lint, shellcheck y kubeconform sobre `deploy/` |
 | `test` | `go test -race ./...` |
 
@@ -36,7 +40,7 @@ El spike imprime `PASS` o `FAIL` y deja la evidencia en `experiments/results/s00
 
 | Ruta | Contenido |
 |---|---|
-| `cmd/`, `internal/` | Servicios Go (aún vacío) |
+| `cmd/`, `internal/` | Servicios Go (por ahora solo `internal/buildinfo`) |
 | `deploy/{kind,platform,brokers,mesh,apps}/` | Manifiestos del cluster, plataforma, brokers, mesh y aplicaciones |
 | `experiments/{spikes,lib,results}/` | Spikes `sNN`, librería shell y evidencia (solo `results/final/` se versiona) |
 | `mise-tasks/` | Tasks de mise como archivos (`cluster/up` es `cluster:up`) |

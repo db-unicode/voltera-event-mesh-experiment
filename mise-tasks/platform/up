@@ -1,0 +1,42 @@
+#!/bin/sh
+#MISE description="Instala Istio, KEDA, observabilidad y metrics-server (idempotente)"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+
+KEDA_CHART_VERSION=2.21.0   # chart 2.21.0 = KEDA v2.21.0
+KEDA_REPO=https://kedacore.github.io/charts
+
+need kubectl
+need helm
+need istioctl
+need kind
+require_cluster
+
+P="$ROOT/deploy/platform"
+
+log "istio 1.31.2"
+istioctl --context "$KUBE_CONTEXT" install -y -f "$P/istio/istio-operator.yaml"
+k apply -f "$P/istio/peer-authentication.yaml" -f "$P/istio/telemetry.yaml"
+
+log "keda $KEDA_CHART_VERSION"
+h upgrade --install keda keda --repo "$KEDA_REPO" --version "$KEDA_CHART_VERSION" \
+  --namespace keda --create-namespace -f "$P/keda/values.yaml" --wait --timeout 5m
+k label namespace keda istio-injection=disabled --overwrite
+
+log "observabilidad (prometheus, kiali, grafana, jaeger)"
+k apply -f "$P/observability/"
+
+log "metrics-server"
+k apply -k "$P/metrics-server"
+
+wait_rollout deployment/istiod istio-system
+for d in prometheus kiali grafana jaeger; do
+  wait_rollout "deployment/$d" istio-system
+done
+for d in keda-operator keda-operator-metrics-apiserver keda-admission-webhooks; do
+  wait_rollout "deployment/$d" keda
+done
+wait_rollout deployment/metrics-server kube-system
+
+log "plataforma lista"
