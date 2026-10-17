@@ -1,0 +1,8 @@
+#!/bin/sh
+#MISE description="Crea los namespaces del experimento (idempotente)"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+need kubectl
+require_cluster
+k apply -f "$ROOT/deploy/base/namespaces.yaml"
