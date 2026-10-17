@@ -63,28 +63,27 @@ La captura visual de Kiali no se automatiza (sin navegador): el grafo JSON es la
 - La política no afecta a `kubectl exec` ni a `kubectl port-forward` (entran por el loopback del pod, sin pasar por el filtro
   RBAC): `expctl sql`, los spikes y `mise run data:test` siguen funcionando.
 
-## Resultado (corrida del 2026-10-17, `results/final/e04-state-transfer/`)
+## Resultado (corrida final, `results/final/e04-state-transfer/`)
 
-Evidencia: `experiments/results/final/e04-state-transfer/` (copia de `20261017T054432Z-9fa7dee-dirty-r1`; el `-dirty` es solo
-por un cambio de este README entre el commit y la corrida: el código de `run.sh` es el del commit). 19 de 19 criterios PASS.
+Evidencia: `experiments/results/final/e04-state-transfer/` (corrida `20261017T071724Z-18789b0-dirty-r1`, ronda `final-run-18789b0.tsv`). 19 de 19 criterios PASS. La marca `-dirty` se debe solo a la evidencia promovida a `results/final` durante la corrida; el código es el del commit indicado.
 
 | Prueba | Observado | Criterio |
 |---|---|---|
-| (1) intentos de SA `market-projector` rechazados | 20 de 20; 0 errores de autenticación (`server closed the connection unexpectedly`) | 20/20 |
-| (1) `tcp.rbac.denied` del sidecar de `positions-db` | 0 -> 20 (+20; allowed +20 por el control) | > 0 (>= 20) |
+| (1) intentos de SA `market-projector` rechazados | 20 de 20; 0 errores de autenticación | 20/20 |
+| (1) `tcp.rbac.denied` del sidecar de `positions-db` | +20 (`allowed` +20 por el control) | >= 20 |
 | (1) control con SA `declaration-gateway` | 20 de 20 conectan | 20/20 |
-| (2) `pg_stat_activity`, 20 muestras en 5 min | un solo cliente: `voltera / declaration-gateway`, 1-22 conexiones | = {declaration-gateway} |
-| (2) conexiones nuevas a `positions-db` por `source_workload` (ventana de 5 min) | `declaration-gateway`: 83; `market-projector`: 0; otros: 0 | solo el gateway |
+| (2) `pg_stat_activity`, 21 muestras | un solo cliente: `voltera/declaration-gateway` | = {declaration-gateway} |
+| (2) conexiones a `positions-db` por origen (Prometheus) | `declaration-gateway`: 50; `market-projector`: 0 | solo el gateway |
 | (3) drivers de Postgres en `go list -deps ./cmd/market-projector` (284 paquetes) | 0 (el gateway, como control: 16) | 0 |
-| (3) variables del Deployment del proyector | `POD_NAME AMQP_USER AMQP_PASSWORD REDIS_PASSWORD VIEW_TTL_S PRICE_TTL_S PREFETCH FAILPOINT_STATE_DIR EXPERIMENTS GOMEMLIMIT REGION`; 0 de BD | 0 |
-| (4) 500 `PositionDeclared` directos con `positions-db` en 0 réplicas | 500 de 500 keys en Redis a 1,09 s del inicio de la publicación | 500/500 en <= 10 s |
-| Kiali, grafo de `voltera-r1` | arista `declaration-gateway` -> `positions-db`; sin `market-projector` -> `positions-db` | sin la arista |
+| (3) variables de BD en el Deployment del proyector | 0 | 0 |
+| (4) 500 `PositionDeclared` directos con `positions-db` en 0 réplicas | 500 de 500 keys en Redis a 1,299 s | 500/500 en <= 10 s |
+| Kiali, grafo de `voltera-r1` | arista `declaration-gateway` -> `positions-db` (1); `market-projector` -> `positions-db` (0) | sin la arista |
 
-Tras la prueba (1), `istio_tcp_after_deny.json` muestra los intentos como `source_workload` = el Job de prueba (20 del rechazado y
-20 del control), nunca como `market-projector`: el rechazo ocurre después de que el sidecar de origen abre la conexión mTLS.
+Tras la prueba (1), `istio_tcp_after_deny.json` muestra los intentos como `source_workload` = el Job de prueba (20 del rechazado y 20 del control), nunca como `market-projector`: el rechazo ocurre después de que el sidecar de origen abre la conexión mTLS.
+
 
 ## Tabla final
 
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| E4 Transferencia de estado | El proyector construye la vista sin acceder a `positions-db` y sigue proyectando con la base apagada | Intentos rechazados y `rbac denied`; clientes de `pg_stat_activity` y de `istio_tcp_*`; drivers de BD en el binario; keys en Redis con la base apagada | 20/20 rechazados y denied > 0; solo `declaration-gateway`; 0 drivers; 500/500 en <= 10 s | 20/20 rechazados, denied +20, control 20/20; un cliente (`declaration-gateway`), 0 conexiones del proyector; 0 drivers, 0 variables de BD; 500/500 en 1,09 s; Kiali sin la arista. PASS, 19/19 criterios (`experiments/results/final/e04-state-transfer/`) |
+| E4 Transferencia de estado | El proyector construye la vista sin acceder a `positions-db` y sigue proyectando con la base apagada | Intentos rechazados y `rbac denied`; clientes de `pg_stat_activity` y de `istio_tcp_*`; drivers de BD en el binario; keys en Redis con la base apagada | 20/20 rechazados y denied > 0; solo `declaration-gateway`; 0 drivers; 500/500 en <= 10 s | 20/20 rechazados, denied +20, control 20/20; un cliente (`declaration-gateway`), 0 conexiones del proyector; 0 drivers, 0 variables de BD; 500/500 en 1,299 s; Kiali sin la arista. PASS 19/19 (`experiments/results/final/e04-state-transfer/`, corrida `18789b0-dirty-r1`) |

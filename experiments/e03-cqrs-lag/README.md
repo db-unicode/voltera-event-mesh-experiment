@@ -54,60 +54,55 @@ Ajustes respecto a 03-experiments.md (medidas de ruido, no cambios de umbral):
 y su gráfico temporal en `figures/`), `figures/cdf_*.png`, `raw/reads_*.csv` (lecturas por segundo),
 `latency_quantiles.json`, `decomposition.json`, `convergence.json`, `metrics.json`, `result.json`.
 
-## Resultado (corrida del 2026-10-17, `results/final/e03-cqrs-lag/`)
+## Resultado (corrida final, `results/final/e03-cqrs-lag/`)
 
-Evidencia: `experiments/results/final/e03-cqrs-lag/` (copia de `20261017T053432Z-9fa7dee-r1`, árbol limpio). 30 de 30 criterios PASS.
+Evidencia: `experiments/results/final/e03-cqrs-lag/` (corrida `20261017T070732Z-18789b0-dirty-r1`, ronda `final-run-18789b0.tsv`). 30 de 30 criterios PASS. La marca `-dirty` se debe solo a la evidencia promovida a `results/final` durante la corrida; el código es el del commit indicado.
 
 | Fase | n | p50 | p95 | p99 | max |
 |---|---|---|---|---|---|
-| A: base, sin lecturas | 60 | 20,5 ms | 24,4 ms | 28,8 ms | 30,8 ms |
-| B: base, 200 lecturas/s | 60 | 20,4 ms | 25,1 ms | 31,6 ms | 36,6 ms |
-| D: durante el pico (60 s a 276 decl/s, desde 0 réplicas) | 59 | 23,5 ms | 67,2 ms | 148,6 ms | 164,1 ms |
-| D: 60 s después del pico | 51 | 20,2 ms | 23,5 ms | 25,2 ms | 25,6 ms |
+| A: base, sin lecturas | 60 | 20,6 ms | 26,4 ms | 75,9 ms | 136,5 ms |
+| B: base, 200 lecturas/s | 60 | 17,3 ms | 23,8 ms | 67,3 ms | 127,9 ms |
+| D: durante el pico (60 s a 276 decl/s, desde 0 réplicas) | 59 | 13,1 ms | 24,2 ms | 32,8 ms | 42,7 ms |
+| D: 60 s después del pico | 51 | 20,5 ms | 23,4 ms | 24,1 ms | 24,3 ms |
 
 (committed -> visible, caja negra.) Ningún sondeo expiró (290 de 290 visibles).
 
 | Otra medida | Observado | Criterio |
 |---|---|---|
-| Lecturas con `positions-db` en 0 réplicas (28 s, 200/s) | 5600 lecturas, 0 errores (0 de 20001 en todo el Job) | 0 errores |
-| p95 de lectura, mediana de los p95 por segundo: base arriba / base caída | 0,554 ms / 0,579 ms (+4,5%) | +-20% |
-| p95 de procesamiento del gateway sin / con lecturas | 44,7 ms / 45,3 ms (+1,3%) | <= +20% |
-| Convergencia Redis == `positions-db` (steady A) | 3000/3000 | 100% |
-| Convergencia tras el pico (steady) / sondeos del pico | 3000/3000 / 50/50 | 100% |
-| Convergencia de los sondeos base | 50/50 (otros 50 expiraron por TTL antes de comprobar) | 100% de los no expirados |
-| Generador de carga | 27000 y 15870 declaraciones, 0 descartadas | 0 |
+| Lecturas con `positions-db` en 0 réplicas (28 s, 200/s) | 5600 lecturas, 0 errores (20 000 lecturas en todo el Job, 0 errores) | 0 errores |
+| p95 de lectura, mediana de los p95 por segundo: base arriba / base caída | 0,562 ms / 0,5465 ms; diferencia de 0,0155 ms, por debajo del umbral de ruido de 0,5 ms (se cuenta 0) | +-20 % (observado 0) |
+| p95 de procesamiento del gateway sin / con lecturas | 39,2 ms / 43,4 ms: +10,6 % bruto; diferencia de 4,2 ms, por debajo de 5 ms (se cuenta 0) | <= +20 % |
+| Convergencia Redis == `positions-db` (steady A) | 3000/3000 | 100 % |
+| Convergencia tras el pico (steady) / sondeos del pico | 3000/3000 / 50/50 | 100 % |
+| Convergencia de los sondeos base | 50/50 (otros 50 expiraron por TTL antes de comprobar) | 100 % de los no expirados |
+| Generador de carga | 27 000 (base) y 15 870 (pico) declaraciones, 0 descartadas | 0 |
 
 Descomposición (medias y percentiles de los histogramas internos; ventana base = AB completa, pico = D completa):
 
 | Etapa | Base | Pico |
 |---|---|---|
-| committed -> visible (histograma, p50 / p95 / p99) | 5,9 / 22 / 49 ms | 14,7 / 49,5 / 113 ms |
-| committed -> emitted (media) | 4,0 ms | 11,3 ms |
-| emitted -> consumido (media) | 3,6 ms | 6,4 ms |
-| consumido -> SET (media) | 0,5 ms | 0,8 ms |
+| committed -> visible (histograma, p50 / p95 / p99) | 5,5 / 17,1 / 34,3 ms | 5,7 / 24,6 / 75,4 ms |
+| committed -> emitted (media) | 2,7 ms | 4,2 ms |
+| emitted -> consumido (media) | 2,7 ms | 2,6 ms |
+| consumido -> SET (media) | 0,2 ms | 0,3 ms |
 
-`committed_p99_whole_run_s` (la consulta del enunciado sobre toda la corrida) = 88 ms.
+`committed_p99_whole_run_s` (la consulta del enunciado sobre toda la corrida) = 48,3 ms.
 
-La caja negra (p50 20 ms) está por encima del histograma interno (p50 6 ms): suma el periodo de lectura de 20 ms (en
-promedio 10 ms de espera hasta la siguiente lectura) y el RTT de Redis a través de los dos sidecars.
+La caja negra (p50 20,6 ms en la fase A) está por encima del histograma interno (p50 5,5 ms en la base): suma el periodo de lectura de 20 ms (en promedio 10 ms de espera hasta la siguiente lectura) y el RTT de Redis a través de los dos sidecars.
 
 ## Hallazgo: el retraso que importa está antes del commit
 
-committed -> visible no se degrada con el pico (p99 149 ms con 15870 declaraciones en 60 s). El retraso extremo-a-extremo sí:
-`sent_to_visible` (enviado por el medidor -> visible) incluye la espera en la cola `meter-declarations` antes de que el
-gateway haga commit. Es un tema de E2 (KEDA), pero lo ve el matching:
+committed -> visible no se degrada con el pico: p99 32,8 ms durante el pico frente a 75,9 ms en la fase A (caja negra). El retraso extremo-a-extremo sí: `sent_to_visible` (enviado por el medidor -> visible) incluye la espera en la cola `meter-declarations` antes de que el gateway haga commit. Es un tema de E2 (KEDA), pero lo ve el matching:
 
 | Fase | p50 | p95 | p99 | max |
 |---|---|---|---|---|
-| base, sin lecturas | 52 ms | 9,6 s | 10,6 s | 10,6 s |
-| pico | 16,2 s | 19,9 s | 20,4 s | 20,6 s |
+| base, sin lecturas | 47,8 ms | 9,3 s | 10,3 s | 10,4 s |
+| durante el pico | 15,2 s | 20,4 s | 20,9 s | 21,0 s |
 
-Último sondeo enviado después del pico con enviado->visible > 5 s: +104 s (informativo, sin criterio en E3). Incluso con carga
-constante de 100 decl/s hay episodios de ~10 s de cola (`figures/latency_base_noread.png`, `figures/latency_peak_all.png`):
-aparecen como una rampa que sube y baja en unos segundos; la causa no se investigó (E2 mide el escalado del gateway).
+Recuperación tras el pico (`sent_to_visible.peak_recovery_s`): 81,8 s, informativo y sin criterio en E3. Incluso con carga constante de 100 decl/s hay episodios de ~10 s de cola (`figures/latency_base_noread.png`, `figures/latency_peak_all.png`): aparecen como una rampa que sube y baja en unos segundos; la causa no se investigó (E2 mide el escalado del gateway).
 
 ## Tabla final
 
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| E3 CQRS: retraso escritura -> vista | La vista converge tras el commit dentro de la tolerancia, también con carga base y en el pico, y no depende de `positions-db` | p95/p99 committed -> visible (sondeo sobre Redis); errores de lectura con la base caída; p95 de escritura con y sin lectura; convergencia | Base p95 <= 2 s y p99 <= 5 s; pico p99 <= 30 s y <= 5 s a los 60 s; 0 errores y p95 +-20%; escritura <= +20%; convergencia 100% | Base p95 24 ms, p99 29 ms; pico p99 149 ms, recuperado p99 25 ms; 0 errores en 20001 lecturas (5600 con la base caída), p95 +4,5%; escritura +1,3%; convergencia 100% (6000/6000 + sondeos). PASS, 30/30 criterios (`experiments/results/final/e03-cqrs-lag/`) |
+| E3 CQRS: retraso escritura -> vista | La vista converge tras el commit dentro de la tolerancia, también con carga base y en el pico, y no depende de `positions-db` | p95/p99 committed -> visible (sondeo sobre Redis); errores de lectura con la base caída; p95 de escritura con y sin lectura; convergencia | Base p95 <= 2 s y p99 <= 5 s; pico p99 <= 30 s y <= 5 s a los 60 s; 0 errores y p95 +-20%; escritura <= +20%; convergencia 100% | Base p95 26,4 / 23,8 ms y p99 75,9 / 67,3 ms (A / B); pico p99 32,8 ms, recuperado p99 24,1 ms; 0 errores en 20 000 lecturas (5600 con la base caída); p95 de lectura 0,562 / 0,5465 ms (base / base caída); escritura +10,6 % bruto; convergencia 3000/3000 y 50/50. PASS 30/30 (`experiments/results/final/e03-cqrs-lag/`, corrida `18789b0-dirty-r1`) |

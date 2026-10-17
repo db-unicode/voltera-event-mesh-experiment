@@ -69,11 +69,11 @@ contraria (el emisor intacto) es la que mide E1.
 
 ## Resultado
 
-Corrida final `20261017T063004Z-56cc7ba-r1` (copiada a `experiments/results/final/e01-consumer-down/`; se podaron `raw/billing-{a,b}.json` por tamaño, el conteo está en `metrics.json`): 25/25 criterios en PASS.
+Corrida final `20261017T075119Z-c79d389-r1` (`experiments/results/final/e01-consumer-down/`, ronda `final-run-c79d389.tsv`): 25/25 criterios en PASS. La primera corrida de la ronda (`18789b0`) falló por un bug del script: con billing-sim recién reiniciado, `byRegion.r1` venía nulo y `jq` fallaba. Corregido en main (`fix(e01)`).
 
-- Fase a (`energy-transfer` a 0 réplicas 60 s): 3599 matches, pérdida 0 y duplicados 0 en device-sim y billing-sim, errores del emisor 0, p95 del emisor x1,10, lag de 19 a 1219 durante la caída (+1200) y 0 a 4 s de volver el consumidor.
-- Fase b (`market-projector` a 0 réplicas 60 s): 2495 matches, pérdida 0 y duplicados 0, errores del gateway 0, p95 del gateway x0,94, cola `energy-positions` de 0 a 2323 durante la caída y 0 a 2 s de volver el proyector, 400 keys en la vista antes/durante/después (ninguna expulsada).
+- Fase a (`energy-transfer` a 0 réplicas, 60 s): 3600 matches; pérdida 0 y duplicados 0 en device-sim y billing-sim; errores del emisor 0; p95 de la ventana de emparejamiento x0,75 (71,25 ms durante la caída frente a 95,0 ms antes); lag de 0 a 1200 durante la caída (`growth` 1200); drenado de 3 s al volver el consumidor.
+- Fase b (`market-projector` a 0 réplicas, 60 s): 2533 matches; pérdida 0 y duplicados 0; errores del gateway 0; p95 del gateway x1,01; cola `energy-positions` de 17 a 2229 (+2212, pico 2429); drenado de 3 s; keys de la vista 400 antes, 400 en el mínimo y 400 al final (ninguna expulsada).
 
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| E1 Consumidor caído | El emisor no se entera; los eventos esperan y se procesan al volver | pérdida, duplicados, errores y p95 del emisor, lag/cola, drenado, keys | pérdida 0; duplicados 0; errores 0; p95 <= 1,2x; lag/cola crece y vuelve a 0 en <= 60 s; keys sin expulsar | PASS 25/25: pérdida 0, dups 0, errores 0, p95 x1,10 (a) / x0,94 (b), lag +1200 y drenado 4 s (a), cola +2323 y drenado 2 s (b), keys 400/400/400 · `experiments/results/final/e01-consumer-down/` |
+| E1 Consumidor caído | El emisor no se entera; los eventos esperan y se procesan al volver | pérdida, duplicados, errores y p95 del emisor, lag/cola, drenado, keys | pérdida 0; duplicados 0; errores 0; p95 <= 1,2x; lag/cola crece y vuelve a 0 en <= 60 s; keys sin expulsar | PASS 25/25: pérdida 0, dups 0, errores 0, p95 x0,75 (a) / x1,01 (b), lag +1200 y drenado 3 s (a), cola +2212 y drenado 3 s (b), keys 400/400/400 · `experiments/results/final/e01-consumer-down/` (corrida `c79d389-r1`) |

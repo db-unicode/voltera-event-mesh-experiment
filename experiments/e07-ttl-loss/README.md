@@ -50,29 +50,28 @@ mensaje de >= 180 medidores y de ninguno dos veces (valida la inyección).
   (el vencimiento lo hace Redis). La expiración se mide en las muestras de Redis.
 - La resolución del muestreo es 1 s; el criterio de +-2 s del enunciado la cubre (error esperado entre 0 y ~1,2 s).
 
-## Resultado (corrida del 2026-10-17, `results/final/e07-ttl-loss/`)
+## Resultado (corrida final, `results/final/e07-ttl-loss/`)
 
-Evidencia: `experiments/results/final/e07-ttl-loss/` (copia de `20261017T060348Z-1a3b937-dirty-r1`; el `-dirty` es solo por un
-cambio de README entre el commit y la corrida). Corrida rápida (P = 10 s, TTL = 25 s, M = 200). 13 de 13 criterios PASS.
+Evidencia: `experiments/results/final/e07-ttl-loss/` (corrida `20261017T073406Z-18789b0-dirty-r1`, ronda `final-run-18789b0.tsv`). Corrida rápida (P = 10 s, TTL = 25 s, M = 200). 13 de 13 criterios PASS. La marca `-dirty` se debe solo a la evidencia promovida a `results/final` durante la corrida; el código es el del commit indicado.
 
 | Fase | Observado | Criterio |
 |---|---|---|
-| 7a, ventana del failpoint | 9,6 s; 193 medidores perdieron 1 mensaje, ninguno dos | >= 180 y máximo 1 |
-| 7a, `min(keys)` desde 5 s antes hasta la recuperación | 200 | == 200 |
-| 7a, TTL mínimo observado | 5,0 s | > 0 |
-| 7b, ventana del failpoint | 30,1 s (602 mensajes descartados) | 3 ciclos |
+| 7a, medidores con el mensaje descartado | 191 (un mensaje cada uno; `max_drops_per_meter` = 1) | >= 180 y máximo 1 |
+| 7a, ventana del failpoint | 9,585 s | (informativo) |
+| 7a, `min(keys)` | 200 | == 200 |
+| 7a, TTL mínimo observado | 5,01 s | > 0 |
+| 7b, ventana del failpoint | 30,092 s (602 mensajes descartados) | 3 ciclos |
 | 7b, keys vencidas | 200 de 200 | 200 |
-| 7b, desaparición observada - (`projectedAt` + 25 s) | entre +0,004 y +1,006 s | [-2, +2] s |
-| 7b, `keys == 200` tras apagar el failpoint | 10,3 s | <= P + 5 = 15 s |
+| 7b, desaparición observada - (`projectedAt` + 25 s) | entre +0,002 s y +1,003 s | [-2, +2] s |
+| 7b, `keys == 200` tras apagar el failpoint | 10,427 s | <= P + 5 = 15 s |
 | 7c, keys borradas del prefijo | 200 | 200 |
-| 7c, `keys == 200` tras el borrado | 10,0 s | <= 15 s |
+| 7c, `keys == 200` tras el borrado | 10,220 s | <= 15 s |
 
-El error de desaparición es siempre positivo y <= 1 s: la key vence en el instante del TTL y el muestreo de 1 Hz la ve
-ausente en la muestra siguiente. Que reaparezcan en ~10 s (no antes) es el ciclo P: cada medidor vuelve a declarar una vez por
-ciclo y la vista no se repuebla sola; con TTL = 2,5 P, perder un ciclo deja 0,5 P de margen (5 s: el TTL mínimo observado en 7a).
+El error de desaparición es siempre positivo y <= 1,003 s: la key vence en el instante del TTL y el muestreo de 1 Hz la ve ausente en la muestra siguiente. Que reaparezcan en ~10 s (no antes) es el ciclo P: cada medidor vuelve a declarar una vez por ciclo y la vista no se repuebla sola; con TTL = 2,5 P, perder un ciclo deja 0,5 P de margen (el TTL mínimo observado en 7a fue 5,01 s).
+
 
 ## Tabla final
 
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| E7 Pérdida de un mensaje de posición (TTL) | Con TTL = 2,5 ciclos, perder un ciclo no expulsa a nadie; perder tres hace vencer las keys a TTL; si se pierde Redis, se repuebla en un ciclo | `min(keys)` y TTL mínimo (7a); desaparición vs último refresco y reaparición (7b); keys == M tras el borrado (7c) | 7a min(keys) = 200 y TTL > 0; 7b TTL +-2 s y reaparecen en <= P + 5 s; 7c <= P + 5 s | 7a: 200 keys mínimas, TTL mínimo 5,0 s; 7b: 200 vencidas con error +0,004..+1,006 s, reaparecen en 10,3 s; 7c: repobladas en 10,0 s. PASS, 13/13 criterios, corrida rápida (`experiments/results/final/e07-ttl-loss/`) |
+| E7 Pérdida de un mensaje de posición (TTL) | Con TTL = 2,5 ciclos, perder un ciclo no expulsa a nadie; perder tres hace vencer las keys a TTL; si se pierde Redis, se repuebla en un ciclo | `min(keys)` y TTL mínimo (7a); desaparición vs último refresco y reaparición (7b); keys == M tras el borrado (7c) | 7a min(keys) = 200 y TTL > 0; 7b TTL +-2 s y reaparecen en <= P + 5 s; 7c <= P + 5 s | 7a: 191 medidores con un mensaje perdido (ninguno dos veces), `min(keys)` 200, TTL mínimo 5,01 s; 7b: 200/200 vencidas con error de +0,002 a +1,003 s, reaparecen en 10,427 s; 7c: repobladas en 10,220 s. PASS 13/13 (`experiments/results/final/e07-ttl-loss/`, corrida `18789b0-dirty-r1`) |

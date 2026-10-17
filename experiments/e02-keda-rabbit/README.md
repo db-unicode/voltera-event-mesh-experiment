@@ -70,20 +70,19 @@ Los umbrales de 03-experiments.md 5/E2 se mantienen sin cambios (`criteria.yaml`
 
 ## Resultado
 
-Corrida que pasa (20/20 criterios): `experiments/results/final/e02-keda-rabbit/` (origen `20261017T060820Z-f02de76-r2`; el filtro de eventos y el
-recorte de eventos se aplicó después a mano en la copia). Otra corrida con los mismos criterios (r1, desarrollo) dio valores parecidos.
+Corrida final `20261017T065458Z-18789b0-r1` (`experiments/results/final/e02-keda-rabbit/`, ronda `final-run-18789b0.tsv`): 20/20 criterios en PASS. KEDA y control se miden en la misma corrida.
 
 | | KEDA | Control (1 réplica) |
 |---|---|---|
-| enviadas / filas en positions-db | 15 870 / 15 870 (pérdida 0) | 15 870 / 15 870 |
-| `cold_start_s` | 14,25 (<= 20) | n/a |
-| `time_to_scale_up_s` (listas >= 5) | 31 (<= 45) | n/a |
-| pico de réplicas / profundidad | 10 / 6612 | 1 / 13 290 |
-| `drain_s` | 18 (<= 60) | 320 (17,8x) |
-| p99 retraso en cola | 24,2 s (<= 30) | 316 s |
-| `scale_to_zero_s` | 34 (<= 60) | n/a |
+| enviadas / filas en positions-db | 15 870 / 15 870 (pérdida 0) | 15 870 / 15 870 (pérdida 0) |
+| `cold_start_s` | 8,08 (<= 20) | n/a |
+| `time_to_scale_up_s` (listas >= 5) | 15 (<= 45) | n/a |
+| pico de réplicas / profundidad | 10 (máximo 10) / 3626 | 1 / 13 266 |
+| `drain_s` | 2 (<= 60) | 325 (162,5x) |
+| p99 retraso en cola | 13,53 s (<= 30) | 316,81 s |
+| `scale_to_zero_s` | 28 (<= 60) | n/a |
 | bajadas de réplicas en el pico | 0 | 0 |
 
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| E2A KEDA RabbitMQ | 0 -> N -> 0 siguiendo la cola, sin pérdida | cold start, escalado, drenado, scale-to-zero, pérdida | 20 s / 45 s / 60 s / 60 s / 0; control >= 3x | 14,25 s / 31 s / 18 s / 34 s / 0; control 17,8x: PASS (`results/final/e02-keda-rabbit/`) |
+| E2A KEDA RabbitMQ | 0 -> N -> 0 siguiendo la cola, sin pérdida | cold start, escalado, drenado, scale-to-zero, pérdida | 20 s / 45 s / 60 s / 60 s / 0; control >= 3x | PASS 20/20: 8,08 s / 15 s / 2 s / 28 s / 0 pérdidas (15 870 de 15 870); control con 325 s de drenado (162,5x) · `experiments/results/final/e02-keda-rabbit/` (corrida `18789b0-r1`) |

@@ -38,8 +38,8 @@ Ver `criteria.yaml`. Es el de `03-experiments.md` (E8): 100 % de r1 y r2 en bill
 
 ## Desviaciones
 
-- La corrida entregada (`20261017T045215Z-58a9758-dirty-r1`) se lanzó con cambios sin commitear que luego se commitearon tal cual (solo `lib/mesh.sh` cambió después: espera a que `bus-tools` termine de borrarse). No hubo tiempo de repetirla con el árbol limpio por la cola del lock; 1 repetición, no 3.
-- Sin variante de 80 ms (sin toxiproxy).
+- Sin variante de 80 ms (sin toxiproxy): la latencia inter-región es 0 ms y el criterio de 12 s no se mide.
+- Una sola repetición (r1 en `final-run-18789b0.tsv`), no 3.
 
 ## Evidencia
 
@@ -47,47 +47,47 @@ Ver `criteria.yaml`. Es el de `03-experiments.md` (E8): 100 % de r1 y r2 en bill
 
 ## Resultado
 
-Corrida `20261017T045215Z-58a9758-dirty-r1` (veredicto PASS). Evidencia versionada en `experiments/results/final/e08-event-mesh/`.
+Corrida final `20261017T073700Z-18789b0-dirty-r1` (`experiments/results/final/e08-event-mesh/`, ronda `final-run-18789b0.tsv`): 28/28 criterios en PASS. La marca `-dirty` se debe solo a la evidencia promovida a `results/final` durante la corrida; el código es el del commit indicado.
 
 | Criterio | Observado | Umbral | Veredicto |
 |---|---|---|---|
 | r1 normal - todo match de r1 llega a billing (matches sin entregar) | 0 | eq 0 | PASS |
-| r1 normal - la carga produjo matches (ratio matches/pares enviados) | 1 | ge 0.9 | PASS |
+| r1 normal - la carga produjo matches (ratio matches/pares enviados) | 0,999 (1199 matches de 1200 pares) | ge 0,9 | PASS |
 | r2 normal - todo match de r2 llega a billing (matches sin entregar) | 0 | eq 0 | PASS |
-| r2 normal - la carga produjo matches (ratio matches/pares enviados) | 1 | ge 0.9 | PASS |
-| r1 normal - p99 de receivedAt - emittedAt (s) | 0.0255 | le 10 | PASS |
-| r2 normal - p99 de receivedAt - emittedAt (s) | 0.00814 | le 10 | PASS |
-| r1 normal - p99 de receivedAt - occurredAt (s) | 0.051 | le 10 | PASS |
-| r2 normal - p99 de receivedAt - occurredAt (s) | 0.0208 | le 10 | PASS |
+| r2 normal - la carga produjo matches (ratio matches/pares enviados) | 1 (360 de 360) | ge 0,9 | PASS |
+| r1 normal - p99 de receivedAt - emittedAt (s) | 0,011320 | le 10 | PASS |
+| r2 normal - p99 de receivedAt - emittedAt (s) | 0,007177 | le 10 | PASS |
+| r1 normal - p99 de receivedAt - occurredAt (s) | 0,030374 | le 10 | PASS |
+| r2 normal - p99 de receivedAt - occurredAt (s) | 0,017111 | le 10 | PASS |
 | Efectos duplicados en billing en todas las fases | 0 | eq 0 | PASS |
-| Falsos rechazos del flujo legítimo (mesh_publish_rejected_total durante la fase normal) | 0 | eq 0 | PASS |
+| Falsos rechazos del flujo legítimo (`mesh_publish_rejected_total` en la fase normal) | 0 | eq 0 | PASS |
 | Intentos negativos ejecutados (4 casos x 20) | 80 | eq 80 | PASS |
 | Intentos rechazados (80/80) | 80 | eq 80 | PASS |
-| Rechazados por autorización (acl o authn), no por fallos de red | 80 | eq 80 | PASS |
-| Mensajes nuevos en el stream BILLING_MATCHED durante los negativos (last_seq) | 0 | eq 0 | PASS |
-| Entregas nuevas en billing durante los negativos | 0 | eq 0 | PASS |
-| El timeline de /leafz muestra el enlace caído (muestras con global=1 y r2=0) | 114 | ge 3 | PASS |
+| Rechazados por autorización (acl o authn), no por red | 80 | eq 80 | PASS |
+| Mensajes nuevos en el stream BILLING_MATCHED durante los negativos (`stream_seq_delta`) | 0 | eq 0 | PASS |
+| Entregas nuevas en billing durante los negativos (`billing_total_delta`) | 0 | eq 0 | PASS |
+| Muestras de /leafz con el enlace caído (global=1, r2=0) | 119 (de 159) | ge 3 | PASS |
 | Duración del corte (s) | 135 | ge 120 | PASS |
-| Transferencia local de r2 durante el corte (matches vencidos ya aplicados en device-sim r2 / matches vencidos) | 1 | eq 1 | PASS |
-| device-sim r2 crece durante el corte (comandos distintos nuevos) | 356 | ge 50 | PASS |
-| El lag del grupo mesh-bridge de r2 crece durante el corte (máximo de mensajes en espera) | 353 | ge 20 | PASS |
-| El lag del grupo mesh-bridge de r2 vuelve a 0 | 0 | eq 0 | PASS |
-| Matches de r2 creados en la partición que no llegan a billing (pérdida) | 0 | eq 0 | PASS |
-| La carga de r2 durante el corte produjo matches | 360 | ge 100 | PASS |
-| Drenado de r2 tras restaurar el enlace (s hasta el último match en billing) | 3.31 | le 60 | PASS |
+| Transferencia local de r2 durante el corte (ratio) | 1 | eq 1 | PASS |
+| device-sim r2 crece durante el corte (comandos nuevos) | 360 | ge 50 | PASS |
+| Lag del grupo mesh-bridge de r2 durante el corte (máximo) | 313 | ge 20 | PASS |
+| Lag del grupo mesh-bridge de r2 al final | 0 | eq 0 | PASS |
+| Matches de r2 creados en la partición que no llegan a billing | 0 | eq 0 | PASS |
+| Matches de r2 creados durante el corte | 360 | ge 100 | PASS |
+| Drenado de r2 tras restaurar el enlace (s) | 1,73 | le 60 | PASS |
 | r1 sigue entregando durante el corte (matches sin entregar) | 0 | eq 0 | PASS |
-| p99 de r1 durante el corte (s) | 3.43 | le 10 | PASS |
+| p99 de r1 durante el corte (s) | 3,437 | le 10 | PASS |
 | Efectos duplicados en device-sim r2 de los matches de la partición | 0 | eq 0 | PASS |
 | Leafnodes del hub al final (2) y de r2 (1) | 2 | eq 2 | PASS |
 
 Notas de la corrida:
 
-- Normal: r1 1200/1200 matches en billing (1200 pares enviados), p50/p95/p99 de `receivedAt - emittedAt` = 0,005 / 0,017 / 0,025 s. r2 360/360, 0,003 / 0,007 / 0,008 s.
-- Negativos: 80/80 rechazados ({"bridge-r2": {"attempts": 20, "rejected": 20}, "nocred": {"attempts": 20, "rejected": 20}, "rogue": {"attempts": 20, "rejected": 20}, "sub": {"attempts": 20, "rejected": 20}}), `last_seq` del stream +0, billing +0.
-- Partición: 135 s con el enlace caído (114 muestras de `/leafz` con global=1 y r2=0). `device-sim` r2 sumó 356 comandos durante el corte (transferencia local 100 %). El grupo `mesh-bridge` de r2 llegó a 353 mensajes de lag y volvió a 0. Tras restaurar: 360/360 matches de r2 en billing, drenado en 3,31 s, latencia máxima de un match retenido 119,42 s. r1 durante el corte: 240/240, p99 3,43 s.
+- Normal: r1 1199 matches, todos entregados (1200 pares enviados); p50 / p95 / p99 de `receivedAt - emittedAt` = 2,8 / 8,5 / 11,3 ms. r2 360/360, 1,9 / 4,9 / 7,2 ms.
+- Negativos: 80/80 rechazados (`bridge-r2`, `nocred`, `rogue` y `sub`, 20 intentos cada uno); `last_seq` del stream +0 y billing +0.
+- Partición: 135 s con el enlace caído (119 de 159 muestras de `/leafz` con global=1 y r2=0). device-sim de r2 sumó 360 comandos durante el corte (transferencia local 100 %). El grupo `mesh-bridge` de r2 llegó a 313 mensajes de lag y volvió a 0. Tras restaurar: 360/360 matches de r2 en billing, drenado en 1,73 s, latencia máxima de un match retenido 119,24 s. r1 durante el corte: 240/240, p99 3,44 s.
 
 ## Fila de la tabla final
 
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| **E8 Event mesh 2 regiones:** matches de R1 y R2 a Facturación; publicadores no autorizados; partición de 120 s. **Patrones:** Event Mesh, Zero Trust en el bus. | Distribución real entre regiones con autorización y tolerancia a partición. | Entrega por región, p99 de latencia, rechazos, transferencia local durante el corte. | 100 % entregado; p99 <= 10 s; 80/80 rechazos; pérdida 0 tras reconectar; R2 local al 100 %. | r1 1200/1200 y r2 360/360; p99 0,025 / 0,008 s; 80/80 rechazos; corte 135 s: pérdida 0, drenado 3,31 s, r2 local 100 %; PASS (`experiments/results/final/e08-event-mesh/`) |
+| **E8 Event mesh 2 regiones:** matches de R1 y R2 a Facturación; publicadores no autorizados; partición de 120 s. **Patrones:** Event Mesh, Zero Trust en el bus. | Distribución real entre regiones con autorización y tolerancia a partición. | Entrega por región, p99 de latencia, rechazos, transferencia local durante el corte. | 100 % entregado; p99 <= 10 s; 80/80 rechazos; pérdida 0 tras reconectar; R2 local al 100 %. | r1 1199 matches (1199/1199 en billing) y r2 360/360; p99 11,3 / 7,2 ms (emisión -> recepción); 80/80 rechazos; corte de 135 s: pérdida 0, drenado 1,73 s, r2 local 100 %; PASS 28/28 (`experiments/results/final/e08-event-mesh/`, corrida `18789b0-dirty-r1`) |
