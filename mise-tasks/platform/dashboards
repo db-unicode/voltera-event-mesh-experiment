@@ -1,0 +1,33 @@
+#!/bin/sh
+#MISE description="Provisiona el dashboard de Grafana voltera-eda como ConfigMap del provider del addon (idempotente)"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+need kubectl
+need jq
+require_cluster
+
+NS=istio-system
+# ConfigMap que el addon ya monta en /var/lib/grafana/dashboards/istio-services (provider de archivo)
+CM=istio-services-grafana-dashboards
+MOUNT=/var/lib/grafana/dashboards/istio-services
+SRC="$ROOT/deploy/platform/observability/dashboards"
+
+# Merge patch: añade/actualiza solo la clave voltera.json y deja intactas las
+# claves del addon (no hace falta tocar el Deployment ni reaplicar grafana.yaml).
+log "dashboard voltera-eda -> configmap/$CM"
+patch=$(mktemp)
+trap 'rm -f "$patch"' EXIT INT TERM
+jq -n --rawfile dash "$SRC/voltera.json" '{data: {"voltera.json": $dash}}' >"$patch"
+k -n "$NS" patch configmap "$CM" --type merge --patch-file "$patch"
+
+# kubelet refresca el volumen en ≤ ~90 s; Grafana relee el provider cada 10 s
+log "esperando a que el pod de Grafana vea $MOUNT/voltera.json"
+i=0
+until k -n "$NS" exec -i deploy/grafana -c grafana -- \
+  cmp -s "$MOUNT/voltera.json" - <"$SRC/voltera.json" 2>/dev/null; do
+  i=$((i + 1))
+  [ "$i" -le 40 ] || die "el archivo no llegó al pod en 200 s"
+  sleep 5
+done
+log "dashboard listo: /d/voltera-eda (port-forward: svc/grafana 3000)"
