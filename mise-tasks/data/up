@@ -9,7 +9,7 @@ require_cluster
 
 region=${1:-r1}
 dir="$ROOT/deploy/data/$region"
-[ -f "$dir/kustomization.yaml" ] || die "región desconocida '$region' (existen: $(ls "$ROOT/deploy/data" | grep -E '^r[0-9]+$' | tr '\n' ' '))"
+[ -f "$dir/kustomization.yaml" ] || die "región desconocida '$region' (ver deploy/data/r*/)"
 
 k apply -f "$ROOT/deploy/base/namespaces.yaml" >/dev/null
 k apply -k "$dir"

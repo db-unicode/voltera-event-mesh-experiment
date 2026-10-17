@@ -1,0 +1,26 @@
+#!/bin/sh
+#MISE description="Tests de integración de internal/ contra positions-db y market-view (port-forward temporal)"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+need kubectl
+need go
+require_cluster
+
+PG_PORT=${TEST_PG_PORT:-19301}
+REDIS_PORT=${TEST_REDIS_PORT:-19302}
+
+k -n voltera-r1 port-forward svc/positions-db "$PG_PORT:5432" >/dev/null 2>&1 &
+pf1=$!
+k -n voltera-r1 port-forward svc/market-view "$REDIS_PORT:6379" >/dev/null 2>&1 &
+pf2=$!
+trap 'kill $pf1 $pf2 2>/dev/null || true' EXIT INT TERM
+sleep 3
+
+# Cada test crea un schema temporal en Postgres y un prefijo de keys en Redis, y los borra al terminar.
+pass=$(k -n voltera-r1 get secret positions-db-credentials -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 -d)
+rpass=$(k -n voltera-r1 get secret market-view-credentials -o jsonpath='{.data.REDIS_PASSWORD}' | base64 -d)
+TEST_POSTGRES_DSN="postgres://voltera:$pass@127.0.0.1:$PG_PORT/voltera?sslmode=disable" \
+TEST_REDIS_ADDR="127.0.0.1:$REDIS_PORT" \
+TEST_REDIS_PASSWORD="$rpass" \
+  go test -race -count=1 ./...

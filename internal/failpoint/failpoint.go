@@ -165,6 +165,7 @@ func (r *Registry) Set(name, mode string) error {
 		// Un Load inicial respeta la marca (el crash ya ocurrió); un Set posterior la borra.
 		if _, loaded := r.points[name]; !loaded && r.fired(name, p.mode) {
 			p.spent = true
+			slog.Info("failpoint already fired before restart", "stage", "failpoint", "result", "spent", "failpoint", name, "mode", p.mode)
 		} else {
 			_ = os.Remove(r.markerPath(name))
 		}

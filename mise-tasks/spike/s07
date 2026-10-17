@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S7: vista Redis con TTL, versión y recuperación (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s07-view/run.sh"
