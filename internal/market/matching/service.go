@@ -119,6 +119,7 @@ func Run(ctx context.Context, getenv func(string) string) error {
 		log.Warn("OUTBOX_MODE=direct: control de E6, los matches se publican sin outbox", "stage", "start", "result", "ok")
 		eng.Direct, eng.Failpoints, eng.Published = pub, fp, svc.Published
 	}
+	svc.AddState("outboxMode", func(context.Context) any { return string(cfg.OutboxMode) })
 	svc.AddState("rules", func(context.Context) any { return rules.State() })
 	svc.AddState("lastWindow", func(context.Context) any { return eng.LastWindow() })
 
