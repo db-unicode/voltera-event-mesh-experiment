@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Tests de Go con detector de carreras"
+set -eu
+cd "${MISE_PROJECT_ROOT:-.}"
+
+go test -race ./...

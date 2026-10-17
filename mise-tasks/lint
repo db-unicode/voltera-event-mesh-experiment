@@ -1,0 +1,22 @@
+#!/bin/sh
+#MISE description="go vet, golangci-lint, shellcheck y kubeconform"
+set -eu
+cd "${MISE_PROJECT_ROOT:-.}"
+
+if [ -f go.mod ]; then
+  echo "==> go vet"
+  go vet ./...
+  echo "==> golangci-lint"
+  golangci-lint run ./...
+fi
+
+echo "==> shellcheck"
+find mise-tasks experiments -type f ! -path 'experiments/results/*' \
+  \( -name '*.sh' -o -path 'mise-tasks/*' \) \
+  -exec shellcheck -s sh -x -P . {} +
+
+echo "==> kubeconform"
+# CRDs sin esquema local (Istio, KEDA, kind) se omiten; los recursos core se validan
+kubeconform -strict -summary -ignore-missing-schemas -kubernetes-version 1.37.0 deploy/
+
+echo "lint: OK"
