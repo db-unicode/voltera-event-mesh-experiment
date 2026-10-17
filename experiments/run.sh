@@ -49,6 +49,11 @@ set +a
 
 expctl_build
 
+# un experimento a la vez: el reset de uno borraría los datos de otro
+# shellcheck source=experiments/lib/lock.sh
+. "$HERE/lib/lock.sh"
+cluster_lock "$exp-r$rep"
+
 sha=$(git -C "$ROOT" rev-parse --short HEAD)
 git -C "$ROOT" diff --quiet HEAD || sha=${sha}-dirty
 OUT="$HERE/results/$exp/$(date -u +%Y%m%dT%H%M%SZ)-$sha-r$rep"
