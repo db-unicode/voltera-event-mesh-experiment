@@ -1,0 +1,67 @@
+# Kafka 4.3.1, 1 nodo KRaft con roles broker+controller combinados, dentro del mesh.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kafka
+  namespace: voltera-infra
+  labels: {app: kafka}
+spec:
+  replicas: 1
+  serviceName: kafka-headless
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels: {app: kafka}
+  template:
+    metadata:
+      labels: {app: kafka}
+    spec:
+      securityContext:
+        fsGroup: 1000
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: kafka
+          image: apache/kafka:4.3.1
+          ports:
+            - {name: tcp-kafka, containerPort: 9092}
+          env:
+            - {name: CLUSTER_ID, value: voltera-kafka-000001aa}   # 22 caracteres base64url
+            - {name: KAFKA_NODE_ID, value: "1"}
+            - {name: KAFKA_PROCESS_ROLES, value: "broker,controller"}
+            # El quorum y el listener CONTROLLER solo escuchan en localhost: no salen del pod.
+            - {name: KAFKA_CONTROLLER_QUORUM_VOTERS, value: 1@localhost:9093}
+            - {name: KAFKA_CONTROLLER_LISTENER_NAMES, value: CONTROLLER}
+            - {name: KAFKA_LISTENERS, value: "PLAINTEXT://:9092,CONTROLLER://localhost:9093"}
+            # DNS estable del pod; con localhost el cliente conectaría y se colgaría al redirigir.
+            - {name: KAFKA_ADVERTISED_LISTENERS, value: "PLAINTEXT://kafka-0.kafka-headless.voltera-infra.svc.cluster.local:9092"}
+            - {name: KAFKA_INTER_BROKER_LISTENER_NAME, value: PLAINTEXT}
+            - {name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP, value: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT"}
+            - {name: KAFKA_LOG_DIRS, value: /var/lib/kafka/data}
+            - {name: KAFKA_AUTO_CREATE_TOPICS_ENABLE, value: "false"}
+            - {name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR, value: "1"}
+            - {name: KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR, value: "1"}
+            - {name: KAFKA_TRANSACTION_STATE_LOG_MIN_ISR, value: "1"}
+            - {name: KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS, value: "0"}
+            - {name: KAFKA_HEAP_OPTS, value: "-Xms256m -Xmx512m"}
+          # exec con nc contra localhost: el kubelet no pasa por el sidecar y un probe TCP
+          # al puerto 9092 lo aceptaría Envoy aunque Kafka siga arrancando.
+          startupProbe:
+            exec: {command: [nc, -z, localhost, "9092"]}
+            periodSeconds: 5
+            failureThreshold: 36
+          readinessProbe:
+            exec: {command: [nc, -z, localhost, "9092"]}
+            periodSeconds: 10
+            timeoutSeconds: 3
+          resources:
+            requests: {cpu: 200m, memory: 768Mi}
+            limits: {memory: 1Gi}
+          volumeMounts:
+            - {name: data, mountPath: /var/lib/kafka/data}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ReadWriteOnce]
+        storageClassName: standard
+        resources:
+          requests: {storage: 2Gi}

@@ -1,0 +1,50 @@
+# Crea los topics (idempotente). Corre con sidecar: el broker exige mTLS STRICT.
+# El sidecar de Istio 1.31 es un init container nativo, así que el Job termina solo.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-topics-script
+  namespace: voltera-infra
+data:
+  create-topics.sh: |
+    #!/bin/sh
+    set -eu
+    BIN=/opt/kafka/bin
+    BS=kafka.voltera-infra.svc:9092
+    for topic in r1.energy-matched r2.energy-matched; do
+      "$BIN/kafka-topics.sh" --bootstrap-server "$BS" --create --if-not-exists \
+        --topic "$topic" --partitions 6 --replication-factor 1 \
+        --config retention.ms=604800000 --config min.insync.replicas=1
+      # reconcilia la config si el topic ya existía con otros valores
+      "$BIN/kafka-configs.sh" --bootstrap-server "$BS" --alter --entity-type topics \
+        --entity-name "$topic" --add-config retention.ms=604800000,min.insync.replicas=1
+    done
+    "$BIN/kafka-topics.sh" --bootstrap-server "$BS" --describe
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kafka-topics
+  namespace: voltera-infra
+  labels: {app: kafka-topics}
+spec:
+  backoffLimit: 10
+  template:
+    metadata:
+      labels: {app: kafka-topics}
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: create-topics
+          image: apache/kafka:4.3.1
+          command: [sh, /scripts/create-topics.sh]
+          env:
+            - {name: KAFKA_HEAP_OPTS, value: "-Xms64m -Xmx192m"}
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {memory: 384Mi}
+          volumeMounts:
+            - {name: scripts, mountPath: /scripts}
+      volumes:
+        - name: scripts
+          configMap: {name: kafka-topics-script}

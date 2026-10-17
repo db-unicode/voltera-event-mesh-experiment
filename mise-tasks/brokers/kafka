@@ -1,0 +1,24 @@
+#!/bin/sh
+#MISE description="Despliega Kafka (KRaft 1 nodo), topics y kafka-exporter en voltera-infra (idempotente)"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+
+need kubectl
+require_cluster
+
+D="$ROOT/deploy/brokers/kafka"
+
+log "kafka + kafka-exporter"
+k apply -k "$D"
+wait_rollout statefulset/kafka voltera-infra 300s
+wait_rollout deployment/kafka-exporter voltera-infra 120s
+
+# el Job es inmutable: se recrea en cada ejecución (create --if-not-exists lo hace idempotente)
+log "topics (Job con sidecar nativo: termina solo)"
+k -n voltera-infra delete job kafka-topics --ignore-not-found --wait=true
+k apply -f "$D/topics-job.yaml"
+k -n voltera-infra wait --for=condition=complete job/kafka-topics --timeout=300s
+k -n voltera-infra logs job/kafka-topics -c create-topics | tail -n 20
+
+log "kafka listo: kafka.voltera-infra.svc:9092"
