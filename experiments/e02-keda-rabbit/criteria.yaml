@@ -1,0 +1,107 @@
+# E2 parte A: KEDA sobre RabbitMQ (declaration-gateway) con pico de SPIKE_RATE durante 60 s, y control con 1 réplica fija.
+# Umbrales de 03-experiments.md sección 5/E2 sin cambios. targetReplicas = ceil(0.8 x SPIKE_RATE / C_POD) = 5 (peakMargin = pico - objetivo).
+# ${KEDA_MAX_REPLICAS} y ${KEDA_COOLDOWN_S} salen de params.env.
+
+# ---- KEDA ----
+- id: keda-sent-errors
+  description: KEDA. Errores de publicación de meter-sim
+  metric: "metrics.json:$.keda.errors"
+  op: eq
+  value: 0
+- id: keda-sent-dropped
+  description: KEDA. Declaraciones descartadas por meter-sim (cola de envío llena)
+  metric: "metrics.json:$.keda.dropped"
+  op: eq
+  value: 0
+- id: keda-loss
+  description: KEDA. Declaraciones enviadas menos filas en positions-db (pérdida)
+  metric: "metrics.json:$.keda.loss"
+  op: eq
+  value: 0
+- id: keda-cold-start-min
+  description: KEDA. Hubo primer commit con el prefijo (-1 = ninguno)
+  metric: "metrics.json:$.keda.coldStartS"
+  op: ge
+  value: 0
+- id: keda-cold-start
+  description: KEDA. cold_start_s, primer mensaje enviado hasta el primer commit del gateway (<= 20)
+  metric: "metrics.json:$.keda.coldStartS"
+  op: le
+  value: 20
+- id: keda-scale-up-min
+  description: KEDA. Se alcanzó el objetivo de réplicas listas (-1 = nunca)
+  metric: "metrics.json:$.keda.timeToScaleUpS"
+  op: ge
+  value: 0
+- id: keda-scale-up
+  description: KEDA. time_to_scale_up_s, inicio del pico hasta réplicas listas >= objetivo (<= 45)
+  metric: "metrics.json:$.keda.timeToScaleUpS"
+  op: le
+  value: 45
+- id: keda-peak-target
+  description: KEDA. peak_replicas - ceil(0.8 x SPIKE_RATE / C_POD) (>= 0)
+  metric: "metrics.json:$.keda.peakMargin"
+  op: ge
+  value: 0
+- id: keda-peak-max
+  description: KEDA. peak_replicas nunca supera el máximo
+  metric: "metrics.json:$.keda.peakReplicas"
+  op: le
+  value: ${KEDA_MAX_REPLICAS}
+- id: keda-drained
+  description: KEDA. La cola llegó a <= 1 mensaje dentro del tope
+  metric: "metrics.json:$.keda.drained"
+  op: eq
+  value: true
+- id: keda-drain
+  description: KEDA. drain_s, fin del pico hasta profundidad <= 1 (<= 60)
+  metric: "metrics.json:$.keda.drainS"
+  op: le
+  value: 60
+- id: keda-drain-min
+  description: KEDA. drain_s medido (-1 = no drenó)
+  metric: "metrics.json:$.keda.drainS"
+  op: ge
+  value: 0
+- id: keda-queue-wait-p99
+  description: KEDA. p99 del retraso en cola (occurredAt -> commit) en s (<= 30)
+  metric: "metrics.json:$.keda.queueWaitP99S"
+  op: le
+  value: 30
+- id: keda-zeroed
+  description: KEDA. El gateway volvió a 0 réplicas dentro del tope
+  metric: "metrics.json:$.keda.zeroed"
+  op: eq
+  value: true
+- id: keda-scale-to-zero
+  description: KEDA. scale_to_zero_s, profundidad 0 hasta réplicas 0 (<= cooldownPeriod + 30)
+  metric: "metrics.json:$.keda.scaleToZeroS"
+  op: le
+  value: 60
+- id: keda-scale-to-zero-min
+  description: KEDA. scale_to_zero_s medido (-1 = nunca)
+  metric: "metrics.json:$.keda.scaleToZeroS"
+  op: ge
+  value: 0
+- id: keda-oscillation
+  description: KEDA. Bajadas de réplicas durante el pico (<= 2 ciclos)
+  metric: "metrics.json:$.keda.replicaDropsDuringSpike"
+  op: le
+  value: 2
+
+# ---- control (1 réplica fija) ----
+- id: control-loss
+  description: Control. Declaraciones enviadas menos filas en positions-db
+  metric: "metrics.json:$.control.loss"
+  op: eq
+  value: 0
+- id: control-drain-ratio
+  description: Control. drain_s del control / drain_s de KEDA (>= 3; si no drena, se usa el tope)
+  metric: "metrics.json:$.drainRatio"
+  op: ge
+  value: 3
+- id: control-queue-wait-p99
+  description: Control. p99 del retraso en cola en s (> 30)
+  metric: "metrics.json:$.control.queueWaitP99S"
+  op: gt
+  value: 30
