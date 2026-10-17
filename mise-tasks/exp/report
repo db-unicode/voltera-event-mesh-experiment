@@ -1,0 +1,12 @@
+#!/bin/sh
+#MISE description="Genera experiments/results/summary.md con la última corrida de cada experimento"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+# shellcheck source=experiments/lib/expctl.sh
+. "$ROOT/experiments/lib/expctl.sh"
+
+expctl_build
+cd "$ROOT"
+mkdir -p experiments/results
+expctl report --results experiments/results --out experiments/results/summary.md

@@ -1,0 +1,7 @@
+#!/bin/sh
+#MISE description="Corre un experimento: exp:run <id> [rep] (compila expctl; evidencia en experiments/results/)"
+#USAGE arg "<id>" help="id o prefijo de la carpeta experiments/<id>*/ (p. ej. e00)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" "$@"

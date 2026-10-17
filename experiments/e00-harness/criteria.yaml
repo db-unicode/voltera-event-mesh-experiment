@@ -1,0 +1,22 @@
+# Criterios del experimento de humo del arnés. Formato: id, description, metric
+# (archivo:expresión dentro de la carpeta de la corrida), op (le|lt|ge|gt|eq) y value.
+- id: samples-taken
+  description: El muestreo de 30 s a 2 s produce al menos 10 filas
+  metric: "raw/samples.csv:count(up_prometheus)"
+  op: ge
+  value: 10
+- id: kafka-exporter-ready
+  description: kafka-exporter tiene al menos 1 réplica lista en todas las muestras
+  metric: "raw/samples.csv:min(kafka_exporter_ready)"
+  op: ge
+  value: 1
+- id: prometheus-up
+  description: Prometheus se ve a sí mismo arriba (up = 1) durante toda la ventana
+  metric: "raw/samples.csv:min(up_prometheus)"
+  op: eq
+  value: 1
+- id: prom-range-points
+  description: La consulta de rango devuelve al menos 10 puntos
+  metric: "metrics.json:$.prom_range_points"
+  op: ge
+  value: 10
