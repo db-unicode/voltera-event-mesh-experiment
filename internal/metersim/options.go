@@ -54,9 +54,12 @@ type Options struct {
 	Workers  int
 	// VersionBase es la primera versión de cada medidor; 0 = 1 en once/dup y el unix time en el resto.
 	VersionBase int64
-	Region      string
-	AMQP        amqpx.Config
-	OpsAddr     string
+	// LogPublish emite un log de etapa (stage=publish, eventId, traceId) por declaración confirmada: para
+	// seguir un evento con `expctl trace`. Con cargas altas son demasiadas líneas: déjalo apagado.
+	LogPublish bool
+	Region     string
+	AMQP       amqpx.Config
+	OpsAddr    string
 }
 
 const (
@@ -116,6 +119,7 @@ const usage = `uso: meter-sim [flags]   (cada flag tiene su variable METERSIM_<N
   --ramp S            rampa de spike (5s)
   --workers N         publicadores concurrentes (16)
   --version-base N    primera versión de cada medidor (0 = 1 en once/dup, unix time en el resto)
+  --log-publish       un log de etapa (eventId, traceId) por declaración publicada; para expctl trace con cargas pequeñas
 
 Entorno: REGION (r1|r2), AMQP_HOST, AMQP_USER, AMQP_PASSWORD, AMQP_VHOST (por defecto REGION), OPS_ADDR (:9090).
 `
@@ -144,6 +148,7 @@ func ParseOptions(args []string, getenv func(string) string, stderr io.Writer) (
 		VersionBase: pe.Int64("VERSION_BASE", 0),
 	}
 	o.Rate = pe.Float("RATE", -1, 0)
+	o.LogPublish = pe.String("LOG_PUBLISH", "") == "1"
 
 	fs := flag.NewFlagSet("meter-sim", flag.ContinueOnError)
 	fs.SetOutput(stderr)
@@ -164,6 +169,7 @@ func ParseOptions(args []string, getenv func(string) string, stderr io.Writer) (
 	fs.Var(secs{&o.Ramp}, "ramp", "")
 	fs.IntVar(&o.Workers, "workers", o.Workers, "")
 	fs.Int64Var(&o.VersionBase, "version-base", o.VersionBase, "")
+	fs.BoolVar(&o.LogPublish, "log-publish", o.LogPublish, "")
 	if err := fs.Parse(args); err != nil {
 		return Options{}, err
 	}

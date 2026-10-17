@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/csv"
+	"encoding/json"
 	"errors"
 	"log/slog"
 	"os"
@@ -389,6 +390,50 @@ func TestRunOnceUnthrottledPublishesEverythingWithHeadersAndCSV(t *testing.T) {
 	require.Len(t, rows, 201)
 	_, err = time.Parse(time.RFC3339Nano, rows[1][3])
 	require.NoError(t, err)
+}
+
+func TestRunLogsOnePublishStagePerDeclarationOnlyWhenAsked(t *testing.T) {
+	run := func(logPublish bool) (*bytes.Buffer, *fakeSender) {
+		o := testOptions(ProfilePairs)
+		o.Meters, o.Zones, o.Rate, o.Duration, o.LogPublish = 2, 1, 2, time.Second, logPublish
+		buf := &bytes.Buffer{}
+		r := newRunner(o, &fakeSender{})
+		r.Log = slog.New(slog.NewJSONHandler(buf, nil))
+		fs := r.Sender.(*fakeSender)
+		sum, err := r.Run(context.Background())
+		require.NoError(t, err)
+		require.Equal(t, int64(2), sum.Published)
+		return buf, fs
+	}
+
+	buf, fs := run(true)
+	lines := bytes.Split(bytes.TrimSpace(buf.Bytes()), []byte("\n"))
+	require.Len(t, lines, 2)
+	for i, line := range lines {
+		var rec map[string]any
+		require.NoError(t, json.Unmarshal(line, &rec))
+		require.Equal(t, "publish", rec["stage"])
+		require.Equal(t, "ok", rec["result"])
+		require.Equal(t, fs.sent[i].MessageID, rec["eventId"])
+		require.Equal(t, events.TraceID(fs.sent[i].Headers["traceparent"].(string)), rec["traceId"])
+	}
+
+	buf, _ = run(false)
+	require.Empty(t, buf.Bytes())
+}
+
+func TestParseOptionsLogPublish(t *testing.T) {
+	base := map[string]string{"REGION": "r1", "AMQP_USER": "u", "AMQP_PASSWORD": "x"}
+	o, err := ParseOptions(nil, env(base), &bytes.Buffer{})
+	require.NoError(t, err)
+	require.False(t, o.LogPublish)
+	o, err = ParseOptions([]string{"--log-publish"}, env(base), &bytes.Buffer{})
+	require.NoError(t, err)
+	require.True(t, o.LogPublish)
+	base["METERSIM_LOG_PUBLISH"] = "1"
+	o, err = ParseOptions(nil, env(base), &bytes.Buffer{})
+	require.NoError(t, err)
+	require.True(t, o.LogPublish)
 }
 
 func TestRunSteadyKeepsTheArrivalRate(t *testing.T) {

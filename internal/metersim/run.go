@@ -17,6 +17,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/broker/amqpx"
+	"github.com/db-unicode/voltera-event-mesh-experiment/internal/events"
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/telemetry"
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/w3c"
 )
@@ -145,10 +146,11 @@ func (r *Runner) Run(ctx context.Context) (Summary, error) {
 					}
 				}
 				body, err := d.Encode(sentAt)
+				traceparent := w3c.NewTraceparent()
 				if err == nil {
 					err = r.Sender.Send(ctx, amqpx.Outgoing{
 						Exchange: Exchange, RoutingKey: QueueName, Body: body, MessageID: d.EventID, Type: EventType, Timestamp: sentAt,
-						Headers: map[string]any{"x-vendor": d.Vendor, "traceparent": w3c.NewTraceparent(), "eventId": d.EventID},
+						Headers: map[string]any{"x-vendor": d.Vendor, "traceparent": traceparent, "eventId": d.EventID},
 					})
 				}
 				if err != nil {
@@ -161,6 +163,11 @@ func (r *Runner) Run(ctx context.Context) (Summary, error) {
 				}
 				published.Add(1)
 				r.Svc.Metrics.EventsPublished.WithLabelValues(EventType, QueueName).Inc()
+				if o.LogPublish {
+					telemetry.LogStage(r.Log, telemetry.StagePublish, events.Envelope{EventID: d.EventID, Traceparent: traceparent},
+						telemetry.ResultOK, "meterId", d.MeterID, "version", d.Version, "side", d.Side, "vendor", d.Vendor,
+						"sentAt", sentAt.UTC().Format(time.RFC3339Nano))
+				}
 				vendorMu.Lock()
 				sum.ByVendor[d.Vendor]++
 				vendorMu.Unlock()
