@@ -1,0 +1,186 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/exp-e01-e02/experiments/results/e02-keda-rabbit/20261017T060820Z-f02de76-r2",
+  "criteria": [
+    {
+      "id": "keda-sent-errors",
+      "description": "KEDA. Errores de publicación de meter-sim",
+      "metric": "metrics.json:$.keda.errors",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-sent-dropped",
+      "description": "KEDA. Declaraciones descartadas por meter-sim (cola de envío llena)",
+      "metric": "metrics.json:$.keda.dropped",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-loss",
+      "description": "KEDA. Declaraciones enviadas menos filas en positions-db (pérdida)",
+      "metric": "metrics.json:$.keda.loss",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-cold-start-min",
+      "description": "KEDA. Hubo primer commit con el prefijo (-1 = ninguno)",
+      "metric": "metrics.json:$.keda.coldStartS",
+      "observed": 14.25,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-cold-start",
+      "description": "KEDA. cold_start_s, primer mensaje enviado hasta el primer commit del gateway (\u003c= 20)",
+      "metric": "metrics.json:$.keda.coldStartS",
+      "observed": 14.25,
+      "op": "le",
+      "expected": 20,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-scale-up-min",
+      "description": "KEDA. Se alcanzó el objetivo de réplicas listas (-1 = nunca)",
+      "metric": "metrics.json:$.keda.timeToScaleUpS",
+      "observed": 31,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-scale-up",
+      "description": "KEDA. time_to_scale_up_s, inicio del pico hasta réplicas listas \u003e= objetivo (\u003c= 45)",
+      "metric": "metrics.json:$.keda.timeToScaleUpS",
+      "observed": 31,
+      "op": "le",
+      "expected": 45,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-peak-target",
+      "description": "KEDA. peak_replicas - ceil(0.8 x SPIKE_RATE / C_POD) (\u003e= 0)",
+      "metric": "metrics.json:$.keda.peakMargin",
+      "observed": 5,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-peak-max",
+      "description": "KEDA. peak_replicas nunca supera el máximo",
+      "metric": "metrics.json:$.keda.peakReplicas",
+      "observed": 10,
+      "op": "le",
+      "expected": 10,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-drained",
+      "description": "KEDA. La cola llegó a \u003c= 1 mensaje dentro del tope",
+      "metric": "metrics.json:$.keda.drained",
+      "observed": true,
+      "op": "eq",
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-drain",
+      "description": "KEDA. drain_s, fin del pico hasta profundidad \u003c= 1 (\u003c= 60)",
+      "metric": "metrics.json:$.keda.drainS",
+      "observed": 18,
+      "op": "le",
+      "expected": 60,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-drain-min",
+      "description": "KEDA. drain_s medido (-1 = no drenó)",
+      "metric": "metrics.json:$.keda.drainS",
+      "observed": 18,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-queue-wait-p99",
+      "description": "KEDA. p99 del retraso en cola (occurredAt -\u003e commit) en s (\u003c= 30)",
+      "metric": "metrics.json:$.keda.queueWaitP99S",
+      "observed": 24.23,
+      "op": "le",
+      "expected": 30,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-zeroed",
+      "description": "KEDA. El gateway volvió a 0 réplicas dentro del tope",
+      "metric": "metrics.json:$.keda.zeroed",
+      "observed": true,
+      "op": "eq",
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-scale-to-zero",
+      "description": "KEDA. scale_to_zero_s, profundidad 0 hasta réplicas 0 (\u003c= cooldownPeriod + 30)",
+      "metric": "metrics.json:$.keda.scaleToZeroS",
+      "observed": 34,
+      "op": "le",
+      "expected": 60,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-scale-to-zero-min",
+      "description": "KEDA. scale_to_zero_s medido (-1 = nunca)",
+      "metric": "metrics.json:$.keda.scaleToZeroS",
+      "observed": 34,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-oscillation",
+      "description": "KEDA. Bajadas de réplicas durante el pico (\u003c= 2 ciclos)",
+      "metric": "metrics.json:$.keda.replicaDropsDuringSpike",
+      "observed": 0,
+      "op": "le",
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "control-loss",
+      "description": "Control. Declaraciones enviadas menos filas en positions-db",
+      "metric": "metrics.json:$.control.loss",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "control-drain-ratio",
+      "description": "Control. drain_s del control / drain_s de KEDA (\u003e= 3; si no drena, se usa el tope)",
+      "metric": "metrics.json:$.drainRatio",
+      "observed": 17.77777777777778,
+      "op": "ge",
+      "expected": 3,
+      "verdict": "PASS"
+    },
+    {
+      "id": "control-queue-wait-p99",
+      "description": "Control. p99 del retraso en cola en s (\u003e 30)",
+      "metric": "metrics.json:$.control.queueWaitP99S",
+      "observed": 316.19,
+      "op": "gt",
+      "expected": 30,
+      "verdict": "PASS"
+    }
+  ]
+}

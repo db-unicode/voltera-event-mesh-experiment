@@ -1,0 +1,111 @@
+{
+    "apiVersion": "keda.sh/v1alpha1",
+    "kind": "ScaledObject",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"keda.sh/v1alpha1\",\"kind\":\"ScaledObject\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"energy-transfer\",\"app.kubernetes.io/component\":\"match-side\",\"app.kubernetes.io/name\":\"energy-transfer\",\"app.kubernetes.io/part-of\":\"voltera\"},\"name\":\"energy-transfer\",\"namespace\":\"voltera-r1\"},\"spec\":{\"advanced\":{\"horizontalPodAutoscalerConfig\":{\"behavior\":{\"scaleDown\":{\"stabilizationWindowSeconds\":30}}}},\"cooldownPeriod\":30,\"maxReplicaCount\":6,\"minReplicaCount\":0,\"pollingInterval\":5,\"scaleTargetRef\":{\"name\":\"energy-transfer\"},\"triggers\":[{\"metadata\":{\"bootstrapServers\":\"kafka.voltera-infra.svc:9092\",\"consumerGroup\":\"energy-transfer\",\"lagThreshold\":\"50\",\"limitToPartitionsWithLag\":\"true\",\"offsetResetPolicy\":\"earliest\",\"topic\":\"r1.energy-matched\"},\"type\":\"kafka\"}]}}\n"
+        },
+        "creationTimestamp": "2026-10-17T03:01:01Z",
+        "finalizers": [
+            "finalizer.keda.sh"
+        ],
+        "generation": 2,
+        "labels": {
+            "app": "energy-transfer",
+            "app.kubernetes.io/component": "match-side",
+            "app.kubernetes.io/name": "energy-transfer",
+            "app.kubernetes.io/part-of": "voltera",
+            "scaledobject.keda.sh/name": "energy-transfer"
+        },
+        "name": "energy-transfer",
+        "namespace": "voltera-r1",
+        "resourceVersion": "91073",
+        "uid": "5557b0fe-70cd-4e81-af2e-1b993a2fa6b6"
+    },
+    "spec": {
+        "advanced": {
+            "horizontalPodAutoscalerConfig": {
+                "behavior": {
+                    "scaleDown": {
+                        "stabilizationWindowSeconds": 30
+                    }
+                }
+            },
+            "scalingModifiers": {}
+        },
+        "cooldownPeriod": 30,
+        "maxReplicaCount": 6,
+        "minReplicaCount": 0,
+        "pollingInterval": 5,
+        "scaleTargetRef": {
+            "name": "energy-transfer"
+        },
+        "triggers": [
+            {
+                "metadata": {
+                    "bootstrapServers": "kafka.voltera-infra.svc:9092",
+                    "consumerGroup": "energy-transfer",
+                    "lagThreshold": "50",
+                    "limitToPartitionsWithLag": "true",
+                    "offsetResetPolicy": "earliest",
+                    "topic": "r1.energy-matched"
+                },
+                "type": "kafka"
+            }
+        ]
+    },
+    "status": {
+        "authenticationsTypes": "",
+        "conditions": [
+            {
+                "message": "ScaledObject is defined correctly and is ready for scaling",
+                "reason": "ScaledObjectReady",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "message": "Scaling is not performed because triggers are not active",
+                "reason": "ScalerNotActive",
+                "status": "False",
+                "type": "Active"
+            },
+            {
+                "message": "No fallbacks are active on this scaled object",
+                "reason": "NoFallbackFound",
+                "status": "False",
+                "type": "Fallback"
+            },
+            {
+                "message": "pause annotation removed for ScaledObject",
+                "reason": "ScaledObjectUnpaused",
+                "status": "False",
+                "type": "Paused"
+            },
+            {
+                "message": "HPA is actively scaling",
+                "reason": "HPAActive",
+                "status": "True",
+                "type": "HPAActive"
+            }
+        ],
+        "externalMetricNames": [
+            "s0-kafka-r1-energy-matched"
+        ],
+        "hpaName": "keda-hpa-energy-transfer",
+        "lastActiveTime": "2026-10-17T06:07:40Z",
+        "originalReplicaCount": 0,
+        "scaleTargetGVKR": {
+            "group": "apps",
+            "kind": "Deployment",
+            "resource": "deployments",
+            "version": "v1"
+        },
+        "scaleTargetKind": "apps/v1.Deployment",
+        "triggersActivity": {
+            "s0-kafka-r1-energy-matched": {
+                "isActive": false
+            }
+        },
+        "triggersTypes": "kafka"
+    }
+}

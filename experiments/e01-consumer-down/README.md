@@ -66,4 +66,13 @@ contraria (el emisor intacto) es la que mide E1.
 
 ## Resultado
 
-RESULTADOS_PENDIENTES
+Sin corrida final que pase todavía. Última corrida completa (`20261017T043410Z-8b6c576-dirty-r2`, antes de los últimos cambios del script):
+fase a 17/17 criterios en PASS (pérdida 0, duplicados 0, p95 emisor x1,00, errores 0, lag +1240 = matches creados en la caída, drenado 6 s tras Ready);
+fase b: pérdida 0, duplicados 0, 400 keys antes/durante/después (ninguna expulsada), drenado 5 s, p95 del gateway x1,04; fallaban
+`b-matches` (2505 < 3000: con `--horizon 30s` las posiciones encoladas caducan antes de proyectarse) y `b-depth-growth-lo` (0,84: la profundidad del management API va
+5 s por detrás). Ambos corregidos en el script (horizon 90 s en b; profundidad exacta con `rabbitmqctl`; ventana de crecimiento entre las mismas dos
+muestras) pero no verificados: la corrida `...062425Z-59b8a9e-r3` se mató al cerrar la sesión.
+
+| Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
+|---|---|---|---|---|
+| E1 Consumidor caído | El emisor no se entera; los eventos esperan y se procesan al volver | pérdida, p95 emisor, lag, drenado, keys | pérdida 0; p95 <= 1,2x; drenado <= 60 s; keys iguales | Fase a PASS (r2); fase b con 2 criterios por verificar tras la corrección: PENDIENTE |

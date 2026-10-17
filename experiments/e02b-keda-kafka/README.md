@@ -47,4 +47,10 @@ El lag se lee del exporter en cada muestra, no de Prometheus (scrape de 15 s), p
 
 ## Resultado
 
-RESULTADOS_PENDIENTES
+Corrida que pasa (15/15 criterios): `experiments/results/final/e02b-keda-kafka/` (origen `20261017T060655Z-f02de76-r3`; sin los dumps completos de device-sim/billing-sim).
+Pico de lag 1865, réplicas 0 -> 5 -> 0, primera réplica a los 5 s, lag 0 a los 18 s, 0 réplicas 26 s después, 3000 transferencias `SENT`, 0 pérdidas, 0 duplicados.
+Los criterios definitivos (pico de lag >= 1000) se fijaron antes de esa corrida; r2 (lag 1714) también pasó.
+
+| Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
+|---|---|---|---|---|
+| E2B KEDA Kafka | `energy-transfer` 0 -> <= 6 -> 0 por lag | réplicas pico, lag final, scale-to-zero, efectos | <= 6; lag 0; <= 90 s; 3000 efectos únicos | 5; 0; 26 s; 3000: PASS (`results/final/e02b-keda-kafka/`) |

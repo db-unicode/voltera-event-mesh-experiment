@@ -1,0 +1,1 @@
+{"profile":"spike","region":"r1","seed":2,"meters":18560,"rate":276,"planned":15870,"scheduled":15870,"published":15870,"errors":0,"late":0,"dropped":0,"maxLatenessMs":23.38997,"byVendor":{"acme-v1":7935,"voltix-2":7935},"startedAt":"2026-10-17T06:09:10.219422053Z","endedAt":"2026-10-17T06:10:10.225251402Z","elapsedSec":60.005829348,"achievedRate":264.47430478733895}

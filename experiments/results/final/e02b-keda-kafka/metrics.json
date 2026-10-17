@@ -1,0 +1,27 @@
+{
+  "prefix": "e02b-1792217236",
+  "produced": true,
+  "drained": true,
+  "zeroed": true,
+  "published": 3000,
+  "transfersTotal": 3000,
+  "transfersSent": 3000,
+  "transfersNotSent": 0,
+  "device": {
+    "missing": 0,
+    "dups": 0,
+    "deltaDistinct": 3000
+  },
+  "billing": {
+    "missing": 0
+  },
+  "replicasStart": 0,
+  "peakReplicas": 5,
+  "maxReplicas": 6,
+  "replicasEnd": 0,
+  "peakLag": 1865,
+  "lagEnd": 0,
+  "timeToFirstReplicaS": 5,
+  "timeToLagZeroS": 18,
+  "scaleToZeroS": 26
+}

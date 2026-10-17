@@ -1,0 +1,112 @@
+{
+    "apiVersion": "keda.sh/v1alpha1",
+    "kind": "ScaledObject",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"keda.sh/v1alpha1\",\"kind\":\"ScaledObject\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"declaration-gateway\",\"app.kubernetes.io/component\":\"write-side\",\"app.kubernetes.io/name\":\"declaration-gateway\",\"app.kubernetes.io/part-of\":\"voltera\"},\"name\":\"declaration-gateway\",\"namespace\":\"voltera-r1\"},\"spec\":{\"advanced\":{\"horizontalPodAutoscalerConfig\":{\"behavior\":{\"scaleDown\":{\"stabilizationWindowSeconds\":30}}}},\"cooldownPeriod\":30,\"maxReplicaCount\":10,\"minReplicaCount\":0,\"pollingInterval\":5,\"scaleTargetRef\":{\"name\":\"declaration-gateway\"},\"triggers\":[{\"authenticationRef\":{\"name\":\"rabbitmq-http\"},\"metadata\":{\"mode\":\"QueueLength\",\"protocol\":\"http\",\"queueName\":\"meter-declarations\",\"value\":\"100\"},\"type\":\"rabbitmq\"}]}}\n"
+        },
+        "creationTimestamp": "2026-10-17T03:16:34Z",
+        "finalizers": [
+            "finalizer.keda.sh"
+        ],
+        "generation": 2,
+        "labels": {
+            "app": "declaration-gateway",
+            "app.kubernetes.io/component": "write-side",
+            "app.kubernetes.io/name": "declaration-gateway",
+            "app.kubernetes.io/part-of": "voltera",
+            "scaledobject.keda.sh/name": "declaration-gateway"
+        },
+        "name": "declaration-gateway",
+        "namespace": "voltera-r1",
+        "resourceVersion": "92027",
+        "uid": "3fb41cca-2768-45cc-8dce-4ec050be6800"
+    },
+    "spec": {
+        "advanced": {
+            "horizontalPodAutoscalerConfig": {
+                "behavior": {
+                    "scaleDown": {
+                        "stabilizationWindowSeconds": 30
+                    }
+                }
+            },
+            "scalingModifiers": {}
+        },
+        "cooldownPeriod": 30,
+        "maxReplicaCount": 10,
+        "minReplicaCount": 0,
+        "pollingInterval": 5,
+        "scaleTargetRef": {
+            "name": "declaration-gateway"
+        },
+        "triggers": [
+            {
+                "authenticationRef": {
+                    "name": "rabbitmq-http"
+                },
+                "metadata": {
+                    "mode": "QueueLength",
+                    "protocol": "http",
+                    "queueName": "meter-declarations",
+                    "value": "100"
+                },
+                "type": "rabbitmq"
+            }
+        ]
+    },
+    "status": {
+        "authenticationsTypes": "rabbitmq-http",
+        "conditions": [
+            {
+                "message": "ScaledObject is defined correctly and is ready for scaling",
+                "reason": "ScaledObjectReady",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "message": "Scaling is not performed because triggers are not active",
+                "reason": "ScalerNotActive",
+                "status": "False",
+                "type": "Active"
+            },
+            {
+                "message": "No fallbacks are active on this scaled object",
+                "reason": "NoFallbackFound",
+                "status": "False",
+                "type": "Fallback"
+            },
+            {
+                "message": "pause annotation removed for ScaledObject",
+                "reason": "ScaledObjectUnpaused",
+                "status": "False",
+                "type": "Paused"
+            },
+            {
+                "message": "HPA is actively scaling",
+                "reason": "HPAActive",
+                "status": "True",
+                "type": "HPAActive"
+            }
+        ],
+        "externalMetricNames": [
+            "s0-rabbitmq-meter-declarations"
+        ],
+        "hpaName": "keda-hpa-declaration-gateway",
+        "lastActiveTime": "2026-10-17T06:10:31Z",
+        "originalReplicaCount": 0,
+        "scaleTargetGVKR": {
+            "group": "apps",
+            "kind": "Deployment",
+            "resource": "deployments",
+            "version": "v1"
+        },
+        "scaleTargetKind": "apps/v1.Deployment",
+        "triggersActivity": {
+            "s0-rabbitmq-meter-declarations": {
+                "isActive": false
+            }
+        },
+        "triggersTypes": "rabbitmq"
+    }
+}
