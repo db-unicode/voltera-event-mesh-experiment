@@ -1,0 +1,44 @@
+# Carga continua: 0 réplicas por defecto. `kubectl scale deploy/meter-sim --replicas=1` arranca la carga steady
+# descrita aquí; cambia el perfil con `kubectl set env deploy/meter-sim METERSIM_PROFILE=...`. Las corridas acotadas
+# (S11, S16) usan Jobs con el mismo ServiceAccount y Secret (experiments/lib/metersim.sh).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meter-sim
+spec:
+  replicas: 0
+  selector:
+    matchLabels: {}
+  template:
+    metadata:
+      labels: {}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      serviceAccountName: meter-sim
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: meter-sim
+          image: voltera/meter-sim:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: AMQP_USER
+              valueFrom: {secretKeyRef: {name: meter-sim-rabbitmq, key: AMQP_USER}}
+            - name: AMQP_PASSWORD
+              valueFrom: {secretKeyRef: {name: meter-sim-rabbitmq, key: AMQP_PASSWORD}}
+            - {name: METERSIM_PROFILE, value: steady}
+            - {name: METERSIM_RATE, value: "20"}
+            - {name: METERSIM_METERS, value: "100"}
+            - {name: METERSIM_DURATION, value: 24h}
+            - {name: METERSIM_ZONES, value: "4"}
+            - {name: GOMEMLIMIT, value: 50MiB}
+          ports:
+            - {name: http-ops, containerPort: 9090}
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 64Mi}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}

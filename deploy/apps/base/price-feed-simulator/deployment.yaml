@@ -1,0 +1,52 @@
+# Publica PriceUpdated en kwh-prices.x. Sin base de datos ni outbox (estado efímero: ver internal/pricing).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: price-feed-simulator
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate   # dos instancias publicarían dos series de precios
+  selector:
+    matchLabels: {}
+  template:
+    metadata:
+      labels: {}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      serviceAccountName: price-feed-simulator
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: price-feed-simulator
+          image: voltera/price-feed-simulator:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: AMQP_USER
+              valueFrom: {secretKeyRef: {name: price-feed-simulator-rabbitmq, key: AMQP_USER}}
+            - name: AMQP_PASSWORD
+              valueFrom: {secretKeyRef: {name: price-feed-simulator-rabbitmq, key: AMQP_PASSWORD}}
+            - {name: PRICE_MIN_INTERVAL_S, value: "5"}
+            - {name: PRICE_MAX_INTERVAL_S, value: "15"}
+            - {name: PRICE_BASE, value: "0.15"}
+            - {name: PRICE_JITTER, value: "0.01"}
+            - {name: PRICE_SEED, value: "1"}
+            - {name: EXPERIMENTS, value: "1"}
+            - {name: GOMEMLIMIT, value: 50MiB}
+          ports:
+            - {name: http-ops, containerPort: 9090}
+          readinessProbe:
+            httpGet: {path: /readyz, port: http-ops}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /healthz, port: http-ops}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 64Mi}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}

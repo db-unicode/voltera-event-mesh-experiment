@@ -1,0 +1,93 @@
+#!/bin/sh
+#MISE description="Construye y despliega el lado de escritura (meter-sim, declaration-gateway, price-feed-simulator, market-projector) (idempotente; arg: r1|r2|all)"
+#USAGE arg "[region]" help="región a desplegar (r1, r2 o all)" default="all"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+need kubectl
+need docker
+need kind
+need jq
+require_cluster
+
+region=${1:-all}
+case $region in
+  r1 | r2) regions=$region ;;
+  all) regions="r1 r2" ;;
+  *) die "región desconocida '$region' (r1, r2 o all)" ;;
+esac
+
+images="meter-sim declaration-gateway price-feed-simulator market-projector"
+# servicio:usuario de RabbitMQ (sin sufijo de región)
+users="meter-sim:meter-sim declaration-gateway:declaration-gateway price-feed-simulator:price-feed market-projector:market-projector"
+
+# id de la imagen antes y después: solo se reinicia lo que cambió (el tag :dev no cambia)
+image_id() { docker image inspect -f '{{.Id}}' "voltera/$1:dev" 2>/dev/null || echo none; }
+
+ids=$(mktemp -d)
+trap 'rm -rf "$ids"' EXIT INT TERM
+for img in $images; do image_id "$img" >"$ids/$img"; done
+# shellcheck disable=SC2086  # $images se trocea a propósito: un argumento por imagen
+MISE_PROJECT_ROOT=$ROOT sh "$ROOT/mise-tasks/images/build" $images
+changed=""
+for img in $images; do
+  [ "$(cat "$ids/$img")" = "$(image_id "$img")" ] || changed="$changed $img"
+done
+[ -z "$changed" ] || log "imágenes nuevas:$changed"
+
+k apply -f "$ROOT/deploy/base/namespaces.yaml" >/dev/null
+
+# rmq_password <usuario>: contraseña del usuario en el Secret rabbitmq-users de voltera-infra
+rmq_password() {
+  k -n voltera-infra get secret rabbitmq-users -o json | jq -er --arg u "$1" '.data[$u]' | base64 -d
+}
+
+# copy_credentials <namespace> <region>: un Secret por servicio con SOLO las credenciales de su usuario,
+# y el URI del management API (usuario keda, solo lectura) para el TriggerAuthentication de KEDA
+copy_credentials() {
+  _ns=$1
+  _r=$2
+  for pair in $users; do
+    _svc=${pair%%:*}
+    _user=${pair#*:}-$_r
+    k -n "$_ns" create secret generic "$_svc-rabbitmq" \
+      --from-literal="AMQP_USER=$_user" --from-literal="AMQP_PASSWORD=$(rmq_password "$_user")" \
+      --dry-run=client -o yaml | k apply -f - >/dev/null
+  done
+  k -n "$_ns" create secret generic keda-rabbitmq-uri \
+    --from-literal="host=http://keda:$(rmq_password keda)@rabbitmq.voltera-infra.svc:15672/$_r" \
+    --dry-run=client -o yaml | k apply -f - >/dev/null
+}
+
+restart_if_changed() { # <deployment> <namespace>
+  case " $changed " in
+    *" $1 "*) k -n "$2" get deployment "$1" >/dev/null 2>&1 && k -n "$2" rollout restart "deployment/$1" >/dev/null ;;
+  esac
+}
+
+for r in $regions; do
+  ns=voltera-$r
+  # el overlay necesita positions-db y market-view en la región; r2 puede no tenerlos todavía
+  missing=""
+  k -n "$ns" get statefulset positions-db >/dev/null 2>&1 || missing="$missing positions-db"
+  k -n "$ns" get deployment market-view >/dev/null 2>&1 || missing="$missing market-view"
+  if [ -n "$missing" ]; then
+    log "AVISO: faltan en $ns:$missing; overlay deploy/apps/$r/write-side listo pero NO aplicado (ejecuta: mise run data:up $r)"
+    continue
+  fi
+
+  log "credenciales de RabbitMQ en $ns (un Secret por servicio)"
+  copy_credentials "$ns" "$r"
+  log "overlay deploy/apps/$r/write-side en $ns"
+  k apply -k "$ROOT/deploy/apps/$r/write-side"
+  for d in declaration-gateway price-feed-simulator market-projector meter-sim; do restart_if_changed "$d" "$ns"; done
+  for d in price-feed-simulator market-projector; do wait_rollout "deployment/$d" "$ns" 180s; done
+  # declaration-gateway arranca en 0 réplicas: lo gobierna KEDA
+  i=0
+  until k -n "$ns" get scaledobject declaration-gateway -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}' 2>/dev/null | grep -qx True; do
+    i=$((i + 1))
+    [ "$i" -lt 30 ] || die "ScaledObject declaration-gateway no llegó a Ready en $ns"
+    sleep 2
+  done
+  log "ScaledObject declaration-gateway Ready en $ns"
+done

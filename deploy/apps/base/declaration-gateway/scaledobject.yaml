@@ -1,0 +1,23 @@
+# Patrón validado en experiments/spikes/s05-keda-rabbit/. value=100 mensajes por réplica (C_pod ~ 46 msg/s con 20 ms).
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: declaration-gateway
+spec:
+  scaleTargetRef: {name: declaration-gateway}
+  minReplicaCount: 0
+  maxReplicaCount: 10
+  pollingInterval: 5
+  cooldownPeriod: 30
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown: {stabilizationWindowSeconds: 30}
+  triggers:
+    - type: rabbitmq
+      metadata:
+        protocol: http
+        queueName: meter-declarations
+        mode: QueueLength
+        value: "100"
+      authenticationRef: {name: rabbitmq-http}
