@@ -1,0 +1,59 @@
+# Nodo NATS regional (sin JetStream). Los kustomize de r1/r2 fijan namespace y nats.conf.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nats
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nats
+  labels: {app: nats}
+spec:
+  selector: {app: nats}
+  ports:
+    # server-first: el servidor envía INFO al conectar; el prefijo tcp- evita la detección de protocolo de Istio
+    - {name: tcp-client, port: 4222, targetPort: client}
+    - {name: http-monitor, port: 8222, targetPort: monitor}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nats
+  labels: {app: nats}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: nats}
+  template:
+    metadata:
+      labels: {app: nats}
+    spec:
+      serviceAccountName: nats
+      securityContext: {runAsNonRoot: true, runAsUser: 10001, runAsGroup: 10001, fsGroup: 10001}
+      containers:
+        - name: nats
+          image: nats:2.15.1
+          args: ["-c", "/etc/nats/nats.conf"]
+          env:
+            - {name: GOMEMLIMIT, value: 100MiB}
+          ports:
+            - {name: client, containerPort: 4222}
+            - {name: monitor, containerPort: 8222}
+          readinessProbe:
+            httpGet: {path: /healthz, port: monitor}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /healthz, port: monitor}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 20m, memory: 32Mi}
+            limits: {memory: 128Mi}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          volumeMounts:
+            - {name: config, mountPath: /etc/nats, readOnly: true}
+      volumes:
+        - name: config
+          secret: {secretName: nats-config}

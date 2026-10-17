@@ -1,0 +1,39 @@
+#!/bin/sh
+#MISE description="Despliega los 3 nodos NATS (r1, r2, global) y el stream/consumer de Facturación (idempotente)"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+
+need kubectl
+need jq
+require_cluster
+
+N="$ROOT/deploy/mesh/nats"
+
+log "nodos NATS"
+for node in global r1 r2; do
+  ns=voltera-$node
+  k apply -k "$N/$node" >/dev/null
+  wait_rollout deployment/nats "$ns" 180s
+done
+
+# el Job es inmutable: se recrea en cada ejecución
+log "stream BILLING_MATCHED y consumer billing"
+k -n voltera-global delete job nats-setup --ignore-not-found --wait=true >/dev/null
+k apply -k "$N/setup" >/dev/null
+k -n voltera-global wait --for=condition=complete job/nats-setup --timeout=180s \
+  || { k -n voltera-global logs job/nats-setup -c nats-box --tail=30 >&2 || true; die "nats-setup falló"; }
+
+# el monitor se lee desde el sidecar del propio pod (el kubelet y el apiserver no están en el mesh)
+log "enlaces leafnode"
+for node in r1 r2; do
+  i=0
+  until k -n "voltera-$node" exec deploy/nats -c istio-proxy -- curl -fsS localhost:8222/leafz 2>/dev/null \
+    | jq -e '.leafnodes >= 1' >/dev/null 2>&1; do
+    i=$((i + 1))
+    [ "$i" -lt 30 ] || die "nats-$node no enlazó con nats-global"
+    sleep 2
+  done
+  log "nats-$node enlazado con nats-global"
+done
+log "mesh listo"

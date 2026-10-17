@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: voltera-global
+resources:
+  - job.yaml
+configMapGenerator:
+  - name: nats-setup
+    files: [stream.cfg, consumer.cfg, setup.sh]
+secretGenerator:
+  - name: nats-admin
+    literals:
+      - NATS_URL=nats://nats.voltera-global.svc.cluster.local:4222
+      - NATS_USER=admin
+      - NATS_PASSWORD=dev-admin-c0de
