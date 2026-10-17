@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Experimento e09: Zero Trust en el bus (PASS/FAIL)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e09-zero-trust "$@"

@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Experimento e05: idempotencia ante duplicados (PASS/FAIL)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e05-duplicates "$@"

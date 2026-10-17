@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Experimento e06: outbox transaccional ante caídas (PASS/FAIL)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e06-outbox "$@"

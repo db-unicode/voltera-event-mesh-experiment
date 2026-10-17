@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Experimento e10: traza de punta a punta (PASS/FAIL)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e10-end-to-end-trace "$@"

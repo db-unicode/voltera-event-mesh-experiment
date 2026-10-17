@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Experimento e02: KEDA por profundidad de cola RabbitMQ (PASS/FAIL)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e02-keda-rabbit "$@"

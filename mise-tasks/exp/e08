@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Experimento e08: event mesh NATS entre regiones (PASS/FAIL)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e08-event-mesh "$@"

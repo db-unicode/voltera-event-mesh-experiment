@@ -2,8 +2,8 @@
 # Jobs de carga de E3, E4 y E7 con meter-sim (perfiles steady, probe y direct-positions). Se usa con `.`; no se ejecuta.
 # Requiere experiments/lib/common.sh cargado antes.
 #
-# Imagen propia (voltera/meter-sim:exp-e03-e04-e07): otros agentes reconstruyen voltera/meter-sim:dev desde sus ramas y
-# no tienen estos perfiles. Se reconstruye con la caché de Docker (rápido) y se carga en kind si cambió.
+# Imagen voltera/meter-sim:dev (PROBEJOB_IMAGE para otra): se reconstruye desde el árbol actual con la caché de Docker
+# (rápido) y se carga en kind, así los perfiles probe y direct-positions siempre están.
 #
 #   probejob_build                          construye y carga la imagen
 #   probejob_start <región> <modo> <args>   crea el Job y deja su nombre en PROBEJOB_LAST (no lo imprime: el contador
@@ -22,7 +22,7 @@
 #           energy-positions.x además del admin). Solo para E4: publica saltándose gateway y positions-db.
 # PROBEJOB_DEADLINE (s, 900 por defecto) acota cada Job.
 
-PROBEJOB_IMAGE=${PROBEJOB_IMAGE:-voltera/meter-sim:exp-e03-e04-e07}
+PROBEJOB_IMAGE=${PROBEJOB_IMAGE:-voltera/meter-sim:dev}
 PROBEJOB_SEQ=0
 PROBEJOB_LAST=
 
