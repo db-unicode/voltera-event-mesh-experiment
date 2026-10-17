@@ -11,7 +11,7 @@ configMapGenerator:
     files:
       - rabbitmq.conf
       - render-definitions.sh
-      - definitions.template.json
+      - definitions.json.tmpl
 secretGenerator:
   # Una clave por usuario, con el nombre del usuario. Contraseñas de laboratorio (hex), solo para este cluster kind.
   - name: rabbitmq-users

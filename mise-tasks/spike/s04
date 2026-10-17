@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S4: RabbitMQ con colas durables y profundidad en Prometheus (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s04-rabbitmq/run.sh"
