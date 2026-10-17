@@ -1,15 +1,15 @@
-{"id":"mesh-bridge.kafka.r1.energy-matched.consume","broker":"kafka","op":"consume","target":"r1.energy-matched","outcome":"allowed","ms":77}
-{"id":"mesh-bridge.kafka.r1.energy-matched.publish","broker":"kafka","op":"publish","target":"r1.energy-matched","outcome":"allowed","ms":73}
-{"id":"mesh-bridge.kafka.r2.energy-matched.consume","broker":"kafka","op":"consume","target":"r2.energy-matched","outcome":"allowed","ms":81}
-{"id":"mesh-bridge.kafka.r2.energy-matched.publish","broker":"kafka","op":"publish","target":"r2.energy-matched","outcome":"allowed","ms":71}
+{"id":"mesh-bridge.kafka.r1.energy-matched.consume","broker":"kafka","op":"consume","target":"r1.energy-matched","outcome":"allowed","ms":57}
+{"id":"mesh-bridge.kafka.r1.energy-matched.publish","broker":"kafka","op":"publish","target":"r1.energy-matched","outcome":"allowed","ms":48}
+{"id":"mesh-bridge.kafka.r2.energy-matched.consume","broker":"kafka","op":"consume","target":"r2.energy-matched","outcome":"allowed","ms":42}
+{"id":"mesh-bridge.kafka.r2.energy-matched.publish","broker":"kafka","op":"publish","target":"r2.energy-matched","outcome":"allowed","ms":41}
 {"id":"mesh-bridge.nats.BILLING_MATCHED/billing.consumer-info","broker":"nats","op":"consumer-info","target":"BILLING_MATCHED/billing","outcome":"denied","class":"acl","error":"nats: permissions violation: Permissions Violation for Publish to \"$JS.API.CONSUMER.INFO.BILLING_MATCHED.billing\"","ms":8001}
-{"id":"mesh-bridge.nats.connect.connect","broker":"nats","op":"connect","target":"","outcome":"allowed","ms":11}
-{"id":"mesh-bridge.nats.energy.matched.\u003e.subscribe","broker":"nats","op":"subscribe","target":"energy.matched.\u003e","outcome":"denied","class":"acl","error":"nats: permissions violation: Permissions Violation for Subscription to \"energy.matched.\u003e\"","ms":813}
-{"id":"mesh-bridge.nats.energy.matched.r1.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r1.zt-probe","outcome":"allowed","ms":808}
-{"id":"mesh-bridge.nats.energy.matched.r2.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r2.zt-probe","outcome":"denied","class":"acl","error":"nats: permissions violation: Permissions Violation for Publish to \"energy.matched.r2.zt-probe\"","ms":805}
-{"id":"mesh-bridge.rabbitmq.energy-positions.consume","broker":"rabbitmq","op":"consume","target":"r1:energy-positions","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":14}
-{"id":"mesh-bridge.rabbitmq.energy-positions.publish","broker":"rabbitmq","op":"publish","target":"r1:energy-positions","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":14}
-{"id":"mesh-bridge.rabbitmq.kwh-prices.consume","broker":"rabbitmq","op":"consume","target":"r1:kwh-prices","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":18}
-{"id":"mesh-bridge.rabbitmq.kwh-prices.publish","broker":"rabbitmq","op":"publish","target":"r1:kwh-prices","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":14}
-{"id":"mesh-bridge.rabbitmq.meter-declarations.consume","broker":"rabbitmq","op":"consume","target":"r1:meter-declarations","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":11}
-{"id":"mesh-bridge.rabbitmq.meter-declarations.publish","broker":"rabbitmq","op":"publish","target":"r1:meter-declarations","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":13}
+{"id":"mesh-bridge.nats.connect.connect","broker":"nats","op":"connect","target":"","outcome":"allowed","ms":9}
+{"id":"mesh-bridge.nats.energy.matched.\u003e.subscribe","broker":"nats","op":"subscribe","target":"energy.matched.\u003e","outcome":"denied","class":"acl","error":"nats: permissions violation: Permissions Violation for Subscription to \"energy.matched.\u003e\"","ms":814}
+{"id":"mesh-bridge.nats.energy.matched.r1.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r1.zt-probe","outcome":"allowed","ms":815}
+{"id":"mesh-bridge.nats.energy.matched.r2.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r2.zt-probe","outcome":"denied","class":"acl","error":"nats: permissions violation: Permissions Violation for Publish to \"energy.matched.r2.zt-probe\"","ms":813}
+{"id":"mesh-bridge.rabbitmq.energy-positions.consume","broker":"rabbitmq","op":"consume","target":"r1:energy-positions","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":9}
+{"id":"mesh-bridge.rabbitmq.energy-positions.publish","broker":"rabbitmq","op":"publish","target":"r1:energy-positions","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":10}
+{"id":"mesh-bridge.rabbitmq.kwh-prices.consume","broker":"rabbitmq","op":"consume","target":"r1:kwh-prices","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":10}
+{"id":"mesh-bridge.rabbitmq.kwh-prices.publish","broker":"rabbitmq","op":"publish","target":"r1:kwh-prices","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":9}
+{"id":"mesh-bridge.rabbitmq.meter-declarations.consume","broker":"rabbitmq","op":"consume","target":"r1:meter-declarations","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":10}
+{"id":"mesh-bridge.rabbitmq.meter-declarations.publish","broker":"rabbitmq","op":"publish","target":"r1:meter-declarations","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":10}

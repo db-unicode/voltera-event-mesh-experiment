@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "data": "/Users/diego/Developer/voltera-wt/exp-e08-e09-e10/experiments/results/e09-zero-trust/20261017T055348Z-821ecf9-r1",
+  "data": "/Users/diego/Developer/voltera-wt/final-run/experiments/results/e09-zero-trust/20261017T074315Z-18789b0-dirty-r1",
   "criteria": [
     {
       "id": "matrix-complete",
@@ -96,7 +96,7 @@
       "id": "rbac-denied-kafka",
       "description": "Contadores rbac denied del sidecar de Kafka (incremento)",
       "metric": "metrics.json:$.rbac_denied_delta.kafka",
-      "observed": 42,
+      "observed": 44,
       "op": "ge",
       "expected": 1,
       "verdict": "PASS"

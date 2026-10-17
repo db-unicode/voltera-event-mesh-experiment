@@ -1,20 +1,20 @@
 {
   "server_id": "NCJNS7V2TNYD4TX46PWZ5SMM7PFKRXSDPSWHMHG7IHY7MNBVV5IT2E46",
-  "now": "2026-10-17T04:56:27.333169875Z",
+  "now": "2026-10-17T07:40:34.169581416Z",
   "leafnodes": 1,
   "leafs": [
     {
-      "id": 335,
+      "id": 489,
       "name": "nats-r1",
       "is_spoke": false,
       "account": "MESH",
       "ip": "127.0.0.6",
-      "port": 38587,
-      "rtt": "343µs",
-      "in_msgs": 7106,
-      "out_msgs": 7106,
-      "in_bytes": 5196744,
-      "out_bytes": 284546,
+      "port": 49877,
+      "rtt": "269µs",
+      "in_msgs": 73912,
+      "out_msgs": 73912,
+      "in_bytes": 54188585,
+      "out_bytes": 3038132,
       "subscriptions": 2,
       "compression": "s2_uncompressed"
     }

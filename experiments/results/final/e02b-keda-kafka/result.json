@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "data": "/Users/diego/Developer/voltera-wt/exp-e01-e02/experiments/results/e02b-keda-kafka/20261017T060655Z-f02de76-r3",
+  "data": "/Users/diego/Developer/voltera-wt/final-run/experiments/results/e02b-keda-kafka/20261017T070630Z-18789b0-dirty-r1",
   "criteria": [
     {
       "id": "produced",
@@ -96,7 +96,7 @@
       "id": "lag-peak",
       "description": "El lag llegó a al menos un tercio de lo publicado (\u003e= 1000)",
       "metric": "metrics.json:$.peakLag",
-      "observed": 1865,
+      "observed": 1081,
       "op": "ge",
       "expected": 1000,
       "verdict": "PASS"
@@ -123,7 +123,7 @@
       "id": "scale-to-zero-min",
       "description": "scale_to_zero_s medido (-1 = nunca)",
       "metric": "metrics.json:$.scaleToZeroS",
-      "observed": 26,
+      "observed": 28,
       "op": "ge",
       "expected": 0,
       "verdict": "PASS"
@@ -132,7 +132,7 @@
       "id": "scale-to-zero",
       "description": "Segundos desde lag 0 hasta 0 réplicas (\u003c= 90)",
       "metric": "metrics.json:$.scaleToZeroS",
-      "observed": 26,
+      "observed": 28,
       "op": "le",
       "expected": 90,
       "verdict": "PASS"

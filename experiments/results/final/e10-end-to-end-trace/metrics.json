@@ -1,14 +1,14 @@
 {
-  "run": "e10-17062646-",
-  "prefix": "e10-17062646-",
-  "sent_at": "2026-10-17T06:29:43.907401000Z",
-  "done_at": "2026-10-17T06:29:57.284304000Z",
+  "run": "e10-17074534-",
+  "prefix": "e10-17074534-",
+  "sent_at": "2026-10-17T07:47:48.275499000Z",
+  "done_at": "2026-10-17T07:48:07.581539000Z",
   "ids": {
-    "declaration_surplus": "96602ea3-bf94-521b-a6db-7e9f658f6314",
-    "declaration_deficit": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
-    "critical_declaration": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
-    "match": "match-ee5c0c40156a38bc07a29b816119f7c9",
-    "match_event": "01a1488d-749f-7321-b8a7-311dc02dd992"
+    "declaration_surplus": "58357c19-255d-57ca-825e-b8b859b741bb",
+    "declaration_deficit": "5a369d9b-4c31-571d-85a8-533177aa3f76",
+    "critical_declaration": "5a369d9b-4c31-571d-85a8-533177aa3f76",
+    "match": "match-aace1c9693a7d33cbc2860d51b36ad27",
+    "match_event": "01a148d5-0186-7552-a855-739681112893"
   },
   "pair_exact": 1,
   "matches_for_prefix": 1,
@@ -32,100 +32,100 @@
     "rabbitmq"
   ],
   "brokers_count": 3,
-  "total_s": 9.077657461166382,
+  "total_s": 16.094730377197266,
   "end_hop": "device_command",
   "branch_s": {
-    "transfer": 9.077657461166382,
-    "mesh": 5.568849563598633
+    "transfer": 16.094730377197266,
+    "mesh": 10.259871482849121
   },
   "segments": [
     {
       "name": "cold_start_gateway",
       "from": "sent",
       "to": "gateway_consume",
-      "seconds": 5.097586393356323
+      "seconds": 9.099308013916016
     },
     {
       "name": "gateway_process",
       "from": "gateway_consume",
       "to": "gateway_commit",
-      "seconds": 0.0016286373138427734
+      "seconds": 0.001268148422241211
     },
     {
       "name": "outbox_to_projection",
       "from": "gateway_commit",
       "to": "projector_apply",
-      "seconds": 0.002354145050048828
+      "seconds": 0.002837657928466797
     },
     {
       "name": "match_window",
       "from": "projector_apply",
       "to": "match_commit",
-      "seconds": 0.4502897262573242
+      "seconds": 1.1383798122406006
     },
     {
       "name": "kafka_to_transfer",
       "from": "match_commit",
       "to": "transfer_consume",
-      "seconds": 3.5214967727661133
+      "seconds": 5.848584413528442
     },
     {
       "name": "transfer_to_device",
       "from": "transfer_consume",
       "to": "device_command",
-      "seconds": 0.004301786422729492
+      "seconds": 0.0043523311614990234
     }
   ],
-  "segments_sum_s": 9.077657461166382,
+  "segments_sum_s": 16.094730377197266,
   "segments_error_pct": 0,
   "cold_start": {
     "gateway": {
-      "total_s": 5.097586393356323,
+      "total_s": 9.099308013916016,
       "components": [
         {
           "name": "keda_detect_and_scale",
-          "seconds": 3.1322150230407715
+          "seconds": 5.69243597984314
         },
         {
           "name": "pod_start_to_app_ready",
-          "seconds": 1.9045264720916748
+          "seconds": 3.351247787475586
         },
         {
           "name": "app_ready_to_first_message",
-          "seconds": 0.06084489822387695
+          "seconds": 0.05562424659729004
         }
       ],
-      "components_sum_s": 5.097586393356323,
+      "components_sum_s": 9.099308013916016,
       "error_pct": 0,
-      "pod": "declaration-gateway-57d49f98ff-9xc2s",
-      "pod_created": "2026-10-17T06:29:50Z",
-      "pod_ready": "2026-10-17T06:29:52Z"
+      "pod": "declaration-gateway-64bf767884-qkns9",
+      "pod_created": "2026-10-17T07:47:57Z",
+      "pod_ready": "2026-10-17T07:48:01Z"
     },
     "transfer": {
-      "total_s": 3.5214967727661133,
+      "total_s": 5.848584413528442,
       "components": [
         {
           "name": "keda_detect_and_scale",
-          "seconds": 0
+          "seconds": 2.4506423473358154
         },
         {
           "name": "pod_start_to_app_ready",
-          "seconds": 3.506208658218384
+          "seconds": 3.380657434463501
         },
         {
           "name": "app_ready_to_first_message",
-          "seconds": 0.015288114547729492
+          "seconds": 0.017284631729125977
         }
       ],
-      "components_sum_s": 3.5214967727661133,
+      "components_sum_s": 5.848584413528442,
       "error_pct": 0,
-      "pod": "energy-transfer-cd6b4bbf9-7xqhw",
-      "pod_created": "2026-10-17T06:29:52Z",
-      "pod_ready": "2026-10-17T06:29:56Z"
+      "pod": "energy-transfer-6bfb7d86cd-8wfch",
+      "pod_created": "2026-10-17T07:48:04Z",
+      "pod_ready": "2026-10-17T07:48:08Z"
     }
   },
   "k8s_events": {
-    "count": 30,
+    "count": 31,
     "reasons": [
       "Created",
       "KEDAScaleTargetActivated",

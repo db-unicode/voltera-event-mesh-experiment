@@ -2764,7 +2764,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40922->10.96.162.54:5672: read: connection reset by peer\"",
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56306->10.96.162.54:5672: read: connection reset by peer\"",
     "verdict": "match"
   },
   {
@@ -2780,7 +2780,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40946->10.96.162.54:5672: read: connection reset by peer\"",
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56320->10.96.162.54:5672: read: connection reset by peer\"",
     "verdict": "match"
   },
   {
@@ -2796,7 +2796,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40904->10.96.162.54:5672: read: connection reset by peer\"",
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56332->10.96.162.54:5672: read: connection reset by peer\"",
     "verdict": "match"
   },
   {
@@ -2812,7 +2812,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40938->10.96.162.54:5672: read: connection reset by peer\"",
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56336->10.96.162.54:5672: read: connection reset by peer\"",
     "verdict": "match"
   },
   {
@@ -2828,7 +2828,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40930->10.96.162.54:5672: read: connection reset by peer\"",
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56338->10.96.162.54:5672: read: connection reset by peer\"",
     "verdict": "match"
   },
   {
@@ -2844,7 +2844,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40916->10.96.162.54:5672: read: connection reset by peer\"",
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56312->10.96.162.54:5672: read: connection reset by peer\"",
     "verdict": "match"
   },
   {
@@ -2876,7 +2876,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "offsets: read tcp 10.244.0.99:59926->10.96.50.211:9092: read: connection reset by peer",
+    "error": "offsets: read tcp 10.244.0.230:35870->10.96.50.211:9092: read: connection reset by peer",
     "verdict": "match"
   },
   {
@@ -2908,7 +2908,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "offsets: read tcp 10.244.0.99:60018->10.96.50.211:9092: read: connection reset by peer",
+    "error": "offsets: read tcp 10.244.0.230:35744->10.96.50.211:9092: read: connection reset by peer",
     "verdict": "match"
   },
   {
@@ -2924,7 +2924,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43066->10.96.4.202:4222: i/o timeout",
+    "error": "conectar: read tcp 10.244.0.230:44624->10.96.4.202:4222: i/o timeout",
     "verdict": "match"
   },
   {
@@ -2940,7 +2940,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43074->10.96.4.202:4222: i/o timeout",
+    "error": "conectar: read tcp 10.244.0.230:44630->10.96.4.202:4222: i/o timeout",
     "verdict": "match"
   },
   {
@@ -2956,7 +2956,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43082->10.96.4.202:4222: i/o timeout",
+    "error": "conectar: read tcp 10.244.0.230:44640->10.96.4.202:4222: i/o timeout",
     "verdict": "match"
   },
   {
@@ -2972,7 +2972,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43090->10.96.4.202:4222: i/o timeout",
+    "error": "conectar: read tcp 10.244.0.230:44646->10.96.4.202:4222: i/o timeout",
     "verdict": "match"
   },
   {
@@ -2988,7 +2988,7 @@
     "note": "",
     "actual": "deny",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43094->10.96.4.202:4222: i/o timeout",
+    "error": "conectar: read tcp 10.244.0.230:44660->10.96.4.202:4222: i/o timeout",
     "verdict": "match"
   }
 ]

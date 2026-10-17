@@ -1,0 +1,2 @@
+logs/market-projector.log
+raw/redis_watch.txt

@@ -1,300 +1,300 @@
-2026-10-17 05:54:04.364323+00:00 [info] <0.87527.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:08.893860+00:00 [info] <0.87548.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:09.363856+00:00 [info] <0.87551.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:13.895240+00:00 [info] <0.87576.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:14.365824+00:00 [info] <0.87579.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:14.393197+00:00 [info] <0.87582.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:18.895010+00:00 [info] <0.87606.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:19.369161+00:00 [info] <0.87611.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:19.431876+00:00 [info] <0.86524.0> closing AMQP connection (127.0.0.6:36609 -> 10.244.0.188:5672 - declaration-gateway, vhost: 'r1', user: 'declaration-gateway-r1', duration: '2M, 56s')[0m
-2026-10-17 05:54:19.437374+00:00 [info] <0.86573.0> closing AMQP connection (127.0.0.6:40445 -> 10.244.0.188:5672 - declaration-gateway-relay, vhost: 'r1', user: 'declaration-gateway-r1', duration: '2M, 51s')[0m
-2026-10-17 05:54:23.897603+00:00 [info] <0.87644.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:24.366359+00:00 [info] <0.87647.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:28.897176+00:00 [info] <0.87668.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:29.369222+00:00 [info] <0.87671.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:33.897334+00:00 [info] <0.87699.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:34.370458+00:00 [info] <0.87702.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:38.642442+00:00 [info] <0.87726.0> accepting AMQP connection 127.0.0.6:38013 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.643558+00:00 [info] <0.87742.0> accepting AMQP connection 127.0.0.6:35105 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.644920+00:00 [info] <0.87730.0> accepting AMQP connection 127.0.0.6:49201 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.645155+00:00 [info] <0.87742.0> connection 127.0.0.6:35105 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.energy-positions.consume[0m
-2026-10-17 05:54:38.645282+00:00 [info] <0.87742.0> User 'declaration-gateway-r1' authenticated successfully[0m
-2026-10-17 05:54:38.646246+00:00 [info] <0.87730.0> connection 127.0.0.6:49201 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.energy-positions.publish[0m
-2026-10-17 05:54:38.646327+00:00 [info] <0.87730.0> User 'declaration-gateway-r1' authenticated successfully[0m
-2026-10-17 05:54:38.646933+00:00 [info] <0.87738.0> accepting AMQP connection 127.0.0.6:54817 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.647287+00:00 [info] <0.87742.0> connection 127.0.0.6:35105 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.energy-positions.consume: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:38.647909+00:00 [info] <0.87734.0> accepting AMQP connection 127.0.0.6:40301 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.648037+00:00 [info] <0.87726.0> connection 127.0.0.6:38013 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.meter-declarations.publish[0m
-2026-10-17 05:54:38.648348+00:00 [info] <0.87726.0> User 'declaration-gateway-r1' authenticated successfully[0m
-2026-10-17 05:54:38.648340+00:00 [info] <0.87746.0> accepting AMQP connection 127.0.0.6:47821 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.648737+00:00 [info] <0.87730.0> connection 127.0.0.6:49201 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.energy-positions.publish: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:38.649333+00:00 [info] <0.87726.0> connection 127.0.0.6:38013 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.meter-declarations.publish: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
-[38;5;160m2026-10-17 05:54:38.649868+00:00 [error] <0.87758.0> Channel error on connection <0.87742.0> (127.0.0.6:35105 -> 10.244.0.188:5672, vhost: 'r1', user: 'declaration-gateway-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:38.649868+00:00 [error] <0.87758.0> operation basic.consume caused a channel exception access_refused: read access to queue 'energy-positions' in vhost 'r1' refused for user 'declaration-gateway-r1'[0m
-2026-10-17 05:54:38.650879+00:00 [info] <0.87746.0> connection 127.0.0.6:47821 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.kwh-prices.consume[0m
-2026-10-17 05:54:38.650938+00:00 [info] <0.87746.0> User 'declaration-gateway-r1' authenticated successfully[0m
-2026-10-17 05:54:38.651217+00:00 [info] <0.87738.0> connection 127.0.0.6:54817 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.kwh-prices.publish[0m
-2026-10-17 05:54:38.651239+00:00 [info] <0.87734.0> connection 127.0.0.6:40301 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.meter-declarations.consume[0m
-2026-10-17 05:54:38.651265+00:00 [info] <0.87738.0> User 'declaration-gateway-r1' authenticated successfully[0m
-2026-10-17 05:54:38.651291+00:00 [info] <0.87734.0> User 'declaration-gateway-r1' authenticated successfully[0m
-2026-10-17 05:54:38.651850+00:00 [info] <0.87734.0> connection 127.0.0.6:40301 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.meter-declarations.consume: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:38.651932+00:00 [info] <0.87738.0> connection 127.0.0.6:54817 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.kwh-prices.publish: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
-[38;5;160m2026-10-17 05:54:38.651937+00:00 [error] <0.87777.0> Channel error on connection <0.87726.0> (127.0.0.6:38013 -> 10.244.0.188:5672, vhost: 'r1', user: 'declaration-gateway-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:38.651937+00:00 [error] <0.87777.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'meter-declarations.x' in vhost 'r1' refused for user 'declaration-gateway-r1'[0m
-2026-10-17 05:54:38.652037+00:00 [info] <0.87746.0> connection 127.0.0.6:47821 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.kwh-prices.consume: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:38.652393+00:00 [info] <0.87742.0> closing AMQP connection (127.0.0.6:35105 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.energy-positions.consume, vhost: 'r1', user: 'declaration-gateway-r1', duration: '12ms')[0m
-2026-10-17 05:54:38.653488+00:00 [info] <0.87730.0> closing AMQP connection (127.0.0.6:49201 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.energy-positions.publish, vhost: 'r1', user: 'declaration-gateway-r1', duration: '15ms')[0m
-2026-10-17 05:54:38.660678+00:00 [info] <0.87726.0> closing AMQP connection (127.0.0.6:38013 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.meter-declarations.publish, vhost: 'r1', user: 'declaration-gateway-r1', duration: '23ms')[0m
-[38;5;160m2026-10-17 05:54:38.665378+00:00 [error] <0.87803.0> Channel error on connection <0.87738.0> (127.0.0.6:54817 -> 10.244.0.188:5672, vhost: 'r1', user: 'declaration-gateway-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:38.665378+00:00 [error] <0.87803.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'declaration-gateway-r1'[0m
-2026-10-17 05:54:38.669302+00:00 [info] <0.87824.0> accepting AMQP connection 127.0.0.6:44371 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.670706+00:00 [info] <0.87738.0> closing AMQP connection (127.0.0.6:54817 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.kwh-prices.publish, vhost: 'r1', user: 'declaration-gateway-r1', duration: '30ms')[0m
-[38;5;160m2026-10-17 05:54:38.671213+00:00 [error] <0.87812.0> Channel error on connection <0.87746.0> (127.0.0.6:47821 -> 10.244.0.188:5672, vhost: 'r1', user: 'declaration-gateway-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:38.671213+00:00 [error] <0.87812.0> operation basic.consume caused a channel exception access_refused: read access to queue 'kwh-prices' in vhost 'r1' refused for user 'declaration-gateway-r1'[0m
-2026-10-17 05:54:38.672839+00:00 [info] <0.87834.0> accepting AMQP connection 127.0.0.6:37487 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.673175+00:00 [info] <0.87828.0> accepting AMQP connection 127.0.0.6:46223 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.674548+00:00 [info] <0.87746.0> closing AMQP connection (127.0.0.6:47821 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.kwh-prices.consume, vhost: 'r1', user: 'declaration-gateway-r1', duration: '33ms')[0m
-2026-10-17 05:54:38.677280+00:00 [info] <0.87828.0> connection 127.0.0.6:46223 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.kwh-prices.publish[0m
-2026-10-17 05:54:38.677404+00:00 [info] <0.87828.0> User 'meter-sim-r1' authenticated successfully[0m
-2026-10-17 05:54:38.677411+00:00 [info] <0.87824.0> connection 127.0.0.6:44371 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.energy-positions.consume[0m
-2026-10-17 05:54:38.677559+00:00 [info] <0.87824.0> User 'meter-sim-r1' authenticated successfully[0m
-2026-10-17 05:54:38.677705+00:00 [info] <0.87834.0> connection 127.0.0.6:37487 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.energy-positions.publish[0m
-2026-10-17 05:54:38.677810+00:00 [info] <0.87834.0> User 'meter-sim-r1' authenticated successfully[0m
-2026-10-17 05:54:38.680641+00:00 [info] <0.87820.0> accepting AMQP connection 127.0.0.6:39903 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.681629+00:00 [info] <0.87824.0> connection 127.0.0.6:44371 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.energy-positions.consume: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:38.681668+00:00 [info] <0.87828.0> connection 127.0.0.6:46223 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.kwh-prices.publish: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:38.681740+00:00 [info] <0.87834.0> connection 127.0.0.6:37487 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.energy-positions.publish: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:38.682245+00:00 [info] <0.87839.0> accepting AMQP connection 127.0.0.6:51741 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.682253+00:00 [info] <0.87843.0> accepting AMQP connection 127.0.0.6:54353 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:38.683630+00:00 [info] <0.87820.0> connection 127.0.0.6:39903 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.meter-declarations.consume[0m
-2026-10-17 05:54:38.683710+00:00 [info] <0.87820.0> User 'meter-sim-r1' authenticated successfully[0m
-2026-10-17 05:54:38.683972+00:00 [info] <0.87843.0> connection 127.0.0.6:54353 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.meter-declarations.publish[0m
-2026-10-17 05:54:38.684033+00:00 [info] <0.87843.0> User 'meter-sim-r1' authenticated successfully[0m
-2026-10-17 05:54:38.684493+00:00 [info] <0.87839.0> connection 127.0.0.6:51741 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.kwh-prices.consume[0m
-2026-10-17 05:54:38.684552+00:00 [info] <0.87839.0> User 'meter-sim-r1' authenticated successfully[0m
-2026-10-17 05:54:38.685292+00:00 [info] <0.87820.0> connection 127.0.0.6:39903 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.meter-declarations.consume: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:38.685377+00:00 [info] <0.87839.0> connection 127.0.0.6:51741 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.kwh-prices.consume: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:38.685404+00:00 [info] <0.87843.0> connection 127.0.0.6:54353 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.meter-declarations.publish: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
-[38;5;160m2026-10-17 05:54:38.685791+00:00 [error] <0.87869.0> Channel error on connection <0.87834.0> (127.0.0.6:37487 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:38.685791+00:00 [error] <0.87869.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'meter-sim-r1'[0m
-[38;5;160m2026-10-17 05:54:38.685792+00:00 [error] <0.87879.0> Channel error on connection <0.87828.0> (127.0.0.6:46223 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:38.685792+00:00 [error] <0.87879.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'meter-sim-r1'[0m
-[38;5;160m2026-10-17 05:54:38.686214+00:00 [error] <0.87874.0> Channel error on connection <0.87824.0> (127.0.0.6:44371 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:38.686214+00:00 [error] <0.87874.0> operation basic.consume caused a channel exception access_refused: read access to queue 'energy-positions' in vhost 'r1' refused for user 'meter-sim-r1'[0m
-2026-10-17 05:54:38.687290+00:00 [info] <0.87828.0> closing AMQP connection (127.0.0.6:46223 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.kwh-prices.publish, vhost: 'r1', user: 'meter-sim-r1', duration: '29ms')[0m
-2026-10-17 05:54:38.687950+00:00 [info] <0.87834.0> closing AMQP connection (127.0.0.6:37487 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.energy-positions.publish, vhost: 'r1', user: 'meter-sim-r1', duration: '22ms')[0m
-2026-10-17 05:54:38.688078+00:00 [info] <0.87824.0> closing AMQP connection (127.0.0.6:44371 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.energy-positions.consume, vhost: 'r1', user: 'meter-sim-r1', duration: '30ms')[0m
-[38;5;160m2026-10-17 05:54:38.688636+00:00 [error] <0.87910.0> Channel error on connection <0.87820.0> (127.0.0.6:39903 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:38.688636+00:00 [error] <0.87910.0> operation basic.consume caused a channel exception access_refused: read access to queue 'meter-declarations' in vhost 'r1' refused for user 'meter-sim-r1'[0m
-[38;5;160m2026-10-17 05:54:38.689227+00:00 [error] <0.87911.0> Channel error on connection <0.87839.0> (127.0.0.6:51741 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:38.689227+00:00 [error] <0.87911.0> operation basic.consume caused a channel exception access_refused: read access to queue 'kwh-prices' in vhost 'r1' refused for user 'meter-sim-r1'[0m
-2026-10-17 05:54:38.698965+00:00 [info] <0.87843.0> closing AMQP connection (127.0.0.6:54353 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.meter-declarations.publish, vhost: 'r1', user: 'meter-sim-r1', duration: '29ms')[0m
-2026-10-17 05:54:38.700316+00:00 [info] <0.87839.0> closing AMQP connection (127.0.0.6:51741 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.kwh-prices.consume, vhost: 'r1', user: 'meter-sim-r1', duration: '35ms')[0m
-2026-10-17 05:54:38.702937+00:00 [info] <0.87820.0> closing AMQP connection (127.0.0.6:39903 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.meter-declarations.consume, vhost: 'r1', user: 'meter-sim-r1', duration: '45ms')[0m
-2026-10-17 05:54:38.899982+00:00 [info] <0.87935.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:39.370303+00:00 [info] <0.87938.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:39.732002+00:00 [info] <0.87980.0> accepting AMQP connection 127.0.0.6:56317 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:39.732809+00:00 [info] <0.87984.0> accepting AMQP connection 127.0.0.6:35947 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:39.735449+00:00 [info] <0.87984.0> connection 127.0.0.6:35947 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.kwh-prices.consume[0m
-2026-10-17 05:54:39.735560+00:00 [info] <0.87984.0> User 'price-feed-r1' authenticated successfully[0m
-2026-10-17 05:54:39.737462+00:00 [info] <0.87984.0> connection 127.0.0.6:35947 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.kwh-prices.consume: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:39.739801+00:00 [info] <0.87980.0> connection 127.0.0.6:56317 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.meter-declarations.consume[0m
-2026-10-17 05:54:39.739920+00:00 [info] <0.87980.0> User 'price-feed-r1' authenticated successfully[0m
-2026-10-17 05:54:39.742449+00:00 [info] <0.87992.0> accepting AMQP connection 127.0.0.6:45037 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:39.742544+00:00 [info] <0.87988.0> accepting AMQP connection 127.0.0.6:43695 -> 10.244.0.188:5672[0m
-[38;5;160m2026-10-17 05:54:39.742673+00:00 [error] <0.88006.0> Channel error on connection <0.87984.0> (127.0.0.6:35947 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:39.742673+00:00 [error] <0.88006.0> operation basic.consume caused a channel exception access_refused: read access to queue 'kwh-prices' in vhost 'r1' refused for user 'price-feed-r1'[0m
-2026-10-17 05:54:39.743993+00:00 [info] <0.87984.0> closing AMQP connection (127.0.0.6:35947 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.kwh-prices.consume, vhost: 'r1', user: 'price-feed-r1', duration: '16ms')[0m
-2026-10-17 05:54:39.745293+00:00 [info] <0.87996.0> accepting AMQP connection 127.0.0.6:53797 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:39.745335+00:00 [info] <0.88009.0> accepting AMQP connection 127.0.0.6:57233 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:39.745842+00:00 [info] <0.87980.0> connection 127.0.0.6:56317 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.meter-declarations.consume: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:39.751517+00:00 [info] <0.87988.0> connection 127.0.0.6:43695 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.meter-declarations.publish[0m
-2026-10-17 05:54:39.751683+00:00 [info] <0.87988.0> User 'price-feed-r1' authenticated successfully[0m
-2026-10-17 05:54:39.751719+00:00 [info] <0.87992.0> connection 127.0.0.6:45037 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.energy-positions.publish[0m
-2026-10-17 05:54:39.751821+00:00 [info] <0.87992.0> User 'price-feed-r1' authenticated successfully[0m
-2026-10-17 05:54:39.752724+00:00 [info] <0.87988.0> connection 127.0.0.6:43695 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.meter-declarations.publish: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:39.752820+00:00 [info] <0.87992.0> connection 127.0.0.6:45037 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.energy-positions.publish: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:39.754406+00:00 [info] <0.87996.0> connection 127.0.0.6:53797 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.energy-positions.consume[0m
-2026-10-17 05:54:39.754581+00:00 [info] <0.87996.0> User 'price-feed-r1' authenticated successfully[0m
-2026-10-17 05:54:39.754635+00:00 [info] <0.88009.0> connection 127.0.0.6:57233 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.kwh-prices.publish[0m
-2026-10-17 05:54:39.754697+00:00 [info] <0.88009.0> User 'price-feed-r1' authenticated successfully[0m
-[38;5;160m2026-10-17 05:54:39.754905+00:00 [error] <0.88038.0> Channel error on connection <0.87992.0> (127.0.0.6:45037 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:39.754905+00:00 [error] <0.88038.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'price-feed-r1'[0m
-2026-10-17 05:54:39.755314+00:00 [info] <0.87996.0> connection 127.0.0.6:53797 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.energy-positions.consume: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
-[38;5;160m2026-10-17 05:54:39.755422+00:00 [error] <0.88037.0> Channel error on connection <0.87988.0> (127.0.0.6:43695 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:39.755422+00:00 [error] <0.88037.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'meter-declarations.x' in vhost 'r1' refused for user 'price-feed-r1'[0m
-2026-10-17 05:54:39.756767+00:00 [info] <0.87992.0> closing AMQP connection (127.0.0.6:45037 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.energy-positions.publish, vhost: 'r1', user: 'price-feed-r1', duration: '29ms')[0m
-[38;5;160m2026-10-17 05:54:39.756849+00:00 [error] <0.88058.0> Channel error on connection <0.87996.0> (127.0.0.6:53797 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:39.756849+00:00 [error] <0.88058.0> operation basic.consume caused a channel exception access_refused: read access to queue 'energy-positions' in vhost 'r1' refused for user 'price-feed-r1'[0m
-2026-10-17 05:54:39.756888+00:00 [info] <0.88009.0> connection 127.0.0.6:57233 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.kwh-prices.publish: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:39.757857+00:00 [info] <0.87988.0> closing AMQP connection (127.0.0.6:43695 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.meter-declarations.publish, vhost: 'r1', user: 'price-feed-r1', duration: '30ms')[0m
-[38;5;160m2026-10-17 05:54:39.758552+00:00 [error] <0.88053.0> Channel error on connection <0.87980.0> (127.0.0.6:56317 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:39.758552+00:00 [error] <0.88053.0> operation basic.consume caused a channel exception access_refused: read access to queue 'meter-declarations' in vhost 'r1' refused for user 'price-feed-r1'[0m
-2026-10-17 05:54:39.761370+00:00 [info] <0.87996.0> closing AMQP connection (127.0.0.6:53797 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.energy-positions.consume, vhost: 'r1', user: 'price-feed-r1', duration: '29ms')[0m
-2026-10-17 05:54:39.764820+00:00 [info] <0.88009.0> closing AMQP connection (127.0.0.6:57233 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.kwh-prices.publish, vhost: 'r1', user: 'price-feed-r1', duration: '24ms')[0m
-2026-10-17 05:54:39.765554+00:00 [info] <0.87980.0> closing AMQP connection (127.0.0.6:56317 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.meter-declarations.consume, vhost: 'r1', user: 'price-feed-r1', duration: '38ms')[0m
-2026-10-17 05:54:40.180895+00:00 [info] <0.87734.0> closing AMQP connection (127.0.0.6:40301 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.meter-declarations.consume, vhost: 'r1', user: 'declaration-gateway-r1', duration: '1s')[0m
-2026-10-17 05:54:40.758323+00:00 [info] <0.88124.0> accepting AMQP connection 127.0.0.6:53807 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:40.769978+00:00 [info] <0.88132.0> accepting AMQP connection 127.0.0.6:33743 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:40.774663+00:00 [info] <0.88136.0> accepting AMQP connection 127.0.0.6:44809 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:40.778837+00:00 [info] <0.88124.0> connection 127.0.0.6:53807 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.meter-declarations.consume[0m
-2026-10-17 05:54:40.779397+00:00 [info] <0.88124.0> User 'market-projector-r1' authenticated successfully[0m
-2026-10-17 05:54:40.780950+00:00 [info] <0.88128.0> accepting AMQP connection 127.0.0.6:59535 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:40.781635+00:00 [info] <0.88132.0> connection 127.0.0.6:33743 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.energy-positions.publish[0m
-2026-10-17 05:54:40.781711+00:00 [info] <0.88132.0> User 'market-projector-r1' authenticated successfully[0m
-2026-10-17 05:54:40.781853+00:00 [info] <0.88124.0> connection 127.0.0.6:53807 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.meter-declarations.consume: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:40.784644+00:00 [info] <0.88128.0> connection 127.0.0.6:59535 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.kwh-prices.publish[0m
-2026-10-17 05:54:40.784760+00:00 [info] <0.88128.0> User 'market-projector-r1' authenticated successfully[0m
-2026-10-17 05:54:40.785964+00:00 [info] <0.88156.0> accepting AMQP connection 127.0.0.6:51967 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:40.786068+00:00 [info] <0.88152.0> accepting AMQP connection 127.0.0.6:35539 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:40.786124+00:00 [info] <0.88136.0> connection 127.0.0.6:44809 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.energy-positions.consume[0m
-2026-10-17 05:54:40.786297+00:00 [info] <0.88136.0> User 'market-projector-r1' authenticated successfully[0m
-2026-10-17 05:54:40.786443+00:00 [info] <0.88132.0> connection 127.0.0.6:33743 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.energy-positions.publish: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:40.786606+00:00 [info] <0.88128.0> connection 127.0.0.6:59535 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.kwh-prices.publish: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:40.790275+00:00 [info] <0.88156.0> connection 127.0.0.6:51967 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.meter-declarations.publish[0m
-2026-10-17 05:54:40.790343+00:00 [info] <0.88156.0> User 'market-projector-r1' authenticated successfully[0m
-2026-10-17 05:54:40.790330+00:00 [info] <0.88152.0> connection 127.0.0.6:35539 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.kwh-prices.consume[0m
-2026-10-17 05:54:40.790396+00:00 [info] <0.88152.0> User 'market-projector-r1' authenticated successfully[0m
-2026-10-17 05:54:40.790464+00:00 [info] <0.88136.0> connection 127.0.0.6:44809 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.energy-positions.consume: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
-[38;5;160m2026-10-17 05:54:40.790950+00:00 [error] <0.88212.0> Channel error on connection <0.88128.0> (127.0.0.6:59535 -> 10.244.0.188:5672, vhost: 'r1', user: 'market-projector-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:40.790950+00:00 [error] <0.88212.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'market-projector-r1'[0m
-[38;5;160m2026-10-17 05:54:40.790994+00:00 [error] <0.88206.0> Channel error on connection <0.88124.0> (127.0.0.6:53807 -> 10.244.0.188:5672, vhost: 'r1', user: 'market-projector-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:40.790994+00:00 [error] <0.88206.0> operation basic.consume caused a channel exception access_refused: read access to queue 'meter-declarations' in vhost 'r1' refused for user 'market-projector-r1'[0m
-2026-10-17 05:54:40.791488+00:00 [info] <0.88152.0> connection 127.0.0.6:35539 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.kwh-prices.consume: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:40.791618+00:00 [info] <0.88156.0> connection 127.0.0.6:51967 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.meter-declarations.publish: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:40.791911+00:00 [info] <0.88128.0> closing AMQP connection (127.0.0.6:59535 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.kwh-prices.publish, vhost: 'r1', user: 'market-projector-r1', duration: '37ms')[0m
-[38;5;160m2026-10-17 05:54:40.792925+00:00 [error] <0.88221.0> Channel error on connection <0.88132.0> (127.0.0.6:33743 -> 10.244.0.188:5672, vhost: 'r1', user: 'market-projector-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:40.792925+00:00 [error] <0.88221.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'market-projector-r1'[0m
-[38;5;160m2026-10-17 05:54:40.793481+00:00 [error] <0.88252.0> Channel error on connection <0.88156.0> (127.0.0.6:51967 -> 10.244.0.188:5672, vhost: 'r1', user: 'market-projector-r1'), channel 1:[0m
-[38;5;160m2026-10-17 05:54:40.793481+00:00 [error] <0.88252.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'meter-declarations.x' in vhost 'r1' refused for user 'market-projector-r1'[0m
-2026-10-17 05:54:40.794383+00:00 [info] <0.88124.0> closing AMQP connection (127.0.0.6:53807 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.meter-declarations.consume, vhost: 'r1', user: 'market-projector-r1', duration: '40ms')[0m
-2026-10-17 05:54:40.799240+00:00 [info] <0.88156.0> closing AMQP connection (127.0.0.6:51967 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.meter-declarations.publish, vhost: 'r1', user: 'market-projector-r1', duration: '35ms')[0m
-2026-10-17 05:54:40.801320+00:00 [info] <0.88132.0> closing AMQP connection (127.0.0.6:33743 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.energy-positions.publish, vhost: 'r1', user: 'market-projector-r1', duration: '45ms')[0m
-2026-10-17 05:54:42.297035+00:00 [info] <0.88136.0> closing AMQP connection (127.0.0.6:44809 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.energy-positions.consume, vhost: 'r1', user: 'market-projector-r1', duration: '1s')[0m
-2026-10-17 05:54:42.300261+00:00 [info] <0.88152.0> closing AMQP connection (127.0.0.6:35539 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.kwh-prices.consume, vhost: 'r1', user: 'market-projector-r1', duration: '1s')[0m
-2026-10-17 05:54:42.640434+00:00 [info] <0.88438.0> accepting AMQP connection 127.0.0.6:52309 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:42.655314+00:00 [info] <0.88446.0> accepting AMQP connection 127.0.0.6:37205 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:42.655450+00:00 [info] <0.88442.0> accepting AMQP connection 127.0.0.6:53019 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:42.655980+00:00 [info] <0.88438.0> connection 127.0.0.6:52309 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.energy-positions.consume[0m
-[38;5;214m2026-10-17 05:54:42.658229+00:00 [warning] <0.88438.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
-[38;5;160m2026-10-17 05:54:42.658314+00:00 [error] <0.88438.0> Error on AMQP connection <0.88438.0> (127.0.0.6:52309 -> 10.244.0.188:5672, state: starting):[0m
-[38;5;160m2026-10-17 05:54:42.658314+00:00 [error] <0.88438.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
-2026-10-17 05:54:42.659219+00:00 [info] <0.88446.0> connection 127.0.0.6:37205 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.kwh-prices.publish[0m
-2026-10-17 05:54:42.659218+00:00 [info] <0.88442.0> connection 127.0.0.6:53019 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.kwh-prices.consume[0m
-[38;5;214m2026-10-17 05:54:42.659315+00:00 [warning] <0.88442.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
-[38;5;214m2026-10-17 05:54:42.659316+00:00 [warning] <0.88446.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
-[38;5;160m2026-10-17 05:54:42.659371+00:00 [error] <0.88446.0> Error on AMQP connection <0.88446.0> (127.0.0.6:37205 -> 10.244.0.188:5672, state: starting):[0m
-[38;5;160m2026-10-17 05:54:42.659371+00:00 [error] <0.88446.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
-[38;5;160m2026-10-17 05:54:42.659370+00:00 [error] <0.88442.0> Error on AMQP connection <0.88442.0> (127.0.0.6:53019 -> 10.244.0.188:5672, state: starting):[0m
-[38;5;160m2026-10-17 05:54:42.659370+00:00 [error] <0.88442.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
-2026-10-17 05:54:42.660292+00:00 [info] <0.88454.0> accepting AMQP connection 127.0.0.6:57781 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:42.660387+00:00 [info] <0.88458.0> accepting AMQP connection 127.0.0.6:57507 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:42.660491+00:00 [info] <0.88450.0> accepting AMQP connection 127.0.0.6:43301 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:42.661314+00:00 [info] <0.88450.0> connection 127.0.0.6:43301 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.meter-declarations.consume[0m
-[38;5;214m2026-10-17 05:54:42.661398+00:00 [warning] <0.88450.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
-[38;5;160m2026-10-17 05:54:42.661474+00:00 [error] <0.88450.0> Error on AMQP connection <0.88450.0> (127.0.0.6:43301 -> 10.244.0.188:5672, state: starting):[0m
-[38;5;160m2026-10-17 05:54:42.661474+00:00 [error] <0.88450.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
-2026-10-17 05:54:42.662001+00:00 [info] <0.88454.0> connection 127.0.0.6:57781 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.energy-positions.publish[0m
-[38;5;214m2026-10-17 05:54:42.662057+00:00 [warning] <0.88454.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
-[38;5;160m2026-10-17 05:54:42.662114+00:00 [error] <0.88454.0> Error on AMQP connection <0.88454.0> (127.0.0.6:57781 -> 10.244.0.188:5672, state: starting):[0m
-[38;5;160m2026-10-17 05:54:42.662114+00:00 [error] <0.88454.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
-2026-10-17 05:54:42.662144+00:00 [info] <0.88458.0> connection 127.0.0.6:57507 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.meter-declarations.publish[0m
-[38;5;214m2026-10-17 05:54:42.662206+00:00 [warning] <0.88458.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
-[38;5;160m2026-10-17 05:54:42.662261+00:00 [error] <0.88458.0> Error on AMQP connection <0.88458.0> (127.0.0.6:57507 -> 10.244.0.188:5672, state: starting):[0m
-[38;5;160m2026-10-17 05:54:42.662261+00:00 [error] <0.88458.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
-2026-10-17 05:54:43.899426+00:00 [info] <0.88459.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:44.374573+00:00 [info] <0.88462.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:45.659364+00:00 [info] <0.88438.0> closing AMQP connection (127.0.0.6:52309 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.energy-positions.consume, duration: '3s')[0m
-2026-10-17 05:54:45.660236+00:00 [info] <0.88442.0> closing AMQP connection (127.0.0.6:53019 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.kwh-prices.consume, duration: '3s')[0m
-2026-10-17 05:54:45.660494+00:00 [info] <0.88446.0> closing AMQP connection (127.0.0.6:37205 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.kwh-prices.publish, duration: '3s')[0m
-2026-10-17 05:54:45.662261+00:00 [info] <0.88450.0> closing AMQP connection (127.0.0.6:43301 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.meter-declarations.consume, duration: '3s')[0m
-2026-10-17 05:54:45.663232+00:00 [info] <0.88454.0> closing AMQP connection (127.0.0.6:57781 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.energy-positions.publish, duration: '3s')[0m
-2026-10-17 05:54:45.663404+00:00 [info] <0.88458.0> closing AMQP connection (127.0.0.6:57507 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.meter-declarations.publish, duration: '3s')[0m
-2026-10-17 05:54:48.901284+00:00 [info] <0.88498.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:49.375640+00:00 [info] <0.88503.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:53.902493+00:00 [info] <0.88528.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:54.378115+00:00 [info] <0.88531.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:57.820882+00:00 [info] <0.88559.0> accepting AMQP connection 127.0.0.6:50441 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:57.822295+00:00 [info] <0.88559.0> connection 127.0.0.6:50441 -> 10.244.0.188:5672 has a client-provided name: meter-sim[0m
-2026-10-17 05:54:57.822386+00:00 [info] <0.88559.0> User 'meter-sim-r1' authenticated successfully[0m
-2026-10-17 05:54:57.822484+00:00 [info] <0.88555.0> accepting AMQP connection 127.0.0.6:53747 -> 10.244.0.188:5672[0m
-2026-10-17 05:54:57.823274+00:00 [info] <0.88559.0> connection 127.0.0.6:50441 -> 10.244.0.188:5672 - meter-sim: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:54:57.823539+00:00 [info] <0.88555.0> connection 127.0.0.6:53747 -> 10.244.0.188:5672 has a client-provided name: meter-sim[0m
-2026-10-17 05:54:57.823637+00:00 [info] <0.88555.0> User 'meter-sim-r2' authenticated successfully[0m
-2026-10-17 05:54:57.824226+00:00 [info] <0.88555.0> connection 127.0.0.6:53747 -> 10.244.0.188:5672 - meter-sim: user 'meter-sim-r2' authenticated and granted access to vhost 'r2'[0m
-2026-10-17 05:54:58.904490+00:00 [info] <0.88580.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:54:59.378659+00:00 [info] <0.88583.0> User 'keda' authenticated successfully[0m
-[38;5;214m2026-10-17 05:55:01.335851+00:00 [warning] <0.87276.0> closing AMQP connection <0.87276.0> (127.0.0.6:43405 -> 10.244.0.188:5672 - market-projector-kwh-prices, vhost: 'r1', user: 'market-projector-r1', duration: '1M, 15s'):[0m
-[38;5;214m2026-10-17 05:55:01.335851+00:00 [warning] <0.87276.0> client unexpectedly closed TCP connection[0m
-[38;5;214m2026-10-17 05:55:01.336120+00:00 [warning] <0.55160.0> closing AMQP connection <0.55160.0> (127.0.0.6:60451 -> 10.244.0.188:5672 - price-feed-simulator, vhost: 'r2', user: 'price-feed-r2', duration: '1H, 9M, 30s'):[0m
-[38;5;214m2026-10-17 05:55:01.336120+00:00 [warning] <0.55160.0> client unexpectedly closed TCP connection[0m
-[38;5;214m2026-10-17 05:55:01.336078+00:00 [warning] <0.55069.0> closing AMQP connection <0.55069.0> (127.0.0.6:44965 -> 10.244.0.188:5672 - market-projector-energy-positions, vhost: 'r2', user: 'market-projector-r2', duration: '1H, 9M, 31s'):[0m
-[38;5;214m2026-10-17 05:55:01.336078+00:00 [warning] <0.55069.0> client unexpectedly closed TCP connection[0m
-[38;5;214m2026-10-17 05:55:01.336297+00:00 [warning] <0.55128.0> closing AMQP connection <0.55128.0> (127.0.0.6:34953 -> 10.244.0.188:5672 - price-feed-simulator, vhost: 'r1', user: 'price-feed-r1', duration: '1H, 9M, 31s'):[0m
-[38;5;214m2026-10-17 05:55:01.336297+00:00 [warning] <0.55128.0> client unexpectedly closed TCP connection[0m
-[38;5;214m2026-10-17 05:55:01.336009+00:00 [warning] <0.87272.0> closing AMQP connection <0.87272.0> (127.0.0.6:51335 -> 10.244.0.188:5672 - market-projector-energy-positions, vhost: 'r1', user: 'market-projector-r1', duration: '1M, 15s'):[0m
-[38;5;214m2026-10-17 05:55:01.336009+00:00 [warning] <0.87272.0> client unexpectedly closed TCP connection[0m
-[38;5;214m2026-10-17 05:55:01.336483+00:00 [warning] <0.55073.0> closing AMQP connection <0.55073.0> (127.0.0.6:54161 -> 10.244.0.188:5672 - market-projector-kwh-prices, vhost: 'r2', user: 'market-projector-r2', duration: '1H, 9M, 31s'):[0m
-[38;5;214m2026-10-17 05:55:01.336483+00:00 [warning] <0.55073.0> client unexpectedly closed TCP connection[0m
-2026-10-17 05:55:01.485049+00:00 [info] <0.88620.0> accepting AMQP connection 127.0.0.6:57351 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:01.486722+00:00 [info] <0.88620.0> connection 127.0.0.6:57351 -> 10.244.0.188:5672 has a client-provided name: price-feed-simulator[0m
-2026-10-17 05:55:01.486831+00:00 [info] <0.88620.0> User 'price-feed-r2' authenticated successfully[0m
-2026-10-17 05:55:01.487483+00:00 [info] <0.88620.0> connection 127.0.0.6:57351 -> 10.244.0.188:5672 - price-feed-simulator: user 'price-feed-r2' authenticated and granted access to vhost 'r2'[0m
-2026-10-17 05:55:02.342706+00:00 [info] <0.88649.0> accepting AMQP connection 127.0.0.6:33255 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:02.344475+00:00 [info] <0.88653.0> accepting AMQP connection 127.0.0.6:60281 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:02.345031+00:00 [info] <0.88657.0> accepting AMQP connection 127.0.0.6:51833 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:02.345646+00:00 [info] <0.88653.0> connection 127.0.0.6:60281 -> 10.244.0.188:5672 has a client-provided name: market-projector-kwh-prices[0m
-2026-10-17 05:55:02.345748+00:00 [info] <0.88653.0> User 'market-projector-r1' authenticated successfully[0m
-2026-10-17 05:55:02.346879+00:00 [info] <0.88653.0> connection 127.0.0.6:60281 -> 10.244.0.188:5672 - market-projector-kwh-prices: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:55:02.346950+00:00 [info] <0.88657.0> connection 127.0.0.6:51833 -> 10.244.0.188:5672 has a client-provided name: market-projector-kwh-prices[0m
-2026-10-17 05:55:02.346965+00:00 [info] <0.88649.0> connection 127.0.0.6:33255 -> 10.244.0.188:5672 has a client-provided name: market-projector-energy-positions[0m
-2026-10-17 05:55:02.347032+00:00 [info] <0.88649.0> User 'market-projector-r2' authenticated successfully[0m
-2026-10-17 05:55:02.347043+00:00 [info] <0.88657.0> User 'market-projector-r2' authenticated successfully[0m
-2026-10-17 05:55:02.347533+00:00 [info] <0.88649.0> connection 127.0.0.6:33255 -> 10.244.0.188:5672 - market-projector-energy-positions: user 'market-projector-r2' authenticated and granted access to vhost 'r2'[0m
-2026-10-17 05:55:02.347739+00:00 [info] <0.88657.0> connection 127.0.0.6:51833 -> 10.244.0.188:5672 - market-projector-kwh-prices: user 'market-projector-r2' authenticated and granted access to vhost 'r2'[0m
-2026-10-17 05:55:02.347971+00:00 [info] <0.88661.0> accepting AMQP connection 127.0.0.6:59785 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:02.349254+00:00 [info] <0.88661.0> connection 127.0.0.6:59785 -> 10.244.0.188:5672 has a client-provided name: market-projector-energy-positions[0m
-2026-10-17 05:55:02.349313+00:00 [info] <0.88661.0> User 'market-projector-r1' authenticated successfully[0m
-2026-10-17 05:55:02.349727+00:00 [info] <0.88661.0> connection 127.0.0.6:59785 -> 10.244.0.188:5672 - market-projector-energy-positions: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:55:03.905787+00:00 [info] <0.88705.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:04.382925+00:00 [info] <0.88708.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:04.423253+00:00 [info] <0.88714.0> accepting AMQP connection 127.0.0.6:60209 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:04.424651+00:00 [info] <0.88714.0> connection 127.0.0.6:60209 -> 10.244.0.188:5672 has a client-provided name: price-feed-simulator[0m
-2026-10-17 05:55:04.424806+00:00 [info] <0.88714.0> User 'price-feed-r1' authenticated successfully[0m
-2026-10-17 05:55:04.425499+00:00 [info] <0.88714.0> connection 127.0.0.6:60209 -> 10.244.0.188:5672 - price-feed-simulator: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:55:05.635174+00:00 [info] <0.88725.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:05.856101+00:00 [info] <0.88731.0> accepting AMQP connection 127.0.0.6:51345 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:05.857534+00:00 [info] <0.88731.0> connection 127.0.0.6:51345 -> 10.244.0.188:5672 has a client-provided name: declaration-gateway[0m
-2026-10-17 05:55:05.857605+00:00 [info] <0.88731.0> User 'declaration-gateway-r2' authenticated successfully[0m
-2026-10-17 05:55:05.858144+00:00 [info] <0.88731.0> connection 127.0.0.6:51345 -> 10.244.0.188:5672 - declaration-gateway: user 'declaration-gateway-r2' authenticated and granted access to vhost 'r2'[0m
-2026-10-17 05:55:05.891436+00:00 [info] <0.88745.0> accepting AMQP connection 127.0.0.6:33897 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:05.892671+00:00 [info] <0.88745.0> connection 127.0.0.6:33897 -> 10.244.0.188:5672 has a client-provided name: declaration-gateway-relay[0m
-2026-10-17 05:55:05.892752+00:00 [info] <0.88745.0> User 'declaration-gateway-r2' authenticated successfully[0m
-2026-10-17 05:55:05.893394+00:00 [info] <0.88745.0> connection 127.0.0.6:33897 -> 10.244.0.188:5672 - declaration-gateway-relay: user 'declaration-gateway-r2' authenticated and granted access to vhost 'r2'[0m
-2026-10-17 05:55:08.906539+00:00 [info] <0.88774.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:09.381423+00:00 [info] <0.88777.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:11.894875+00:00 [info] <0.88787.0> accepting AMQP connection 127.0.0.6:57889 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:11.896810+00:00 [info] <0.88787.0> connection 127.0.0.6:57889 -> 10.244.0.188:5672 has a client-provided name: declaration-gateway[0m
-2026-10-17 05:55:11.896890+00:00 [info] <0.88787.0> User 'declaration-gateway-r1' authenticated successfully[0m
-2026-10-17 05:55:11.897437+00:00 [info] <0.88787.0> connection 127.0.0.6:57889 -> 10.244.0.188:5672 - declaration-gateway: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:55:11.928828+00:00 [info] <0.88801.0> accepting AMQP connection 127.0.0.6:35503 -> 10.244.0.188:5672[0m
-2026-10-17 05:55:11.929638+00:00 [info] <0.88801.0> connection 127.0.0.6:35503 -> 10.244.0.188:5672 has a client-provided name: declaration-gateway-relay[0m
-2026-10-17 05:55:11.929703+00:00 [info] <0.88801.0> User 'declaration-gateway-r1' authenticated successfully[0m
-2026-10-17 05:55:11.930062+00:00 [info] <0.88801.0> connection 127.0.0.6:35503 -> 10.244.0.188:5672 - declaration-gateway-relay: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
-2026-10-17 05:55:13.905587+00:00 [info] <0.88830.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:14.382446+00:00 [info] <0.88833.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:14.429880+00:00 [info] <0.88836.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:17.880468+00:00 [info] <0.88559.0> closing AMQP connection (127.0.0.6:50441 -> 10.244.0.188:5672 - meter-sim, vhost: 'r1', user: 'meter-sim-r1', duration: '20s')[0m
-2026-10-17 05:55:18.019985+00:00 [info] <0.88555.0> closing AMQP connection (127.0.0.6:53747 -> 10.244.0.188:5672 - meter-sim, vhost: 'r2', user: 'meter-sim-r2', duration: '20s')[0m
-2026-10-17 05:55:18.910930+00:00 [info] <0.88868.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:19.387926+00:00 [info] <0.88871.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:20.657860+00:00 [info] <0.88876.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:23.906936+00:00 [info] <0.88901.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:24.385944+00:00 [info] <0.88904.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:28.907751+00:00 [info] <0.88925.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:29.386911+00:00 [info] <0.88928.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:29.447430+00:00 [info] <0.88931.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:33.908113+00:00 [info] <0.88959.0> User 'keda' authenticated successfully[0m
-2026-10-17 05:55:33.969043+00:00 [info] <0.88731.0> closing AMQP connection (127.0.0.6:51345 -> 10.244.0.188:5672 - declaration-gateway, vhost: 'r2', user: 'declaration-gateway-r2', duration: '28s')[0m
-2026-10-17 05:55:33.974230+00:00 [info] <0.88745.0> closing AMQP connection (127.0.0.6:33897 -> 10.244.0.188:5672 - declaration-gateway-relay, vhost: 'r2', user: 'declaration-gateway-r2', duration: '28s')[0m
-2026-10-17 05:55:34.387969+00:00 [info] <0.88970.0> User 'keda' authenticated successfully[0m
+[38;5;160m2026-10-17 07:44:03.446889+00:00 [error] <0.166516.0> operation basic.consume caused a channel exception access_refused: read access to queue 'kwh-prices' in vhost 'r1' refused for user 'meter-sim-r1'[0m
+2026-10-17 07:44:03.447054+00:00 [info] <0.166444.0> closing AMQP connection (127.0.0.6:58127 -> 10.244.0.188:5672 - zt-probe-thief-rabbit.rabbitmq.meter-declarations.publish, vhost: 'r1', user: 'meter-sim-r1', duration: '10ms')[0m
+2026-10-17 07:44:03.447149+00:00 [info] <0.166460.0> closing AMQP connection (127.0.0.6:40461 -> 10.244.0.188:5672 - zt-probe-thief-rabbit.rabbitmq.kwh-prices.publish, vhost: 'r1', user: 'meter-sim-r1', duration: '8ms')[0m
+2026-10-17 07:44:03.447502+00:00 [info] <0.166456.0> closing AMQP connection (127.0.0.6:49381 -> 10.244.0.188:5672 - zt-probe-thief-rabbit.rabbitmq.meter-declarations.consume, vhost: 'r1', user: 'meter-sim-r1', duration: '8ms')[0m
+2026-10-17 07:44:03.447514+00:00 [info] <0.166448.0> closing AMQP connection (127.0.0.6:48385 -> 10.244.0.188:5672 - zt-probe-thief-rabbit.rabbitmq.energy-positions.consume, vhost: 'r1', user: 'meter-sim-r1', duration: '8ms')[0m
+2026-10-17 07:44:03.447798+00:00 [info] <0.166464.0> closing AMQP connection (127.0.0.6:43901 -> 10.244.0.188:5672 - zt-probe-thief-rabbit.rabbitmq.kwh-prices.consume, vhost: 'r1', user: 'meter-sim-r1', duration: '5ms')[0m
+2026-10-17 07:44:03.448147+00:00 [info] <0.166452.0> closing AMQP connection (127.0.0.6:52285 -> 10.244.0.188:5672 - zt-probe-thief-rabbit.rabbitmq.energy-positions.publish, vhost: 'r1', user: 'meter-sim-r1', duration: '9ms')[0m
+2026-10-17 07:44:05.728176+00:00 [info] <0.166567.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:07.119270+00:00 [info] <0.166570.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:10.728747+00:00 [info] <0.166595.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:12.121979+00:00 [info] <0.166598.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:15.731877+00:00 [info] <0.166622.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:17.121212+00:00 [info] <0.166625.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:20.734532+00:00 [info] <0.166652.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:22.122787+00:00 [info] <0.166655.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:25.738037+00:00 [info] <0.166676.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:27.125386+00:00 [info] <0.166679.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:30.736944+00:00 [info] <0.166707.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:32.126225+00:00 [info] <0.166710.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:35.739106+00:00 [info] <0.166731.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:37.126880+00:00 [info] <0.166734.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:38.867004+00:00 [info] <0.166748.0> accepting AMQP connection 127.0.0.6:38461 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.867165+00:00 [info] <0.166756.0> accepting AMQP connection 127.0.0.6:46155 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.867229+00:00 [info] <0.166760.0> accepting AMQP connection 127.0.0.6:43393 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.867201+00:00 [info] <0.166740.0> accepting AMQP connection 127.0.0.6:58821 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.867216+00:00 [info] <0.166752.0> accepting AMQP connection 127.0.0.6:45835 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.867207+00:00 [info] <0.166744.0> accepting AMQP connection 127.0.0.6:51209 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.873399+00:00 [info] <0.166744.0> connection 127.0.0.6:51209 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.kwh-prices.consume[0m
+2026-10-17 07:44:38.873412+00:00 [info] <0.166740.0> connection 127.0.0.6:58821 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.meter-declarations.publish[0m
+2026-10-17 07:44:38.873418+00:00 [info] <0.166756.0> connection 127.0.0.6:46155 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.energy-positions.publish[0m
+2026-10-17 07:44:38.873475+00:00 [info] <0.166744.0> User 'meter-sim-r1' authenticated successfully[0m
+2026-10-17 07:44:38.873498+00:00 [info] <0.166756.0> User 'meter-sim-r1' authenticated successfully[0m
+2026-10-17 07:44:38.873494+00:00 [info] <0.166740.0> User 'meter-sim-r1' authenticated successfully[0m
+2026-10-17 07:44:38.873571+00:00 [info] <0.166760.0> connection 127.0.0.6:43393 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.meter-declarations.consume[0m
+2026-10-17 07:44:38.873639+00:00 [info] <0.166748.0> connection 127.0.0.6:38461 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.kwh-prices.publish[0m
+2026-10-17 07:44:38.873640+00:00 [info] <0.166760.0> User 'meter-sim-r1' authenticated successfully[0m
+2026-10-17 07:44:38.873703+00:00 [info] <0.166748.0> User 'meter-sim-r1' authenticated successfully[0m
+2026-10-17 07:44:38.873390+00:00 [info] <0.166752.0> connection 127.0.0.6:45835 -> 10.244.0.188:5672 has a client-provided name: zt-probe-meter-sim.rabbitmq.energy-positions.consume[0m
+2026-10-17 07:44:38.876288+00:00 [info] <0.166752.0> User 'meter-sim-r1' authenticated successfully[0m
+2026-10-17 07:44:38.876741+00:00 [info] <0.166744.0> connection 127.0.0.6:51209 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.kwh-prices.consume: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.876786+00:00 [info] <0.166740.0> connection 127.0.0.6:58821 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.meter-declarations.publish: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.876838+00:00 [info] <0.166760.0> connection 127.0.0.6:43393 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.meter-declarations.consume: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.876853+00:00 [info] <0.166756.0> connection 127.0.0.6:46155 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.energy-positions.publish: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.876740+00:00 [info] <0.166748.0> connection 127.0.0.6:38461 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.kwh-prices.publish: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.878668+00:00 [info] <0.166752.0> connection 127.0.0.6:45835 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.energy-positions.consume: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
+[38;5;160m2026-10-17 07:44:38.879041+00:00 [error] <0.166789.0> Channel error on connection <0.166748.0> (127.0.0.6:38461 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:38.879041+00:00 [error] <0.166789.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'meter-sim-r1'[0m
+[38;5;160m2026-10-17 07:44:38.879610+00:00 [error] <0.166803.0> Channel error on connection <0.166744.0> (127.0.0.6:51209 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:38.879610+00:00 [error] <0.166803.0> operation basic.consume caused a channel exception access_refused: read access to queue 'kwh-prices' in vhost 'r1' refused for user 'meter-sim-r1'[0m
+[38;5;160m2026-10-17 07:44:38.879745+00:00 [error] <0.166804.0> Channel error on connection <0.166760.0> (127.0.0.6:43393 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:38.879745+00:00 [error] <0.166804.0> operation basic.consume caused a channel exception access_refused: read access to queue 'meter-declarations' in vhost 'r1' refused for user 'meter-sim-r1'[0m
+2026-10-17 07:44:38.880239+00:00 [info] <0.166748.0> closing AMQP connection (127.0.0.6:38461 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.kwh-prices.publish, vhost: 'r1', user: 'meter-sim-r1', duration: '19ms')[0m
+[38;5;160m2026-10-17 07:44:38.885127+00:00 [error] <0.166814.0> Channel error on connection <0.166756.0> (127.0.0.6:46155 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:38.885127+00:00 [error] <0.166814.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'meter-sim-r1'[0m
+2026-10-17 07:44:38.885614+00:00 [info] <0.166835.0> accepting AMQP connection 127.0.0.6:58529 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.886845+00:00 [info] <0.166740.0> closing AMQP connection (127.0.0.6:58821 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.meter-declarations.publish, vhost: 'r1', user: 'meter-sim-r1', duration: '25ms')[0m
+[38;5;160m2026-10-17 07:44:38.886983+00:00 [error] <0.166829.0> Channel error on connection <0.166752.0> (127.0.0.6:45835 -> 10.244.0.188:5672, vhost: 'r1', user: 'meter-sim-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:38.886983+00:00 [error] <0.166829.0> operation basic.consume caused a channel exception access_refused: read access to queue 'energy-positions' in vhost 'r1' refused for user 'meter-sim-r1'[0m
+2026-10-17 07:44:38.887331+00:00 [info] <0.166756.0> closing AMQP connection (127.0.0.6:46155 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.energy-positions.publish, vhost: 'r1', user: 'meter-sim-r1', duration: '25ms')[0m
+2026-10-17 07:44:38.887306+00:00 [info] <0.166830.0> accepting AMQP connection 127.0.0.6:55125 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.888608+00:00 [info] <0.166760.0> closing AMQP connection (127.0.0.6:43393 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.meter-declarations.consume, vhost: 'r1', user: 'meter-sim-r1', duration: '24ms')[0m
+2026-10-17 07:44:38.889491+00:00 [info] <0.166752.0> closing AMQP connection (127.0.0.6:45835 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.energy-positions.consume, vhost: 'r1', user: 'meter-sim-r1', duration: '27ms')[0m
+2026-10-17 07:44:38.889485+00:00 [info] <0.166744.0> closing AMQP connection (127.0.0.6:51209 -> 10.244.0.188:5672 - zt-probe-meter-sim.rabbitmq.kwh-prices.consume, vhost: 'r1', user: 'meter-sim-r1', duration: '28ms')[0m
+2026-10-17 07:44:38.889940+00:00 [info] <0.166839.0> accepting AMQP connection 127.0.0.6:53097 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.890505+00:00 [info] <0.166835.0> connection 127.0.0.6:58529 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.kwh-prices.consume[0m
+2026-10-17 07:44:38.890584+00:00 [info] <0.166835.0> User 'declaration-gateway-r1' authenticated successfully[0m
+2026-10-17 07:44:38.890606+00:00 [info] <0.166844.0> accepting AMQP connection 127.0.0.6:33905 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.890639+00:00 [info] <0.166861.0> accepting AMQP connection 127.0.0.6:34977 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.890650+00:00 [info] <0.166853.0> accepting AMQP connection 127.0.0.6:41339 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:38.890678+00:00 [info] <0.166830.0> connection 127.0.0.6:55125 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.meter-declarations.consume[0m
+2026-10-17 07:44:38.890705+00:00 [info] <0.166830.0> User 'declaration-gateway-r1' authenticated successfully[0m
+2026-10-17 07:44:38.893401+00:00 [info] <0.166844.0> connection 127.0.0.6:33905 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.kwh-prices.publish[0m
+2026-10-17 07:44:38.893448+00:00 [info] <0.166844.0> User 'declaration-gateway-r1' authenticated successfully[0m
+2026-10-17 07:44:38.893799+00:00 [info] <0.166835.0> connection 127.0.0.6:58529 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.kwh-prices.consume: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.893663+00:00 [info] <0.166830.0> connection 127.0.0.6:55125 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.meter-declarations.consume: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.894172+00:00 [info] <0.166839.0> connection 127.0.0.6:53097 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.energy-positions.consume[0m
+2026-10-17 07:44:38.894241+00:00 [info] <0.166839.0> User 'declaration-gateway-r1' authenticated successfully[0m
+2026-10-17 07:44:38.894172+00:00 [info] <0.166861.0> connection 127.0.0.6:34977 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.energy-positions.publish[0m
+2026-10-17 07:44:38.894591+00:00 [info] <0.166861.0> User 'declaration-gateway-r1' authenticated successfully[0m
+2026-10-17 07:44:38.896719+00:00 [info] <0.166839.0> connection 127.0.0.6:53097 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.energy-positions.consume: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.896689+00:00 [info] <0.166853.0> connection 127.0.0.6:41339 -> 10.244.0.188:5672 has a client-provided name: zt-probe-declaration-gateway.rabbitmq.meter-declarations.publish[0m
+2026-10-17 07:44:38.896875+00:00 [info] <0.166861.0> connection 127.0.0.6:34977 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.energy-positions.publish: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.896914+00:00 [info] <0.166853.0> User 'declaration-gateway-r1' authenticated successfully[0m
+2026-10-17 07:44:38.897044+00:00 [info] <0.166844.0> connection 127.0.0.6:33905 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.kwh-prices.publish: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:38.899307+00:00 [info] <0.166853.0> connection 127.0.0.6:41339 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.meter-declarations.publish: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
+[38;5;160m2026-10-17 07:44:38.899396+00:00 [error] <0.166887.0> Channel error on connection <0.166835.0> (127.0.0.6:58529 -> 10.244.0.188:5672, vhost: 'r1', user: 'declaration-gateway-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:38.899396+00:00 [error] <0.166887.0> operation basic.consume caused a channel exception access_refused: read access to queue 'kwh-prices' in vhost 'r1' refused for user 'declaration-gateway-r1'[0m
+[38;5;160m2026-10-17 07:44:38.899428+00:00 [error] <0.166907.0> Channel error on connection <0.166844.0> (127.0.0.6:33905 -> 10.244.0.188:5672, vhost: 'r1', user: 'declaration-gateway-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:38.899428+00:00 [error] <0.166907.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'declaration-gateway-r1'[0m
+2026-10-17 07:44:38.901210+00:00 [info] <0.166835.0> closing AMQP connection (127.0.0.6:58529 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.kwh-prices.consume, vhost: 'r1', user: 'declaration-gateway-r1', duration: '16ms')[0m
+[38;5;160m2026-10-17 07:44:38.901417+00:00 [error] <0.166930.0> Channel error on connection <0.166853.0> (127.0.0.6:41339 -> 10.244.0.188:5672, vhost: 'r1', user: 'declaration-gateway-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:38.901417+00:00 [error] <0.166930.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'meter-declarations.x' in vhost 'r1' refused for user 'declaration-gateway-r1'[0m
+[38;5;160m2026-10-17 07:44:38.901384+00:00 [error] <0.166918.0> Channel error on connection <0.166839.0> (127.0.0.6:53097 -> 10.244.0.188:5672, vhost: 'r1', user: 'declaration-gateway-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:38.901384+00:00 [error] <0.166918.0> operation basic.consume caused a channel exception access_refused: read access to queue 'energy-positions' in vhost 'r1' refused for user 'declaration-gateway-r1'[0m
+2026-10-17 07:44:38.901837+00:00 [info] <0.166839.0> closing AMQP connection (127.0.0.6:53097 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.energy-positions.consume, vhost: 'r1', user: 'declaration-gateway-r1', duration: '16ms')[0m
+2026-10-17 07:44:38.902149+00:00 [info] <0.166844.0> closing AMQP connection (127.0.0.6:33905 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.kwh-prices.publish, vhost: 'r1', user: 'declaration-gateway-r1', duration: '17ms')[0m
+2026-10-17 07:44:38.902567+00:00 [info] <0.166853.0> closing AMQP connection (127.0.0.6:41339 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.meter-declarations.publish, vhost: 'r1', user: 'declaration-gateway-r1', duration: '15ms')[0m
+2026-10-17 07:44:38.902771+00:00 [info] <0.166861.0> closing AMQP connection (127.0.0.6:34977 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.energy-positions.publish, vhost: 'r1', user: 'declaration-gateway-r1', duration: '15ms')[0m
+2026-10-17 07:44:39.854424+00:00 [info] <0.167094.0> accepting AMQP connection 127.0.0.6:57329 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:39.855592+00:00 [info] <0.167102.0> accepting AMQP connection 127.0.0.6:42489 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:39.855732+00:00 [info] <0.167094.0> connection 127.0.0.6:57329 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.meter-declarations.publish[0m
+2026-10-17 07:44:39.855784+00:00 [info] <0.167094.0> User 'price-feed-r1' authenticated successfully[0m
+2026-10-17 07:44:39.856757+00:00 [info] <0.167090.0> accepting AMQP connection 127.0.0.6:36993 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:39.856819+00:00 [info] <0.167098.0> accepting AMQP connection 127.0.0.6:38337 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:39.856837+00:00 [info] <0.167082.0> accepting AMQP connection 127.0.0.6:60187 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:39.856849+00:00 [info] <0.167086.0> accepting AMQP connection 127.0.0.6:59677 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:39.857071+00:00 [info] <0.167102.0> connection 127.0.0.6:42489 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.energy-positions.consume[0m
+2026-10-17 07:44:39.857098+00:00 [info] <0.167102.0> User 'price-feed-r1' authenticated successfully[0m
+2026-10-17 07:44:39.857291+00:00 [info] <0.167094.0> connection 127.0.0.6:57329 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.meter-declarations.publish: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:39.857720+00:00 [info] <0.167102.0> connection 127.0.0.6:42489 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.energy-positions.consume: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
+[38;5;160m2026-10-17 07:44:39.857746+00:00 [error] <0.167111.0> Channel error on connection <0.167094.0> (127.0.0.6:57329 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:39.857746+00:00 [error] <0.167111.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'meter-declarations.x' in vhost 'r1' refused for user 'price-feed-r1'[0m
+2026-10-17 07:44:39.858284+00:00 [info] <0.167098.0> connection 127.0.0.6:38337 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.energy-positions.publish[0m
+2026-10-17 07:44:39.858314+00:00 [info] <0.167098.0> User 'price-feed-r1' authenticated successfully[0m
+2026-10-17 07:44:39.858350+00:00 [info] <0.167082.0> connection 127.0.0.6:60187 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.kwh-prices.consume[0m
+2026-10-17 07:44:39.858475+00:00 [info] <0.167082.0> User 'price-feed-r1' authenticated successfully[0m
+2026-10-17 07:44:39.858775+00:00 [info] <0.167094.0> closing AMQP connection (127.0.0.6:57329 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.meter-declarations.publish, vhost: 'r1', user: 'price-feed-r1', duration: '6ms')[0m
+[38;5;160m2026-10-17 07:44:39.859252+00:00 [error] <0.167123.0> Channel error on connection <0.167102.0> (127.0.0.6:42489 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:39.859252+00:00 [error] <0.167123.0> operation basic.consume caused a channel exception access_refused: read access to queue 'energy-positions' in vhost 'r1' refused for user 'price-feed-r1'[0m
+2026-10-17 07:44:39.859442+00:00 [info] <0.167082.0> connection 127.0.0.6:60187 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.kwh-prices.consume: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:39.859468+00:00 [info] <0.167098.0> connection 127.0.0.6:38337 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.energy-positions.publish: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:39.859819+00:00 [info] <0.167102.0> closing AMQP connection (127.0.0.6:42489 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.energy-positions.consume, vhost: 'r1', user: 'price-feed-r1', duration: '5ms')[0m
+2026-10-17 07:44:39.860736+00:00 [info] <0.167086.0> connection 127.0.0.6:59677 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.meter-declarations.consume[0m
+2026-10-17 07:44:39.860781+00:00 [info] <0.167086.0> User 'price-feed-r1' authenticated successfully[0m
+2026-10-17 07:44:39.860761+00:00 [info] <0.167090.0> connection 127.0.0.6:36993 -> 10.244.0.188:5672 has a client-provided name: zt-probe-price-feed-simulator.rabbitmq.kwh-prices.publish[0m
+2026-10-17 07:44:39.860854+00:00 [info] <0.167090.0> User 'price-feed-r1' authenticated successfully[0m
+2026-10-17 07:44:39.861670+00:00 [info] <0.167090.0> connection 127.0.0.6:36993 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.kwh-prices.publish: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
+[38;5;160m2026-10-17 07:44:39.861717+00:00 [error] <0.167147.0> Channel error on connection <0.167082.0> (127.0.0.6:60187 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:39.861717+00:00 [error] <0.167147.0> operation basic.consume caused a channel exception access_refused: read access to queue 'kwh-prices' in vhost 'r1' refused for user 'price-feed-r1'[0m
+2026-10-17 07:44:39.861738+00:00 [info] <0.167086.0> connection 127.0.0.6:59677 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.meter-declarations.consume: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
+[38;5;160m2026-10-17 07:44:39.862231+00:00 [error] <0.167148.0> Channel error on connection <0.167098.0> (127.0.0.6:38337 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:39.862231+00:00 [error] <0.167148.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'price-feed-r1'[0m
+2026-10-17 07:44:39.862569+00:00 [info] <0.167082.0> closing AMQP connection (127.0.0.6:60187 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.kwh-prices.consume, vhost: 'r1', user: 'price-feed-r1', duration: '10ms')[0m
+2026-10-17 07:44:39.865614+00:00 [info] <0.167098.0> closing AMQP connection (127.0.0.6:38337 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.energy-positions.publish, vhost: 'r1', user: 'price-feed-r1', duration: '12ms')[0m
+[38;5;160m2026-10-17 07:44:39.865628+00:00 [error] <0.167172.0> Channel error on connection <0.167086.0> (127.0.0.6:59677 -> 10.244.0.188:5672, vhost: 'r1', user: 'price-feed-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:39.865628+00:00 [error] <0.167172.0> operation basic.consume caused a channel exception access_refused: read access to queue 'meter-declarations' in vhost 'r1' refused for user 'price-feed-r1'[0m
+2026-10-17 07:44:39.865860+00:00 [info] <0.167090.0> closing AMQP connection (127.0.0.6:36993 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.kwh-prices.publish, vhost: 'r1', user: 'price-feed-r1', duration: '13ms')[0m
+2026-10-17 07:44:39.866549+00:00 [info] <0.167086.0> closing AMQP connection (127.0.0.6:59677 -> 10.244.0.188:5672 - zt-probe-price-feed-simulator.rabbitmq.meter-declarations.consume, vhost: 'r1', user: 'price-feed-r1', duration: '14ms')[0m
+2026-10-17 07:44:40.407582+00:00 [info] <0.166830.0> closing AMQP connection (127.0.0.6:55125 -> 10.244.0.188:5672 - zt-probe-declaration-gateway.rabbitmq.meter-declarations.consume, vhost: 'r1', user: 'declaration-gateway-r1', duration: '1s')[0m
+2026-10-17 07:44:40.740060+00:00 [info] <0.167191.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:40.848830+00:00 [info] <0.167259.0> accepting AMQP connection 127.0.0.6:38891 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.849695+00:00 [info] <0.167299.0> accepting AMQP connection 127.0.0.6:45339 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.849860+00:00 [info] <0.167287.0> accepting AMQP connection 127.0.0.6:48989 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.851663+00:00 [info] <0.167259.0> connection 127.0.0.6:38891 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.meter-declarations.consume[0m
+2026-10-17 07:44:40.851711+00:00 [info] <0.167259.0> User 'market-projector-r1' authenticated successfully[0m
+2026-10-17 07:44:40.855656+00:00 [info] <0.167287.0> connection 127.0.0.6:48989 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.energy-positions.publish[0m
+[38;5;214m2026-10-17 07:44:40.855753+00:00 [warning] <0.167287.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
+[38;5;160m2026-10-17 07:44:40.855814+00:00 [error] <0.167287.0> Error on AMQP connection <0.167287.0> (127.0.0.6:48989 -> 10.244.0.188:5672, state: starting):[0m
+[38;5;160m2026-10-17 07:44:40.855814+00:00 [error] <0.167287.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
+2026-10-17 07:44:40.856423+00:00 [info] <0.167299.0> connection 127.0.0.6:45339 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.energy-positions.consume[0m
+[38;5;214m2026-10-17 07:44:40.856470+00:00 [warning] <0.167299.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
+[38;5;160m2026-10-17 07:44:40.856495+00:00 [error] <0.167299.0> Error on AMQP connection <0.167299.0> (127.0.0.6:45339 -> 10.244.0.188:5672, state: starting):[0m
+[38;5;160m2026-10-17 07:44:40.856495+00:00 [error] <0.167299.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
+2026-10-17 07:44:40.856583+00:00 [info] <0.167259.0> connection 127.0.0.6:38891 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.meter-declarations.consume: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:40.857127+00:00 [info] <0.167295.0> accepting AMQP connection 127.0.0.6:37821 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.858339+00:00 [info] <0.167303.0> accepting AMQP connection 127.0.0.6:33851 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.858378+00:00 [info] <0.167307.0> accepting AMQP connection 127.0.0.6:49997 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.858682+00:00 [info] <0.167311.0> accepting AMQP connection 127.0.0.6:44397 -> 10.244.0.188:5672[0m
+[38;5;160m2026-10-17 07:44:40.862160+00:00 [error] <0.167336.0> Channel error on connection <0.167259.0> (127.0.0.6:38891 -> 10.244.0.188:5672, vhost: 'r1', user: 'market-projector-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:40.862160+00:00 [error] <0.167336.0> operation basic.consume caused a channel exception access_refused: read access to queue 'meter-declarations' in vhost 'r1' refused for user 'market-projector-r1'[0m
+2026-10-17 07:44:40.862820+00:00 [info] <0.167259.0> closing AMQP connection (127.0.0.6:38891 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.meter-declarations.consume, vhost: 'r1', user: 'market-projector-r1', duration: '17ms')[0m
+2026-10-17 07:44:40.862793+00:00 [info] <0.167317.0> accepting AMQP connection 127.0.0.6:52513 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.863160+00:00 [info] <0.167341.0> accepting AMQP connection 127.0.0.6:47637 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.863334+00:00 [info] <0.167332.0> accepting AMQP connection 127.0.0.6:46565 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.863357+00:00 [info] <0.167345.0> accepting AMQP connection 127.0.0.6:56635 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.863410+00:00 [info] <0.167349.0> accepting AMQP connection 127.0.0.6:48401 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:40.863470+00:00 [info] <0.167307.0> connection 127.0.0.6:49997 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.kwh-prices.consume[0m
+2026-10-17 07:44:40.863462+00:00 [info] <0.167303.0> connection 127.0.0.6:33851 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.kwh-prices.publish[0m
+[38;5;214m2026-10-17 07:44:40.863609+00:00 [warning] <0.167303.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
+2026-10-17 07:44:40.863446+00:00 [info] <0.167295.0> connection 127.0.0.6:37821 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.meter-declarations.publish[0m
+[38;5;160m2026-10-17 07:44:40.863678+00:00 [error] <0.167303.0> Error on AMQP connection <0.167303.0> (127.0.0.6:33851 -> 10.244.0.188:5672, state: starting):[0m
+[38;5;160m2026-10-17 07:44:40.863678+00:00 [error] <0.167303.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
+[38;5;214m2026-10-17 07:44:40.863611+00:00 [warning] <0.167307.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
+[38;5;160m2026-10-17 07:44:40.863917+00:00 [error] <0.167307.0> Error on AMQP connection <0.167307.0> (127.0.0.6:49997 -> 10.244.0.188:5672, state: starting):[0m
+[38;5;160m2026-10-17 07:44:40.863917+00:00 [error] <0.167307.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
+[38;5;214m2026-10-17 07:44:40.863683+00:00 [warning] <0.167295.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
+[38;5;160m2026-10-17 07:44:40.864151+00:00 [error] <0.167295.0> Error on AMQP connection <0.167295.0> (127.0.0.6:37821 -> 10.244.0.188:5672, state: starting):[0m
+[38;5;160m2026-10-17 07:44:40.864151+00:00 [error] <0.167295.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
+2026-10-17 07:44:40.864483+00:00 [info] <0.167311.0> connection 127.0.0.6:44397 -> 10.244.0.188:5672 has a client-provided name: zt-probe-badpass-rabbit.rabbitmq.meter-declarations.consume[0m
+[38;5;214m2026-10-17 07:44:40.864521+00:00 [warning] <0.167311.0> User 'meter-sim-r1' failed to authenticate: user 'meter-sim-r1' - invalid credentials[0m
+[38;5;160m2026-10-17 07:44:40.864550+00:00 [error] <0.167311.0> Error on AMQP connection <0.167311.0> (127.0.0.6:44397 -> 10.244.0.188:5672, state: starting):[0m
+[38;5;160m2026-10-17 07:44:40.864550+00:00 [error] <0.167311.0> PLAIN login refused: user 'meter-sim-r1' - invalid credentials[0m
+2026-10-17 07:44:40.864602+00:00 [info] <0.167341.0> connection 127.0.0.6:47637 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.meter-declarations.publish[0m
+2026-10-17 07:44:40.865021+00:00 [info] <0.167341.0> User 'market-projector-r1' authenticated successfully[0m
+2026-10-17 07:44:40.865504+00:00 [info] <0.167341.0> connection 127.0.0.6:47637 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.meter-declarations.publish: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:40.865858+00:00 [info] <0.167332.0> connection 127.0.0.6:46565 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.kwh-prices.publish[0m
+2026-10-17 07:44:40.865889+00:00 [info] <0.167317.0> connection 127.0.0.6:52513 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.kwh-prices.consume[0m
+2026-10-17 07:44:40.865924+00:00 [info] <0.167332.0> User 'market-projector-r1' authenticated successfully[0m
+2026-10-17 07:44:40.865941+00:00 [info] <0.167317.0> User 'market-projector-r1' authenticated successfully[0m
+2026-10-17 07:44:40.866407+00:00 [info] <0.167332.0> connection 127.0.0.6:46565 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.kwh-prices.publish: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:40.866866+00:00 [info] <0.167317.0> connection 127.0.0.6:52513 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.kwh-prices.consume: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:40.866968+00:00 [info] <0.167345.0> connection 127.0.0.6:56635 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.energy-positions.publish[0m
+2026-10-17 07:44:40.867016+00:00 [info] <0.167345.0> User 'market-projector-r1' authenticated successfully[0m
+2026-10-17 07:44:40.867179+00:00 [info] <0.167349.0> connection 127.0.0.6:48401 -> 10.244.0.188:5672 has a client-provided name: zt-probe-market-projector.rabbitmq.energy-positions.consume[0m
+2026-10-17 07:44:40.867456+00:00 [info] <0.167349.0> User 'market-projector-r1' authenticated successfully[0m
+[38;5;160m2026-10-17 07:44:40.868119+00:00 [error] <0.167387.0> Channel error on connection <0.167332.0> (127.0.0.6:46565 -> 10.244.0.188:5672, vhost: 'r1', user: 'market-projector-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:40.868119+00:00 [error] <0.167387.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'market-projector-r1'[0m
+2026-10-17 07:44:40.868680+00:00 [info] <0.167332.0> closing AMQP connection (127.0.0.6:46565 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.kwh-prices.publish, vhost: 'r1', user: 'market-projector-r1', duration: '12ms')[0m
+2026-10-17 07:44:40.868918+00:00 [info] <0.167345.0> connection 127.0.0.6:56635 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.energy-positions.publish: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
+[38;5;160m2026-10-17 07:44:40.869259+00:00 [error] <0.167382.0> Channel error on connection <0.167341.0> (127.0.0.6:47637 -> 10.244.0.188:5672, vhost: 'r1', user: 'market-projector-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:40.869259+00:00 [error] <0.167382.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'meter-declarations.x' in vhost 'r1' refused for user 'market-projector-r1'[0m
+2026-10-17 07:44:40.869391+00:00 [info] <0.167349.0> connection 127.0.0.6:48401 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.energy-positions.consume: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
+[38;5;160m2026-10-17 07:44:40.870808+00:00 [error] <0.167410.0> Channel error on connection <0.167345.0> (127.0.0.6:56635 -> 10.244.0.188:5672, vhost: 'r1', user: 'market-projector-r1'), channel 1:[0m
+[38;5;160m2026-10-17 07:44:40.870808+00:00 [error] <0.167410.0> operation basic.publish caused a channel exception access_refused: write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'market-projector-r1'[0m
+2026-10-17 07:44:40.871078+00:00 [info] <0.167341.0> closing AMQP connection (127.0.0.6:47637 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.meter-declarations.publish, vhost: 'r1', user: 'market-projector-r1', duration: '14ms')[0m
+2026-10-17 07:44:40.871680+00:00 [info] <0.167345.0> closing AMQP connection (127.0.0.6:56635 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.energy-positions.publish, vhost: 'r1', user: 'market-projector-r1', duration: '13ms')[0m
+2026-10-17 07:44:42.128247+00:00 [info] <0.167462.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:42.371122+00:00 [info] <0.167317.0> closing AMQP connection (127.0.0.6:52513 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.kwh-prices.consume, vhost: 'r1', user: 'market-projector-r1', duration: '1s')[0m
+2026-10-17 07:44:42.373964+00:00 [info] <0.167349.0> closing AMQP connection (127.0.0.6:48401 -> 10.244.0.188:5672 - zt-probe-market-projector.rabbitmq.energy-positions.consume, vhost: 'r1', user: 'market-projector-r1', duration: '1s')[0m
+2026-10-17 07:44:43.857259+00:00 [info] <0.167287.0> closing AMQP connection (127.0.0.6:48989 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.energy-positions.publish, duration: '3s')[0m
+2026-10-17 07:44:43.857259+00:00 [info] <0.167299.0> closing AMQP connection (127.0.0.6:45339 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.energy-positions.consume, duration: '3s')[0m
+2026-10-17 07:44:43.864400+00:00 [info] <0.167303.0> closing AMQP connection (127.0.0.6:33851 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.kwh-prices.publish, duration: '3s')[0m
+2026-10-17 07:44:43.864559+00:00 [info] <0.167295.0> closing AMQP connection (127.0.0.6:37821 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.meter-declarations.publish, duration: '3s')[0m
+2026-10-17 07:44:43.864632+00:00 [info] <0.167307.0> closing AMQP connection (127.0.0.6:49997 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.kwh-prices.consume, duration: '3s')[0m
+2026-10-17 07:44:43.865317+00:00 [info] <0.167311.0> closing AMQP connection (127.0.0.6:44397 -> 10.244.0.188:5672 - zt-probe-badpass-rabbit.rabbitmq.meter-declarations.consume, duration: '3s')[0m
+2026-10-17 07:44:45.742246+00:00 [info] <0.167506.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:47.129331+00:00 [info] <0.167509.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:50.745141+00:00 [info] <0.167536.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:52.132377+00:00 [info] <0.167539.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:55.747026+00:00 [info] <0.167560.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:57.134056+00:00 [info] <0.167563.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:44:57.975925+00:00 [info] <0.167569.0> accepting AMQP connection 127.0.0.6:50087 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:57.978489+00:00 [info] <0.167569.0> connection 127.0.0.6:50087 -> 10.244.0.188:5672 has a client-provided name: meter-sim[0m
+2026-10-17 07:44:57.978544+00:00 [info] <0.167569.0> User 'meter-sim-r1' authenticated successfully[0m
+2026-10-17 07:44:57.978877+00:00 [info] <0.167569.0> connection 127.0.0.6:50087 -> 10.244.0.188:5672 - meter-sim: user 'meter-sim-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:44:57.982756+00:00 [info] <0.167583.0> accepting AMQP connection 127.0.0.6:38821 -> 10.244.0.188:5672[0m
+2026-10-17 07:44:57.983933+00:00 [info] <0.167583.0> connection 127.0.0.6:38821 -> 10.244.0.188:5672 has a client-provided name: meter-sim[0m
+2026-10-17 07:44:57.983983+00:00 [info] <0.167583.0> User 'meter-sim-r2' authenticated successfully[0m
+2026-10-17 07:44:57.984281+00:00 [info] <0.167583.0> connection 127.0.0.6:38821 -> 10.244.0.188:5672 - meter-sim: user 'meter-sim-r2' authenticated and granted access to vhost 'r2'[0m
+2026-10-17 07:45:00.747146+00:00 [info] <0.167619.0> User 'keda' authenticated successfully[0m
+[38;5;214m2026-10-17 07:45:01.870504+00:00 [warning] <0.163403.0> closing AMQP connection <0.163403.0> (127.0.0.6:38463 -> 10.244.0.188:5672 - market-projector-energy-positions, vhost: 'r1', user: 'market-projector-r1', duration: '8M, 3s'):[0m
+[38;5;214m2026-10-17 07:45:01.870504+00:00 [warning] <0.163403.0> client unexpectedly closed TCP connection[0m
+[38;5;214m2026-10-17 07:45:01.871311+00:00 [warning] <0.123831.0> closing AMQP connection <0.123831.0> (127.0.0.6:58005 -> 10.244.0.188:5672 - market-projector-kwh-prices, vhost: 'r2', user: 'market-projector-r2', duration: '1H, 0M, 25s'):[0m
+[38;5;214m2026-10-17 07:45:01.871311+00:00 [warning] <0.123831.0> client unexpectedly closed TCP connection[0m
+[38;5;214m2026-10-17 07:45:01.871370+00:00 [warning] <0.123827.0> closing AMQP connection <0.123827.0> (127.0.0.6:59033 -> 10.244.0.188:5672 - market-projector-energy-positions, vhost: 'r2', user: 'market-projector-r2', duration: '1H, 0M, 25s'):[0m
+[38;5;214m2026-10-17 07:45:01.871370+00:00 [warning] <0.123827.0> client unexpectedly closed TCP connection[0m
+[38;5;214m2026-10-17 07:45:01.871126+00:00 [warning] <0.123813.0> closing AMQP connection <0.123813.0> (127.0.0.6:39747 -> 10.244.0.188:5672 - price-feed-simulator, vhost: 'r2', user: 'price-feed-r2', duration: '1H, 0M, 25s'):[0m
+[38;5;214m2026-10-17 07:45:01.871126+00:00 [warning] <0.123813.0> client unexpectedly closed TCP connection[0m
+[38;5;214m2026-10-17 07:45:01.872254+00:00 [warning] <0.163407.0> closing AMQP connection <0.163407.0> (127.0.0.6:59819 -> 10.244.0.188:5672 - market-projector-kwh-prices, vhost: 'r1', user: 'market-projector-r1', duration: '8M, 3s'):[0m
+[38;5;214m2026-10-17 07:45:01.872254+00:00 [warning] <0.163407.0> client unexpectedly closed TCP connection[0m
+[38;5;214m2026-10-17 07:45:01.872420+00:00 [warning] <0.123735.0> closing AMQP connection <0.123735.0> (127.0.0.6:43325 -> 10.244.0.188:5672 - price-feed-simulator, vhost: 'r1', user: 'price-feed-r1', duration: '1H, 0M, 29s'):[0m
+[38;5;214m2026-10-17 07:45:01.872420+00:00 [warning] <0.123735.0> client unexpectedly closed TCP connection[0m
+2026-10-17 07:45:02.133902+00:00 [info] <0.167646.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:02.880412+00:00 [info] <0.167652.0> accepting AMQP connection 127.0.0.6:36793 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:02.880517+00:00 [info] <0.167660.0> accepting AMQP connection 127.0.0.6:46243 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:02.880500+00:00 [info] <0.167656.0> accepting AMQP connection 127.0.0.6:33211 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:02.881241+00:00 [info] <0.167664.0> accepting AMQP connection 127.0.0.6:51255 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:02.881391+00:00 [info] <0.167656.0> connection 127.0.0.6:33211 -> 10.244.0.188:5672 has a client-provided name: market-projector-kwh-prices[0m
+2026-10-17 07:45:02.881466+00:00 [info] <0.167656.0> User 'market-projector-r1' authenticated successfully[0m
+2026-10-17 07:45:02.881555+00:00 [info] <0.167652.0> connection 127.0.0.6:36793 -> 10.244.0.188:5672 has a client-provided name: market-projector-kwh-prices[0m
+2026-10-17 07:45:02.881583+00:00 [info] <0.167652.0> User 'market-projector-r2' authenticated successfully[0m
+2026-10-17 07:45:02.881571+00:00 [info] <0.167660.0> connection 127.0.0.6:46243 -> 10.244.0.188:5672 has a client-provided name: market-projector-energy-positions[0m
+2026-10-17 07:45:02.881623+00:00 [info] <0.167660.0> User 'market-projector-r2' authenticated successfully[0m
+2026-10-17 07:45:02.881891+00:00 [info] <0.167656.0> connection 127.0.0.6:33211 -> 10.244.0.188:5672 - market-projector-kwh-prices: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:45:02.881994+00:00 [info] <0.167660.0> connection 127.0.0.6:46243 -> 10.244.0.188:5672 - market-projector-energy-positions: user 'market-projector-r2' authenticated and granted access to vhost 'r2'[0m
+2026-10-17 07:45:02.882068+00:00 [info] <0.167652.0> connection 127.0.0.6:36793 -> 10.244.0.188:5672 - market-projector-kwh-prices: user 'market-projector-r2' authenticated and granted access to vhost 'r2'[0m
+2026-10-17 07:45:02.882305+00:00 [info] <0.167664.0> connection 127.0.0.6:51255 -> 10.244.0.188:5672 has a client-provided name: market-projector-energy-positions[0m
+2026-10-17 07:45:02.882351+00:00 [info] <0.167664.0> User 'market-projector-r1' authenticated successfully[0m
+2026-10-17 07:45:02.882721+00:00 [info] <0.167664.0> connection 127.0.0.6:51255 -> 10.244.0.188:5672 - market-projector-energy-positions: user 'market-projector-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:45:03.230577+00:00 [info] <0.167708.0> accepting AMQP connection 127.0.0.6:39413 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:03.231396+00:00 [info] <0.167708.0> connection 127.0.0.6:39413 -> 10.244.0.188:5672 has a client-provided name: price-feed-simulator[0m
+2026-10-17 07:45:03.231477+00:00 [info] <0.167708.0> User 'price-feed-r1' authenticated successfully[0m
+2026-10-17 07:45:03.231930+00:00 [info] <0.167708.0> connection 127.0.0.6:39413 -> 10.244.0.188:5672 - price-feed-simulator: user 'price-feed-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:45:04.052700+00:00 [info] <0.167722.0> accepting AMQP connection 127.0.0.6:41519 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:04.052798+00:00 [info] <0.167726.0> accepting AMQP connection 127.0.0.6:46365 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:04.053435+00:00 [info] <0.167722.0> connection 127.0.0.6:41519 -> 10.244.0.188:5672 has a client-provided name: declaration-gateway[0m
+2026-10-17 07:45:04.053469+00:00 [info] <0.167722.0> User 'declaration-gateway-r2' authenticated successfully[0m
+2026-10-17 07:45:04.053509+00:00 [info] <0.167726.0> connection 127.0.0.6:46365 -> 10.244.0.188:5672 has a client-provided name: declaration-gateway[0m
+2026-10-17 07:45:04.053583+00:00 [info] <0.167726.0> User 'declaration-gateway-r1' authenticated successfully[0m
+2026-10-17 07:45:04.053825+00:00 [info] <0.167722.0> connection 127.0.0.6:41519 -> 10.244.0.188:5672 - declaration-gateway: user 'declaration-gateway-r2' authenticated and granted access to vhost 'r2'[0m
+2026-10-17 07:45:04.053871+00:00 [info] <0.167726.0> connection 127.0.0.6:46365 -> 10.244.0.188:5672 - declaration-gateway: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:45:04.083619+00:00 [info] <0.167750.0> accepting AMQP connection 127.0.0.6:32775 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:04.084339+00:00 [info] <0.167750.0> connection 127.0.0.6:32775 -> 10.244.0.188:5672 has a client-provided name: declaration-gateway-relay[0m
+2026-10-17 07:45:04.084383+00:00 [info] <0.167750.0> User 'declaration-gateway-r1' authenticated successfully[0m
+2026-10-17 07:45:04.084736+00:00 [info] <0.167750.0> connection 127.0.0.6:32775 -> 10.244.0.188:5672 - declaration-gateway-relay: user 'declaration-gateway-r1' authenticated and granted access to vhost 'r1'[0m
+2026-10-17 07:45:04.085290+00:00 [info] <0.167764.0> accepting AMQP connection 127.0.0.6:42309 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:04.085780+00:00 [info] <0.167764.0> connection 127.0.0.6:42309 -> 10.244.0.188:5672 has a client-provided name: declaration-gateway-relay[0m
+2026-10-17 07:45:04.085811+00:00 [info] <0.167764.0> User 'declaration-gateway-r2' authenticated successfully[0m
+2026-10-17 07:45:04.086026+00:00 [info] <0.167764.0> connection 127.0.0.6:42309 -> 10.244.0.188:5672 - declaration-gateway-relay: user 'declaration-gateway-r2' authenticated and granted access to vhost 'r2'[0m
+2026-10-17 07:45:05.748524+00:00 [info] <0.167793.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:06.332456+00:00 [info] <0.167799.0> accepting AMQP connection 127.0.0.6:42055 -> 10.244.0.188:5672[0m
+2026-10-17 07:45:06.333457+00:00 [info] <0.167799.0> connection 127.0.0.6:42055 -> 10.244.0.188:5672 has a client-provided name: price-feed-simulator[0m
+2026-10-17 07:45:06.333543+00:00 [info] <0.167799.0> User 'price-feed-r2' authenticated successfully[0m
+2026-10-17 07:45:06.333930+00:00 [info] <0.167799.0> connection 127.0.0.6:42055 -> 10.244.0.188:5672 - price-feed-simulator: user 'price-feed-r2' authenticated and granted access to vhost 'r2'[0m
+2026-10-17 07:45:07.135020+00:00 [info] <0.167810.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:07.607172+00:00 [info] <0.167813.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:10.749526+00:00 [info] <0.167838.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:12.137499+00:00 [info] <0.167841.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:12.307717+00:00 [info] <0.167844.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:15.750177+00:00 [info] <0.167868.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:17.136709+00:00 [info] <0.167871.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:17.985102+00:00 [info] <0.167569.0> closing AMQP connection (127.0.0.6:50087 -> 10.244.0.188:5672 - meter-sim, vhost: 'r1', user: 'meter-sim-r1', duration: '20s')[0m
+2026-10-17 07:45:17.989050+00:00 [info] <0.167583.0> closing AMQP connection (127.0.0.6:38821 -> 10.244.0.188:5672 - meter-sim, vhost: 'r2', user: 'meter-sim-r2', duration: '20s')[0m
+2026-10-17 07:45:20.751757+00:00 [info] <0.167906.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:22.141852+00:00 [info] <0.167909.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:22.626516+00:00 [info] <0.167912.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:25.753665+00:00 [info] <0.167933.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:27.142791+00:00 [info] <0.167936.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:27.317367+00:00 [info] <0.167939.0> User 'keda' authenticated successfully[0m
+2026-10-17 07:45:30.755369+00:00 [info] <0.167967.0> User 'keda' authenticated successfully[0m

@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "data": "/Users/diego/Developer/voltera-wt/exp-e08-e09-e10/experiments/results/e10-end-to-end-trace/20261017T062645Z-b5e155b-r1",
+  "data": "/Users/diego/Developer/voltera-wt/final-run/experiments/results/e10-end-to-end-trace/20261017T074533Z-18789b0-dirty-r1",
   "criteria": [
     {
       "id": "pair-exact",
@@ -69,7 +69,7 @@
       "id": "cold-start-gateway-seen",
       "description": "El gateway arrancó en frío (s entre el envío y su primer consumo; \u003e 2 s)",
       "metric": "metrics.json:$.cold_start.gateway.total_s",
-      "observed": 5.097586393356323,
+      "observed": 9.099308013916016,
       "op": "gt",
       "expected": 2,
       "verdict": "PASS"
@@ -105,7 +105,7 @@
       "id": "total-latency",
       "description": "Latencia total de la cadena, del envío a su último hop (s; arranques en frío incluidos)",
       "metric": "metrics.json:$.total_s",
-      "observed": 9.077657461166382,
+      "observed": 16.094730377197266,
       "op": "le",
       "expected": 120,
       "verdict": "PASS"

@@ -1,0 +1,42 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/final-run/experiments/results/e00-harness/20261017T064459Z-18789b0-r1",
+  "criteria": [
+    {
+      "id": "samples-taken",
+      "description": "El muestreo de 30 s a 2 s produce al menos 10 filas",
+      "metric": "raw/samples.csv:count(up_prometheus)",
+      "observed": 15,
+      "op": "ge",
+      "expected": 10,
+      "verdict": "PASS"
+    },
+    {
+      "id": "kafka-exporter-ready",
+      "description": "kafka-exporter tiene al menos 1 réplica lista en todas las muestras",
+      "metric": "raw/samples.csv:min(kafka_exporter_ready)",
+      "observed": 1,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "prometheus-up",
+      "description": "Prometheus se ve a sí mismo arriba (up = 1) durante toda la ventana",
+      "metric": "raw/samples.csv:min(up_prometheus)",
+      "observed": 1,
+      "op": "eq",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "prom-range-points",
+      "description": "La consulta de rango devuelve al menos 10 puntos",
+      "metric": "metrics.json:$.prom_range_points",
+      "observed": 16,
+      "op": "ge",
+      "expected": 10,
+      "verdict": "PASS"
+    }
+  ]
+}

@@ -8,7 +8,7 @@
                 "annotations": {
                     "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"keda.sh/v1alpha1\",\"kind\":\"ScaledObject\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"declaration-gateway\",\"app.kubernetes.io/component\":\"write-side\",\"app.kubernetes.io/name\":\"declaration-gateway\",\"app.kubernetes.io/part-of\":\"voltera\"},\"name\":\"declaration-gateway\",\"namespace\":\"voltera-r1\"},\"spec\":{\"advanced\":{\"horizontalPodAutoscalerConfig\":{\"behavior\":{\"scaleDown\":{\"stabilizationWindowSeconds\":30}}}},\"cooldownPeriod\":30,\"maxReplicaCount\":10,\"minReplicaCount\":0,\"pollingInterval\":5,\"scaleTargetRef\":{\"name\":\"declaration-gateway\"},\"triggers\":[{\"authenticationRef\":{\"name\":\"rabbitmq-http\"},\"metadata\":{\"mode\":\"QueueLength\",\"protocol\":\"http\",\"queueName\":\"meter-declarations\",\"value\":\"100\"},\"type\":\"rabbitmq\"}]}}\n"
                 },
-                "creationTimestamp": "2026-10-17T06:06:51Z",
+                "creationTimestamp": "2026-10-17T07:06:27Z",
                 "generation": 1,
                 "labels": {
                     "app": "declaration-gateway",
@@ -31,8 +31,8 @@
                         "uid": "3fb41cca-2768-45cc-8dce-4ec050be6800"
                     }
                 ],
-                "resourceVersion": "90855",
-                "uid": "3c2f07d5-90d3-4acd-a810-1cf8b1401a51"
+                "resourceVersion": "105521",
+                "uid": "6c2bf572-9dd4-4815-833c-5167d23579fb"
             },
             "spec": {
                 "behavior": {
@@ -94,24 +94,24 @@
             "status": {
                 "conditions": [
                     {
-                        "lastTransitionTime": "2026-10-17T06:06:51Z",
+                        "lastTransitionTime": "2026-10-17T07:06:27Z",
                         "message": "the HPA controller was able to get the target's current scale",
                         "reason": "SucceededGetScale",
                         "status": "True",
                         "type": "AbleToScale"
                     },
                     {
-                        "lastTransitionTime": "2026-10-17T06:07:36Z",
+                        "lastTransitionTime": "2026-10-17T07:06:42Z",
                         "message": "scaling is disabled since the replica count of the target is zero",
                         "reason": "ScalingDisabled",
                         "status": "False",
                         "type": "ScalingActive"
                     },
                     {
-                        "lastTransitionTime": "2026-10-17T06:07:21Z",
-                        "message": "the desired replica count is less than the minimum replica count",
-                        "reason": "TooFewReplicas",
-                        "status": "True",
+                        "lastTransitionTime": "2026-10-17T07:06:27Z",
+                        "message": "the desired count is within the acceptable range",
+                        "reason": "DesiredWithinRange",
+                        "status": "False",
                         "type": "ScalingLimited"
                     }
                 ],
@@ -127,7 +127,7 @@
                 "annotations": {
                     "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"keda.sh/v1alpha1\",\"kind\":\"ScaledObject\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"energy-transfer\",\"app.kubernetes.io/component\":\"match-side\",\"app.kubernetes.io/name\":\"energy-transfer\",\"app.kubernetes.io/part-of\":\"voltera\"},\"name\":\"energy-transfer\",\"namespace\":\"voltera-r1\"},\"spec\":{\"advanced\":{\"horizontalPodAutoscalerConfig\":{\"behavior\":{\"scaleDown\":{\"stabilizationWindowSeconds\":30}}}},\"cooldownPeriod\":30,\"maxReplicaCount\":6,\"minReplicaCount\":0,\"pollingInterval\":5,\"scaleTargetRef\":{\"name\":\"energy-transfer\"},\"triggers\":[{\"metadata\":{\"bootstrapServers\":\"kafka.voltera-infra.svc:9092\",\"consumerGroup\":\"energy-transfer\",\"lagThreshold\":\"50\",\"limitToPartitionsWithLag\":\"true\",\"offsetResetPolicy\":\"earliest\",\"topic\":\"r1.energy-matched\"},\"type\":\"kafka\"}]}}\n"
                 },
-                "creationTimestamp": "2026-10-17T06:02:20Z",
+                "creationTimestamp": "2026-10-17T06:47:20Z",
                 "generation": 1,
                 "labels": {
                     "app": "energy-transfer",
@@ -150,8 +150,8 @@
                         "uid": "5557b0fe-70cd-4e81-af2e-1b993a2fa6b6"
                     }
                 ],
-                "resourceVersion": "91014",
-                "uid": "1dd0dfe1-3e0a-4c41-9a2c-c45996e22879"
+                "resourceVersion": "105811",
+                "uid": "12bc45fd-a42d-44f9-ab7b-8b1ab7a7885b"
             },
             "spec": {
                 "behavior": {
@@ -213,28 +213,28 @@
             "status": {
                 "conditions": [
                     {
-                        "lastTransitionTime": "2026-10-17T06:02:20Z",
+                        "lastTransitionTime": "2026-10-17T06:47:20Z",
                         "message": "the HPA controller was able to update the target scale to 1",
                         "reason": "SucceededRescale",
                         "status": "True",
                         "type": "AbleToScale"
                     },
                     {
-                        "lastTransitionTime": "2026-10-17T06:07:35Z",
+                        "lastTransitionTime": "2026-10-17T07:06:51Z",
                         "message": "the HPA was able to successfully calculate a replica count from external metric s0-kafka-r1-energy-matched(\u0026LabelSelector{MatchLabels:map[string]string{scaledobject.keda.sh/name: energy-transfer,},MatchExpressions:[]LabelSelectorRequirement{},})",
                         "reason": "ValidMetricFound",
                         "status": "True",
                         "type": "ScalingActive"
                     },
                     {
-                        "lastTransitionTime": "2026-10-17T06:08:05Z",
+                        "lastTransitionTime": "2026-10-17T07:07:21Z",
                         "message": "the desired replica count is less than the minimum replica count",
                         "reason": "TooFewReplicas",
                         "status": "True",
                         "type": "ScalingLimited"
                     },
                     {
-                        "lastTransitionTime": "2026-10-17T06:03:05Z",
+                        "lastTransitionTime": "2026-10-17T06:52:51Z",
                         "message": "the HPA controller did not scale the workload to zero",
                         "reason": "NotScaledToZero",
                         "status": "False",
@@ -261,7 +261,7 @@
                 ],
                 "currentReplicas": 5,
                 "desiredReplicas": 1,
-                "lastScaleTime": "2026-10-17T06:08:05Z",
+                "lastScaleTime": "2026-10-17T07:07:21Z",
                 "observedGeneration": 1
             }
         }

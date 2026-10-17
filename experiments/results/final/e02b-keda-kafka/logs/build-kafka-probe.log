@@ -1,3 +1,3 @@
-06:06:58 build voltera/kafka-probe:dev
-Image: "voltera/kafka-probe:dev" with ID "sha256:eade9d1e48636eb9d10e34541fd9a0f7ce6161dce4b9f9347e04d315713cbe71" not yet present on node "voltera-control-plane", loading...
-06:07:11 imágenes cargadas: kafka-probe
+07:06:31 build voltera/kafka-probe:dev
+Image: "voltera/kafka-probe:dev" with ID "sha256:c778434b44046f8016f047d81f60192f6f1e7689d90d20c76453b01958ba875e" not yet present on node "voltera-control-plane", loading...
+07:06:33 imágenes cargadas: kafka-probe

@@ -10,7 +10,7 @@
     "rbac_allowed_delta": 20
   },
   "connections": {
-    "pg_stat_samples": 20,
+    "pg_stat_samples": 21,
     "pg_foreign_rows": 0,
     "pg_clients": [
       "voltera/declaration-gateway"
@@ -20,11 +20,11 @@
     ],
     "prom_foreign_sources": 0,
     "prom_projector_connections": 0,
-    "prom_gateway_connections": 83,
+    "prom_gateway_connections": 50,
     "prom_sources_after_deny_test": {
-      "declaration-gateway": 112,
-      "e04-control-261017054449": 20,
-      "e04-deny-261017054449": 20
+      "declaration-gateway": 73,
+      "e04-control-261017071727": 20,
+      "e04-deny-261017071727": 20
     }
   },
   "static": {
@@ -39,7 +39,7 @@
   "autonomy": {
     "published": 500,
     "in_redis": 500,
-    "seconds_to_full": 1.086
+    "seconds_to_full": 1.299
   },
   "kiali": {
     "positions_db_nodes": 1,

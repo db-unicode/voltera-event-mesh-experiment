@@ -1,12 +1,12 @@
 {
   "verdict": "PASS",
-  "data": "/Users/diego/Developer/voltera-wt/exp-e03-e04-e07/experiments/results/e03-cqrs-lag/20261017T053432Z-9fa7dee-r1",
+  "data": "/Users/diego/Developer/voltera-wt/final-run/experiments/results/e03-cqrs-lag/20261017T070732Z-18789b0-dirty-r1",
   "criteria": [
     {
       "id": "base-noread-p95",
       "description": "Carga base sin lectura concurrente, p95 committed-\u003evisible \u003c= 2 s",
       "metric": "raw/latency_base_noread.csv:p95(committed_to_visible_s)",
-      "observed": 0.024390949999999998,
+      "observed": 0.026365499999999983,
       "op": "le",
       "expected": 2,
       "verdict": "PASS"
@@ -15,7 +15,7 @@
       "id": "base-noread-p99",
       "description": "Carga base sin lectura concurrente, p99 \u003c= 5 s",
       "metric": "raw/latency_base_noread.csv:p99(committed_to_visible_s)",
-      "observed": 0.028753829999999998,
+      "observed": 0.07594292999999995,
       "op": "le",
       "expected": 5,
       "verdict": "PASS"
@@ -24,7 +24,7 @@
       "id": "base-read-p95",
       "description": "Carga base con 200 lecturas/s, p95 \u003c= 2 s",
       "metric": "raw/latency_base_read.csv:p95(committed_to_visible_s)",
-      "observed": 0.025149899999999996,
+      "observed": 0.023831449999999997,
       "op": "le",
       "expected": 2,
       "verdict": "PASS"
@@ -33,7 +33,7 @@
       "id": "base-read-p99",
       "description": "Carga base con 200 lecturas/s, p99 \u003c= 5 s",
       "metric": "raw/latency_base_read.csv:p99(committed_to_visible_s)",
-      "observed": 0.031618589999999995,
+      "observed": 0.06733526999999996,
       "op": "le",
       "expected": 5,
       "verdict": "PASS"
@@ -69,7 +69,7 @@
       "id": "peak-p99",
       "description": "Durante el pico, p99 committed-\u003evisible \u003c= 30 s",
       "metric": "raw/latency_peak_during.csv:p99(committed_to_visible_s)",
-      "observed": 0.14861391999999998,
+      "observed": 0.03278639999999999,
       "op": "le",
       "expected": 30,
       "verdict": "PASS"
@@ -96,7 +96,7 @@
       "id": "peak-recovered-p99",
       "description": "Sondeos enviados 60 s después del pico, p99 \u003c= 5 s",
       "metric": "raw/latency_peak_recovered.csv:p99(committed_to_visible_s)",
-      "observed": 0.02515,
+      "observed": 0.0241075,
       "op": "le",
       "expected": 5,
       "verdict": "PASS"

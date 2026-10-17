@@ -1,9 +1,9 @@
 {
-  "prefix": "e02c-1792217469-",
+  "prefix": "e02c-1792220242-",
   "mode": "control",
-  "tEnd": 1792217551,
-  "tDrainWait": 1792217868,
-  "tZeroWait": 1792217868,
+  "tEnd": 1792220324,
+  "tDrainWait": 1792220644,
+  "tZeroWait": 1792220644,
   "drained": true,
   "zeroed": true
 }

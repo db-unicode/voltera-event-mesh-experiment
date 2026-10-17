@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "data": "/Users/diego/Developer/voltera-wt/exp-e03-e04-e07/experiments/results/e04-state-transfer/20261017T054432Z-9fa7dee-dirty-r1",
+  "data": "/Users/diego/Developer/voltera-wt/final-run/experiments/results/e04-state-transfer/20261017T071724Z-18789b0-dirty-r1",
   "criteria": [
     {
       "id": "policy-attempts",
@@ -51,7 +51,7 @@
       "id": "pg-samples",
       "description": "(2) pg_stat_activity muestreada con clientes al menos 10 veces durante la carga",
       "metric": "metrics.json:$.connections.pg_stat_samples",
-      "observed": 20,
+      "observed": 21,
       "op": "ge",
       "expected": 10,
       "verdict": "PASS"
@@ -87,7 +87,7 @@
       "id": "prom-gateway",
       "description": "(2) declaration-gateway sí aparece como origen (control de la consulta)",
       "metric": "metrics.json:$.connections.prom_gateway_connections",
-      "observed": 83,
+      "observed": 50,
       "op": "gt",
       "expected": 0,
       "verdict": "PASS"
@@ -141,7 +141,7 @@
       "id": "autonomy-time",
       "description": "(4) 500/500 en Redis en \u003c= 10 s desde el inicio de la publicación",
       "metric": "metrics.json:$.autonomy.seconds_to_full",
-      "observed": 1.086,
+      "observed": 1.299,
       "op": "le",
       "expected": 10,
       "verdict": "PASS"
@@ -150,7 +150,7 @@
       "id": "autonomy-time-found",
       "description": "(4) Las 500 se observaron (seconds_to_full \u003e= 0)",
       "metric": "metrics.json:$.autonomy.seconds_to_full",
-      "observed": 1.086,
+      "observed": 1.299,
       "op": "ge",
       "expected": 0,
       "verdict": "PASS"

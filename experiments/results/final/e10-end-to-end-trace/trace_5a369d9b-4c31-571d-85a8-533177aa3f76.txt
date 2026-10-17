@@ -1,0 +1,7 @@
+ts                           Δms       service              pod                                   stage    result
+2026-10-17T07:47:51.307563Z  0.000     meter-sim            meter-sim-1792223268-11140-1-mpfqf    publish  ok
+2026-10-17T07:48:00.406872Z  9099.308  declaration-gateway  declaration-gateway-64bf767884-qkns9  consume  ok
+2026-10-17T07:48:00.408140Z  1.268     declaration-gateway  declaration-gateway-64bf767884-qkns9  commit   ok
+2026-10-17T07:48:00.410418Z  2.278     declaration-gateway  declaration-gateway-64bf767884-qkns9  publish  ok
+2026-10-17T07:48:00.410652Z  0.233     market-projector     market-projector-844f84db9d-xqvfd     consume  ok
+2026-10-17T07:48:00.410977Z  0.326     market-projector     market-projector-844f84db9d-xqvfd     apply    ok

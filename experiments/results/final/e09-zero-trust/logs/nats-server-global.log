@@ -1,200 +1,200 @@
-[1] 2026/10/17 04:56:59.502077 [INF] 127.0.0.6:42481 - lid:377 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:00.512030 [INF] 127.0.0.6:40619 - lid:378 - Leafnode connection created 
-[1] 2026/10/17 04:57:00.513020 [INF] 127.0.0.6:40619 - lid:378 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:01.518308 [INF] 127.0.0.6:33519 - lid:379 - Leafnode connection created 
-[1] 2026/10/17 04:57:01.519846 [INF] 127.0.0.6:33519 - lid:379 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:02.522980 [INF] 127.0.0.6:60483 - lid:380 - Leafnode connection created 
-[1] 2026/10/17 04:57:02.523778 [INF] 127.0.0.6:60483 - lid:380 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:03.269237 [INF] 127.0.0.6:38587 - lid:335 - Leafnode connection closed: Client Closed - Remote: nats-r1
-[1] 2026/10/17 04:57:03.528339 [INF] 127.0.0.6:49425 - lid:381 - Leafnode connection created 
-[1] 2026/10/17 04:57:03.529082 [INF] 127.0.0.6:49425 - lid:381 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:04.533034 [INF] 127.0.0.6:43429 - lid:383 - Leafnode connection created 
-[1] 2026/10/17 04:57:04.533906 [INF] 127.0.0.6:43429 - lid:383 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:05.540600 [INF] 127.0.0.6:36097 - lid:384 - Leafnode connection created 
-[1] 2026/10/17 04:57:05.541374 [INF] 127.0.0.6:36097 - lid:384 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:06.276387 [INF] 127.0.0.6:44139 - lid:385 - Leafnode connection created 
-[1] 2026/10/17 04:57:06.548582 [INF] 127.0.0.6:56701 - lid:386 - Leafnode connection created 
-[1] 2026/10/17 04:57:06.549599 [INF] 127.0.0.6:56701 - lid:386 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:07.554423 [INF] 127.0.0.6:57999 - lid:387 - Leafnode connection created 
-[1] 2026/10/17 04:57:07.555581 [INF] 127.0.0.6:57999 - lid:387 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:08.560886 [INF] 127.0.0.6:46105 - lid:388 - Leafnode connection created 
-[1] 2026/10/17 04:57:08.561694 [INF] 127.0.0.6:46105 - lid:388 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:09.568030 [INF] 127.0.0.6:54511 - lid:389 - Leafnode connection created 
-[1] 2026/10/17 04:57:09.571277 [INF] 127.0.0.6:54511 - lid:389 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:10.575811 [INF] 127.0.0.6:59865 - lid:390 - Leafnode connection created 
-[1] 2026/10/17 04:57:10.576710 [INF] 127.0.0.6:59865 - lid:390 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:11.582326 [INF] 127.0.0.6:51775 - lid:391 - Leafnode connection created 
-[1] 2026/10/17 04:57:11.583408 [INF] 127.0.0.6:51775 - lid:391 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:12.586995 [INF] 127.0.0.6:58667 - lid:392 - Leafnode connection created 
-[1] 2026/10/17 04:57:12.587834 [INF] 127.0.0.6:58667 - lid:392 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:13.594982 [INF] 127.0.0.6:35779 - lid:393 - Leafnode connection created 
-[1] 2026/10/17 04:57:13.596265 [INF] 127.0.0.6:35779 - lid:393 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:14.600951 [INF] 127.0.0.6:44177 - lid:394 - Leafnode connection created 
-[1] 2026/10/17 04:57:14.602336 [INF] 127.0.0.6:44177 - lid:394 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:15.606640 [INF] 127.0.0.6:48217 - lid:395 - Leafnode connection created 
-[1] 2026/10/17 04:57:15.608214 [INF] 127.0.0.6:48217 - lid:395 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:16.617868 [INF] 127.0.0.6:44461 - lid:396 - Leafnode connection created 
-[1] 2026/10/17 04:57:16.619003 [INF] 127.0.0.6:44461 - lid:396 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:17.623610 [INF] 127.0.0.6:46695 - lid:397 - Leafnode connection created 
-[1] 2026/10/17 04:57:17.624569 [INF] 127.0.0.6:46695 - lid:397 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:18.628151 [INF] 127.0.0.6:41983 - lid:398 - Leafnode connection created 
-[1] 2026/10/17 04:57:18.629030 [INF] 127.0.0.6:41983 - lid:398 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:19.633533 [INF] 127.0.0.6:36497 - lid:399 - Leafnode connection created 
-[1] 2026/10/17 04:57:19.634897 [INF] 127.0.0.6:36497 - lid:399 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:20.638460 [INF] 127.0.0.6:40341 - lid:400 - Leafnode connection created 
-[1] 2026/10/17 04:57:20.639655 [INF] 127.0.0.6:40341 - lid:400 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:21.644398 [INF] 127.0.0.6:46313 - lid:401 - Leafnode connection created 
-[1] 2026/10/17 04:57:21.645251 [INF] 127.0.0.6:46313 - lid:401 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:22.649252 [INF] 127.0.0.6:36683 - lid:402 - Leafnode connection created 
-[1] 2026/10/17 04:57:22.650344 [INF] 127.0.0.6:36683 - lid:402 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:23.653105 [INF] 127.0.0.6:56387 - lid:403 - Leafnode connection created 
-[1] 2026/10/17 04:57:23.654246 [INF] 127.0.0.6:56387 - lid:403 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:24.657920 [INF] 127.0.0.6:34455 - lid:404 - Leafnode connection created 
-[1] 2026/10/17 04:57:24.658512 [INF] 127.0.0.6:34455 - lid:404 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:25.666864 [INF] 127.0.0.6:44341 - lid:405 - Leafnode connection created 
-[1] 2026/10/17 04:57:25.667831 [INF] 127.0.0.6:44341 - lid:405 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:26.670997 [INF] 127.0.0.6:52833 - lid:406 - Leafnode connection created 
-[1] 2026/10/17 04:57:26.672897 [INF] 127.0.0.6:52833 - lid:406 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:27.676663 [INF] 127.0.0.6:38097 - lid:407 - Leafnode connection created 
-[1] 2026/10/17 04:57:27.677899 [INF] 127.0.0.6:38097 - lid:407 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:28.683677 [INF] 127.0.0.6:49839 - lid:408 - Leafnode connection created 
-[1] 2026/10/17 04:57:28.684638 [INF] 127.0.0.6:49839 - lid:408 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:29.689459 [INF] 127.0.0.6:54015 - lid:409 - Leafnode connection created 
-[1] 2026/10/17 04:57:29.690559 [INF] 127.0.0.6:54015 - lid:409 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:30.695297 [INF] 127.0.0.6:55853 - lid:410 - Leafnode connection created 
-[1] 2026/10/17 04:57:30.696229 [INF] 127.0.0.6:55853 - lid:410 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:31.698715 [INF] 127.0.0.6:47315 - lid:411 - Leafnode connection created 
-[1] 2026/10/17 04:57:31.699675 [INF] 127.0.0.6:47315 - lid:411 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:32.705686 [INF] 127.0.0.6:49247 - lid:412 - Leafnode connection created 
-[1] 2026/10/17 04:57:32.707022 [INF] 127.0.0.6:49247 - lid:412 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:33.712612 [INF] 127.0.0.6:49647 - lid:413 - Leafnode connection created 
-[1] 2026/10/17 04:57:33.715295 [INF] 127.0.0.6:49647 - lid:413 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:34.718571 [INF] 127.0.0.6:39529 - lid:414 - Leafnode connection created 
-[1] 2026/10/17 04:57:34.719337 [INF] 127.0.0.6:39529 - lid:414 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:35.722333 [INF] 127.0.0.6:55679 - lid:415 - Leafnode connection created 
-[1] 2026/10/17 04:57:35.723071 [INF] 127.0.0.6:55679 - lid:415 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:36.728490 [INF] 127.0.0.6:60507 - lid:416 - Leafnode connection created 
-[1] 2026/10/17 04:57:36.729862 [INF] 127.0.0.6:60507 - lid:416 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:37.734706 [INF] 127.0.0.6:34361 - lid:417 - Leafnode connection created 
-[1] 2026/10/17 04:57:37.736558 [INF] 127.0.0.6:34361 - lid:417 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:38.741026 [INF] 127.0.0.6:41451 - lid:418 - Leafnode connection created 
-[1] 2026/10/17 04:57:38.742475 [INF] 127.0.0.6:41451 - lid:418 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:39.744946 [INF] 127.0.0.6:41011 - lid:419 - Leafnode connection created 
-[1] 2026/10/17 04:57:39.745872 [INF] 127.0.0.6:41011 - lid:419 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:40.754357 [INF] 127.0.0.6:44551 - lid:420 - Leafnode connection created 
-[1] 2026/10/17 04:57:40.755321 [INF] 127.0.0.6:44551 - lid:420 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:41.762071 [INF] 127.0.0.6:48447 - lid:421 - Leafnode connection created 
-[1] 2026/10/17 04:57:41.763222 [INF] 127.0.0.6:48447 - lid:421 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:42.767172 [INF] 127.0.0.6:40121 - lid:422 - Leafnode connection created 
-[1] 2026/10/17 04:57:42.768328 [INF] 127.0.0.6:40121 - lid:422 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:43.774911 [INF] 127.0.0.6:58067 - lid:423 - Leafnode connection created 
-[1] 2026/10/17 04:57:43.776204 [INF] 127.0.0.6:58067 - lid:423 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:44.783489 [INF] 127.0.0.6:52577 - lid:424 - Leafnode connection created 
-[1] 2026/10/17 04:57:44.784631 [INF] 127.0.0.6:52577 - lid:424 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:45.789096 [INF] 127.0.0.6:45631 - lid:425 - Leafnode connection created 
-[1] 2026/10/17 04:57:45.790254 [INF] 127.0.0.6:45631 - lid:425 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:46.795101 [INF] 127.0.0.6:39239 - lid:426 - Leafnode connection created 
-[1] 2026/10/17 04:57:46.796629 [INF] 127.0.0.6:39239 - lid:426 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:47.802091 [INF] 127.0.0.6:58629 - lid:427 - Leafnode connection created 
-[1] 2026/10/17 04:57:47.804119 [INF] 127.0.0.6:58629 - lid:427 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:48.807642 [INF] 127.0.0.6:42301 - lid:428 - Leafnode connection created 
-[1] 2026/10/17 04:57:48.809261 [INF] 127.0.0.6:42301 - lid:428 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:49.814090 [INF] 127.0.0.6:51387 - lid:429 - Leafnode connection created 
-[1] 2026/10/17 04:57:49.814775 [INF] 127.0.0.6:51387 - lid:429 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:50.819830 [INF] 127.0.0.6:37365 - lid:430 - Leafnode connection created 
-[1] 2026/10/17 04:57:50.820635 [INF] 127.0.0.6:37365 - lid:430 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:51.825671 [INF] 127.0.0.6:46069 - lid:431 - Leafnode connection created 
-[1] 2026/10/17 04:57:51.827247 [INF] 127.0.0.6:46069 - lid:431 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:52.832157 [INF] 127.0.0.6:46389 - lid:432 - Leafnode connection created 
-[1] 2026/10/17 04:57:52.833890 [INF] 127.0.0.6:46389 - lid:432 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:53.840948 [INF] 127.0.0.6:46711 - lid:433 - Leafnode connection created 
-[1] 2026/10/17 04:57:53.842649 [INF] 127.0.0.6:46711 - lid:433 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:54.855463 [INF] 127.0.0.6:60249 - lid:434 - Leafnode connection created 
-[1] 2026/10/17 04:57:54.856899 [INF] 127.0.0.6:60249 - lid:434 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:55.865467 [INF] 127.0.0.6:41473 - lid:435 - Leafnode connection created 
-[1] 2026/10/17 04:57:55.866900 [INF] 127.0.0.6:41473 - lid:435 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:56.872222 [INF] 127.0.0.6:54387 - lid:436 - Leafnode connection created 
-[1] 2026/10/17 04:57:56.873147 [INF] 127.0.0.6:54387 - lid:436 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:57.876329 [INF] 127.0.0.6:56137 - lid:437 - Leafnode connection created 
-[1] 2026/10/17 04:57:57.877745 [INF] 127.0.0.6:56137 - lid:437 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:58.880699 [INF] 127.0.0.6:40417 - lid:438 - Leafnode connection created 
-[1] 2026/10/17 04:57:58.881891 [INF] 127.0.0.6:40417 - lid:438 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:57:59.886423 [INF] 127.0.0.6:42679 - lid:439 - Leafnode connection created 
-[1] 2026/10/17 04:57:59.887619 [INF] 127.0.0.6:42679 - lid:439 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:00.892015 [INF] 127.0.0.6:46515 - lid:440 - Leafnode connection created 
-[1] 2026/10/17 04:58:00.892774 [INF] 127.0.0.6:46515 - lid:440 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:01.897919 [INF] 127.0.0.6:60429 - lid:441 - Leafnode connection created 
-[1] 2026/10/17 04:58:01.898914 [INF] 127.0.0.6:60429 - lid:441 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:02.904664 [INF] 127.0.0.6:46593 - lid:442 - Leafnode connection created 
-[1] 2026/10/17 04:58:02.905568 [INF] 127.0.0.6:46593 - lid:442 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:03.911262 [INF] 127.0.0.6:57193 - lid:443 - Leafnode connection created 
-[1] 2026/10/17 04:58:03.912278 [INF] 127.0.0.6:57193 - lid:443 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:04.917328 [INF] 127.0.0.6:45895 - lid:444 - Leafnode connection created 
-[1] 2026/10/17 04:58:04.918279 [INF] 127.0.0.6:45895 - lid:444 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:05.922205 [INF] 127.0.0.6:59067 - lid:445 - Leafnode connection created 
-[1] 2026/10/17 04:58:05.922832 [INF] 127.0.0.6:59067 - lid:445 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:06.926592 [INF] 127.0.0.6:54095 - lid:446 - Leafnode connection created 
-[1] 2026/10/17 04:58:06.927633 [INF] 127.0.0.6:54095 - lid:446 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:07.930486 [INF] 127.0.0.6:44559 - lid:447 - Leafnode connection created 
-[1] 2026/10/17 04:58:07.931991 [INF] 127.0.0.6:44559 - lid:447 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:08.938254 [INF] 127.0.0.6:48569 - lid:448 - Leafnode connection created 
-[1] 2026/10/17 04:58:08.939232 [INF] 127.0.0.6:48569 - lid:448 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:09.942545 [INF] 127.0.0.6:59797 - lid:449 - Leafnode connection created 
-[1] 2026/10/17 04:58:09.943413 [INF] 127.0.0.6:59797 - lid:449 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:10.947482 [INF] 127.0.0.6:44545 - lid:450 - Leafnode connection created 
-[1] 2026/10/17 04:58:10.948403 [INF] 127.0.0.6:44545 - lid:450 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:11.952961 [INF] 127.0.0.6:39013 - lid:451 - Leafnode connection created 
-[1] 2026/10/17 04:58:11.954239 [INF] 127.0.0.6:39013 - lid:451 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:12.960962 [INF] 127.0.0.6:36735 - lid:452 - Leafnode connection created 
-[1] 2026/10/17 04:58:12.962135 [INF] 127.0.0.6:36735 - lid:452 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:13.969632 [INF] 127.0.0.6:40293 - lid:453 - Leafnode connection created 
-[1] 2026/10/17 04:58:13.971860 [INF] 127.0.0.6:40293 - lid:453 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:14.978367 [INF] 127.0.0.6:52209 - lid:454 - Leafnode connection created 
-[1] 2026/10/17 04:58:14.979554 [INF] 127.0.0.6:52209 - lid:454 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:15.982962 [INF] 127.0.0.6:44355 - lid:455 - Leafnode connection created 
-[1] 2026/10/17 04:58:15.983711 [INF] 127.0.0.6:44355 - lid:455 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:16.990816 [INF] 127.0.0.6:56915 - lid:456 - Leafnode connection created 
-[1] 2026/10/17 04:58:16.992335 [INF] 127.0.0.6:56915 - lid:456 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:17.998507 [INF] 127.0.0.6:44381 - lid:457 - Leafnode connection created 
-[1] 2026/10/17 04:58:17.999668 [INF] 127.0.0.6:44381 - lid:457 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:19.003383 [INF] 127.0.0.6:40967 - lid:458 - Leafnode connection created 
-[1] 2026/10/17 04:58:19.003982 [INF] 127.0.0.6:40967 - lid:458 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:20.007102 [INF] 127.0.0.6:46591 - lid:459 - Leafnode connection created 
-[1] 2026/10/17 04:58:20.008022 [INF] 127.0.0.6:46591 - lid:459 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:21.011424 [INF] 127.0.0.6:38999 - lid:460 - Leafnode connection created 
-[1] 2026/10/17 04:58:21.012424 [INF] 127.0.0.6:38999 - lid:460 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:22.016785 [INF] 127.0.0.6:35193 - lid:461 - Leafnode connection created 
-[1] 2026/10/17 04:58:22.018903 [INF] 127.0.0.6:35193 - lid:461 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:23.022771 [INF] 127.0.0.6:54583 - lid:462 - Leafnode connection created 
-[1] 2026/10/17 04:58:23.023422 [INF] 127.0.0.6:54583 - lid:462 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:24.030154 [INF] 127.0.0.6:39877 - lid:463 - Leafnode connection created 
-[1] 2026/10/17 04:58:24.031126 [INF] 127.0.0.6:39877 - lid:463 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:25.036762 [INF] 127.0.0.6:40837 - lid:464 - Leafnode connection created 
-[1] 2026/10/17 04:58:25.037969 [INF] 127.0.0.6:40837 - lid:464 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:26.042620 [INF] 127.0.0.6:54423 - lid:465 - Leafnode connection created 
-[1] 2026/10/17 04:58:26.044233 [INF] 127.0.0.6:54423 - lid:465 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:27.049704 [INF] 127.0.0.6:50013 - lid:466 - Leafnode connection created 
-[1] 2026/10/17 04:58:27.051763 [INF] 127.0.0.6:50013 - lid:466 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:28.057180 [INF] 127.0.0.6:44661 - lid:467 - Leafnode connection created 
-[1] 2026/10/17 04:58:28.057924 [INF] 127.0.0.6:44661 - lid:467 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:29.065418 [INF] 127.0.0.6:57889 - lid:468 - Leafnode connection created 
-[1] 2026/10/17 04:58:29.067049 [INF] 127.0.0.6:57889 - lid:468 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:30.070476 [INF] 127.0.0.6:42495 - lid:469 - Leafnode connection created 
-[1] 2026/10/17 04:58:30.071402 [INF] 127.0.0.6:42495 - lid:469 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:31.076085 [INF] 127.0.0.6:49039 - lid:470 - Leafnode connection created 
-[1] 2026/10/17 04:58:31.077103 [INF] 127.0.0.6:49039 - lid:470 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:32.084587 [INF] 127.0.0.6:49775 - lid:471 - Leafnode connection created 
-[1] 2026/10/17 04:58:32.085593 [INF] 127.0.0.6:49775 - lid:471 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:33.090032 [INF] 127.0.0.6:32893 - lid:472 - Leafnode connection created 
-[1] 2026/10/17 04:58:33.090769 [INF] 127.0.0.6:32893 - lid:472 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:34.095252 [INF] 127.0.0.6:59535 - lid:473 - Leafnode connection created 
-[1] 2026/10/17 04:58:34.096451 [INF] 127.0.0.6:59535 - lid:473 - Leafnode connection closed: Client Closed
-[1] 2026/10/17 04:58:35.101924 [INF] 127.0.0.6:53483 - lid:474 - Leafnode connection created 
-[1] 2026/10/17 04:59:19.092195 [INF] 127.0.0.6:44139 - lid:385 - Leafnode connection closed: Client Closed - Remote: nats-r1
-[1] 2026/10/17 04:59:22.099515 [INF] 127.0.0.6:43831 - lid:476 - Leafnode connection created 
-[1] 2026/10/17 05:54:41.735025 [ERR] 127.0.0.6:47483 - cid:480 - "v1.54.0:go:zt-probe-billing-sim.nats.energy.matched.r1.>.publish" - "MESH/user:billing" - Publish Violation - Subject "energy.matched.r1.zt-probe"
-[1] 2026/10/17 05:54:41.735322 [ERR] 127.0.0.6:39091 - cid:479 - "v1.54.0:go:zt-probe-billing-sim.nats.energy.matched.r2.>.publish" - "MESH/user:billing" - Publish Violation - Subject "energy.matched.r2.zt-probe"
-[1] 2026/10/17 05:55:01.342633 [INF] 127.0.0.6:43831 - lid:476 - Leafnode connection closed: Client Closed - Remote: nats-r1
-[1] 2026/10/17 05:55:01.343101 [INF] 127.0.0.6:53483 - lid:474 - Leafnode connection closed: Client Closed - Remote: nats-r2
-[1] 2026/10/17 05:55:04.359211 [INF] 127.0.0.6:47997 - lid:485 - Leafnode connection created 
-[1] 2026/10/17 05:55:04.359284 [INF] 127.0.0.6:40185 - lid:486 - Leafnode connection created 
+[1] 2026/10/17 07:41:07.274588 [INF] 127.0.0.6:46251 - lid:533 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:08.276773 [INF] 127.0.0.6:33983 - lid:534 - Leafnode connection created 
+[1] 2026/10/17 07:41:08.277871 [INF] 127.0.0.6:33983 - lid:534 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:09.282051 [INF] 127.0.0.6:54829 - lid:535 - Leafnode connection created 
+[1] 2026/10/17 07:41:09.282635 [INF] 127.0.0.6:54829 - lid:535 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:10.286338 [INF] 127.0.0.6:56769 - lid:536 - Leafnode connection created 
+[1] 2026/10/17 07:41:10.286803 [INF] 127.0.0.6:56769 - lid:536 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:11.291337 [INF] 127.0.0.6:51069 - lid:537 - Leafnode connection created 
+[1] 2026/10/17 07:41:11.291989 [INF] 127.0.0.6:51069 - lid:537 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:11.549154 [INF] 127.0.0.6:49877 - lid:489 - Leafnode connection closed: Client Closed - Remote: nats-r1
+[1] 2026/10/17 07:41:12.296334 [INF] 127.0.0.6:36945 - lid:538 - Leafnode connection created 
+[1] 2026/10/17 07:41:12.297119 [INF] 127.0.0.6:36945 - lid:538 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:13.300667 [INF] 127.0.0.6:55571 - lid:540 - Leafnode connection created 
+[1] 2026/10/17 07:41:13.301325 [INF] 127.0.0.6:55571 - lid:540 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:14.307283 [INF] 127.0.0.6:33609 - lid:541 - Leafnode connection created 
+[1] 2026/10/17 07:41:14.307739 [INF] 127.0.0.6:33609 - lid:541 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:14.553839 [INF] 127.0.0.6:44715 - lid:542 - Leafnode connection created 
+[1] 2026/10/17 07:41:15.309971 [INF] 127.0.0.6:46025 - lid:543 - Leafnode connection created 
+[1] 2026/10/17 07:41:15.310491 [INF] 127.0.0.6:46025 - lid:543 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:16.317783 [INF] 127.0.0.6:42881 - lid:544 - Leafnode connection created 
+[1] 2026/10/17 07:41:16.318157 [INF] 127.0.0.6:42881 - lid:544 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:17.323720 [INF] 127.0.0.6:57895 - lid:545 - Leafnode connection created 
+[1] 2026/10/17 07:41:17.324233 [INF] 127.0.0.6:57895 - lid:545 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:18.328544 [INF] 127.0.0.6:38605 - lid:546 - Leafnode connection created 
+[1] 2026/10/17 07:41:18.329216 [INF] 127.0.0.6:38605 - lid:546 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:19.332601 [INF] 127.0.0.6:51351 - lid:547 - Leafnode connection created 
+[1] 2026/10/17 07:41:19.333655 [INF] 127.0.0.6:51351 - lid:547 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:20.338016 [INF] 127.0.0.6:55775 - lid:548 - Leafnode connection created 
+[1] 2026/10/17 07:41:20.338958 [INF] 127.0.0.6:55775 - lid:548 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:21.342379 [INF] 127.0.0.6:50257 - lid:549 - Leafnode connection created 
+[1] 2026/10/17 07:41:21.342743 [INF] 127.0.0.6:50257 - lid:549 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:22.345570 [INF] 127.0.0.6:51955 - lid:550 - Leafnode connection created 
+[1] 2026/10/17 07:41:22.346074 [INF] 127.0.0.6:51955 - lid:550 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:23.349365 [INF] 127.0.0.6:60743 - lid:551 - Leafnode connection created 
+[1] 2026/10/17 07:41:23.349934 [INF] 127.0.0.6:60743 - lid:551 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:24.353329 [INF] 127.0.0.6:37129 - lid:552 - Leafnode connection created 
+[1] 2026/10/17 07:41:24.353870 [INF] 127.0.0.6:37129 - lid:552 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:25.356148 [INF] 127.0.0.6:54391 - lid:553 - Leafnode connection created 
+[1] 2026/10/17 07:41:25.356767 [INF] 127.0.0.6:54391 - lid:553 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:26.361723 [INF] 127.0.0.6:50771 - lid:554 - Leafnode connection created 
+[1] 2026/10/17 07:41:26.362413 [INF] 127.0.0.6:50771 - lid:554 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:27.367842 [INF] 127.0.0.6:58887 - lid:555 - Leafnode connection created 
+[1] 2026/10/17 07:41:27.368235 [INF] 127.0.0.6:58887 - lid:555 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:28.373035 [INF] 127.0.0.6:38503 - lid:556 - Leafnode connection created 
+[1] 2026/10/17 07:41:28.374193 [INF] 127.0.0.6:38503 - lid:556 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:29.376889 [INF] 127.0.0.6:46375 - lid:557 - Leafnode connection created 
+[1] 2026/10/17 07:41:29.377288 [INF] 127.0.0.6:46375 - lid:557 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:30.379625 [INF] 127.0.0.6:33241 - lid:558 - Leafnode connection created 
+[1] 2026/10/17 07:41:30.380143 [INF] 127.0.0.6:33241 - lid:558 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:31.383473 [INF] 127.0.0.6:60447 - lid:559 - Leafnode connection created 
+[1] 2026/10/17 07:41:31.383941 [INF] 127.0.0.6:60447 - lid:559 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:32.388189 [INF] 127.0.0.6:45921 - lid:560 - Leafnode connection created 
+[1] 2026/10/17 07:41:32.389105 [INF] 127.0.0.6:45921 - lid:560 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:33.391533 [INF] 127.0.0.6:56889 - lid:561 - Leafnode connection created 
+[1] 2026/10/17 07:41:33.392337 [INF] 127.0.0.6:56889 - lid:561 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:34.395663 [INF] 127.0.0.6:53945 - lid:562 - Leafnode connection created 
+[1] 2026/10/17 07:41:34.396408 [INF] 127.0.0.6:53945 - lid:562 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:35.401213 [INF] 127.0.0.6:47393 - lid:563 - Leafnode connection created 
+[1] 2026/10/17 07:41:35.402056 [INF] 127.0.0.6:47393 - lid:563 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:36.406041 [INF] 127.0.0.6:54121 - lid:564 - Leafnode connection created 
+[1] 2026/10/17 07:41:36.406649 [INF] 127.0.0.6:54121 - lid:564 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:37.410055 [INF] 127.0.0.6:58783 - lid:565 - Leafnode connection created 
+[1] 2026/10/17 07:41:37.411053 [INF] 127.0.0.6:58783 - lid:565 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:38.416658 [INF] 127.0.0.6:33809 - lid:566 - Leafnode connection created 
+[1] 2026/10/17 07:41:38.417975 [INF] 127.0.0.6:33809 - lid:566 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:39.421296 [INF] 127.0.0.6:50881 - lid:567 - Leafnode connection created 
+[1] 2026/10/17 07:41:39.422470 [INF] 127.0.0.6:50881 - lid:567 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:40.426885 [INF] 127.0.0.6:40657 - lid:568 - Leafnode connection created 
+[1] 2026/10/17 07:41:40.427739 [INF] 127.0.0.6:40657 - lid:568 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:41.437008 [INF] 127.0.0.6:34437 - lid:569 - Leafnode connection created 
+[1] 2026/10/17 07:41:41.438948 [INF] 127.0.0.6:34437 - lid:569 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:42.441654 [INF] 127.0.0.6:41061 - lid:570 - Leafnode connection created 
+[1] 2026/10/17 07:41:42.442576 [INF] 127.0.0.6:41061 - lid:570 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:43.446106 [INF] 127.0.0.6:59233 - lid:571 - Leafnode connection created 
+[1] 2026/10/17 07:41:43.446754 [INF] 127.0.0.6:59233 - lid:571 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:44.452379 [INF] 127.0.0.6:50675 - lid:572 - Leafnode connection created 
+[1] 2026/10/17 07:41:44.453657 [INF] 127.0.0.6:50675 - lid:572 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:45.463586 [INF] 127.0.0.6:50113 - lid:573 - Leafnode connection created 
+[1] 2026/10/17 07:41:45.464564 [INF] 127.0.0.6:50113 - lid:573 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:46.469723 [INF] 127.0.0.6:46337 - lid:574 - Leafnode connection created 
+[1] 2026/10/17 07:41:46.470254 [INF] 127.0.0.6:46337 - lid:574 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:47.476025 [INF] 127.0.0.6:59929 - lid:575 - Leafnode connection created 
+[1] 2026/10/17 07:41:47.477157 [INF] 127.0.0.6:59929 - lid:575 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:48.479729 [INF] 127.0.0.6:58989 - lid:576 - Leafnode connection created 
+[1] 2026/10/17 07:41:48.480375 [INF] 127.0.0.6:58989 - lid:576 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:49.483673 [INF] 127.0.0.6:44345 - lid:577 - Leafnode connection created 
+[1] 2026/10/17 07:41:49.484083 [INF] 127.0.0.6:44345 - lid:577 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:50.487139 [INF] 127.0.0.6:45581 - lid:578 - Leafnode connection created 
+[1] 2026/10/17 07:41:50.488107 [INF] 127.0.0.6:45581 - lid:578 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:51.489625 [INF] 127.0.0.6:41855 - lid:579 - Leafnode connection created 
+[1] 2026/10/17 07:41:51.490077 [INF] 127.0.0.6:41855 - lid:579 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:52.492176 [INF] 127.0.0.6:52145 - lid:580 - Leafnode connection created 
+[1] 2026/10/17 07:41:52.492790 [INF] 127.0.0.6:52145 - lid:580 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:53.495610 [INF] 127.0.0.6:55603 - lid:581 - Leafnode connection created 
+[1] 2026/10/17 07:41:53.496213 [INF] 127.0.0.6:55603 - lid:581 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:54.497871 [INF] 127.0.0.6:51321 - lid:582 - Leafnode connection created 
+[1] 2026/10/17 07:41:54.498517 [INF] 127.0.0.6:51321 - lid:582 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:55.502418 [INF] 127.0.0.6:48909 - lid:583 - Leafnode connection created 
+[1] 2026/10/17 07:41:55.503284 [INF] 127.0.0.6:48909 - lid:583 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:56.505674 [INF] 127.0.0.6:36431 - lid:584 - Leafnode connection created 
+[1] 2026/10/17 07:41:56.506209 [INF] 127.0.0.6:36431 - lid:584 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:57.510069 [INF] 127.0.0.6:58919 - lid:585 - Leafnode connection created 
+[1] 2026/10/17 07:41:57.510830 [INF] 127.0.0.6:58919 - lid:585 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:58.517311 [INF] 127.0.0.6:57045 - lid:586 - Leafnode connection created 
+[1] 2026/10/17 07:41:58.518158 [INF] 127.0.0.6:57045 - lid:586 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:41:59.520285 [INF] 127.0.0.6:52657 - lid:587 - Leafnode connection created 
+[1] 2026/10/17 07:41:59.520780 [INF] 127.0.0.6:52657 - lid:587 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:00.526316 [INF] 127.0.0.6:45207 - lid:588 - Leafnode connection created 
+[1] 2026/10/17 07:42:00.527012 [INF] 127.0.0.6:45207 - lid:588 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:01.533134 [INF] 127.0.0.6:41423 - lid:589 - Leafnode connection created 
+[1] 2026/10/17 07:42:01.533861 [INF] 127.0.0.6:41423 - lid:589 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:02.538121 [INF] 127.0.0.6:38171 - lid:590 - Leafnode connection created 
+[1] 2026/10/17 07:42:02.538718 [INF] 127.0.0.6:38171 - lid:590 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:03.541443 [INF] 127.0.0.6:33341 - lid:591 - Leafnode connection created 
+[1] 2026/10/17 07:42:03.542168 [INF] 127.0.0.6:33341 - lid:591 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:04.546035 [INF] 127.0.0.6:57961 - lid:592 - Leafnode connection created 
+[1] 2026/10/17 07:42:04.546614 [INF] 127.0.0.6:57961 - lid:592 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:05.548910 [INF] 127.0.0.6:49737 - lid:593 - Leafnode connection created 
+[1] 2026/10/17 07:42:05.550572 [INF] 127.0.0.6:49737 - lid:593 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:06.553402 [INF] 127.0.0.6:57273 - lid:594 - Leafnode connection created 
+[1] 2026/10/17 07:42:06.553892 [INF] 127.0.0.6:57273 - lid:594 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:07.559033 [INF] 127.0.0.6:41693 - lid:595 - Leafnode connection created 
+[1] 2026/10/17 07:42:07.560276 [INF] 127.0.0.6:41693 - lid:595 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:08.564084 [INF] 127.0.0.6:46217 - lid:596 - Leafnode connection created 
+[1] 2026/10/17 07:42:08.564924 [INF] 127.0.0.6:46217 - lid:596 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:09.570874 [INF] 127.0.0.6:37739 - lid:597 - Leafnode connection created 
+[1] 2026/10/17 07:42:09.571402 [INF] 127.0.0.6:37739 - lid:597 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:10.574012 [INF] 127.0.0.6:60511 - lid:598 - Leafnode connection created 
+[1] 2026/10/17 07:42:10.574983 [INF] 127.0.0.6:60511 - lid:598 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:11.579998 [INF] 127.0.0.6:46465 - lid:599 - Leafnode connection created 
+[1] 2026/10/17 07:42:11.580743 [INF] 127.0.0.6:46465 - lid:599 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:12.584465 [INF] 127.0.0.6:57605 - lid:600 - Leafnode connection created 
+[1] 2026/10/17 07:42:12.585013 [INF] 127.0.0.6:57605 - lid:600 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:13.592978 [INF] 127.0.0.6:33065 - lid:601 - Leafnode connection created 
+[1] 2026/10/17 07:42:13.593383 [INF] 127.0.0.6:33065 - lid:601 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:14.596357 [INF] 127.0.0.6:55501 - lid:602 - Leafnode connection created 
+[1] 2026/10/17 07:42:14.596992 [INF] 127.0.0.6:55501 - lid:602 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:15.599825 [INF] 127.0.0.6:40817 - lid:603 - Leafnode connection created 
+[1] 2026/10/17 07:42:15.600839 [INF] 127.0.0.6:40817 - lid:603 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:16.604692 [INF] 127.0.0.6:56667 - lid:604 - Leafnode connection created 
+[1] 2026/10/17 07:42:16.605597 [INF] 127.0.0.6:56667 - lid:604 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:17.611853 [INF] 127.0.0.6:51785 - lid:605 - Leafnode connection created 
+[1] 2026/10/17 07:42:17.612623 [INF] 127.0.0.6:51785 - lid:605 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:18.621119 [INF] 127.0.0.6:44549 - lid:606 - Leafnode connection created 
+[1] 2026/10/17 07:42:18.622367 [INF] 127.0.0.6:44549 - lid:606 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:19.627386 [INF] 127.0.0.6:33387 - lid:607 - Leafnode connection created 
+[1] 2026/10/17 07:42:19.627801 [INF] 127.0.0.6:33387 - lid:607 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:20.635821 [INF] 127.0.0.6:52307 - lid:608 - Leafnode connection created 
+[1] 2026/10/17 07:42:20.636147 [INF] 127.0.0.6:52307 - lid:608 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:21.642861 [INF] 127.0.0.6:38085 - lid:609 - Leafnode connection created 
+[1] 2026/10/17 07:42:21.643871 [INF] 127.0.0.6:38085 - lid:609 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:22.652573 [INF] 127.0.0.6:51297 - lid:610 - Leafnode connection created 
+[1] 2026/10/17 07:42:22.654305 [INF] 127.0.0.6:51297 - lid:610 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:23.660955 [INF] 127.0.0.6:43053 - lid:611 - Leafnode connection created 
+[1] 2026/10/17 07:42:23.662491 [INF] 127.0.0.6:43053 - lid:611 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:24.666916 [INF] 127.0.0.6:35299 - lid:612 - Leafnode connection created 
+[1] 2026/10/17 07:42:24.667635 [INF] 127.0.0.6:35299 - lid:612 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:25.670728 [INF] 127.0.0.6:49175 - lid:613 - Leafnode connection created 
+[1] 2026/10/17 07:42:25.671492 [INF] 127.0.0.6:49175 - lid:613 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:26.677253 [INF] 127.0.0.6:44561 - lid:614 - Leafnode connection created 
+[1] 2026/10/17 07:42:26.678216 [INF] 127.0.0.6:44561 - lid:614 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:27.685663 [INF] 127.0.0.6:36517 - lid:615 - Leafnode connection created 
+[1] 2026/10/17 07:42:27.686319 [INF] 127.0.0.6:36517 - lid:615 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:28.692730 [INF] 127.0.0.6:41615 - lid:616 - Leafnode connection created 
+[1] 2026/10/17 07:42:28.694303 [INF] 127.0.0.6:41615 - lid:616 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:29.697921 [INF] 127.0.0.6:52335 - lid:617 - Leafnode connection created 
+[1] 2026/10/17 07:42:29.698396 [INF] 127.0.0.6:52335 - lid:617 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:30.704034 [INF] 127.0.0.6:54287 - lid:618 - Leafnode connection created 
+[1] 2026/10/17 07:42:30.704650 [INF] 127.0.0.6:54287 - lid:618 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:31.709601 [INF] 127.0.0.6:38947 - lid:619 - Leafnode connection created 
+[1] 2026/10/17 07:42:31.710804 [INF] 127.0.0.6:38947 - lid:619 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:32.713968 [INF] 127.0.0.6:59963 - lid:620 - Leafnode connection created 
+[1] 2026/10/17 07:42:32.715053 [INF] 127.0.0.6:59963 - lid:620 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:33.722914 [INF] 127.0.0.6:42867 - lid:621 - Leafnode connection created 
+[1] 2026/10/17 07:42:33.724791 [INF] 127.0.0.6:42867 - lid:621 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:34.727802 [INF] 127.0.0.6:44399 - lid:622 - Leafnode connection created 
+[1] 2026/10/17 07:42:34.728461 [INF] 127.0.0.6:44399 - lid:622 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:35.732289 [INF] 127.0.0.6:49555 - lid:623 - Leafnode connection created 
+[1] 2026/10/17 07:42:35.732840 [INF] 127.0.0.6:49555 - lid:623 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:36.736373 [INF] 127.0.0.6:43387 - lid:624 - Leafnode connection created 
+[1] 2026/10/17 07:42:36.737260 [INF] 127.0.0.6:43387 - lid:624 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:37.739247 [INF] 127.0.0.6:34419 - lid:625 - Leafnode connection created 
+[1] 2026/10/17 07:42:37.739955 [INF] 127.0.0.6:34419 - lid:625 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:38.746053 [INF] 127.0.0.6:45675 - lid:626 - Leafnode connection created 
+[1] 2026/10/17 07:42:38.747060 [INF] 127.0.0.6:45675 - lid:626 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:39.751579 [INF] 127.0.0.6:51083 - lid:627 - Leafnode connection created 
+[1] 2026/10/17 07:42:39.752029 [INF] 127.0.0.6:51083 - lid:627 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:40.755900 [INF] 127.0.0.6:47803 - lid:628 - Leafnode connection created 
+[1] 2026/10/17 07:42:40.756429 [INF] 127.0.0.6:47803 - lid:628 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:41.761601 [INF] 127.0.0.6:57567 - lid:629 - Leafnode connection created 
+[1] 2026/10/17 07:42:41.762533 [INF] 127.0.0.6:57567 - lid:629 - Leafnode connection closed: Client Closed
+[1] 2026/10/17 07:42:42.768386 [INF] 127.0.0.6:48945 - lid:630 - Leafnode connection created 
+[1] 2026/10/17 07:43:27.130127 [INF] 127.0.0.6:44715 - lid:542 - Leafnode connection closed: Client Closed - Remote: nats-r1
+[1] 2026/10/17 07:43:30.136605 [INF] 127.0.0.6:54383 - lid:632 - Leafnode connection created 
+[1] 2026/10/17 07:44:39.842304 [ERR] 127.0.0.6:36973 - cid:634 - "v1.54.0:go:zt-probe-billing-sim.nats.energy.matched.r1.>.publish" - "MESH/user:billing" - Publish Violation - Subject "energy.matched.r1.zt-probe"
+[1] 2026/10/17 07:44:39.845775 [ERR] 127.0.0.6:39945 - cid:635 - "v1.54.0:go:zt-probe-billing-sim.nats.energy.matched.r2.>.publish" - "MESH/user:billing" - Publish Violation - Subject "energy.matched.r2.zt-probe"
+[1] 2026/10/17 07:45:01.874665 [INF] 127.0.0.6:54383 - lid:632 - Leafnode connection closed: Client Closed - Remote: nats-r1
+[1] 2026/10/17 07:45:01.875143 [INF] 127.0.0.6:48945 - lid:630 - Leafnode connection closed: Read Error - Remote: nats-r2
+[1] 2026/10/17 07:45:04.881756 [INF] 127.0.0.6:45375 - lid:639 - Leafnode connection created 
+[1] 2026/10/17 07:45:04.883431 [INF] 127.0.0.6:58461 - lid:640 - Leafnode connection created 

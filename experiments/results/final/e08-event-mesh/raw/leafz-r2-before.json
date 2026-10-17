@@ -1,20 +1,20 @@
 {
-  "server_id": "NA5VKC22XT6HYNJIZTSASX4GXCSNBODXGD5H7JVS4R7FALMNJ55SRTLZ",
-  "now": "2026-10-17T04:56:17.952014879Z",
+  "server_id": "NCCVB6PF6Z2DUWMXIK266MWPW32XQVGHDFLOO2UPJIWEUNAIJ5TG3RKX",
+  "now": "2026-10-17T07:40:26.260567154Z",
   "leafnodes": 1,
   "leafs": [
     {
-      "id": 152,
+      "id": 147,
       "name": "nats-global",
       "is_spoke": true,
       "account": "MESH",
       "ip": "10.96.107.71",
       "port": 7422,
-      "rtt": "595µs",
+      "rtt": "627µs",
       "in_msgs": 400,
       "out_msgs": 400,
-      "in_bytes": 16000,
-      "out_bytes": 293001,
+      "in_bytes": 16400,
+      "out_bytes": 293029,
       "subscriptions": 4,
       "compression": "s2_uncompressed"
     }

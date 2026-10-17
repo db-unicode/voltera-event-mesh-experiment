@@ -1,3 +1,3 @@
-06:26:46 build voltera/meter-sim:dev
-Image: "voltera/meter-sim:dev" with ID "sha256:4bfe2a2718a8ada8345635d93f00be58c886ae04226bd81922600180123ac5dd" not yet present on node "voltera-control-plane", loading...
-06:26:53 imágenes cargadas: meter-sim
+07:45:34 build voltera/meter-sim:dev
+Image: "voltera/meter-sim:dev" with ID "sha256:b2e69d8202a01573ab1dfeec2372e3fb65d6420cc68cb68939fca3aa14d74364" not yet present on node "voltera-control-plane", loading...
+07:45:36 imágenes cargadas: meter-sim

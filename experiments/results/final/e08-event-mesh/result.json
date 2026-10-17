@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "data": "/Users/diego/Developer/voltera-wt/exp-e08-e09-e10/experiments/results/e08-event-mesh/20261017T045215Z-58a9758-dirty-r1",
+  "data": "/Users/diego/Developer/voltera-wt/final-run/experiments/results/e08-event-mesh/20261017T073700Z-18789b0-dirty-r1",
   "criteria": [
     {
       "id": "normal-r1-delivered",
@@ -15,7 +15,7 @@
       "id": "normal-r1-matches",
       "description": "r1 normal - la carga produjo matches (ratio matches/pares enviados)",
       "metric": "metrics.json:$.normal.r1.match_ratio",
-      "observed": 1,
+      "observed": 0.9991666666666666,
       "op": "ge",
       "expected": 0.9,
       "verdict": "PASS"
@@ -42,7 +42,7 @@
       "id": "normal-r1-p99",
       "description": "r1 normal - p99 de receivedAt - emittedAt (s)",
       "metric": "metrics.json:$.normal.r1.emit_p99_s",
-      "observed": 0.025468439619999998,
+      "observed": 0.011320147999999997,
       "op": "le",
       "expected": 10,
       "verdict": "PASS"
@@ -51,7 +51,7 @@
       "id": "normal-r2-p99",
       "description": "r2 normal - p99 de receivedAt - emittedAt (s)",
       "metric": "metrics.json:$.normal.r2.emit_p99_s",
-      "observed": 0.008135306390000008,
+      "observed": 0.007176796690000002,
       "op": "le",
       "expected": 10,
       "verdict": "PASS"
@@ -60,7 +60,7 @@
       "id": "normal-r1-e2e-p99",
       "description": "r1 normal - p99 de receivedAt - occurredAt (s)",
       "metric": "metrics.json:$.normal.r1.e2e_p99_s",
-      "observed": 0.05100264094999961,
+      "observed": 0.030373700519999994,
       "op": "le",
       "expected": 10,
       "verdict": "PASS"
@@ -69,7 +69,7 @@
       "id": "normal-r2-e2e-p99",
       "description": "r2 normal - p99 de receivedAt - occurredAt (s)",
       "metric": "metrics.json:$.normal.r2.e2e_p99_s",
-      "observed": 0.02078300800000001,
+      "observed": 0.01711076858000003,
       "op": "le",
       "expected": 10,
       "verdict": "PASS"
@@ -141,7 +141,7 @@
       "id": "part-link-down",
       "description": "El timeline de /leafz muestra el enlace caído (muestras con global=1 y r2=0)",
       "metric": "metrics.json:$.partition.leafz.down_samples",
-      "observed": 114,
+      "observed": 119,
       "op": "ge",
       "expected": 3,
       "verdict": "PASS"
@@ -168,7 +168,7 @@
       "id": "part-device-growth",
       "description": "device-sim r2 crece durante el corte (comandos distintos nuevos)",
       "metric": "metrics.json:$.partition.device_growth_during_cut",
-      "observed": 356,
+      "observed": 360,
       "op": "ge",
       "expected": 50,
       "verdict": "PASS"
@@ -177,7 +177,7 @@
       "id": "part-bridge-retains",
       "description": "El lag del grupo mesh-bridge de r2 crece durante el corte (máximo de mensajes en espera)",
       "metric": "metrics.json:$.partition.lag_r2_max_during_cut",
-      "observed": 353,
+      "observed": 313,
       "op": "ge",
       "expected": 20,
       "verdict": "PASS"
@@ -213,7 +213,7 @@
       "id": "part-drain",
       "description": "Drenado de r2 tras restaurar el enlace (s hasta el último match en billing)",
       "metric": "metrics.json:$.partition.drain_s",
-      "observed": 3.308,
+      "observed": 1.73,
       "op": "le",
       "expected": 60,
       "verdict": "PASS"
@@ -231,7 +231,7 @@
       "id": "part-r1-p99",
       "description": "p99 de r1 durante el corte (s)",
       "metric": "metrics.json:$.partition.r1.emit_p99_s",
-      "observed": 3.43306705548,
+      "observed": 3.43674997992,
       "op": "le",
       "expected": 10,
       "verdict": "PASS"

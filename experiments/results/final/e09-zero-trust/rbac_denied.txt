@@ -6,12 +6,12 @@ voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15672;.rbac.denied: 1
 voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15672;.rbac.istio_dry_run_allow_.shadow_denied: 0
 voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15692;.rbac.denied: 0
 voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15692;.rbac.istio_dry_run_allow_.shadow_denied: 0
-voltera-infra/rabbitmq-0 tcp.rbac.denied: 84
+voltera-infra/rabbitmq-0 tcp.rbac.denied: 126
 voltera-infra/rabbitmq-0 tcp.rbac.istio_dry_run_allow_.shadow_denied: 0
 ## después
 voltera-infra/kafka-0 http.InboundPassthroughCluster;.rbac.denied: 0
 voltera-infra/kafka-0 http.InboundPassthroughCluster;.rbac.istio_dry_run_allow_.shadow_denied: 0
-voltera-infra/kafka-0 tcp.rbac.denied: 42
+voltera-infra/kafka-0 tcp.rbac.denied: 44
 voltera-infra/kafka-0 tcp.rbac.istio_dry_run_allow_.shadow_denied: 0
 voltera-infra/rabbitmq-0 http.InboundPassthroughCluster;.rbac.denied: 0
 voltera-infra/rabbitmq-0 http.InboundPassthroughCluster;.rbac.istio_dry_run_allow_.shadow_denied: 0
@@ -19,7 +19,7 @@ voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15672;.rbac.denied: 1
 voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15672;.rbac.istio_dry_run_allow_.shadow_denied: 0
 voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15692;.rbac.denied: 0
 voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15692;.rbac.istio_dry_run_allow_.shadow_denied: 0
-voltera-infra/rabbitmq-0 tcp.rbac.denied: 126
+voltera-infra/rabbitmq-0 tcp.rbac.denied: 168
 voltera-infra/rabbitmq-0 tcp.rbac.istio_dry_run_allow_.shadow_denied: 0
 voltera-r1/nats http.InboundPassthroughCluster;.rbac.denied: 0
 voltera-r1/nats http.InboundPassthroughCluster;.rbac.istio_dry_run_allow_.shadow_denied: 0

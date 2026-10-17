@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "data": "/Users/diego/Developer/voltera-wt/exp-e03-e04-e07/experiments/results/e07-ttl-loss/20261017T060348Z-1a3b937-dirty-r1",
+  "data": "/Users/diego/Developer/voltera-wt/final-run/experiments/results/e07-ttl-loss/20261017T073406Z-18789b0-dirty-r1",
   "criteria": [
     {
       "id": "ttl-applied",
@@ -15,7 +15,7 @@
       "id": "7a-lost-one-cycle",
       "description": "7a perdió el mensaje de al menos el 90% de los medidores (drop_position durante 9,5 s)",
       "metric": "metrics.json:$.a.dropped_meters",
-      "observed": 193,
+      "observed": 191,
       "op": "ge",
       "expected": 180,
       "verdict": "PASS"
@@ -42,7 +42,7 @@
       "id": "7a-min-ttl",
       "description": "7a TTL mínimo observado (s) \u003e 0",
       "metric": "metrics.json:$.a.min_ttl_s",
-      "observed": 5.008,
+      "observed": 5.01,
       "op": "gt",
       "expected": 0,
       "verdict": "PASS"
@@ -60,7 +60,7 @@
       "id": "7b-expiry-late-max",
       "description": "7b desaparición - (projectedAt + TTL) \u003c= 2 s (s)",
       "metric": "metrics.json:$.b.err_max_s",
-      "observed": 1.006,
+      "observed": 1.003,
       "op": "le",
       "expected": 2,
       "verdict": "PASS"
@@ -69,7 +69,7 @@
       "id": "7b-expiry-early-min",
       "description": "7b ninguna key desaparece antes de TTL - 2 s (s)",
       "metric": "metrics.json:$.b.err_min_s",
-      "observed": 0.004,
+      "observed": 0.002,
       "op": "ge",
       "expected": -2,
       "verdict": "PASS"
@@ -78,7 +78,7 @@
       "id": "7b-reappear",
       "description": "7b las M keys reaparecen en \u003c= P + 5 s tras terminar la pérdida (s)",
       "metric": "metrics.json:$.b.reappear_s",
-      "observed": 10.311,
+      "observed": 10.427,
       "op": "le",
       "expected": 15,
       "verdict": "PASS"
@@ -87,7 +87,7 @@
       "id": "7b-reappear-found",
       "description": "7b las M keys reaparecieron (reappear_s \u003e= 0)",
       "metric": "metrics.json:$.b.reappear_s",
-      "observed": 10.311,
+      "observed": 10.427,
       "op": "ge",
       "expected": 0,
       "verdict": "PASS"
@@ -105,7 +105,7 @@
       "id": "7c-repopulate",
       "description": "7c keys == M de nuevo en \u003c= P + 5 s sin intervención (s)",
       "metric": "metrics.json:$.c.repopulate_s",
-      "observed": 10.049,
+      "observed": 10.22,
       "op": "le",
       "expected": 15,
       "verdict": "PASS"
@@ -114,7 +114,7 @@
       "id": "7c-repopulate-found",
       "description": "7c las M keys reaparecieron (repopulate_s \u003e= 0)",
       "metric": "metrics.json:$.c.repopulate_s",
-      "observed": 10.049,
+      "observed": 10.22,
       "op": "ge",
       "expected": 0,
       "verdict": "PASS"

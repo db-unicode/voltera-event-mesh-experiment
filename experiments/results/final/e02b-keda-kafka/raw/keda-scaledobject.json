@@ -19,7 +19,7 @@
         },
         "name": "energy-transfer",
         "namespace": "voltera-r1",
-        "resourceVersion": "91073",
+        "resourceVersion": "105874",
         "uid": "5557b0fe-70cd-4e81-af2e-1b993a2fa6b6"
     },
     "spec": {
@@ -92,7 +92,7 @@
             "s0-kafka-r1-energy-matched"
         ],
         "hpaName": "keda-hpa-energy-transfer",
-        "lastActiveTime": "2026-10-17T06:07:40Z",
+        "lastActiveTime": "2026-10-17T07:06:56Z",
         "originalReplicaCount": 0,
         "scaleTargetGVKR": {
             "group": "apps",

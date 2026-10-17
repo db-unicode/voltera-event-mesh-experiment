@@ -7,7 +7,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: Exception (403) Reason: \"username or password not allowed\"",
-    "ms": 3025
+    "ms": 3018
   },
   {
     "id": "badpass-rabbit.rabbitmq.energy-positions.publish",
@@ -17,7 +17,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: Exception (403) Reason: \"username or password not allowed\"",
-    "ms": 3029
+    "ms": 3018
   },
   {
     "id": "badpass-rabbit.rabbitmq.kwh-prices.consume",
@@ -27,7 +27,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: Exception (403) Reason: \"username or password not allowed\"",
-    "ms": 3026
+    "ms": 3025
   },
   {
     "id": "badpass-rabbit.rabbitmq.kwh-prices.publish",
@@ -37,7 +37,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: Exception (403) Reason: \"username or password not allowed\"",
-    "ms": 3026
+    "ms": 3024
   },
   {
     "id": "badpass-rabbit.rabbitmq.meter-declarations.consume",
@@ -47,7 +47,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: Exception (403) Reason: \"username or password not allowed\"",
-    "ms": 3028
+    "ms": 3024
   },
   {
     "id": "badpass-rabbit.rabbitmq.meter-declarations.publish",
@@ -57,7 +57,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: Exception (403) Reason: \"username or password not allowed\"",
-    "ms": 3031
+    "ms": 3024
   },
   {
     "id": "billing-sim.kafka.r1.energy-matched.consume",
@@ -87,7 +87,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 15
+    "ms": 10
   },
   {
     "id": "billing-sim.kafka.r2.energy-matched.publish",
@@ -105,7 +105,7 @@
     "op": "consumer-info",
     "target": "BILLING_MATCHED/billing",
     "outcome": "allowed",
-    "ms": 5
+    "ms": 3
   },
   {
     "id": "billing-sim.nats.connect.connect",
@@ -113,7 +113,7 @@
     "op": "connect",
     "target": "",
     "outcome": "allowed",
-    "ms": 22
+    "ms": 10
   },
   {
     "id": "billing-sim.nats.energy.matched.>.subscribe",
@@ -121,7 +121,7 @@
     "op": "subscribe",
     "target": "energy.matched.>",
     "outcome": "allowed",
-    "ms": 811
+    "ms": 802
   },
   {
     "id": "billing-sim.nats.energy.matched.r1.>.publish",
@@ -131,7 +131,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "nats: permissions violation: Permissions Violation for Publish to \"energy.matched.r1.zt-probe\"",
-    "ms": 822
+    "ms": 806
   },
   {
     "id": "billing-sim.nats.energy.matched.r2.>.publish",
@@ -141,7 +141,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "nats: permissions violation: Permissions Violation for Publish to \"energy.matched.r2.zt-probe\"",
-    "ms": 816
+    "ms": 806
   },
   {
     "id": "billing-sim.rabbitmq.energy-positions.consume",
@@ -151,7 +151,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 27
+    "ms": 11
   },
   {
     "id": "billing-sim.rabbitmq.energy-positions.publish",
@@ -161,7 +161,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 29
+    "ms": 13
   },
   {
     "id": "billing-sim.rabbitmq.kwh-prices.consume",
@@ -171,7 +171,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 25
+    "ms": 10
   },
   {
     "id": "billing-sim.rabbitmq.kwh-prices.publish",
@@ -181,7 +181,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 29
+    "ms": 11
   },
   {
     "id": "billing-sim.rabbitmq.meter-declarations.consume",
@@ -191,7 +191,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 10
+    "ms": 13
   },
   {
     "id": "billing-sim.rabbitmq.meter-declarations.publish",
@@ -201,7 +201,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 28
+    "ms": 13
   },
   {
     "id": "declaration-gateway.kafka.r1.energy-matched.consume",
@@ -211,7 +211,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 9
+    "ms": 8
   },
   {
     "id": "declaration-gateway.kafka.r1.energy-matched.publish",
@@ -221,7 +221,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8000
+    "ms": 8001
   },
   {
     "id": "declaration-gateway.kafka.r2.energy-matched.consume",
@@ -231,7 +231,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 7
+    "ms": 8
   },
   {
     "id": "declaration-gateway.kafka.r2.energy-matched.publish",
@@ -241,7 +241,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8001
+    "ms": 8000
   },
   {
     "id": "declaration-gateway.nats.BILLING_MATCHED/billing.consumer-info",
@@ -251,7 +251,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 11
+    "ms": 2
   },
   {
     "id": "declaration-gateway.nats.connect.connect",
@@ -261,7 +261,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 22
+    "ms": 3
   },
   {
     "id": "declaration-gateway.nats.energy.matched.>.subscribe",
@@ -271,7 +271,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 16
+    "ms": 2
   },
   {
     "id": "declaration-gateway.nats.energy.matched.r1.>.publish",
@@ -281,7 +281,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 23
+    "ms": 0
   },
   {
     "id": "declaration-gateway.nats.energy.matched.r2.>.publish",
@@ -291,7 +291,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 19
+    "ms": 3
   },
   {
     "id": "declaration-gateway.rabbitmq.energy-positions.consume",
@@ -301,7 +301,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'energy-positions' in vhost 'r1' refused for user 'declaration-gateway-r1'\"",
-    "ms": 21
+    "ms": 24
   },
   {
     "id": "declaration-gateway.rabbitmq.energy-positions.publish",
@@ -309,7 +309,7 @@
     "op": "publish",
     "target": "r1:energy-positions",
     "outcome": "allowed",
-    "ms": 24
+    "ms": 25
   },
   {
     "id": "declaration-gateway.rabbitmq.kwh-prices.consume",
@@ -319,7 +319,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'kwh-prices' in vhost 'r1' refused for user 'declaration-gateway-r1'\"",
-    "ms": 44
+    "ms": 23
   },
   {
     "id": "declaration-gateway.rabbitmq.kwh-prices.publish",
@@ -329,7 +329,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'declaration-gateway-r1'\"",
-    "ms": 40
+    "ms": 24
   },
   {
     "id": "declaration-gateway.rabbitmq.meter-declarations.consume",
@@ -337,7 +337,7 @@
     "op": "consume",
     "target": "r1:meter-declarations",
     "outcome": "allowed",
-    "ms": 1550
+    "ms": 1530
   },
   {
     "id": "declaration-gateway.rabbitmq.meter-declarations.publish",
@@ -347,7 +347,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'meter-declarations.x' in vhost 'r1' refused for user 'declaration-gateway-r1'\"",
-    "ms": 24
+    "ms": 25
   },
   {
     "id": "device-sim.kafka.r1.energy-matched.consume",
@@ -357,7 +357,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 17
+    "ms": 5
   },
   {
     "id": "device-sim.kafka.r1.energy-matched.publish",
@@ -367,7 +367,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8004
+    "ms": 8002
   },
   {
     "id": "device-sim.kafka.r2.energy-matched.consume",
@@ -377,7 +377,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 5
+    "ms": 15
   },
   {
     "id": "device-sim.kafka.r2.energy-matched.publish",
@@ -387,7 +387,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8002
+    "ms": 8000
   },
   {
     "id": "device-sim.nats.BILLING_MATCHED/billing.consumer-info",
@@ -397,7 +397,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 10
+    "ms": 11
   },
   {
     "id": "device-sim.nats.connect.connect",
@@ -407,7 +407,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 11
+    "ms": 14
   },
   {
     "id": "device-sim.nats.energy.matched.>.subscribe",
@@ -417,7 +417,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 8
+    "ms": 20
   },
   {
     "id": "device-sim.nats.energy.matched.r1.>.publish",
@@ -427,7 +427,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 14
+    "ms": 4
   },
   {
     "id": "device-sim.nats.energy.matched.r2.>.publish",
@@ -437,7 +437,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 11
+    "ms": 12
   },
   {
     "id": "device-sim.rabbitmq.energy-positions.consume",
@@ -447,7 +447,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 44
+    "ms": 19
   },
   {
     "id": "device-sim.rabbitmq.energy-positions.publish",
@@ -457,7 +457,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 11
+    "ms": 17
   },
   {
     "id": "device-sim.rabbitmq.kwh-prices.consume",
@@ -467,7 +467,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 12
+    "ms": 18
   },
   {
     "id": "device-sim.rabbitmq.kwh-prices.publish",
@@ -477,7 +477,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 52
+    "ms": 19
   },
   {
     "id": "device-sim.rabbitmq.meter-declarations.consume",
@@ -487,7 +487,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 11
+    "ms": 9
   },
   {
     "id": "device-sim.rabbitmq.meter-declarations.publish",
@@ -497,7 +497,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 51
+    "ms": 16
   },
   {
     "id": "energy-transfer.kafka.r1.energy-matched.consume",
@@ -505,7 +505,7 @@
     "op": "consume",
     "target": "r1.energy-matched",
     "outcome": "allowed",
-    "ms": 72
+    "ms": 42
   },
   {
     "id": "energy-transfer.kafka.r1.energy-matched.publish",
@@ -513,7 +513,7 @@
     "op": "publish",
     "target": "r1.energy-matched",
     "outcome": "allowed",
-    "ms": 66
+    "ms": 45
   },
   {
     "id": "energy-transfer.kafka.r2.energy-matched.consume",
@@ -521,7 +521,7 @@
     "op": "consume",
     "target": "r2.energy-matched",
     "outcome": "allowed",
-    "ms": 71
+    "ms": 39
   },
   {
     "id": "energy-transfer.kafka.r2.energy-matched.publish",
@@ -529,7 +529,7 @@
     "op": "publish",
     "target": "r2.energy-matched",
     "outcome": "allowed",
-    "ms": 62
+    "ms": 37
   },
   {
     "id": "energy-transfer.nats.BILLING_MATCHED/billing.consumer-info",
@@ -539,7 +539,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 27
+    "ms": 3
   },
   {
     "id": "energy-transfer.nats.connect.connect",
@@ -549,7 +549,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 7
+    "ms": 10
   },
   {
     "id": "energy-transfer.nats.energy.matched.>.subscribe",
@@ -559,7 +559,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 15
+    "ms": 10
   },
   {
     "id": "energy-transfer.nats.energy.matched.r1.>.publish",
@@ -569,7 +569,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 16
+    "ms": 10
   },
   {
     "id": "energy-transfer.nats.energy.matched.r2.>.publish",
@@ -579,7 +579,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 10
+    "ms": 11
   },
   {
     "id": "energy-transfer.rabbitmq.energy-positions.consume",
@@ -589,7 +589,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 14
+    "ms": 11
   },
   {
     "id": "energy-transfer.rabbitmq.energy-positions.publish",
@@ -599,7 +599,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 15
+    "ms": 11
   },
   {
     "id": "energy-transfer.rabbitmq.kwh-prices.consume",
@@ -609,7 +609,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 15
+    "ms": 11
   },
   {
     "id": "energy-transfer.rabbitmq.kwh-prices.publish",
@@ -619,7 +619,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 14
+    "ms": 10
   },
   {
     "id": "energy-transfer.rabbitmq.meter-declarations.consume",
@@ -629,7 +629,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 13
+    "ms": 7
   },
   {
     "id": "energy-transfer.rabbitmq.meter-declarations.publish",
@@ -639,7 +639,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 10
+    "ms": 11
   },
   {
     "id": "market-projector.kafka.r1.energy-matched.consume",
@@ -649,7 +649,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 11
+    "ms": 7
   },
   {
     "id": "market-projector.kafka.r1.energy-matched.publish",
@@ -669,7 +669,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 3
+    "ms": 11
   },
   {
     "id": "market-projector.kafka.r2.energy-matched.publish",
@@ -679,7 +679,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8002
+    "ms": 8000
   },
   {
     "id": "market-projector.nats.BILLING_MATCHED/billing.consumer-info",
@@ -689,7 +689,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 2
+    "ms": 0
   },
   {
     "id": "market-projector.nats.connect.connect",
@@ -699,7 +699,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 6
+    "ms": 8
   },
   {
     "id": "market-projector.nats.energy.matched.>.subscribe",
@@ -709,7 +709,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 7
+    "ms": 2
   },
   {
     "id": "market-projector.nats.energy.matched.r1.>.publish",
@@ -719,7 +719,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 5
+    "ms": 1
   },
   {
     "id": "market-projector.nats.energy.matched.r2.>.publish",
@@ -729,7 +729,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 8
+    "ms": 2
   },
   {
     "id": "market-projector.rabbitmq.energy-positions.consume",
@@ -737,7 +737,7 @@
     "op": "consume",
     "target": "r1:energy-positions",
     "outcome": "allowed",
-    "ms": 1547
+    "ms": 1534
   },
   {
     "id": "market-projector.rabbitmq.energy-positions.publish",
@@ -747,7 +747,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'market-projector-r1'\"",
-    "ms": 52
+    "ms": 32
   },
   {
     "id": "market-projector.rabbitmq.kwh-prices.consume",
@@ -755,7 +755,7 @@
     "op": "consume",
     "target": "r1:kwh-prices",
     "outcome": "allowed",
-    "ms": 1550
+    "ms": 1532
   },
   {
     "id": "market-projector.rabbitmq.kwh-prices.publish",
@@ -765,7 +765,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'market-projector-r1'\"",
-    "ms": 42
+    "ms": 29
   },
   {
     "id": "market-projector.rabbitmq.meter-declarations.consume",
@@ -775,7 +775,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'meter-declarations' in vhost 'r1' refused for user 'market-projector-r1'\"",
-    "ms": 43
+    "ms": 24
   },
   {
     "id": "market-projector.rabbitmq.meter-declarations.publish",
@@ -785,7 +785,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'meter-declarations.x' in vhost 'r1' refused for user 'market-projector-r1'\"",
-    "ms": 48
+    "ms": 32
   },
   {
     "id": "matching-engine.kafka.r1.energy-matched.consume",
@@ -793,7 +793,7 @@
     "op": "consume",
     "target": "r1.energy-matched",
     "outcome": "allowed",
-    "ms": 966
+    "ms": 1531
   },
   {
     "id": "matching-engine.kafka.r1.energy-matched.publish",
@@ -801,7 +801,7 @@
     "op": "publish",
     "target": "r1.energy-matched",
     "outcome": "allowed",
-    "ms": 39
+    "ms": 41
   },
   {
     "id": "matching-engine.kafka.r2.energy-matched.consume",
@@ -809,7 +809,7 @@
     "op": "consume",
     "target": "r2.energy-matched",
     "outcome": "allowed",
-    "ms": 44
+    "ms": 40
   },
   {
     "id": "matching-engine.kafka.r2.energy-matched.publish",
@@ -817,7 +817,7 @@
     "op": "publish",
     "target": "r2.energy-matched",
     "outcome": "allowed",
-    "ms": 41
+    "ms": 39
   },
   {
     "id": "matching-engine.nats.BILLING_MATCHED/billing.consumer-info",
@@ -827,7 +827,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 7
+    "ms": 6
   },
   {
     "id": "matching-engine.nats.connect.connect",
@@ -837,7 +837,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 8
+    "ms": 22
   },
   {
     "id": "matching-engine.nats.energy.matched.>.subscribe",
@@ -847,7 +847,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 13
+    "ms": 5
   },
   {
     "id": "matching-engine.nats.energy.matched.r1.>.publish",
@@ -857,7 +857,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 11
+    "ms": 9
   },
   {
     "id": "matching-engine.nats.energy.matched.r2.>.publish",
@@ -867,7 +867,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 11
+    "ms": 6
   },
   {
     "id": "matching-engine.rabbitmq.energy-positions.consume",
@@ -877,7 +877,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 28
+    "ms": 32
   },
   {
     "id": "matching-engine.rabbitmq.energy-positions.publish",
@@ -887,7 +887,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 27
+    "ms": 7
   },
   {
     "id": "matching-engine.rabbitmq.kwh-prices.consume",
@@ -897,7 +897,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 19
+    "ms": 31
   },
   {
     "id": "matching-engine.rabbitmq.kwh-prices.publish",
@@ -907,7 +907,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 27
+    "ms": 31
   },
   {
     "id": "matching-engine.rabbitmq.meter-declarations.consume",
@@ -917,7 +917,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 25
+    "ms": 31
   },
   {
     "id": "matching-engine.rabbitmq.meter-declarations.publish",
@@ -927,7 +927,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 27
+    "ms": 31
   },
   {
     "id": "mesh-bridge.kafka.r1.energy-matched.consume",
@@ -935,7 +935,7 @@
     "op": "consume",
     "target": "r1.energy-matched",
     "outcome": "allowed",
-    "ms": 77
+    "ms": 57
   },
   {
     "id": "mesh-bridge.kafka.r1.energy-matched.publish",
@@ -943,7 +943,7 @@
     "op": "publish",
     "target": "r1.energy-matched",
     "outcome": "allowed",
-    "ms": 73
+    "ms": 48
   },
   {
     "id": "mesh-bridge.kafka.r2.energy-matched.consume",
@@ -951,7 +951,7 @@
     "op": "consume",
     "target": "r2.energy-matched",
     "outcome": "allowed",
-    "ms": 81
+    "ms": 42
   },
   {
     "id": "mesh-bridge.kafka.r2.energy-matched.publish",
@@ -959,7 +959,7 @@
     "op": "publish",
     "target": "r2.energy-matched",
     "outcome": "allowed",
-    "ms": 71
+    "ms": 41
   },
   {
     "id": "mesh-bridge.nats.BILLING_MATCHED/billing.consumer-info",
@@ -977,7 +977,7 @@
     "op": "connect",
     "target": "",
     "outcome": "allowed",
-    "ms": 11
+    "ms": 9
   },
   {
     "id": "mesh-bridge.nats.energy.matched.>.subscribe",
@@ -987,7 +987,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "nats: permissions violation: Permissions Violation for Subscription to \"energy.matched.>\"",
-    "ms": 813
+    "ms": 814
   },
   {
     "id": "mesh-bridge.nats.energy.matched.r1.>.publish",
@@ -995,7 +995,7 @@
     "op": "publish",
     "target": "energy.matched.r1.zt-probe",
     "outcome": "allowed",
-    "ms": 808
+    "ms": 815
   },
   {
     "id": "mesh-bridge.nats.energy.matched.r2.>.publish",
@@ -1005,7 +1005,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "nats: permissions violation: Permissions Violation for Publish to \"energy.matched.r2.zt-probe\"",
-    "ms": 805
+    "ms": 813
   },
   {
     "id": "mesh-bridge.rabbitmq.energy-positions.consume",
@@ -1015,7 +1015,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 14
+    "ms": 9
   },
   {
     "id": "mesh-bridge.rabbitmq.energy-positions.publish",
@@ -1025,7 +1025,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 14
+    "ms": 10
   },
   {
     "id": "mesh-bridge.rabbitmq.kwh-prices.consume",
@@ -1035,7 +1035,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 18
+    "ms": 10
   },
   {
     "id": "mesh-bridge.rabbitmq.kwh-prices.publish",
@@ -1045,7 +1045,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 14
+    "ms": 9
   },
   {
     "id": "mesh-bridge.rabbitmq.meter-declarations.consume",
@@ -1055,7 +1055,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 11
+    "ms": 10
   },
   {
     "id": "mesh-bridge.rabbitmq.meter-declarations.publish",
@@ -1065,7 +1065,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 13
+    "ms": 10
   },
   {
     "id": "meter-sim.kafka.r1.energy-matched.consume",
@@ -1075,7 +1075,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 12
+    "ms": 6
   },
   {
     "id": "meter-sim.kafka.r1.energy-matched.publish",
@@ -1085,7 +1085,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8003
+    "ms": 8005
   },
   {
     "id": "meter-sim.kafka.r2.energy-matched.consume",
@@ -1095,7 +1095,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 23
+    "ms": 5
   },
   {
     "id": "meter-sim.kafka.r2.energy-matched.publish",
@@ -1105,7 +1105,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8002
+    "ms": 8001
   },
   {
     "id": "meter-sim.nats.BILLING_MATCHED/billing.consumer-info",
@@ -1115,7 +1115,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 7
+    "ms": 4
   },
   {
     "id": "meter-sim.nats.connect.connect",
@@ -1125,7 +1125,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 11
+    "ms": 9
   },
   {
     "id": "meter-sim.nats.energy.matched.>.subscribe",
@@ -1135,7 +1135,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 8
+    "ms": 4
   },
   {
     "id": "meter-sim.nats.energy.matched.r1.>.publish",
@@ -1145,7 +1145,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 14
+    "ms": 5
   },
   {
     "id": "meter-sim.nats.energy.matched.r2.>.publish",
@@ -1155,7 +1155,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 16
+    "ms": 4
   },
   {
     "id": "meter-sim.rabbitmq.energy-positions.consume",
@@ -1165,7 +1165,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'energy-positions' in vhost 'r1' refused for user 'meter-sim-r1'\"",
-    "ms": 37
+    "ms": 29
   },
   {
     "id": "meter-sim.rabbitmq.energy-positions.publish",
@@ -1175,7 +1175,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'meter-sim-r1'\"",
-    "ms": 37
+    "ms": 27
   },
   {
     "id": "meter-sim.rabbitmq.kwh-prices.consume",
@@ -1185,7 +1185,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'kwh-prices' in vhost 'r1' refused for user 'meter-sim-r1'\"",
-    "ms": 50
+    "ms": 29
   },
   {
     "id": "meter-sim.rabbitmq.kwh-prices.publish",
@@ -1195,7 +1195,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'meter-sim-r1'\"",
-    "ms": 37
+    "ms": 21
   },
   {
     "id": "meter-sim.rabbitmq.meter-declarations.consume",
@@ -1205,7 +1205,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'meter-declarations' in vhost 'r1' refused for user 'meter-sim-r1'\"",
-    "ms": 50
+    "ms": 29
   },
   {
     "id": "meter-sim.rabbitmq.meter-declarations.publish",
@@ -1213,7 +1213,7 @@
     "op": "publish",
     "target": "r1:meter-declarations",
     "outcome": "allowed",
-    "ms": 47
+    "ms": 27
   },
   {
     "id": "nocred-nats.nats.BILLING_MATCHED/billing.consumer-info",
@@ -1223,7 +1223,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: nats: Authorization Violation",
-    "ms": 17
+    "ms": 11
   },
   {
     "id": "nocred-nats.nats.connect.connect",
@@ -1233,7 +1233,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: nats: Authorization Violation",
-    "ms": 22
+    "ms": 11
   },
   {
     "id": "nocred-nats.nats.energy.matched.>.subscribe",
@@ -1243,7 +1243,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: nats: Authorization Violation",
-    "ms": 24
+    "ms": 11
   },
   {
     "id": "nocred-nats.nats.energy.matched.r1.>.publish",
@@ -1253,7 +1253,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: nats: Authorization Violation",
-    "ms": 23
+    "ms": 9
   },
   {
     "id": "nocred-nats.nats.energy.matched.r2.>.publish",
@@ -1263,7 +1263,7 @@
     "outcome": "denied",
     "class": "authn",
     "error": "conectar: nats: Authorization Violation",
-    "ms": 24
+    "ms": 10
   },
   {
     "id": "plain.kafka.r1.energy-matched.consume",
@@ -1272,8 +1272,8 @@
     "target": "r1.energy-matched",
     "outcome": "denied",
     "class": "network",
-    "error": "offsets: read tcp 10.244.0.99:59926->10.96.50.211:9092: read: connection reset by peer",
-    "ms": 214
+    "error": "offsets: read tcp 10.244.0.230:35870->10.96.50.211:9092: read: connection reset by peer",
+    "ms": 298
   },
   {
     "id": "plain.kafka.r1.energy-matched.publish",
@@ -1283,7 +1283,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8003
+    "ms": 8000
   },
   {
     "id": "plain.kafka.r2.energy-matched.consume",
@@ -1292,8 +1292,8 @@
     "target": "r2.energy-matched",
     "outcome": "denied",
     "class": "network",
-    "error": "offsets: read tcp 10.244.0.99:60018->10.96.50.211:9092: read: connection reset by peer",
-    "ms": 281
+    "error": "offsets: read tcp 10.244.0.230:35744->10.96.50.211:9092: read: connection reset by peer",
+    "ms": 259
   },
   {
     "id": "plain.kafka.r2.energy-matched.publish",
@@ -1303,7 +1303,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8003
+    "ms": 8000
   },
   {
     "id": "plain.nats.BILLING_MATCHED/billing.consumer-info",
@@ -1312,8 +1312,8 @@
     "target": "BILLING_MATCHED/billing",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43094->10.96.4.202:4222: i/o timeout",
-    "ms": 4001
+    "error": "conectar: read tcp 10.244.0.230:44660->10.96.4.202:4222: i/o timeout",
+    "ms": 4004
   },
   {
     "id": "plain.nats.connect.connect",
@@ -1322,8 +1322,8 @@
     "target": "",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43066->10.96.4.202:4222: i/o timeout",
-    "ms": 4001
+    "error": "conectar: read tcp 10.244.0.230:44624->10.96.4.202:4222: i/o timeout",
+    "ms": 4002
   },
   {
     "id": "plain.nats.energy.matched.>.subscribe",
@@ -1332,8 +1332,8 @@
     "target": "energy.matched.>",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43090->10.96.4.202:4222: i/o timeout",
-    "ms": 4000
+    "error": "conectar: read tcp 10.244.0.230:44646->10.96.4.202:4222: i/o timeout",
+    "ms": 4001
   },
   {
     "id": "plain.nats.energy.matched.r1.>.publish",
@@ -1342,8 +1342,8 @@
     "target": "energy.matched.r1.zt-probe",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43074->10.96.4.202:4222: i/o timeout",
-    "ms": 4001
+    "error": "conectar: read tcp 10.244.0.230:44630->10.96.4.202:4222: i/o timeout",
+    "ms": 4002
   },
   {
     "id": "plain.nats.energy.matched.r2.>.publish",
@@ -1352,8 +1352,8 @@
     "target": "energy.matched.r2.zt-probe",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: read tcp 10.244.0.99:43082->10.96.4.202:4222: i/o timeout",
-    "ms": 4001
+    "error": "conectar: read tcp 10.244.0.230:44640->10.96.4.202:4222: i/o timeout",
+    "ms": 4002
   },
   {
     "id": "plain.rabbitmq.energy-positions.consume",
@@ -1362,8 +1362,8 @@
     "target": "r1:energy-positions",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40938->10.96.162.54:5672: read: connection reset by peer\"",
-    "ms": 1
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56336->10.96.162.54:5672: read: connection reset by peer\"",
+    "ms": 0
   },
   {
     "id": "plain.rabbitmq.energy-positions.publish",
@@ -1372,8 +1372,8 @@
     "target": "r1:energy-positions",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40904->10.96.162.54:5672: read: connection reset by peer\"",
-    "ms": 1
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56332->10.96.162.54:5672: read: connection reset by peer\"",
+    "ms": 0
   },
   {
     "id": "plain.rabbitmq.kwh-prices.consume",
@@ -1382,8 +1382,8 @@
     "target": "r1:kwh-prices",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40916->10.96.162.54:5672: read: connection reset by peer\"",
-    "ms": 2
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56312->10.96.162.54:5672: read: connection reset by peer\"",
+    "ms": 0
   },
   {
     "id": "plain.rabbitmq.kwh-prices.publish",
@@ -1392,8 +1392,8 @@
     "target": "r1:kwh-prices",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40930->10.96.162.54:5672: read: connection reset by peer\"",
-    "ms": 1
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56338->10.96.162.54:5672: read: connection reset by peer\"",
+    "ms": 0
   },
   {
     "id": "plain.rabbitmq.meter-declarations.consume",
@@ -1402,8 +1402,8 @@
     "target": "r1:meter-declarations",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40946->10.96.162.54:5672: read: connection reset by peer\"",
-    "ms": 1
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56320->10.96.162.54:5672: read: connection reset by peer\"",
+    "ms": 0
   },
   {
     "id": "plain.rabbitmq.meter-declarations.publish",
@@ -1412,8 +1412,8 @@
     "target": "r1:meter-declarations",
     "outcome": "denied",
     "class": "network",
-    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.99:40922->10.96.162.54:5672: read: connection reset by peer\"",
-    "ms": 2
+    "error": "conectar: Exception (501) Reason: \"read tcp 10.244.0.230:56306->10.96.162.54:5672: read: connection reset by peer\"",
+    "ms": 0
   },
   {
     "id": "price-feed-simulator.kafka.r1.energy-matched.consume",
@@ -1423,7 +1423,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 8
+    "ms": 12
   },
   {
     "id": "price-feed-simulator.kafka.r1.energy-matched.publish",
@@ -1443,7 +1443,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 9
+    "ms": 1
   },
   {
     "id": "price-feed-simulator.kafka.r2.energy-matched.publish",
@@ -1453,7 +1453,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8001
+    "ms": 8000
   },
   {
     "id": "price-feed-simulator.nats.BILLING_MATCHED/billing.consumer-info",
@@ -1463,7 +1463,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 10
+    "ms": 1
   },
   {
     "id": "price-feed-simulator.nats.connect.connect",
@@ -1473,7 +1473,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 15
+    "ms": 9
   },
   {
     "id": "price-feed-simulator.nats.energy.matched.>.subscribe",
@@ -1483,7 +1483,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 12
+    "ms": 3
   },
   {
     "id": "price-feed-simulator.nats.energy.matched.r1.>.publish",
@@ -1493,7 +1493,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 7
+    "ms": 8
   },
   {
     "id": "price-feed-simulator.nats.energy.matched.r2.>.publish",
@@ -1503,7 +1503,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 14
+    "ms": 8
   },
   {
     "id": "price-feed-simulator.rabbitmq.energy-positions.consume",
@@ -1513,7 +1513,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'energy-positions' in vhost 'r1' refused for user 'price-feed-r1'\"",
-    "ms": 36
+    "ms": 9
   },
   {
     "id": "price-feed-simulator.rabbitmq.energy-positions.publish",
@@ -1523,7 +1523,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'price-feed-r1'\"",
-    "ms": 34
+    "ms": 14
   },
   {
     "id": "price-feed-simulator.rabbitmq.kwh-prices.consume",
@@ -1533,7 +1533,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'kwh-prices' in vhost 'r1' refused for user 'price-feed-r1'\"",
-    "ms": 21
+    "ms": 12
   },
   {
     "id": "price-feed-simulator.rabbitmq.kwh-prices.publish",
@@ -1541,7 +1541,7 @@
     "op": "publish",
     "target": "r1:kwh-prices",
     "outcome": "allowed",
-    "ms": 41
+    "ms": 15
   },
   {
     "id": "price-feed-simulator.rabbitmq.meter-declarations.consume",
@@ -1551,7 +1551,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'meter-declarations' in vhost 'r1' refused for user 'price-feed-r1'\"",
-    "ms": 42
+    "ms": 16
   },
   {
     "id": "price-feed-simulator.rabbitmq.meter-declarations.publish",
@@ -1561,7 +1561,7 @@
     "outcome": "denied",
     "class": "acl",
     "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'meter-declarations.x' in vhost 'r1' refused for user 'price-feed-r1'\"",
-    "ms": 35
+    "ms": 7
   },
   {
     "id": "stranger.kafka.r1.energy-matched.consume",
@@ -1571,7 +1571,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 19
+    "ms": 7
   },
   {
     "id": "stranger.kafka.r1.energy-matched.publish",
@@ -1581,7 +1581,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "context deadline exceeded",
-    "ms": 8002
+    "ms": 8000
   },
   {
     "id": "stranger.kafka.r2.energy-matched.consume",
@@ -1591,7 +1591,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "offsets: broker closed the connection immediately during api versions negotiation, which often happens when the broker requires TLS but the client is using plaintext: is TLS missing?",
-    "ms": 17
+    "ms": 6
   },
   {
     "id": "stranger.kafka.r2.energy-matched.publish",
@@ -1611,7 +1611,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 5
+    "ms": 7
   },
   {
     "id": "stranger.nats.connect.connect",
@@ -1621,7 +1621,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 15
+    "ms": 14
   },
   {
     "id": "stranger.nats.energy.matched.>.subscribe",
@@ -1631,7 +1631,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 8
+    "ms": 7
   },
   {
     "id": "stranger.nats.energy.matched.r1.>.publish",
@@ -1641,7 +1641,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 8
+    "ms": 7
   },
   {
     "id": "stranger.nats.energy.matched.r2.>.publish",
@@ -1651,7 +1651,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 8
+    "ms": 7
   },
   {
     "id": "stranger.rabbitmq.energy-positions.consume",
@@ -1661,7 +1661,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 13
+    "ms": 14
   },
   {
     "id": "stranger.rabbitmq.energy-positions.publish",
@@ -1671,7 +1671,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 21
+    "ms": 14
   },
   {
     "id": "stranger.rabbitmq.kwh-prices.consume",
@@ -1681,7 +1681,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 21
+    "ms": 10
   },
   {
     "id": "stranger.rabbitmq.kwh-prices.publish",
@@ -1691,7 +1691,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 23
+    "ms": 14
   },
   {
     "id": "stranger.rabbitmq.meter-declarations.consume",
@@ -1701,7 +1701,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 37
+    "ms": 14
   },
   {
     "id": "stranger.rabbitmq.meter-declarations.publish",
@@ -1711,7 +1711,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 21
+    "ms": 14
   },
   {
     "id": "thief-nats.nats.BILLING_MATCHED/billing.consumer-info",
@@ -1721,7 +1721,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 15
+    "ms": 5
   },
   {
     "id": "thief-nats.nats.connect.connect",
@@ -1731,7 +1731,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 15
+    "ms": 4
   },
   {
     "id": "thief-nats.nats.energy.matched.>.subscribe",
@@ -1741,7 +1741,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 14
+    "ms": 6
   },
   {
     "id": "thief-nats.nats.energy.matched.r1.>.publish",
@@ -1751,7 +1751,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 18
+    "ms": 4
   },
   {
     "id": "thief-nats.nats.energy.matched.r2.>.publish",
@@ -1761,7 +1761,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: EOF",
-    "ms": 18
+    "ms": 4
   },
   {
     "id": "thief-rabbit.rabbitmq.energy-positions.consume",
@@ -1771,7 +1771,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 26
+    "ms": 7
   },
   {
     "id": "thief-rabbit.rabbitmq.energy-positions.publish",
@@ -1781,7 +1781,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 21
+    "ms": 5
   },
   {
     "id": "thief-rabbit.rabbitmq.kwh-prices.consume",
@@ -1791,7 +1791,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 26
+    "ms": 7
   },
   {
     "id": "thief-rabbit.rabbitmq.kwh-prices.publish",
@@ -1801,7 +1801,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 25
+    "ms": 7
   },
   {
     "id": "thief-rabbit.rabbitmq.meter-declarations.consume",
@@ -1811,7 +1811,7 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 25
+    "ms": 6
   },
   {
     "id": "thief-rabbit.rabbitmq.meter-declarations.publish",
@@ -1821,6 +1821,6 @@
     "outcome": "denied",
     "class": "network",
     "error": "conectar: Exception (501) Reason: \"EOF\"",
-    "ms": 25
+    "ms": 7
   }
 ]

@@ -1,0 +1,8 @@
+ts                           Δms       service          pod                               stage     result
+2026-10-17T07:48:01.549357Z  0.000     matching-engine  matching-engine-9d99c7b5d-8kqpm   commit    ok
+2026-10-17T07:48:01.558638Z  9.281     mesh-bridge      mesh-bridge-6fd4f6895f-j2w98      consume   ok
+2026-10-17T07:48:01.566686Z  8.047     mesh-bridge      mesh-bridge-6fd4f6895f-j2w98      publish   ok
+2026-10-17T07:48:01.567435Z  0.750     billing-sim      billing-sim-77d8bc76fb-9dzj9      received  ok
+2026-10-17T07:48:07.397942Z  5830.506  energy-transfer  energy-transfer-6bfb7d86cd-8wfch  consume   ok
+2026-10-17T07:48:07.402294Z  4.352     device-sim       device-sim-68f5467465-c4qqv       command   ok
+2026-10-17T07:48:07.403748Z  1.454     energy-transfer  energy-transfer-6bfb7d86cd-8wfch  command   ok

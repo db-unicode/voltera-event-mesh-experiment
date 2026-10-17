@@ -1,40 +1,40 @@
-[1] 2026/10/17 04:55:58.113929 [ERR] 127.0.0.6:38559 - cid:216 - authentication error
-[1] 2026/10/17 04:55:58.117605 [ERR] 127.0.0.6:55097 - cid:214 - authentication error
-[1] 2026/10/17 04:55:58.118346 [ERR] 127.0.0.6:54227 - cid:211 - "v1.54.0:go:zt-probe-neg-rogue-06" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.118968 [ERR] 127.0.0.6:60095 - cid:219 - authentication error
-[1] 2026/10/17 04:55:58.119166 [ERR] 127.0.0.6:51633 - cid:220 - authentication error
-[1] 2026/10/17 04:55:58.119202 [ERR] 127.0.0.6:59797 - cid:221 - authentication error
-[1] 2026/10/17 04:55:58.119212 [ERR] 127.0.0.6:48805 - cid:218 - authentication error
-[1] 2026/10/17 04:55:58.119219 [ERR] 127.0.0.6:57529 - cid:210 - "v1.54.0:go:zt-probe-neg-rogue-01" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.120693 [ERR] 127.0.0.6:44619 - cid:213 - "v1.54.0:go:zt-probe-neg-rogue-05" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.119488 [ERR] 127.0.0.6:46979 - cid:212 - "v1.54.0:go:zt-probe-neg-rogue-02" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.119553 [ERR] 127.0.0.6:54319 - cid:215 - "v1.54.0:go:zt-probe-neg-rogue-03" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.120800 [ERR] 127.0.0.6:50005 - cid:217 - "v1.54.0:go:zt-probe-neg-rogue-04" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.121568 [ERR] 127.0.0.6:45735 - cid:223 - authentication error
-[1] 2026/10/17 04:55:58.122467 [ERR] 127.0.0.6:35993 - cid:222 - authentication error
-[1] 2026/10/17 04:55:58.126865 [ERR] 127.0.0.6:39163 - cid:224 - authentication error
-[1] 2026/10/17 04:55:58.129335 [ERR] 127.0.0.6:51281 - cid:225 - authentication error
-[1] 2026/10/17 04:55:58.135851 [ERR] 127.0.0.6:45409 - cid:229 - authentication error
-[1] 2026/10/17 04:55:58.135871 [ERR] 127.0.0.6:34155 - cid:228 - authentication error
-[1] 2026/10/17 04:55:58.136116 [ERR] 127.0.0.6:54689 - cid:226 - authentication error
-[1] 2026/10/17 04:55:58.136200 [ERR] 127.0.0.6:54357 - cid:227 - authentication error
-[1] 2026/10/17 04:55:58.138596 [ERR] 127.0.0.6:41855 - cid:232 - authentication error
-[1] 2026/10/17 04:55:58.138814 [ERR] 127.0.0.6:39499 - cid:230 - authentication error
-[1] 2026/10/17 04:55:58.142604 [ERR] 127.0.0.6:35391 - cid:234 - authentication error
-[1] 2026/10/17 04:55:58.142729 [ERR] 127.0.0.6:43931 - cid:231 - authentication error
-[1] 2026/10/17 04:55:58.143700 [ERR] 127.0.0.6:49521 - cid:235 - authentication error
-[1] 2026/10/17 04:55:58.143855 [ERR] 127.0.0.6:55367 - cid:233 - authentication error
-[1] 2026/10/17 04:55:58.935031 [ERR] 127.0.0.6:43969 - cid:237 - "v1.54.0:go:zt-probe-neg-rogue-08" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.942639 [ERR] 127.0.0.6:51913 - cid:239 - "v1.54.0:go:zt-probe-neg-rogue-09" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.943084 [ERR] 127.0.0.6:33239 - cid:236 - "v1.54.0:go:zt-probe-neg-rogue-07" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.944777 [ERR] 127.0.0.6:37933 - cid:238 - "v1.54.0:go:zt-probe-neg-rogue-11" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.945122 [ERR] 127.0.0.6:34657 - cid:240 - "v1.54.0:go:zt-probe-neg-rogue-10" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:58.945420 [ERR] 127.0.0.6:55925 - cid:241 - "v1.54.0:go:zt-probe-neg-rogue-12" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:59.740267 [ERR] 127.0.0.6:56563 - cid:242 - "v1.54.0:go:zt-probe-neg-rogue-13" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:59.750454 [ERR] 127.0.0.6:35847 - cid:244 - "v1.54.0:go:zt-probe-neg-rogue-14" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:59.751330 [ERR] 127.0.0.6:56207 - cid:246 - "v1.54.0:go:zt-probe-neg-rogue-17" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:59.751404 [ERR] 127.0.0.6:54529 - cid:243 - "v1.54.0:go:zt-probe-neg-rogue-15" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:59.751422 [ERR] 127.0.0.6:42537 - cid:247 - "v1.54.0:go:zt-probe-neg-rogue-18" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:55:59.751616 [ERR] 127.0.0.6:43931 - cid:245 - "v1.54.0:go:zt-probe-neg-rogue-16" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:56:00.545261 [ERR] 127.0.0.6:55397 - cid:248 - "v1.54.0:go:zt-probe-neg-rogue-19" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
-[1] 2026/10/17 04:56:00.554098 [ERR] 127.0.0.6:46111 - cid:249 - "v1.54.0:go:zt-probe-neg-rogue-20" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 07:40:05.908799 [ERR] 127.0.0.6:40781 - cid:323 - authentication error
+[1] 2026/10/17 07:40:05.909163 [ERR] 127.0.0.6:43159 - cid:322 - authentication error
+[1] 2026/10/17 07:40:05.909294 [ERR] 127.0.0.6:60509 - cid:324 - authentication error
+[1] 2026/10/17 07:40:05.909563 [ERR] 127.0.0.6:54991 - cid:325 - authentication error
+[1] 2026/10/17 07:40:05.909729 [ERR] 127.0.0.6:34011 - cid:326 - authentication error
+[1] 2026/10/17 07:40:05.909916 [ERR] 127.0.0.6:46229 - cid:321 - authentication error
+[1] 2026/10/17 07:40:05.915491 [ERR] 127.0.0.6:40265 - cid:329 - "v1.54.0:go:zt-probe-neg-rogue-05" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.915527 [ERR] 127.0.0.6:33105 - cid:332 - "v1.54.0:go:zt-probe-neg-rogue-04" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.915540 [ERR] 127.0.0.6:49403 - cid:328 - "v1.54.0:go:zt-probe-neg-rogue-02" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.916215 [ERR] 127.0.0.6:46243 - cid:327 - "v1.54.0:go:zt-probe-neg-rogue-03" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.916241 [ERR] 127.0.0.6:51009 - cid:331 - "v1.54.0:go:zt-probe-neg-rogue-06" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.916764 [ERR] 127.0.0.6:40041 - cid:336 - authentication error
+[1] 2026/10/17 07:40:05.916974 [ERR] 127.0.0.6:53579 - cid:333 - authentication error
+[1] 2026/10/17 07:40:05.917033 [ERR] 127.0.0.6:39559 - cid:335 - authentication error
+[1] 2026/10/17 07:40:05.917084 [ERR] 127.0.0.6:48991 - cid:337 - authentication error
+[1] 2026/10/17 07:40:05.917129 [ERR] 127.0.0.6:47605 - cid:334 - authentication error
+[1] 2026/10/17 07:40:05.917177 [ERR] 127.0.0.6:51553 - cid:338 - authentication error
+[1] 2026/10/17 07:40:05.921196 [ERR] 127.0.0.6:53251 - cid:339 - authentication error
+[1] 2026/10/17 07:40:05.921239 [ERR] 127.0.0.6:41041 - cid:340 - authentication error
+[1] 2026/10/17 07:40:05.921361 [ERR] 127.0.0.6:37059 - cid:343 - authentication error
+[1] 2026/10/17 07:40:05.921463 [ERR] 127.0.0.6:51287 - cid:330 - "v1.54.0:go:zt-probe-neg-rogue-01" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.921507 [ERR] 127.0.0.6:33559 - cid:341 - authentication error
+[1] 2026/10/17 07:40:05.921793 [ERR] 127.0.0.6:41323 - cid:342 - authentication error
+[1] 2026/10/17 07:40:05.925862 [ERR] 127.0.0.6:35929 - cid:344 - authentication error
+[1] 2026/10/17 07:40:05.925901 [ERR] 127.0.0.6:56007 - cid:345 - authentication error
+[1] 2026/10/17 07:40:05.926154 [ERR] 127.0.0.6:58611 - cid:346 - authentication error
+[1] 2026/10/17 07:40:06.726956 [ERR] 127.0.0.6:43303 - cid:347 - "v1.54.0:go:zt-probe-neg-rogue-07" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.730214 [ERR] 127.0.0.6:42303 - cid:350 - "v1.54.0:go:zt-probe-neg-rogue-10" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.733035 [ERR] 127.0.0.6:42733 - cid:348 - "v1.54.0:go:zt-probe-neg-rogue-09" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.733294 [ERR] 127.0.0.6:57195 - cid:352 - "v1.54.0:go:zt-probe-neg-rogue-12" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.733410 [ERR] 127.0.0.6:58847 - cid:351 - "v1.54.0:go:zt-probe-neg-rogue-08" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.733530 [ERR] 127.0.0.6:50365 - cid:349 - "v1.54.0:go:zt-probe-neg-rogue-11" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.538014 [ERR] 127.0.0.6:45531 - cid:354 - "v1.54.0:go:zt-probe-neg-rogue-13" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.542207 [ERR] 127.0.0.6:40959 - cid:357 - "v1.54.0:go:zt-probe-neg-rogue-15" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.543763 [ERR] 127.0.0.6:35491 - cid:355 - "v1.54.0:go:zt-probe-neg-rogue-16" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.544109 [ERR] 127.0.0.6:53475 - cid:353 - "v1.54.0:go:zt-probe-neg-rogue-14" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.544116 [ERR] 127.0.0.6:41925 - cid:356 - "v1.54.0:go:zt-probe-neg-rogue-18" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.544278 [ERR] 127.0.0.6:37833 - cid:358 - "v1.54.0:go:zt-probe-neg-rogue-17" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:08.345759 [ERR] 127.0.0.6:57273 - cid:360 - "v1.54.0:go:zt-probe-neg-rogue-19" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:08.348809 [ERR] 127.0.0.6:54847 - cid:359 - "v1.54.0:go:zt-probe-neg-rogue-20" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"

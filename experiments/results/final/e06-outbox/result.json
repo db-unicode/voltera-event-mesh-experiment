@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "data": "/Users/diego/Developer/voltera-wt/exp-e05-e06/experiments/results/e06-outbox/20261017T044448Z-6dbf7cb-r2",
+  "data": "/Users/diego/Developer/voltera-wt/final-run/experiments/results/e06-outbox/20261017T072649Z-18789b0-dirty-r1",
   "criteria": [
     {
       "id": "p1-matches",
@@ -195,7 +195,7 @@
       "id": "p2-recovery",
       "description": "fase 2 (after_publish_before_mark, con outbox): recuperación (crash a outbox vacía) \u003c= 30 s en todos los crashes",
       "metric": "metrics.json:$.p2_recovery_max_s",
-      "observed": 0,
+      "observed": 11,
       "op": "le",
       "expected": 30,
       "verdict": "PASS"
@@ -204,7 +204,7 @@
       "id": "p2-broker-duplicates",
       "description": "fase 2 (after_publish_before_mark): el broker recibe eventId repetidos (permitido; el efecto sigue siendo único)",
       "metric": "metrics.json:$.p2_kafka_dup_events",
-      "observed": 12,
+      "observed": 16,
       "op": "ge",
       "expected": 1,
       "verdict": "PASS"
@@ -231,7 +231,7 @@
       "id": "p3-lost",
       "description": "fase 3 (control OUTBOX_MODE=direct): pérdida \u003e= 1 (matches en BD sin evento en el topic)",
       "metric": "metrics.json:$.p3_lost",
-      "observed": 2,
+      "observed": 8,
       "op": "ge",
       "expected": 1,
       "verdict": "PASS"

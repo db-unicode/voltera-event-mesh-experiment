@@ -19,7 +19,7 @@
         },
         "name": "declaration-gateway",
         "namespace": "voltera-r1",
-        "resourceVersion": "92027",
+        "resourceVersion": "103841",
         "uid": "3fb41cca-2768-45cc-8dce-4ec050be6800"
     },
     "spec": {
@@ -93,7 +93,7 @@
             "s0-rabbitmq-meter-declarations"
         ],
         "hpaName": "keda-hpa-declaration-gateway",
-        "lastActiveTime": "2026-10-17T06:10:31Z",
+        "lastActiveTime": "2026-10-17T06:56:46Z",
         "originalReplicaCount": 0,
         "scaleTargetGVKR": {
             "group": "apps",

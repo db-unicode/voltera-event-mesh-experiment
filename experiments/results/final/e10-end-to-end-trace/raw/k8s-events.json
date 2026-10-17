@@ -1,6 +1,6 @@
 [
   {
-    "t": "2026-10-17T06:29:50.237711Z",
+    "t": "2026-10-17T07:47:57.209395Z",
     "kind": "ScaledObject",
     "name": "declaration-gateway",
     "reason": "KEDAScaleTargetActivated",
@@ -8,7 +8,47 @@
     "count": null
   },
   {
-    "t": "2026-10-17T06:29:50.501248Z",
+    "t": "2026-10-17T07:47:57Z",
+    "kind": "Pod",
+    "name": "declaration-gateway-64bf767884-qkns9",
+    "reason": "Scheduled",
+    "message": "Successfully assigned voltera-r1/declaration-gateway-64bf767884-qkns9 to voltera-control-plane",
+    "count": 1
+  },
+  {
+    "t": "2026-10-17T07:47:57Z",
+    "kind": "Pod",
+    "name": "declaration-gateway-64bf767884-qkns9",
+    "reason": "Pulled",
+    "message": "Container image \"docker.io/istio/proxyv2:1.31.2\" already present on machine and can be accessed by the pod",
+    "count": 1
+  },
+  {
+    "t": "2026-10-17T07:47:57Z",
+    "kind": "Pod",
+    "name": "declaration-gateway-64bf767884-qkns9",
+    "reason": "Created",
+    "message": "Container created",
+    "count": 1
+  },
+  {
+    "t": "2026-10-17T07:47:57Z",
+    "kind": "Pod",
+    "name": "declaration-gateway-64bf767884-qkns9",
+    "reason": "Started",
+    "message": "Container started",
+    "count": 1
+  },
+  {
+    "t": "2026-10-17T07:47:57Z",
+    "kind": "ReplicaSet",
+    "name": "declaration-gateway-64bf767884",
+    "reason": "SuccessfulCreate",
+    "message": "(combined from similar events): Created pod: declaration-gateway-64bf767884-qkns9",
+    "count": 70
+  },
+  {
+    "t": "2026-10-17T07:47:58.288506Z",
     "kind": "ScaledObject",
     "name": "declaration-gateway",
     "reason": "ScaledObjectPaused",
@@ -16,7 +56,7 @@
     "count": null
   },
   {
-    "t": "2026-10-17T06:29:50.501307Z",
+    "t": "2026-10-17T07:47:58.288559Z",
     "kind": "ScaledObject",
     "name": "declaration-gateway",
     "reason": "KEDAScalersStopped",
@@ -24,103 +64,71 @@
     "count": null
   },
   {
-    "t": "2026-10-17T06:29:50Z",
+    "t": "2026-10-17T07:47:58Z",
     "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
-    "reason": "Scheduled",
-    "message": "Successfully assigned voltera-r1/declaration-gateway-57d49f98ff-9xc2s to voltera-control-plane",
-    "count": 1
-  },
-  {
-    "t": "2026-10-17T06:29:50Z",
-    "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
+    "name": "declaration-gateway-64bf767884-qkns9",
     "reason": "Pulled",
     "message": "Container image \"docker.io/istio/proxyv2:1.31.2\" already present on machine and can be accessed by the pod",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:50Z",
+    "t": "2026-10-17T07:47:58Z",
     "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
+    "name": "declaration-gateway-64bf767884-qkns9",
     "reason": "Created",
     "message": "Container created",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:50Z",
+    "t": "2026-10-17T07:47:58Z",
     "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
+    "name": "declaration-gateway-64bf767884-qkns9",
     "reason": "Started",
     "message": "Container started",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:50Z",
+    "t": "2026-10-17T07:47:58Z",
     "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
-    "reason": "Pulled",
-    "message": "Container image \"docker.io/istio/proxyv2:1.31.2\" already present on machine and can be accessed by the pod",
+    "name": "declaration-gateway-64bf767884-qkns9",
+    "reason": "Unhealthy",
+    "message": "Startup probe failed: Get \"http://10.244.0.241:15021/healthz/ready\": dial tcp 10.244.0.241:15021: connect: connection refused",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:50Z",
+    "t": "2026-10-17T07:48:00Z",
     "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
-    "reason": "Created",
-    "message": "Container created",
-    "count": 1
-  },
-  {
-    "t": "2026-10-17T06:29:50Z",
-    "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
-    "reason": "Started",
-    "message": "Container started",
-    "count": 1
-  },
-  {
-    "t": "2026-10-17T06:29:50Z",
-    "kind": "Deployment",
-    "name": "declaration-gateway",
-    "reason": "ScalingReplicaSet",
-    "message": "Scaled up replica set declaration-gateway-57d49f98ff from 0 to 1",
-    "count": 16
-  },
-  {
-    "t": "2026-10-17T06:29:51Z",
-    "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
+    "name": "declaration-gateway-64bf767884-qkns9",
     "reason": "Pulled",
     "message": "Container image \"voltera/declaration-gateway:dev\" already present on machine and can be accessed by the pod",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:51Z",
+    "t": "2026-10-17T07:48:00Z",
     "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
+    "name": "declaration-gateway-64bf767884-qkns9",
     "reason": "Created",
     "message": "Container created",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:51Z",
+    "t": "2026-10-17T07:48:00Z",
     "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
+    "name": "declaration-gateway-64bf767884-qkns9",
     "reason": "Started",
     "message": "Container started",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:51Z",
+    "t": "2026-10-17T07:48:00Z",
     "kind": "Pod",
-    "name": "declaration-gateway-57d49f98ff-9xc2s",
+    "name": "declaration-gateway-64bf767884-qkns9",
     "reason": "Unhealthy",
     "message": "Readiness probe failed: HTTP probe failed with statuscode: 500",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:52.760892Z",
+    "t": "2026-10-17T07:48:04.847508Z",
     "kind": "ScaledObject",
     "name": "energy-transfer",
     "reason": "KEDAScaleTargetActivated",
@@ -128,23 +136,23 @@
     "count": null
   },
   {
-    "t": "2026-10-17T06:29:52Z",
+    "t": "2026-10-17T07:48:04Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Scheduled",
-    "message": "Successfully assigned voltera-r1/energy-transfer-cd6b4bbf9-7xqhw to voltera-control-plane",
+    "message": "Successfully assigned voltera-r1/energy-transfer-6bfb7d86cd-8wfch to voltera-control-plane",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:52Z",
-    "kind": "ReplicaSet",
-    "name": "energy-transfer-cd6b4bbf9",
-    "reason": "SuccessfulCreate",
-    "message": "(combined from similar events): Created pod: energy-transfer-cd6b4bbf9-7xqhw",
-    "count": 167
+    "t": "2026-10-17T07:48:04Z",
+    "kind": "Deployment",
+    "name": "energy-transfer",
+    "reason": "ScalingReplicaSet",
+    "message": "Scaled up replica set energy-transfer-6bfb7d86cd from 0 to 1",
+    "count": 46
   },
   {
-    "t": "2026-10-17T06:29:53.751657Z",
+    "t": "2026-10-17T07:48:05.757957Z",
     "kind": "ScaledObject",
     "name": "energy-transfer",
     "reason": "ScaledObjectPaused",
@@ -152,7 +160,7 @@
     "count": null
   },
   {
-    "t": "2026-10-17T06:29:53.751721Z",
+    "t": "2026-10-17T07:48:05.757981Z",
     "kind": "ScaledObject",
     "name": "energy-transfer",
     "reason": "KEDAScalersStopped",
@@ -160,83 +168,83 @@
     "count": null
   },
   {
-    "t": "2026-10-17T06:29:53Z",
+    "t": "2026-10-17T07:48:05Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Pulled",
     "message": "Container image \"docker.io/istio/proxyv2:1.31.2\" already present on machine and can be accessed by the pod",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:53Z",
+    "t": "2026-10-17T07:48:05Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Created",
     "message": "Container created",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:53Z",
+    "t": "2026-10-17T07:48:05Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Started",
     "message": "Container started",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:53Z",
+    "t": "2026-10-17T07:48:06Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Pulled",
     "message": "Container image \"docker.io/istio/proxyv2:1.31.2\" already present on machine and can be accessed by the pod",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:53Z",
+    "t": "2026-10-17T07:48:06Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Created",
     "message": "Container created",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:53Z",
+    "t": "2026-10-17T07:48:06Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Started",
     "message": "Container started",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:54Z",
+    "t": "2026-10-17T07:48:07Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
-    "reason": "Unhealthy",
-    "message": "Startup probe failed: Get \"http://10.244.0.163:15021/healthz/ready\": dial tcp 10.244.0.163:15021: connect: connection refused",
-    "count": 1
-  },
-  {
-    "t": "2026-10-17T06:29:55Z",
-    "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Pulled",
     "message": "Container image \"voltera/energy-transfer:dev\" already present on machine and can be accessed by the pod",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:55Z",
+    "t": "2026-10-17T07:48:07Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Created",
     "message": "Container created",
     "count": 1
   },
   {
-    "t": "2026-10-17T06:29:55Z",
+    "t": "2026-10-17T07:48:07Z",
     "kind": "Pod",
-    "name": "energy-transfer-cd6b4bbf9-7xqhw",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
     "reason": "Started",
     "message": "Container started",
+    "count": 1
+  },
+  {
+    "t": "2026-10-17T07:48:07Z",
+    "kind": "Pod",
+    "name": "energy-transfer-6bfb7d86cd-8wfch",
+    "reason": "Unhealthy",
+    "message": "Readiness probe failed: HTTP probe failed with statuscode: 500",
     "count": 1
   }
 ]

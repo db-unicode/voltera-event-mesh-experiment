@@ -3,11 +3,11 @@
     "kind": "Deployment",
     "metadata": {
         "annotations": {
-            "deployment.kubernetes.io/revision": "5",
+            "deployment.kubernetes.io/revision": "10",
             "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"market-projector\",\"app.kubernetes.io/component\":\"write-side\",\"app.kubernetes.io/name\":\"market-projector\",\"app.kubernetes.io/part-of\":\"voltera\"},\"name\":\"market-projector\",\"namespace\":\"voltera-r1\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"market-projector\",\"app.kubernetes.io/component\":\"write-side\",\"app.kubernetes.io/name\":\"market-projector\",\"app.kubernetes.io/part-of\":\"voltera\"}},\"template\":{\"metadata\":{\"annotations\":{\"prometheus.io/path\":\"/metrics\",\"prometheus.io/port\":\"9090\",\"prometheus.io/scrape\":\"true\"},\"labels\":{\"app\":\"market-projector\",\"app.kubernetes.io/component\":\"write-side\",\"app.kubernetes.io/name\":\"market-projector\",\"app.kubernetes.io/part-of\":\"voltera\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"POD_NAME\",\"valueFrom\":{\"fieldRef\":{\"fieldPath\":\"metadata.name\"}}},{\"name\":\"AMQP_USER\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"AMQP_USER\",\"name\":\"market-projector-rabbitmq\"}}},{\"name\":\"AMQP_PASSWORD\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"AMQP_PASSWORD\",\"name\":\"market-projector-rabbitmq\"}}},{\"name\":\"REDIS_PASSWORD\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"REDIS_PASSWORD\",\"name\":\"market-view-credentials\"}}},{\"name\":\"VIEW_TTL_S\",\"value\":\"150\"},{\"name\":\"PRICE_TTL_S\",\"value\":\"300\"},{\"name\":\"PREFETCH\",\"value\":\"50\"},{\"name\":\"FAILPOINT_STATE_DIR\",\"value\":\"/var/run/failpoints\"},{\"name\":\"EXPERIMENTS\",\"value\":\"1\"},{\"name\":\"GOMEMLIMIT\",\"value\":\"100MiB\"},{\"name\":\"REGION\",\"value\":\"r1\"}],\"image\":\"voltera/market-projector:dev\",\"imagePullPolicy\":\"IfNotPresent\",\"livenessProbe\":{\"httpGet\":{\"path\":\"/healthz\",\"port\":\"http-ops\"},\"initialDelaySeconds\":10,\"periodSeconds\":10},\"name\":\"market-projector\",\"ports\":[{\"containerPort\":9090,\"name\":\"http-ops\"}],\"readinessProbe\":{\"httpGet\":{\"path\":\"/readyz\",\"port\":\"http-ops\"},\"periodSeconds\":5},\"resources\":{\"limits\":{\"memory\":\"128Mi\"},\"requests\":{\"cpu\":\"25m\",\"memory\":\"32Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]},\"readOnlyRootFilesystem\":true},\"volumeMounts\":[{\"mountPath\":\"/var/run/failpoints\",\"name\":\"failpoints\"}]}],\"serviceAccountName\":\"market-projector\",\"terminationGracePeriodSeconds\":30,\"volumes\":[{\"emptyDir\":{},\"name\":\"failpoints\"}]}}}}\n"
         },
         "creationTimestamp": "2026-10-17T03:16:34Z",
-        "generation": 9,
+        "generation": 18,
         "labels": {
             "app": "market-projector",
             "app.kubernetes.io/component": "write-side",
@@ -16,7 +16,7 @@
         },
         "name": "market-projector",
         "namespace": "voltera-r1",
-        "resourceVersion": "65168",
+        "resourceVersion": "101998",
         "uid": "087370f3-43c0-49f8-b9ba-3b46603b00cb"
     },
     "spec": {
@@ -41,7 +41,7 @@
         "template": {
             "metadata": {
                 "annotations": {
-                    "kubectl.kubernetes.io/restartedAt": "2026-10-16T22:30:36-05:00",
+                    "kubectl.kubernetes.io/restartedAt": "2026-10-17T01:44:30-05:00",
                     "prometheus.io/path": "/metrics",
                     "prometheus.io/port": "9090",
                     "prometheus.io/scrape": "true"
@@ -203,23 +203,23 @@
         "availableReplicas": 1,
         "conditions": [
             {
-                "lastTransitionTime": "2026-10-17T04:40:19Z",
-                "lastUpdateTime": "2026-10-17T04:40:19Z",
+                "lastTransitionTime": "2026-10-17T03:16:34Z",
+                "lastUpdateTime": "2026-10-17T06:44:33Z",
+                "message": "ReplicaSet \"market-projector-844f84db9d\" has successfully progressed.",
+                "reason": "NewReplicaSetAvailable",
+                "status": "True",
+                "type": "Progressing"
+            },
+            {
+                "lastTransitionTime": "2026-10-17T06:51:38Z",
+                "lastUpdateTime": "2026-10-17T06:51:38Z",
                 "message": "Deployment has minimum availability.",
                 "reason": "MinimumReplicasAvailable",
                 "status": "True",
                 "type": "Available"
-            },
-            {
-                "lastTransitionTime": "2026-10-17T03:16:34Z",
-                "lastUpdateTime": "2026-10-17T05:06:27Z",
-                "message": "ReplicaSet \"market-projector-74b76774c7\" has successfully progressed.",
-                "reason": "NewReplicaSetAvailable",
-                "status": "True",
-                "type": "Progressing"
             }
         ],
-        "observedGeneration": 9,
+        "observedGeneration": 18,
         "readyReplicas": 1,
         "replicas": 1,
         "terminatingReplicas": 0,

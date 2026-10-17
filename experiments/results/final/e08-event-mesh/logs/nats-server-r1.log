@@ -172,3 +172,74 @@
 [1] 2026/10/17 04:57:05.273103 [INF] 10.244.0.38:7422 - lid:250 - Leafnode connection closed: Read Error
 [1] 2026/10/17 04:57:06.275175 [INF] 10.96.107.71:7422 - lid:251 - Leafnode connection created for account: MESH 
 [1] 2026/10/17 04:57:06.279216 [INF] 10.96.107.71:7422 - lid:251 - JetStream using domains: local "", remote ""
+[1] 2026/10/17 04:59:19.092621 [INF] 10.96.107.71:7422 - lid:251 - Leafnode connection closed: Client Closed - Remote: nats-global
+[1] 2026/10/17 04:59:20.094958 [INF] 10.244.0.38:7422 - lid:252 - Leafnode connection created for account: MESH 
+[1] 2026/10/17 04:59:21.095385 [INF] 10.244.0.38:7422 - lid:252 - Leafnode connection closed: Read Error
+[1] 2026/10/17 04:59:22.098597 [INF] 10.96.107.71:7422 - lid:253 - Leafnode connection created for account: MESH 
+[1] 2026/10/17 04:59:22.104565 [INF] 10.96.107.71:7422 - lid:253 - JetStream using domains: local "", remote ""
+[1] 2026/10/17 05:54:01.343716 [ERR] 127.0.0.6:48859 - cid:258 - "v1.54.0:go:zt-probe-thief-nats.nats.BILLING_MATCHED/billing.consumer-info" - "MESH/user:bridge-r1" - Publish Violation - Subject "$JS.API.CONSUMER.INFO.BILLING_MATCHED.billing"
+[1] 2026/10/17 05:54:01.344418 [ERR] 127.0.0.6:60815 - cid:256 - "v1.54.0:go:zt-probe-thief-nats.nats.energy.matched.>.subscribe" - "MESH/user:bridge-r1" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 05:54:01.345320 [ERR] 127.0.0.6:47283 - cid:257 - "v1.54.0:go:zt-probe-thief-nats.nats.energy.matched.r2.>.publish" - "MESH/user:bridge-r1" - Publish Violation - Subject "energy.matched.r2.zt-probe"
+[1] 2026/10/17 05:54:41.691828 [ERR] 127.0.0.6:39105 - cid:296 - "v1.54.0:go:zt-probe-mesh-bridge.nats.energy.matched.r2.>.publish" - "MESH/user:bridge-r1" - Publish Violation - Subject "energy.matched.r2.zt-probe"
+[1] 2026/10/17 05:54:41.756431 [ERR] 127.0.0.6:46083 - cid:303 - "v1.54.0:go:zt-probe-mesh-bridge.nats.BILLING_MATCHED/billing.consumer-info" - "MESH/user:bridge-r1" - Publish Violation - Subject "$JS.API.CONSUMER.INFO.BILLING_MATCHED.billing"
+[1] 2026/10/17 05:54:41.756943 [ERR] 127.0.0.6:37523 - cid:302 - "v1.54.0:go:zt-probe-mesh-bridge.nats.energy.matched.>.subscribe" - "MESH/user:bridge-r1" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 05:54:42.636464 [ERR] 127.0.0.6:36991 - cid:304 - authentication error
+[1] 2026/10/17 05:54:42.641747 [ERR] 127.0.0.6:36045 - cid:305 - authentication error
+[1] 2026/10/17 05:54:42.647376 [ERR] 127.0.0.6:41805 - cid:306 - authentication error
+[1] 2026/10/17 05:54:42.650031 [ERR] 127.0.0.6:60313 - cid:313 - authentication error
+[1] 2026/10/17 05:54:42.650165 [ERR] 127.0.0.6:56905 - cid:312 - authentication error
+[1] 2026/10/17 05:55:01.342259 [INF] 10.96.107.71:7422 - lid:253 - Leafnode connection closed: Client Closed - Remote: nats-global
+[1] 2026/10/17 05:55:02.344294 [INF] 10.244.0.38:7422 - lid:314 - Leafnode connection created for account: MESH 
+[1] 2026/10/17 05:55:03.346628 [INF] 10.244.0.38:7422 - lid:314 - Leafnode connection closed: Read Error
+[1] 2026/10/17 05:55:04.354834 [INF] 10.96.107.71:7422 - lid:316 - Leafnode connection created for account: MESH 
+[1] 2026/10/17 05:55:04.392960 [INF] 10.96.107.71:7422 - lid:316 - JetStream using domains: local "", remote ""
+[1] 2026/10/17 05:56:20.621326 [INF] 10.96.107.71:7422 - lid:316 - Leafnode connection closed: Client Closed - Remote: nats-global
+[1] 2026/10/17 05:56:21.623094 [INF] 10.244.0.38:7422 - lid:317 - Leafnode connection created for account: MESH 
+[1] 2026/10/17 05:56:22.626063 [INF] 10.244.0.38:7422 - lid:317 - Leafnode connection closed: Read Error
+[1] 2026/10/17 05:56:23.633005 [INF] 10.96.107.71:7422 - lid:319 - Leafnode connection created for account: MESH 
+[1] 2026/10/17 05:56:23.657871 [INF] 10.96.107.71:7422 - lid:319 - JetStream using domains: local "", remote ""
+[1] 2026/10/17 07:40:05.908799 [ERR] 127.0.0.6:40781 - cid:323 - authentication error
+[1] 2026/10/17 07:40:05.909163 [ERR] 127.0.0.6:43159 - cid:322 - authentication error
+[1] 2026/10/17 07:40:05.909294 [ERR] 127.0.0.6:60509 - cid:324 - authentication error
+[1] 2026/10/17 07:40:05.909563 [ERR] 127.0.0.6:54991 - cid:325 - authentication error
+[1] 2026/10/17 07:40:05.909729 [ERR] 127.0.0.6:34011 - cid:326 - authentication error
+[1] 2026/10/17 07:40:05.909916 [ERR] 127.0.0.6:46229 - cid:321 - authentication error
+[1] 2026/10/17 07:40:05.915491 [ERR] 127.0.0.6:40265 - cid:329 - "v1.54.0:go:zt-probe-neg-rogue-05" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.915527 [ERR] 127.0.0.6:33105 - cid:332 - "v1.54.0:go:zt-probe-neg-rogue-04" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.915540 [ERR] 127.0.0.6:49403 - cid:328 - "v1.54.0:go:zt-probe-neg-rogue-02" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.916215 [ERR] 127.0.0.6:46243 - cid:327 - "v1.54.0:go:zt-probe-neg-rogue-03" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.916241 [ERR] 127.0.0.6:51009 - cid:331 - "v1.54.0:go:zt-probe-neg-rogue-06" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.916764 [ERR] 127.0.0.6:40041 - cid:336 - authentication error
+[1] 2026/10/17 07:40:05.916974 [ERR] 127.0.0.6:53579 - cid:333 - authentication error
+[1] 2026/10/17 07:40:05.917033 [ERR] 127.0.0.6:39559 - cid:335 - authentication error
+[1] 2026/10/17 07:40:05.917084 [ERR] 127.0.0.6:48991 - cid:337 - authentication error
+[1] 2026/10/17 07:40:05.917129 [ERR] 127.0.0.6:47605 - cid:334 - authentication error
+[1] 2026/10/17 07:40:05.917177 [ERR] 127.0.0.6:51553 - cid:338 - authentication error
+[1] 2026/10/17 07:40:05.921196 [ERR] 127.0.0.6:53251 - cid:339 - authentication error
+[1] 2026/10/17 07:40:05.921239 [ERR] 127.0.0.6:41041 - cid:340 - authentication error
+[1] 2026/10/17 07:40:05.921361 [ERR] 127.0.0.6:37059 - cid:343 - authentication error
+[1] 2026/10/17 07:40:05.921463 [ERR] 127.0.0.6:51287 - cid:330 - "v1.54.0:go:zt-probe-neg-rogue-01" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:05.921507 [ERR] 127.0.0.6:33559 - cid:341 - authentication error
+[1] 2026/10/17 07:40:05.921793 [ERR] 127.0.0.6:41323 - cid:342 - authentication error
+[1] 2026/10/17 07:40:05.925862 [ERR] 127.0.0.6:35929 - cid:344 - authentication error
+[1] 2026/10/17 07:40:05.925901 [ERR] 127.0.0.6:56007 - cid:345 - authentication error
+[1] 2026/10/17 07:40:05.926154 [ERR] 127.0.0.6:58611 - cid:346 - authentication error
+[1] 2026/10/17 07:40:06.726956 [ERR] 127.0.0.6:43303 - cid:347 - "v1.54.0:go:zt-probe-neg-rogue-07" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.730214 [ERR] 127.0.0.6:42303 - cid:350 - "v1.54.0:go:zt-probe-neg-rogue-10" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.733035 [ERR] 127.0.0.6:42733 - cid:348 - "v1.54.0:go:zt-probe-neg-rogue-09" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.733294 [ERR] 127.0.0.6:57195 - cid:352 - "v1.54.0:go:zt-probe-neg-rogue-12" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.733410 [ERR] 127.0.0.6:58847 - cid:351 - "v1.54.0:go:zt-probe-neg-rogue-08" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:06.733530 [ERR] 127.0.0.6:50365 - cid:349 - "v1.54.0:go:zt-probe-neg-rogue-11" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.538014 [ERR] 127.0.0.6:45531 - cid:354 - "v1.54.0:go:zt-probe-neg-rogue-13" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.542207 [ERR] 127.0.0.6:40959 - cid:357 - "v1.54.0:go:zt-probe-neg-rogue-15" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.543763 [ERR] 127.0.0.6:35491 - cid:355 - "v1.54.0:go:zt-probe-neg-rogue-16" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.544109 [ERR] 127.0.0.6:53475 - cid:353 - "v1.54.0:go:zt-probe-neg-rogue-14" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.544116 [ERR] 127.0.0.6:41925 - cid:356 - "v1.54.0:go:zt-probe-neg-rogue-18" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:07.544278 [ERR] 127.0.0.6:37833 - cid:358 - "v1.54.0:go:zt-probe-neg-rogue-17" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:08.345759 [ERR] 127.0.0.6:57273 - cid:360 - "v1.54.0:go:zt-probe-neg-rogue-19" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:40:08.348809 [ERR] 127.0.0.6:54847 - cid:359 - "v1.54.0:go:zt-probe-neg-rogue-20" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17073701"
+[1] 2026/10/17 07:41:11.548027 [INF] 10.96.107.71:7422 - lid:319 - Leafnode connection closed: Client Closed - Remote: nats-global
+[1] 2026/10/17 07:41:12.551002 [INF] 10.244.0.38:7422 - lid:361 - Leafnode connection created for account: MESH 
+[1] 2026/10/17 07:41:13.551373 [INF] 10.244.0.38:7422 - lid:361 - Leafnode connection closed: Read Error
+[1] 2026/10/17 07:41:14.553357 [INF] 10.96.107.71:7422 - lid:362 - Leafnode connection created for account: MESH 
+[1] 2026/10/17 07:41:14.556923 [INF] 10.96.107.71:7422 - lid:362 - JetStream using domains: local "", remote ""

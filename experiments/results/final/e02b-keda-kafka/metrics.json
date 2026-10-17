@@ -1,5 +1,5 @@
 {
-  "prefix": "e02b-1792217236",
+  "prefix": "e02b-1792220797",
   "produced": true,
   "drained": true,
   "zeroed": true,
@@ -19,9 +19,9 @@
   "peakReplicas": 5,
   "maxReplicas": 6,
   "replicasEnd": 0,
-  "peakLag": 1865,
+  "peakLag": 1081,
   "lagEnd": 0,
-  "timeToFirstReplicaS": 5,
-  "timeToLagZeroS": 18,
-  "scaleToZeroS": 26
+  "timeToFirstReplicaS": 4,
+  "timeToLagZeroS": 12,
+  "scaleToZeroS": 28
 }

@@ -1,7 +1,7 @@
 {
-  "run": "17055349",
-  "policies_on": "2026-10-17T05:54:15.791918000Z",
-  "matrix_done": "2026-10-17T05:54:54.581824000Z",
+  "run": "17074316",
+  "policies_on": "2026-10-17T07:44:16.614892000Z",
+  "matrix_done": "2026-10-17T07:44:54.702507000Z",
   "cells": 187,
   "missing": 0,
   "matched": 187,
@@ -90,7 +90,7 @@
     "thief_nats_publish_allowed": 1
   },
   "rbac_denied_delta": {
-    "kafka": 42,
+    "kafka": 44,
     "rabbitmq": 42,
     "nats": 45
   },

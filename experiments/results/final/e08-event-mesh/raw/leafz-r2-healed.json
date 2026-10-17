@@ -1,6 +1,6 @@
 {
-  "server_id": "NCCVB6PF6Z2DUWMXIK266MWPW32XQVGHDFLOO2UPJIWEUNAIJ5TG3RKX",
-  "now": "2026-10-17T04:58:50.02400834Z",
+  "server_id": "NBU6B5H5X2WTTUK4JSRNQFK7F3ENVDUO7SGEFO5L53AYPVYSTOMCIELI",
+  "now": "2026-10-17T07:42:53.164960869Z",
   "leafnodes": 1,
   "leafs": [
     {
@@ -10,11 +10,11 @@
       "account": "MESH",
       "ip": "10.96.107.71",
       "port": 7422,
-      "rtt": "317µs",
+      "rtt": "190µs",
       "in_msgs": 360,
       "out_msgs": 360,
-      "in_bytes": 14400,
-      "out_bytes": 263440,
+      "in_bytes": 14760,
+      "out_bytes": 263667,
       "subscriptions": 3,
       "compression": "s2_uncompressed"
     }

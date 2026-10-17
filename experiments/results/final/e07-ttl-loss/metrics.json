@@ -3,28 +3,28 @@
     "meters": 200,
     "period_s": 10,
     "view_ttl_s": 25,
-    "prefix": "e07-261017060414-"
+    "prefix": "e07-261017073417-"
   },
   "a": {
     "min_keys": 200,
-    "min_ttl_s": 5.008,
-    "dropped": 193,
-    "dropped_meters": 193,
+    "min_ttl_s": 5.01,
+    "dropped": 191,
+    "dropped_meters": 191,
     "max_drops_per_meter": 1,
-    "drop_window_s": 9.621158,
-    "recover_s": 0.276
+    "drop_window_s": 9.584994,
+    "recover_s": 0.356
   },
   "b": {
     "min_keys": 0,
-    "reappear_s": 10.311,
+    "reappear_s": 10.427,
     "dropped": 602,
-    "drop_window_s": 30.11955,
+    "drop_window_s": 30.091531,
     "vanished": 200,
-    "err_min_s": 0.004,
-    "err_max_s": 1.006
+    "err_min_s": 0.002,
+    "err_max_s": 1.003
   },
   "c": {
     "deleted": 200,
-    "repopulate_s": 10.049
+    "repopulate_s": 10.220
   }
 }
