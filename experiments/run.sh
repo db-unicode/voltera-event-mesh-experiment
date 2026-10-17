@@ -55,7 +55,8 @@ expctl_build
 cluster_lock "$exp-r$rep"
 
 sha=$(git -C "$ROOT" rev-parse --short HEAD)
-git -C "$ROOT" diff --quiet HEAD || sha=${sha}-dirty
+# la evidencia promovida a results/final/ no cuenta como cambio de código
+git -C "$ROOT" diff --quiet HEAD -- . ':(exclude)experiments/results' || sha=${sha}-dirty
 OUT="$HERE/results/$exp/$(date -u +%Y%m%dT%H%M%SZ)-$sha-r$rep"
 mkdir -p "$OUT/raw" "$OUT/prom" "$OUT/logs" "$OUT/figures"
 EXP_ID=$exp

@@ -13,7 +13,7 @@ require_cluster
 reps=${1:-1}
 case "$reps" in '' | *[!0-9]*) die "reps debe ser un entero: $reps" ;; esac
 list=${EXP_LIST:-e00 e01 e02 e02b e03 e04 e05 e06 e07 e08 e09 e10}
-[ "${EXP_ALLOW_DIRTY:-0}" = 1 ] || git -C "$ROOT" diff --quiet HEAD \
+[ "${EXP_ALLOW_DIRTY:-0}" = 1 ] || git -C "$ROOT" diff --quiet HEAD -- . ':(exclude)experiments/results' \
   || die "hay cambios sin commitear: commitea o usa EXP_ALLOW_DIRTY=1"
 
 summary="$ROOT/experiments/results/all-$(date -u +%Y%m%dT%H%M%SZ).tsv"
