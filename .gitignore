@@ -1,0 +1,15 @@
+# Resultados de experimentos: solo se versiona la corrida entregada
+experiments/results/*
+!experiments/results/final/
+
+# Binarios y artefactos de build
+/bin/
+*.exe
+*.test
+*.out
+
+# Secretos locales
+.env
+.env.*
+
+.DS_Store
