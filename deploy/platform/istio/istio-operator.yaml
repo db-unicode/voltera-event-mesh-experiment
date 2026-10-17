@@ -12,6 +12,9 @@ spec:
       # Evita que la app arranque (p. ej. Kafka) antes de que Envoy esté listo
       holdApplicationUntilProxyStarts: true
     defaultProviders:
+      # Sin esta línea el perfil minimal no instala el filtro de métricas (istio_requests_total)
+      metrics:
+        - prometheus
       tracing:
         - jaeger-otel
     extensionProviders:
