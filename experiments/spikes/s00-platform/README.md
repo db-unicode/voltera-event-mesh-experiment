@@ -46,3 +46,17 @@ Al pasar, el spike borra los namespaces `s00-*`. Si falla, los deja para depurar
 
 - `result.txt`: un PASS/FAIL por check y veredicto final. `checks/<n>.log`: salida de cada check.
 - `top-nodes.txt`, `top-pods.txt`, `ram-by-namespace-mib.tsv`, `docker-stats-node.txt`, `pods.txt`, `mtls-headers.json`.
+
+## RAM medida (plataforma sin brokers ni servicios, 60 s tras `platform:up`)
+
+Una corrida en macOS arm64, Docker (OrbStack) con 15,6 GiB. Suma de `kubectl top pods -A`:
+
+| Namespace | MiB |
+|---|---|
+| `kube-system` (apiserver 468, etcd 55, controller-manager 74, resto) | 716 |
+| `istio-system` (istiod 60, Prometheus 170, Grafana 130, Kiali 39, Jaeger y otros) | 419 |
+| `keda` | 91 |
+| `local-path-storage` | 14 |
+| **Total pods** | **1240** |
+
+`docker stats` del contenedor del nodo: 1,55 GiB (incluye kubelet, containerd y kernel). El estimado del informe 02 para esta parte era ~2,4 GiB (nodo 0,9 + istiod 0,3 + Kiali 0,15 + Prometheus 0,4 + Grafana 0,2 + Jaeger 0,25 + KEDA 0,25); lo medido es ~35 % menor. Sin carga: Prometheus y Jaeger crecerán con las series y las trazas.
