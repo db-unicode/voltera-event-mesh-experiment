@@ -102,7 +102,9 @@ RV_WATCH_TAG=
 rv_watch_start() {
   RV_WATCH_SEQ=$((RV_WATCH_SEQ + 1))
   RV_WATCH_TAG=$$-$RV_WATCH_SEQ
-  # kubectl directo (no la función k): $! debe ser el PID de kubectl para poder matarlo
+  # kubectl directo (no la función k): $! debe ser el PID de kubectl para poder matarlo. El script remoto va entre comillas
+  # simples a propósito: lo expande el sh del contenedor, no el nuestro.
+  # shellcheck disable=SC2016
   kubectl --context "$KUBE_CONTEXT" -n "$RV_NS" exec deploy/market-view -c redis -- env "LUA=$RV_LUA_WATCH" "PAT=$1" \
     "DETAIL=${3:-1}" "TAG=$RV_WATCH_TAG" "MAXS=${RV_WATCH_MAX_S:-1800}" sh -c \
     'end=$(( $(date +%s) + MAXS )); while [ ! -f "/tmp/rvstop.$TAG" ] && [ "$(date +%s)" -lt "$end" ]; do printf "%s;" "$(date -u +%Y-%m-%dT%H:%M:%S.%NZ)"; redis-cli --no-auth-warning EVAL "$LUA" 0 "$PAT" "$DETAIL"; sleep 1; done; rm -f "/tmp/rvstop.$TAG"' \

@@ -1,0 +1,1 @@
+{"status":"success","data":{"resultType":"vector","result":[{"metric":{"source_workload":"declaration-gateway"},"value":[1792216253.502,"112"]},{"metric":{"source_workload":"e04-control-261017054449"},"value":[1792216253.502,"20"]},{"metric":{"source_workload":"e04-deny-261017054449"},"value":[1792216253.502,"20"]}]}}

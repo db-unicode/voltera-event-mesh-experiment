@@ -1,0 +1,177 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/exp-e03-e04-e07/experiments/results/e04-state-transfer/20261017T054432Z-9fa7dee-dirty-r1",
+  "criteria": [
+    {
+      "id": "policy-attempts",
+      "description": "(1) El pod con SA market-projector hizo 20 intentos de conexión a positions-db:5432",
+      "metric": "metrics.json:$.policy.attempts",
+      "observed": 20,
+      "op": "eq",
+      "expected": 20,
+      "verdict": "PASS"
+    },
+    {
+      "id": "policy-rejected",
+      "description": "(1) Los 20 intentos fueron rechazados (rc != 0)",
+      "metric": "metrics.json:$.policy.rejected",
+      "observed": 20,
+      "op": "eq",
+      "expected": 20,
+      "verdict": "PASS"
+    },
+    {
+      "id": "policy-not-auth",
+      "description": "(1) Ningún rechazo es un error de autenticación de Postgres (el rechazo es de red, no de contraseña)",
+      "metric": "metrics.json:$.policy.auth_errors",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "policy-rbac-denied",
+      "description": "(1) El contador tcp.rbac.denied del sidecar de positions-db sube al menos 20",
+      "metric": "metrics.json:$.policy.rbac_denied_delta",
+      "observed": 20,
+      "op": "ge",
+      "expected": 20,
+      "verdict": "PASS"
+    },
+    {
+      "id": "policy-control",
+      "description": "(1) Control, el mismo intento con SA declaration-gateway conecta 20 de 20",
+      "metric": "metrics.json:$.policy.control_connected",
+      "observed": 20,
+      "op": "eq",
+      "expected": 20,
+      "verdict": "PASS"
+    },
+    {
+      "id": "pg-samples",
+      "description": "(2) pg_stat_activity muestreada con clientes al menos 10 veces durante la carga",
+      "metric": "metrics.json:$.connections.pg_stat_samples",
+      "observed": 20,
+      "op": "ge",
+      "expected": 10,
+      "verdict": "PASS"
+    },
+    {
+      "id": "pg-clients",
+      "description": "(2) Clientes de pg_stat_activity distintos de declaration-gateway = 0",
+      "metric": "metrics.json:$.connections.pg_foreign_rows",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "prom-foreign-sources",
+      "description": "(2) Orígenes distintos de declaration-gateway en istio_tcp_connections_opened_total hacia positions-db = 0",
+      "metric": "metrics.json:$.connections.prom_foreign_sources",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "prom-projector",
+      "description": "(2) Conexiones con origen market-project hacia positions-db = 0",
+      "metric": "metrics.json:$.connections.prom_projector_connections",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "prom-gateway",
+      "description": "(2) declaration-gateway sí aparece como origen (control de la consulta)",
+      "metric": "metrics.json:$.connections.prom_gateway_connections",
+      "observed": 83,
+      "op": "gt",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "static-projector-deps",
+      "description": "(3) go list -deps ./cmd/market-projector sin drivers de Postgres (pgx, jackc, lib/pq); database/sql de la stdlib entra por prometheus/collectors y se informa aparte",
+      "metric": "metrics.json:$.static.projector_db_deps",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "static-grep-control",
+      "description": "(3) Control, el mismo grep sobre cmd/declaration-gateway sí encuentra drivers",
+      "metric": "metrics.json:$.static.gateway_db_deps_control",
+      "observed": 16,
+      "op": "gt",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "static-env",
+      "description": "(3) El Deployment del proyector no tiene variables ni Secrets de positions-db / Postgres",
+      "metric": "metrics.json:$.static.projector_env_matches",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "autonomy-published",
+      "description": "(4) Se publicaron 500 PositionDeclared directos a energy-positions",
+      "metric": "metrics.json:$.autonomy.published",
+      "observed": 500,
+      "op": "eq",
+      "expected": 500,
+      "verdict": "PASS"
+    },
+    {
+      "id": "autonomy-in-redis",
+      "description": "(4) 500 de 500 posiciones en Redis con positions-db en 0 réplicas",
+      "metric": "metrics.json:$.autonomy.in_redis",
+      "observed": 500,
+      "op": "eq",
+      "expected": 500,
+      "verdict": "PASS"
+    },
+    {
+      "id": "autonomy-time",
+      "description": "(4) 500/500 en Redis en \u003c= 10 s desde el inicio de la publicación",
+      "metric": "metrics.json:$.autonomy.seconds_to_full",
+      "observed": 1.086,
+      "op": "le",
+      "expected": 10,
+      "verdict": "PASS"
+    },
+    {
+      "id": "autonomy-time-found",
+      "description": "(4) Las 500 se observaron (seconds_to_full \u003e= 0)",
+      "metric": "metrics.json:$.autonomy.seconds_to_full",
+      "observed": 1.086,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "kiali-no-edge",
+      "description": "Grafo de Kiali sin arista market-projector -\u003e positions-db",
+      "metric": "metrics.json:$.kiali.edges_projector_to_db",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "kiali-gateway-edge",
+      "description": "Grafo de Kiali con arista declaration-gateway -\u003e positions-db (control del grafo)",
+      "metric": "metrics.json:$.kiali.edges_gateway_to_db",
+      "observed": 1,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    }
+  ]
+}

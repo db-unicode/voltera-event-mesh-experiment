@@ -1,0 +1,227 @@
+{
+  "run": "261017053440",
+  "base_noread": {
+    "n": 60,
+    "p50": 0.020476,
+    "p95": 0.024390949999999998,
+    "p99": 0.028753829999999998,
+    "max": 0.030797,
+    "probes": {
+      "sent": 60,
+      "visible": 60,
+      "timeouts": 0,
+      "errors": 0
+    }
+  },
+  "base_read": {
+    "n": 60,
+    "p50": 0.020445,
+    "p95": 0.025149899999999996,
+    "p99": 0.031618589999999995,
+    "max": 0.036633,
+    "probes": {
+      "sent": 60,
+      "visible": 60,
+      "timeouts": 0,
+      "errors": 0
+    },
+    "reads": {
+      "rate": 200,
+      "reads": 12000,
+      "errors": 0,
+      "skipped": 0,
+      "latencyMs": {
+        "p50": 0.239245,
+        "p95": 0.834151,
+        "p99": 1.802716,
+        "max": 12.544555
+      }
+    }
+  },
+  "peak": {
+    "during": {
+      "n": 59,
+      "p50": 0.023537,
+      "p95": 0.06717279999999992,
+      "p99": 0.14861391999999998,
+      "max": 0.164057
+    },
+    "recovered": {
+      "n": 51,
+      "p50": 0.020164,
+      "p95": 0.0235365,
+      "p99": 0.02515,
+      "max": 0.025565
+    },
+    "all": {
+      "n": 170,
+      "p50": 0.0208855,
+      "p95": 0.05381264999999999,
+      "p99": 0.10740150999999994,
+      "max": 0.164057,
+      "probes": {
+        "sent": 170,
+        "visible": 170,
+        "timeouts": 0,
+        "errors": 0
+      },
+      "reads": {
+        "rate": 200,
+        "reads": 34001,
+        "errors": 0,
+        "skipped": 0,
+        "latencyMs": {
+          "p50": 0.255582,
+          "p95": 1.375497,
+          "p99": 4.177409,
+          "max": 37.94122
+        }
+      }
+    },
+    "recovery_s": 0
+  },
+  "sent_to_visible": {
+    "note": "incluye la espera en la cola meter-declarations antes del commit (tema de E2)",
+    "base_noread": {
+      "n": 60,
+      "p50": 0.052034,
+      "p95": 9.637033249999998,
+      "p99": 10.579915439999999,
+      "max": 10.6059
+    },
+    "base_read": {
+      "n": 60,
+      "p50": 0.056788,
+      "p95": 9.684419499999999,
+      "p99": 10.35190755,
+      "max": 10.6056
+    },
+    "peak_during": {
+      "n": 59,
+      "p50": 16.238944,
+      "p95": 19.893703300000002,
+      "p99": 20.43358088,
+      "max": 20.6238
+    },
+    "peak_all": {
+      "n": 170,
+      "p50": 3.401262,
+      "p95": 19.07551105,
+      "p99": 20.08515455,
+      "max": 20.6238
+    },
+    "peak_recovery_s": 104.323
+  },
+  "isolation": {
+    "baseline": {
+      "seconds": 36,
+      "reads": 7200,
+      "errors": 0,
+      "p95_median_ms": 0.5535000000000001
+    },
+    "positions_db_down": {
+      "seconds": 28,
+      "reads": 5600,
+      "errors": 0,
+      "p95_median_ms": 0.5785
+    },
+    "reader_job_total": {
+      "seconds": 101,
+      "reads": 20001,
+      "errors": 0,
+      "p95_median_ms": 0.569
+    },
+    "p95_change_pct_abs": 0
+  },
+  "write": {
+    "p95_noread_s": 0.04470128871673461,
+    "p95_read_s": 0.04527957201749068,
+    "increase_pct": 1.293661362697095,
+    "increase_pct_effective": 0
+  },
+  "decomposition": {
+    "base": {
+      "committed_to_visible": {
+        "p50": 0.00587012987012987,
+        "p95": 0.02234857849196539,
+        "p99": 0.04878478664192949,
+        "mean": 0.008165984058407159
+      },
+      "emitted_to_visible": {
+        "p50": 0.00516539295083837,
+        "p95": 0.009814246606592903,
+        "p99": 0.021731176470588216,
+        "mean": 0.004116525080011669
+      },
+      "consumed_to_set_mean_s": 0.0004967087540089208,
+      "committed_to_emitted_mean_s": 0.004049458978395489,
+      "emitted_to_consumed_mean_s": 0.0036198163260027488
+    },
+    "peak": {
+      "committed_to_visible": {
+        "p50": 0.014690670800450958,
+        "p95": 0.04949595055413469,
+        "p99": 0.11332000000000018,
+        "mean": 0.018544705039570696
+      },
+      "emitted_to_visible": {
+        "p50": 0.006051833340296314,
+        "p95": 0.021766425265474267,
+        "p99": 0.03593979395065705,
+        "mean": 0.007240162146806957
+      },
+      "consumed_to_set_mean_s": 0.0008318703208328118,
+      "committed_to_emitted_mean_s": 0.011304542892763739,
+      "emitted_to_consumed_mean_s": 0.006408291825974145
+    },
+    "committed_p99_whole_run_s": 0.08839047619047614
+  },
+  "load": {
+    "base": {
+      "published": 27000,
+      "late": 0,
+      "dropped": 0,
+      "errors": 0
+    },
+    "peak": {
+      "published": 15870,
+      "late": 0,
+      "dropped": 0,
+      "errors": 0
+    }
+  },
+  "convergence": {
+    "base_steady": {
+      "checked": 3000,
+      "equal": 3000,
+      "missing": 0,
+      "different": 0,
+      "expired_excluded": 0,
+      "waited_s": 0
+    },
+    "base_probe": {
+      "checked": 100,
+      "equal": 50,
+      "missing": 0,
+      "different": 0,
+      "expired_excluded": 50,
+      "waited_s": 0
+    },
+    "peak_steady": {
+      "checked": 3000,
+      "equal": 3000,
+      "missing": 0,
+      "different": 0,
+      "expired_excluded": 0,
+      "waited_s": 0
+    },
+    "peak_probe": {
+      "checked": 50,
+      "equal": 50,
+      "missing": 0,
+      "different": 0,
+      "expired_excluded": 0,
+      "waited_s": 0
+    }
+  }
+}

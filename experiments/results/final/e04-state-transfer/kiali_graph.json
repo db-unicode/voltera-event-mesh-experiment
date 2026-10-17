@@ -1,0 +1,803 @@
+{
+  "timestamp": 1792216271,
+  "duration": 441,
+  "graphType": "workload",
+  "elements": {
+    "nodes": [
+      {
+        "data": {
+          "id": "dba4fae2a508474c33352ec5d671aa6d9245af0d8269e2714a2e8b2111e88b4c",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-global",
+          "workload": "nats",
+          "app": "nats",
+          "version": "latest",
+          "destServices": [
+            {
+              "cluster": "Kubernetes",
+              "namespace": "voltera-global",
+              "name": "nats"
+            }
+          ],
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpIn": "30457.94"
+              }
+            }
+          ],
+          "healthData": null,
+          "isOutside": true
+        }
+      },
+      {
+        "data": {
+          "id": "e32b60ef5b4a4d97551f14193a40133e0622a181cf3dd3e5964d40828edc90d2",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-infra",
+          "workload": "kafka",
+          "app": "kafka",
+          "version": "latest",
+          "destServices": [
+            {
+              "cluster": "Kubernetes",
+              "namespace": "voltera-infra",
+              "name": "kafka-headless"
+            }
+          ],
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpIn": "35119.85"
+              }
+            }
+          ],
+          "healthData": null,
+          "isOutside": true
+        }
+      },
+      {
+        "data": {
+          "id": "f981e1f80097c10221e7067db2763cb918a60616ff7816066b5eca3fbde3725b",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-infra",
+          "workload": "rabbitmq",
+          "app": "rabbitmq",
+          "version": "latest",
+          "destServices": [
+            {
+              "cluster": "Kubernetes",
+              "namespace": "voltera-infra",
+              "name": "rabbitmq"
+            }
+          ],
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpIn": "80641.87"
+              }
+            }
+          ],
+          "healthData": null,
+          "isOutside": true
+        }
+      },
+      {
+        "data": {
+          "id": "59bedea3c71f59687d8e98b057f5baf8cfd01a60cbbf779adab1165c99d21c07",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "declaration-gateway",
+          "app": "declaration-gateway",
+          "version": "latest",
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpOut": "127043.02"
+              }
+            }
+          ],
+          "healthData": null,
+          "isRoot": true
+        }
+      },
+      {
+        "data": {
+          "id": "9b9cd6e4c6df5caa31111b0c9d2460e015c1f646b45a3eb1958de151dbf6db0d",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "device-sim",
+          "app": "device-sim",
+          "version": "latest",
+          "destServices": [
+            {
+              "cluster": "Kubernetes",
+              "namespace": "voltera-r1",
+              "name": "device-sim"
+            }
+          ],
+          "traffic": [
+            {
+              "protocol": "http",
+              "rates": {
+                "httpIn": "35.15"
+              }
+            }
+          ],
+          "healthData": null
+        }
+      },
+      {
+        "data": {
+          "id": "a8b40c585ac3f81562e4d64591c8078660c2183fafacc944746e3d9be6682a8f",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "e04-control-261017054449",
+          "app": "e04-attempt",
+          "version": "latest",
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpOut": "2.30"
+              }
+            }
+          ],
+          "healthData": null,
+          "isRoot": true
+        }
+      },
+      {
+        "data": {
+          "id": "c0de09b55628ea92453cddc4cb04bc576c47c47a591a78702ceea51ed286ea73",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "energy-transfer",
+          "app": "energy-transfer",
+          "version": "latest",
+          "traffic": [
+            {
+              "protocol": "http",
+              "rates": {
+                "httpOut": "35.15"
+              }
+            },
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpOut": "27071.02"
+              }
+            }
+          ],
+          "healthData": null,
+          "isRoot": true
+        }
+      },
+      {
+        "data": {
+          "id": "dc55a2c2701cb7bef82eebdb262e6bd692942cb323540e8f9526a2b30a9d55d2",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "exp-load-1792215889-91451-1",
+          "app": "exp-load-job",
+          "version": "latest",
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpOut": "33355.05"
+              }
+            }
+          ],
+          "healthData": null,
+          "isRoot": true
+        }
+      },
+      {
+        "data": {
+          "id": "de604ce5f4d4eb4f27d91fcd5869ac972913af649fb69c29592034961b02ed2e",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "market-projector",
+          "app": "market-projector",
+          "version": "latest",
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpOut": "40309.86"
+              }
+            }
+          ],
+          "healthData": null,
+          "isRoot": true
+        }
+      },
+      {
+        "data": {
+          "id": "7c1f231d3223834781e929eb1ff6a40a8543e84d7c3271cdc96448e21f12fa9d",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "matching-engine",
+          "app": "matching-engine",
+          "version": "latest",
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpOut": "278308.21"
+              }
+            }
+          ],
+          "healthData": null,
+          "isRoot": true
+        }
+      },
+      {
+        "data": {
+          "id": "8976103439e08e1fb4c379c642761287ac946adcbcf6977bbc11a8242f8d278c",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "mesh-bridge",
+          "app": "mesh-bridge",
+          "version": "latest",
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpOut": "36870.14"
+              }
+            }
+          ],
+          "healthData": null,
+          "isRoot": true
+        }
+      },
+      {
+        "data": {
+          "id": "4f4b374bed2709098968278cdc1a8f2fc711e852c24758bb2e6890aeb1a462a7",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "nats",
+          "app": "nats",
+          "version": "latest",
+          "destServices": [
+            {
+              "cluster": "Kubernetes",
+              "namespace": "voltera-r1",
+              "name": "nats"
+            }
+          ],
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpIn": "29825.08",
+                "tcpOut": "30457.94"
+              }
+            }
+          ],
+          "healthData": null
+        }
+      },
+      {
+        "data": {
+          "id": "7257fcef44fb751386f4fe5ed6fe004c99d858ec033604e8a0ce4a20b2142518",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "matches-db",
+          "app": "postgres",
+          "version": "latest",
+          "destServices": [
+            {
+              "cluster": "Kubernetes",
+              "namespace": "voltera-r1",
+              "name": "matches-db"
+            }
+          ],
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpIn": "107077.85"
+              }
+            }
+          ],
+          "healthData": null
+        }
+      },
+      {
+        "data": {
+          "id": "78a48d14ae2b6d03fabfb9e89bccf4c7092c2b63a047c171a8a2d4c9e8b49742",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "positions-db",
+          "app": "postgres",
+          "version": "latest",
+          "destServices": [
+            {
+              "cluster": "Kubernetes",
+              "namespace": "voltera-r1",
+              "name": "positions-db"
+            }
+          ],
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpIn": "81334.06"
+              }
+            }
+          ],
+          "healthData": null
+        }
+      },
+      {
+        "data": {
+          "id": "35101c216f83b9da0ff4eaea5a55c17460e6eee14ce514f76a2ca713dffaab73",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "transfer-db",
+          "app": "postgres",
+          "version": "latest",
+          "destServices": [
+            {
+              "cluster": "Kubernetes",
+              "namespace": "voltera-r1",
+              "name": "transfer-db"
+            }
+          ],
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpIn": "19927.46"
+              }
+            }
+          ],
+          "healthData": null
+        }
+      },
+      {
+        "data": {
+          "id": "4952fec7495445ba8991da467f476279bbc509a70f35bad9e1164a8566f0527d",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "price-feed-simulator",
+          "app": "price-feed-simulator",
+          "version": "latest",
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpOut": "70.74"
+              }
+            }
+          ],
+          "healthData": null,
+          "isRoot": true
+        }
+      },
+      {
+        "data": {
+          "id": "6ffc5208ad0dad3535708261a78c04f2230b90572224f353864da01a2822f217",
+          "nodeType": "workload",
+          "cluster": "Kubernetes",
+          "namespace": "voltera-r1",
+          "workload": "market-view",
+          "app": "redis",
+          "version": "latest",
+          "destServices": [
+            {
+              "cluster": "Kubernetes",
+              "namespace": "voltera-r1",
+              "name": "market-view"
+            }
+          ],
+          "traffic": [
+            {
+              "protocol": "tcp",
+              "rates": {
+                "tcpIn": "189104.17"
+              }
+            }
+          ],
+          "healthData": null
+        }
+      }
+    ],
+    "edges": [
+      {
+        "data": {
+          "id": "55e614a5abe87b62bf35b11fd7b0522998527aea2e6e6d2e71c00f8af7e7e222",
+          "source": "4952fec7495445ba8991da467f476279bbc509a70f35bad9e1164a8566f0527d",
+          "target": "f981e1f80097c10221e7067db2763cb918a60616ff7816066b5eca3fbde3725b",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "70.74"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "rabbitmq.voltera-infra.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "cf6fc55202adaa8f1f163cc3125389f6ffbdeac0aff3585cfb9f53cd3574cf9d",
+          "source": "4f4b374bed2709098968278cdc1a8f2fc711e852c24758bb2e6890aeb1a462a7",
+          "target": "dba4fae2a508474c33352ec5d671aa6d9245af0d8269e2714a2e8b2111e88b4c",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "30457.94"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "nats.voltera-global.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "6f51272467be83c3aa09ee15c5f6988b77b6410bd7d119fbad65ba0ef445c361",
+          "source": "59bedea3c71f59687d8e98b057f5baf8cfd01a60cbbf779adab1165c99d21c07",
+          "target": "78a48d14ae2b6d03fabfb9e89bccf4c7092c2b63a047c171a8a2d4c9e8b49742",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "81331.76"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "positions-db.voltera-r1.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "4f195abccde7236a42b1c1790d151ccc4d4d7505704b66c0b9cb7e9f4dbabb35",
+          "source": "59bedea3c71f59687d8e98b057f5baf8cfd01a60cbbf779adab1165c99d21c07",
+          "target": "f981e1f80097c10221e7067db2763cb918a60616ff7816066b5eca3fbde3725b",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "45711.26"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "rabbitmq.voltera-infra.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "9ff3e267739f9d021e19a8bc1d2180d5095b1ef190caf6e7fbd62933e32308ac",
+          "source": "7c1f231d3223834781e929eb1ff6a40a8543e84d7c3271cdc96448e21f12fa9d",
+          "target": "6ffc5208ad0dad3535708261a78c04f2230b90572224f353864da01a2822f217",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "150299.13"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "market-view.voltera-r1.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "0d51bcaf7f3a3172a86b45d45c17d9f9af4e1ac0a10fafd7b950acff4f0d5f0a",
+          "source": "7c1f231d3223834781e929eb1ff6a40a8543e84d7c3271cdc96448e21f12fa9d",
+          "target": "7257fcef44fb751386f4fe5ed6fe004c99d858ec033604e8a0ce4a20b2142518",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "107077.85"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "matches-db.voltera-r1.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "cef2d67686a92203b477e02beaee0c31b24112529e615cb1eab7a2a43449527d",
+          "source": "7c1f231d3223834781e929eb1ff6a40a8543e84d7c3271cdc96448e21f12fa9d",
+          "target": "e32b60ef5b4a4d97551f14193a40133e0622a181cf3dd3e5964d40828edc90d2",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "20931.24"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "kafka-headless.voltera-infra.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "aaca7cdbdf4df29e19209ec4f189a96e709522bddeaf26b89e7d115855877faf",
+          "source": "8976103439e08e1fb4c379c642761287ac946adcbcf6977bbc11a8242f8d278c",
+          "target": "4f4b374bed2709098968278cdc1a8f2fc711e852c24758bb2e6890aeb1a462a7",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "29825.08"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "nats.voltera-r1.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "19cf86655310f6a80ceadc5d2e235db28fa8ee071efce09e03b7ba802c56acbb",
+          "source": "8976103439e08e1fb4c379c642761287ac946adcbcf6977bbc11a8242f8d278c",
+          "target": "e32b60ef5b4a4d97551f14193a40133e0622a181cf3dd3e5964d40828edc90d2",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "7045.05"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "kafka-headless.voltera-infra.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "e9531989731817f9b4cc091fabdd481e801bcadb576187b0951123abcd520d50",
+          "source": "a8b40c585ac3f81562e4d64591c8078660c2183fafacc944746e3d9be6682a8f",
+          "target": "78a48d14ae2b6d03fabfb9e89bccf4c7092c2b63a047c171a8a2d4c9e8b49742",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "2.30"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "positions-db.voltera-r1.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "680353306fc96864e55cc728de8699939c87e1f94b59bcc3bc10bb698340c688",
+          "source": "c0de09b55628ea92453cddc4cb04bc576c47c47a591a78702ceea51ed286ea73",
+          "target": "35101c216f83b9da0ff4eaea5a55c17460e6eee14ce514f76a2ca713dffaab73",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "19927.46"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "transfer-db.voltera-r1.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "1d9a50f709024462d7b7317edbfeb56aedfb36453bb2b1c4951c3a025da15e48",
+          "source": "c0de09b55628ea92453cddc4cb04bc576c47c47a591a78702ceea51ed286ea73",
+          "target": "9b9cd6e4c6df5caa31111b0c9d2460e015c1f646b45a3eb1958de151dbf6db0d",
+          "responseTime": "1",
+          "throughput": "29703",
+          "traffic": {
+            "protocol": "http",
+            "rates": {
+              "http": "35.15",
+              "httpPercentReq": "100.0"
+            },
+            "responses": {
+              "200": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "device-sim.voltera-r1.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "6900def035f1edcc1696c0c1131d2ce3e2d6e5e228a275a58e71be6d04ffdd9d",
+          "source": "c0de09b55628ea92453cddc4cb04bc576c47c47a591a78702ceea51ed286ea73",
+          "target": "e32b60ef5b4a4d97551f14193a40133e0622a181cf3dd3e5964d40828edc90d2",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "7143.56"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "kafka-headless.voltera-infra.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "397d8817cf664492e2844959875ea08e22e2fc958d244a437405eed8269460c0",
+          "source": "dc55a2c2701cb7bef82eebdb262e6bd692942cb323540e8f9526a2b30a9d55d2",
+          "target": "f981e1f80097c10221e7067db2763cb918a60616ff7816066b5eca3fbde3725b",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "33355.05"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "rabbitmq.voltera-infra.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "8f8f087cf9fd91eab319c46e450693a9f4c01d98311a79cadba1419cf7e4072b",
+          "source": "de604ce5f4d4eb4f27d91fcd5869ac972913af649fb69c29592034961b02ed2e",
+          "target": "6ffc5208ad0dad3535708261a78c04f2230b90572224f353864da01a2822f217",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "38805.04"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "market-view.voltera-r1.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "data": {
+          "id": "9a98601e2233a9d356ae343155bb2e4b8d4507a69cb55ab0be37d1e2df586e00",
+          "source": "de604ce5f4d4eb4f27d91fcd5869ac972913af649fb69c29592034961b02ed2e",
+          "target": "f981e1f80097c10221e7067db2763cb918a60616ff7816066b5eca3fbde3725b",
+          "traffic": {
+            "protocol": "tcp",
+            "rates": {
+              "tcp": "1504.82"
+            },
+            "responses": {
+              "-": {
+                "flags": {
+                  "-": "100.0"
+                },
+                "hosts": {
+                  "rabbitmq.voltera-infra.svc.cluster.local": "100.0"
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

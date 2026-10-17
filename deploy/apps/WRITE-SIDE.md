@@ -36,12 +36,21 @@ los medidores de cada zona usa cada formato.
 
 | Flag (env `METERSIM_*`) | Efecto |
 |---|---|
-| `--profile steady\|pairs\|spike\|dup\|once` | steady: tasa fija recorriendo los medidores (la versión sube en cada vuelta). pairs: por zona, pares SURPLUS/DEFICIT de igual kWh (1 match esperado por par; `expectedPairs` en el resumen). spike: rampa lineal (`--ramp`) a `--rate` y meseta. once: cada medidor una vez. dup: el lote de `once` (mismos `eventId` y versiones) `--dup-k` veces, mezclado. |
+| `--profile steady\|pairs\|spike\|dup\|once\|probe\|direct-positions` | steady: tasa fija recorriendo los medidores (la versión sube en cada vuelta). pairs: por zona, pares SURPLUS/DEFICIT de igual kWh (1 match esperado por par; `expectedPairs` en el resumen). spike: rampa lineal (`--ramp`) a `--rate` y meseta. once: cada medidor una vez. probe y direct-positions: ver *Perfiles de medición*. dup: el lote de `once` (mismos `eventId` y versiones) `--dup-k` veces, mezclado. |
 | `--rate` | declaraciones/s. Si falta en steady/pairs/spike: `meters/period`, o 100. En once/dup `0` = sin límite |
 | `--duration` | s o `1m30s` (steady, pairs, spike) |
 | `--meters`, `--zones`, `--period`, `--seed`, `--dup-k` | medidores (`m-0001`...), zonas, s entre declaraciones de un medidor, semilla, copias de dup |
 | `--out` | CSV `eventId,meterId,version,sentAt` |
 | `--prefix`, `--vendor`, `--horizon`, `--ramp`, `--workers`, `--version-base` | prefijo de ids (`m-`); `mixed`/`acme-v1`/`voltix-2`/otro valor (header desconocido con cuerpo acme); vigencia (120s); rampa (5s); publicadores (16); primera versión (once/dup: 1; resto: unix time) |
+
+### Perfiles de medición (E3 y E4; no son parte del dominio)
+
+| Perfil | Qué hace | Credenciales |
+|---|---|---|
+| `probe` | Medidores `probe-*` (`--prefix probe-...`) que declaran `--rate` sondeos/s (1 por defecto) con una versión que no se repite; al confirmarse la publicación, cada sondeo lee `_v` de `pos:<zona>:<medidor>` en `market-view` cada `--poll` (20 ms) hasta ver su versión y anota `visible_at` (`--out`, CSV `eventId,meterId,version,sent_at,confirmed_at,visible_at,sent_us,visible_us,status`). `--read-rate N` añade N lecturas/s de fondo (`HGETALL` de keys `pos:*` al azar; `--read-out`: CSV por segundo con percentiles). `--rate 0` con `--read-rate` = solo lectores | Además de las de AMQP: `REDIS_PASSWORD` del Secret `market-view-credentials` (Redis no tiene usuarios de solo lectura; el perfil solo lee) y `REDIS_ADDR` (`market-view.voltera-<r>:6379`) |
+| `direct-positions` | Como `once`, pero publica `PositionDeclared` completos (estado, `committedAt` y `emittedAt` = instante de envío) en `energy-positions.x`, saltándose el gateway y `positions-db` | Usuario RabbitMQ con write sobre `energy-positions.x`: solo `declaration-gateway-<r>` (y `admin`). Los experimentos lo copian al Secret `e04-direct-rabbitmq` |
+
+Con `--out -` / `--read-out -` los CSV salen por stdout con prefijo `PROBE ` / `READS ` (el Job no tiene volumen; ver `experiments/lib/probejob.sh`).
 
 Modelo abierto: un temporizador encola cada declaración en su instante; si la cola de envío (4096) está llena se descarta
 (`dropped`); si sale más de 100 ms tarde cuenta `late`. `eventId` = UUIDv5(seed/medidor/versión): `once` y `dup` con la misma
@@ -58,6 +67,8 @@ semilla producen los mismos ids. `traceparent` nuevo por mensaje. Termina con un
   El ack va después del commit. El `eventId` de la declaración pasa a ser el del evento (seguimiento de punta a punta).
 - `PROCESSING_DELAY_MS` (20) simula el coste de validar/traducir: fija la capacidad de una réplica en ~1/(20 ms + commit)
   ≈ 40-45 msg/s y hace visible el escalado con carga modesta. `0` lo quita.
+- `DATABASE_URL` lleva `application_name=declaration-gateway`: con el sidecar `client_addr` es siempre 127.0.0.6 y `pg_stat_activity` solo distingue clientes por ese nombre (E4).
+  `positions-db` solo acepta conexiones de este ServiceAccount (`deploy/security/`, `mise run security:up`).
 - Failpoints: `before_ack` (tras el commit, antes del ack) y los del relay (`after_commit_before_publish`, `after_publish_before_mark`).
 - Al apagarse publica lo pendiente de la outbox (hasta 15 s): con KEDA en 0 réplicas nadie más lo haría. Si RabbitMQ no
   responde, lo pendiente espera al siguiente arranque, que KEDA solo provoca si llegan declaraciones.
