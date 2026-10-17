@@ -10,7 +10,7 @@ Experimento universitario de arquitectura orientada a eventos para Voltera, un m
 
 Todo corre en un cluster kind de un nodo, igual en Linux y macOS (amd64 y arm64).
 
-Flujo: medidores → RabbitMQ → declaration-gateway (KEDA) → positions-db + outbox → RabbitMQ → market-projector → Redis (vista CQRS) → matching-engine → matches-db + outbox → Kafka → energy-transfer (KEDA) → device-sim; Kafka → mesh-bridge → NATS (event mesh) → billing-sim global.
+Flujo: medidores → RabbitMQ → declaration-gateway (KEDA) → positions-db + outbox → RabbitMQ → market-projector (+ precio de price-feed-simulator por RabbitMQ) → Redis (vista CQRS) → matching-engine → matches-db + outbox → Kafka → energy-transfer (KEDA) → device-sim; Kafka → mesh-bridge → NATS (event mesh) → billing-sim global.
 
 ## Requisitos
 
