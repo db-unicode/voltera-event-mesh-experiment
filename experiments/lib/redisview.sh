@@ -115,8 +115,7 @@ rv_watch_start() {
 rv_watch_stop() {
   if [ -n "$RV_WATCH_PID" ]; then
     kubectl --context "$KUBE_CONTEXT" -n "$RV_NS" exec deploy/market-view -c redis -- touch "/tmp/rvstop.$RV_WATCH_TAG" >/dev/null 2>&1 || true
-    kill "$RV_WATCH_PID" 2>/dev/null || true
-    wait "$RV_WATCH_PID" 2>/dev/null || true
+    { kill "$RV_WATCH_PID"; wait "$RV_WATCH_PID"; } 2>/dev/null || true
   fi
   RV_WATCH_PID=
 }
