@@ -15,7 +15,9 @@ Orden de las pruebas: (2), (1), (3), (4), grafo de Kiali. La (2) va primero para
 entren en su ventana de conexiones.
 
 1. **(2) Ausencia de conexiones.** 5 min de carga base (3000 medidores / 30 s = 100 decl/s). Cada 15 s, `pg_stat_activity`
-   (sin la sesión propia). Al final, `sum by (source_workload)(increase(istio_tcp_connections_opened_total{destination_workload="positions-db",reporter="destination"}[ventana]))`.
+   (sin la sesión propia). Al final, conexiones nuevas por origen en la ventana = `sum by (source_workload)(istio_tcp_connections_opened_total{destination_workload="positions-db",reporter="destination"})`
+   menos el mismo contador `offset <ventana>` (origen nuevo: desde 0). No se usa `increase()`: una serie que nace dentro de la ventana con
+   una sola muestra devuelve 0 y ocultaría un origen ajeno.
    Con el sidecar, `client_addr` es siempre `127.0.0.6`: el cliente se identifica por `application_name`, que el gateway fija
    en su `DATABASE_URL` (`application_name=declaration-gateway`, cambio de una línea en `deploy/apps/base/declaration-gateway/deployment.yaml`).
 2. **(1) Política.** `deploy/security/` (task `security:up`, ambas regiones): `AuthorizationPolicy` ALLOW sobre `positions-db`,

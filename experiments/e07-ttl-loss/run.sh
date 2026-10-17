@@ -47,13 +47,15 @@ e7_fp_must() {
   [ "$_code" = 200 ] || { log "failpoint drop_position=$1 devolvió HTTP $_code"; return 1; }
 }
 
-# e7_wait_full <timeout_s> [muestras]: espera a que las últimas muestras tengan keys == M
+# e7_wait_full <timeout_s> <muestras> <desde_us>: espera a que las últimas <muestras> muestras, todas posteriores a
+# <desde_us> (reloj de Redis), tengan keys == M. Sin el filtro por instante, las muestras anteriores a la inyección
+# (todavía con M keys) darían por buena la recuperación antes de empezar.
 e7_wait_full() {
   _need=${2:-3}
   _t=0
   while [ "$_t" -lt "$1" ]; do
-    if tail -n "$_need" "$WATCH" | awk -F';' -v m="$E7_M" -v need="$_need" \
-      '{ n = split($2, a, " "); if (n >= 3 && a[2] == m) ok++ } END { exit !(ok == need) }'; then
+    if tail -n "$_need" "$WATCH" | awk -F';' -v m="$E7_M" -v need="$_need" -v after="${3:-0}" \
+      '{ n = split($2, a, " "); if (n >= 3 && a[2] == m && a[1] >= after) ok++ } END { exit !(ok == need) }'; then
       return 0
     fi
     sleep 1
@@ -119,7 +121,7 @@ drive() {
   sleep 9.5
   e7_fp_must off || return 1
   e7_mark a_off || return 1
-  e7_wait_full 60 5 || { log "7a: las keys no volvieron a $E7_M"; return 1; }
+  e7_wait_full 60 5 "$MARK_US" || { log "7a: las keys no volvieron a $E7_M"; return 1; }
   e7_mark a_end || return 1
   sleep $((E7_P * 2))
 
@@ -130,7 +132,7 @@ drive() {
   sleep 30
   e7_fp_must off || return 1
   e7_mark b_off || return 1
-  e7_wait_full 60 5 || { log "7b: las keys no volvieron a $E7_M"; return 1; }
+  e7_wait_full 60 5 "$MARK_US" || { log "7b: las keys no volvieron a $E7_M"; return 1; }
   e7_mark b_end || return 1
   sleep $((E7_P * 2))
 
@@ -138,7 +140,7 @@ drive() {
   log "7c: borrado de las keys $GLOB"
   DELETED=$(rv_delete "$GLOB") || return 1
   e7_mark c_del || return 1
-  e7_wait_full 60 5 || { log "7c: las keys no volvieron a $E7_M"; return 1; }
+  e7_wait_full 60 5 "$MARK_US" || { log "7c: las keys no volvieron a $E7_M"; return 1; }
   e7_mark c_end || return 1
   sleep 5
   rv_watch_stop
