@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S6: outbox transaccional con relay Go y crashes (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s06-outbox/run.sh"

@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S13: métricas Go raspadas por el Prometheus de Istio (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s13-metrics/run.sh"

@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: voltera-r2
+namePrefix: market-
+nameSuffix: -r2
+resources:
+  - ../../redis
+labels:
+  - pairs:
+      app: market-view-r2
+      app.kubernetes.io/instance: market-view-r2
+    includeSelectors: true

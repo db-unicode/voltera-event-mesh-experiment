@@ -1,0 +1,11 @@
+# Postgres propio del spike (Database per Service, sin tocar positions-db). Se borra con el namespace.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: s06-outbox
+namePrefix: s06-
+resources:
+  - ../../../../deploy/data/postgres
+labels:
+  - pairs:
+      app: s06-db
+    includeSelectors: true

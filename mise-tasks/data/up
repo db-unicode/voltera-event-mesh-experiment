@@ -1,0 +1,23 @@
+#!/bin/sh
+#MISE description="Despliega Postgres y Redis por servicio de una región (idempotente; arg: r1|r2, por defecto r1)"
+#USAGE arg "[region]" help="región a desplegar (r1 o r2)" default="r1"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+need kubectl
+require_cluster
+
+region=${1:-r1}
+dir="$ROOT/deploy/data/$region"
+[ -f "$dir/kustomization.yaml" ] || die "región desconocida '$region' (ver deploy/data/r*/)"
+
+k apply -f "$ROOT/deploy/base/namespaces.yaml" >/dev/null
+k apply -k "$dir"
+
+ns=voltera-$region
+for kind in statefulset deployment; do
+  for name in $(k -n "$ns" get "$kind" -l app.kubernetes.io/component=data -o name 2>/dev/null); do
+    wait_rollout "$name" "$ns"
+  done
+done
+log "datos de $region listos en $ns"

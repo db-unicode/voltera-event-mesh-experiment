@@ -1,0 +1,74 @@
+# Probe de métricas con sidecar y un cliente que genera tráfico para istio_requests_total.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: s13-metrics
+  labels: {istio-injection: enabled}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: metrics-probe
+  namespace: s13-metrics
+  labels: {app: metrics-probe}
+spec:
+  selector: {app: metrics-probe}
+  ports:
+    - {name: http-ops, port: 9090, targetPort: http-ops}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-probe
+  namespace: s13-metrics
+  labels: {app: metrics-probe}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: metrics-probe}
+  template:
+    metadata:
+      labels: {app: metrics-probe, version: v1}
+      # Con el sidecar, Istio reescribe estas anotaciones a :15020 y fusiona las métricas de la app.
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      containers:
+        - name: metrics-probe
+          image: voltera/metrics-probe:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: RATE_HZ, value: "5"}
+            - {name: REGION, value: r1}
+          ports:
+            - {name: http-ops, containerPort: 9090}
+          readinessProbe:
+            httpGet: {path: /readyz, port: http-ops}
+            periodSeconds: 5
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {cpu: 200m, memory: 64Mi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curl
+  namespace: s13-metrics
+  labels: {app: curl}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: curl}
+  template:
+    metadata:
+      labels: {app: curl, version: v1}
+    spec:
+      containers:
+        - name: curl
+          image: curlimages/curl:8.23.0
+          command: ["sh", "-c", "while true; do curl -s -o /dev/null http://metrics-probe:9090/healthz; sleep 1; done"]
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+            limits: {cpu: 100m, memory: 32Mi}

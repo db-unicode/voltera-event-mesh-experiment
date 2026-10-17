@@ -1,0 +1,47 @@
+# Job del probe. run.sh sustituye __NAME__ y __FAILPOINTS__. Un crash (exit 137) reinicia el
+# contenedor en el mismo pod; /state (emptyDir) sobrevive y evita que el failpoint dispare otra vez.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: __NAME__
+  namespace: s06-outbox
+  labels: {app: outbox-probe}
+spec:
+  backoffLimit: 6
+  template:
+    metadata:
+      labels: {app: outbox-probe}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: outbox-probe
+          image: voltera/outbox-probe:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_USER
+              valueFrom: {secretKeyRef: {name: s06-db-credentials, key: POSTGRES_USER}}
+            - name: POSTGRES_PASSWORD
+              valueFrom: {secretKeyRef: {name: s06-db-credentials, key: POSTGRES_PASSWORD}}
+            - name: POSTGRES_DB
+              valueFrom: {secretKeyRef: {name: s06-db-credentials, key: POSTGRES_DB}}
+            - name: DATABASE_URL
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@s06-db:5432/$(POSTGRES_DB)?sslmode=disable
+            - {name: ROWS, value: "1000"}
+            - {name: BATCH_SIZE, value: "100"}
+            - {name: EXPERIMENTS, value: "1"}
+            - {name: FAILPOINTS, value: "__FAILPOINTS__"}
+            - {name: FAILPOINT_STATE_DIR, value: /state}
+          ports:
+            - {name: http-ops, containerPort: 9090}
+          volumeMounts:
+            - {name: state, mountPath: /state}
+          resources:
+            requests: {cpu: 20m, memory: 24Mi}
+            limits: {cpu: 500m, memory: 128Mi}
+      volumes:
+        - name: state
+          emptyDir: {}

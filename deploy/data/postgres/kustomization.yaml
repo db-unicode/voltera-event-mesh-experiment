@@ -1,0 +1,21 @@
+# Base reutilizable: un Postgres por servicio dueño de datos (Database per Service).
+# El nombre base es "db"; cada instancia lo prefija (p. ej. namePrefix "positions-" -> positions-db).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - statefulset.yaml
+  - service.yaml
+secretGenerator:
+  - name: db-credentials
+    literals:
+      - POSTGRES_USER=voltera
+      - POSTGRES_PASSWORD=voltera-dev
+      - POSTGRES_DB=voltera
+generatorOptions:
+  disableNameSuffixHash: true
+labels:
+  - pairs:
+      app.kubernetes.io/name: postgres
+      app.kubernetes.io/part-of: voltera
+      app.kubernetes.io/component: data
+    includeSelectors: true

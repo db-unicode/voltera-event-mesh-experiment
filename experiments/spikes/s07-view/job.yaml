@@ -1,0 +1,27 @@
+# Job del probe de S7. El Secret market-view-credentials lo copia run.sh desde voltera-r1.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: view-probe
+  namespace: s07-view
+  labels: {app: view-probe}
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels: {app: view-probe}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: view-probe
+          image: voltera/view-probe:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: REDIS_ADDR, value: "market-view.voltera-r1.svc.cluster.local:6379"}
+            - {name: VIEW_TTL_S, value: "150"}
+            - {name: SHORT_TTL_S, value: "10"}
+            - name: REDIS_PASSWORD
+              valueFrom: {secretKeyRef: {name: market-view-credentials, key: REDIS_PASSWORD}}
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {cpu: 200m, memory: 64Mi}

@@ -1,0 +1,7 @@
+# Datos de la región r2 (poca carga): solo matches-db-r2 y market-view-r2.
+# Para añadir positions-db-r2 o transfer-db-r2 basta copiar el directorio de r1 y ajustar namespace/sufijo.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - matches-db-r2
+  - market-view-r2

@@ -1,0 +1,8 @@
+# Datos de la región r1: una instancia por servicio dueño de datos.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - positions-db
+  - matches-db
+  - transfer-db
+  - market-view
