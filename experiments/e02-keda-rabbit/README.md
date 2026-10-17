@@ -58,7 +58,7 @@ Los umbrales de 03-experiments.md 5/E2 se mantienen sin cambios (`criteria.yaml`
 - Con 46 msg/s por réplica y máximo 10, 276 msg/s necesitan 6 réplicas, pero el trigger divide la profundidad entre `value` = 100.
   La cola crece mientras arrancan los pods (picos de 6000 mensajes), el HPA pide 10 réplicas (el máximo) y el criterio
   `peak_replicas >= 5` y `<= max` se cumple saturando el máximo. 10 réplicas (460 msg/s) tienen margen sobre los 276 msg/s del pico.
-- El manifiesto despliega `value: 100`; `KEDA_QUEUE_VALUE=230` de `params.env` (C_POD x 5 s) no está aplicado y no se cambia (sin cambios en servicios).
+- El ScaledObject usa `value: 100` (`KEDA_QUEUE_VALUE` en `params.env`): ~2 s de cola por réplica con C_POD=46, por debajo del tope tolerado C_POD x 5 s = 230.
 - `time_to_scale_up_s` se mide hasta réplicas listas (no deseadas): incluye arranque del pod con sidecar.
 - Control: `drain_s` del control / `drain_s` de KEDA >= 3 y p99 de espera en cola > 30 s.
 
