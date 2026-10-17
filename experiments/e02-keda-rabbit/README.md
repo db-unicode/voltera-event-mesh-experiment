@@ -71,7 +71,7 @@ Los umbrales de 03-experiments.md 5/E2 se mantienen sin cambios (`criteria.yaml`
 ## Resultado
 
 Corrida que pasa (20/20 criterios): `experiments/results/final/e02-keda-rabbit/` (origen `20261017T060820Z-f02de76-r2`; el filtro de eventos y el
-borrado de dumps grandes de `scripts` se aplicó después a mano en la copia). Otra corrida con los mismos criterios (r1, desarrollo) dio valores parecidos.
+recorte de eventos se aplicó después a mano en la copia). Otra corrida con los mismos criterios (r1, desarrollo) dio valores parecidos.
 
 | | KEDA | Control (1 réplica) |
 |---|---|---|
