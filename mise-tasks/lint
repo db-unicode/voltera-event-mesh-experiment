@@ -21,6 +21,6 @@ find mise-tasks experiments -type f ! -path 'experiments/results/*' \
 echo "==> kubeconform"
 # CRDs sin esquema local (Istio, KEDA, kind) se omiten; los recursos core se validan
 kubeconform -strict -summary -ignore-missing-schemas -kubernetes-version 1.37.0 \
-  -ignore-filename-pattern 'values\.yaml$' deploy/
+  -ignore-filename-pattern 'values\.yaml$' -ignore-filename-pattern 'dashboards/.*\.json$' deploy/
 
 echo "lint: OK"
