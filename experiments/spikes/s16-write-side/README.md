@@ -27,6 +27,12 @@ Los checks (a)-(d) fijan el gateway en 1 réplica con la annotation `autoscaling
 por port-forward (los pods que KEDA apaga se llevan los suyos); el check (e) la quita. El `trap` la quita siempre.
 Los datos del spike llevan prefijo `s16`/`s16e-`/`s16bad-` y se borran al empezar y al pasar; no toca otras keys de `market-view`.
 
-## Resultados
+## Resultados (dos corridas PASS)
 
-Ver la salida de la última corrida en el reporte de entrega; los valores medidos (p95, serie de réplicas, TTL) están en `checks/` y `samples.csv`.
+- (a) 200 posiciones y 200 keys (50 por zona); TTL medido 142-149 s a los pocos segundos de escribirlas.
+- (b) `events_stale_dropped_total` 0 -> 200; `positions`, outbox y Redis idénticos.
+- (e) con `value: 100`, `C_pod = 46` y 276 msg/s durante 60 s: 0 réplicas, pico de 10 (el máximo) con 6327-6805 mensajes en cola,
+  y vuelta a 0 réplicas con cola 0 (la baja a 0 la hace KEDA tras `cooldownPeriod`; las 10 réplicas se mantienen unos 20 s tras vaciarse la cola).
+  15870 declaraciones publicadas, 0 errores, 0 descartadas, 24 `late` (> 100 ms de retraso, máx. 151 ms).
+- (g) committed -> vista: p50 ~7 ms, p95 ~24 ms (el histograma interpola dentro del bucket 10-25 ms). Las ventanas de 10 min
+  incluyen corridas anteriores, por eso el recuento es mayor que el lote.
