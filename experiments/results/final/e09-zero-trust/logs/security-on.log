@@ -1,0 +1,6 @@
+authorizationpolicy.security.istio.io/nats-bus created
+authorizationpolicy.security.istio.io/kafka-bus created
+authorizationpolicy.security.istio.io/rabbitmq-amqp-bus created
+authorizationpolicy.security.istio.io/nats-bus created
+authorizationpolicy.security.istio.io/nats-bus created
+05:54:16 políticas aplicadas; los sidecars tardan unos segundos en recibirlas. Para desactivar: mise run security:bus off

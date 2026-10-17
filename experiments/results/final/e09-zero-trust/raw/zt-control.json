@@ -1,0 +1,106 @@
+[
+  {
+    "id": "thief-nats.nats.BILLING_MATCHED/billing.consumer-info",
+    "broker": "nats",
+    "op": "consumer-info",
+    "target": "BILLING_MATCHED/billing",
+    "outcome": "denied",
+    "class": "acl",
+    "error": "nats: permissions violation: Permissions Violation for Publish to \"$JS.API.CONSUMER.INFO.BILLING_MATCHED.billing\"",
+    "ms": 8003
+  },
+  {
+    "id": "thief-nats.nats.connect.connect",
+    "broker": "nats",
+    "op": "connect",
+    "target": "",
+    "outcome": "allowed",
+    "ms": 9
+  },
+  {
+    "id": "thief-nats.nats.energy.matched.>.subscribe",
+    "broker": "nats",
+    "op": "subscribe",
+    "target": "energy.matched.>",
+    "outcome": "denied",
+    "class": "acl",
+    "error": "nats: permissions violation: Permissions Violation for Subscription to \"energy.matched.>\"",
+    "ms": 813
+  },
+  {
+    "id": "thief-nats.nats.energy.matched.r1.>.publish",
+    "broker": "nats",
+    "op": "publish",
+    "target": "energy.matched.r1.zt-probe",
+    "outcome": "allowed",
+    "ms": 814
+  },
+  {
+    "id": "thief-nats.nats.energy.matched.r2.>.publish",
+    "broker": "nats",
+    "op": "publish",
+    "target": "energy.matched.r2.zt-probe",
+    "outcome": "denied",
+    "class": "acl",
+    "error": "nats: permissions violation: Permissions Violation for Publish to \"energy.matched.r2.zt-probe\"",
+    "ms": 813
+  },
+  {
+    "id": "thief-rabbit.rabbitmq.energy-positions.consume",
+    "broker": "rabbitmq",
+    "op": "consume",
+    "target": "r1:energy-positions",
+    "outcome": "denied",
+    "class": "acl",
+    "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'energy-positions' in vhost 'r1' refused for user 'meter-sim-r1'\"",
+    "ms": 22
+  },
+  {
+    "id": "thief-rabbit.rabbitmq.energy-positions.publish",
+    "broker": "rabbitmq",
+    "op": "publish",
+    "target": "r1:energy-positions",
+    "outcome": "denied",
+    "class": "acl",
+    "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'energy-positions.x' in vhost 'r1' refused for user 'meter-sim-r1'\"",
+    "ms": 21
+  },
+  {
+    "id": "thief-rabbit.rabbitmq.kwh-prices.consume",
+    "broker": "rabbitmq",
+    "op": "consume",
+    "target": "r1:kwh-prices",
+    "outcome": "denied",
+    "class": "acl",
+    "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'kwh-prices' in vhost 'r1' refused for user 'meter-sim-r1'\"",
+    "ms": 20
+  },
+  {
+    "id": "thief-rabbit.rabbitmq.kwh-prices.publish",
+    "broker": "rabbitmq",
+    "op": "publish",
+    "target": "r1:kwh-prices",
+    "outcome": "denied",
+    "class": "acl",
+    "error": "Exception (403) Reason: \"ACCESS_REFUSED - write access to exchange 'kwh-prices.x' in vhost 'r1' refused for user 'meter-sim-r1'\"",
+    "ms": 21
+  },
+  {
+    "id": "thief-rabbit.rabbitmq.meter-declarations.consume",
+    "broker": "rabbitmq",
+    "op": "consume",
+    "target": "r1:meter-declarations",
+    "outcome": "denied",
+    "class": "acl",
+    "error": "consumir: Exception (403) Reason: \"ACCESS_REFUSED - read access to queue 'meter-declarations' in vhost 'r1' refused for user 'meter-sim-r1'\"",
+    "ms": 18
+  },
+  {
+    "id": "thief-rabbit.rabbitmq.meter-declarations.publish",
+    "broker": "rabbitmq",
+    "op": "publish",
+    "target": "r1:meter-declarations",
+    "outcome": "allowed",
+    "ms": 20
+  }
+]

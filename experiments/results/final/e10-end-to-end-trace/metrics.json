@@ -1,0 +1,144 @@
+{
+  "run": "e10-17062646-",
+  "prefix": "e10-17062646-",
+  "sent_at": "2026-10-17T06:29:43.907401000Z",
+  "done_at": "2026-10-17T06:29:57.284304000Z",
+  "ids": {
+    "declaration_surplus": "96602ea3-bf94-521b-a6db-7e9f658f6314",
+    "declaration_deficit": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+    "critical_declaration": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+    "match": "match-ee5c0c40156a38bc07a29b816119f7c9",
+    "match_event": "01a1488d-749f-7321-b8a7-311dc02dd992"
+  },
+  "pair_exact": 1,
+  "matches_for_prefix": 1,
+  "hops_present": 14,
+  "ordered": 1,
+  "order_violations": [],
+  "services": [
+    "billing-sim",
+    "declaration-gateway",
+    "device-sim",
+    "energy-transfer",
+    "market-projector",
+    "matching-engine",
+    "mesh-bridge",
+    "meter-sim"
+  ],
+  "services_count": 8,
+  "brokers": [
+    "kafka",
+    "nats",
+    "rabbitmq"
+  ],
+  "brokers_count": 3,
+  "total_s": 9.077657461166382,
+  "end_hop": "device_command",
+  "branch_s": {
+    "transfer": 9.077657461166382,
+    "mesh": 5.568849563598633
+  },
+  "segments": [
+    {
+      "name": "cold_start_gateway",
+      "from": "sent",
+      "to": "gateway_consume",
+      "seconds": 5.097586393356323
+    },
+    {
+      "name": "gateway_process",
+      "from": "gateway_consume",
+      "to": "gateway_commit",
+      "seconds": 0.0016286373138427734
+    },
+    {
+      "name": "outbox_to_projection",
+      "from": "gateway_commit",
+      "to": "projector_apply",
+      "seconds": 0.002354145050048828
+    },
+    {
+      "name": "match_window",
+      "from": "projector_apply",
+      "to": "match_commit",
+      "seconds": 0.4502897262573242
+    },
+    {
+      "name": "kafka_to_transfer",
+      "from": "match_commit",
+      "to": "transfer_consume",
+      "seconds": 3.5214967727661133
+    },
+    {
+      "name": "transfer_to_device",
+      "from": "transfer_consume",
+      "to": "device_command",
+      "seconds": 0.004301786422729492
+    }
+  ],
+  "segments_sum_s": 9.077657461166382,
+  "segments_error_pct": 0,
+  "cold_start": {
+    "gateway": {
+      "total_s": 5.097586393356323,
+      "components": [
+        {
+          "name": "keda_detect_and_scale",
+          "seconds": 3.1322150230407715
+        },
+        {
+          "name": "pod_start_to_app_ready",
+          "seconds": 1.9045264720916748
+        },
+        {
+          "name": "app_ready_to_first_message",
+          "seconds": 0.06084489822387695
+        }
+      ],
+      "components_sum_s": 5.097586393356323,
+      "error_pct": 0,
+      "pod": "declaration-gateway-57d49f98ff-9xc2s",
+      "pod_created": "2026-10-17T06:29:50Z",
+      "pod_ready": "2026-10-17T06:29:52Z"
+    },
+    "transfer": {
+      "total_s": 3.5214967727661133,
+      "components": [
+        {
+          "name": "keda_detect_and_scale",
+          "seconds": 0
+        },
+        {
+          "name": "pod_start_to_app_ready",
+          "seconds": 3.506208658218384
+        },
+        {
+          "name": "app_ready_to_first_message",
+          "seconds": 0.015288114547729492
+        }
+      ],
+      "components_sum_s": 3.5214967727661133,
+      "error_pct": 0,
+      "pod": "energy-transfer-cd6b4bbf9-7xqhw",
+      "pod_created": "2026-10-17T06:29:52Z",
+      "pod_ready": "2026-10-17T06:29:56Z"
+    }
+  },
+  "k8s_events": {
+    "count": 30,
+    "reasons": [
+      "Created",
+      "KEDAScaleTargetActivated",
+      "KEDAScalersStopped",
+      "Pulled",
+      "ScaledObjectPaused",
+      "ScalingReplicaSet",
+      "Scheduled",
+      "Started",
+      "SuccessfulCreate",
+      "Unhealthy"
+    ],
+    "keda_activation": 2,
+    "pods_started": 6
+  }
+}

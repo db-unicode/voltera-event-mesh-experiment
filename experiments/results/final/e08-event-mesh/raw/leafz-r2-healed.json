@@ -1,0 +1,22 @@
+{
+  "server_id": "NCCVB6PF6Z2DUWMXIK266MWPW32XQVGHDFLOO2UPJIWEUNAIJ5TG3RKX",
+  "now": "2026-10-17T04:58:50.02400834Z",
+  "leafnodes": 1,
+  "leafs": [
+    {
+      "id": 141,
+      "name": "nats-global",
+      "is_spoke": true,
+      "account": "MESH",
+      "ip": "10.96.107.71",
+      "port": 7422,
+      "rtt": "317µs",
+      "in_msgs": 360,
+      "out_msgs": 360,
+      "in_bytes": 14400,
+      "out_bytes": 263440,
+      "subscriptions": 3,
+      "compression": "s2_uncompressed"
+    }
+  ]
+}

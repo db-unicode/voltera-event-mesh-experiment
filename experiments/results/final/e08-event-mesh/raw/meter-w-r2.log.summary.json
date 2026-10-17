@@ -1,0 +1,1 @@
+{"profile":"pairs","region":"r2","seed":1,"meters":400,"rate":4,"planned":80,"scheduled":80,"published":80,"errors":0,"late":0,"dropped":0,"maxLatenessMs":7.209897,"byVendor":{"acme-v1":40,"voltix-2":40},"expectedPairs":40,"startedAt":"2026-10-17T04:53:01.825410607Z","endedAt":"2026-10-17T04:53:21.827815448Z","elapsedSec":20.002404841,"achievedRate":3.999519089625649}

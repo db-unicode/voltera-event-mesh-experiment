@@ -1,0 +1,5 @@
+authorizationpolicy.security.istio.io "nats-bus" deleted from voltera-global namespace
+authorizationpolicy.security.istio.io "kafka-bus" deleted from voltera-infra namespace
+authorizationpolicy.security.istio.io "rabbitmq-amqp-bus" deleted from voltera-infra namespace
+authorizationpolicy.security.istio.io "nats-bus" deleted from voltera-r1 namespace
+authorizationpolicy.security.istio.io "nats-bus" deleted from voltera-r2 namespace

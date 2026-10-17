@@ -1,0 +1,177 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/exp-e08-e09-e10/experiments/results/e09-zero-trust/20261017T055348Z-821ecf9-r1",
+  "criteria": [
+    {
+      "id": "matrix-complete",
+      "description": "Celdas de la matriz sin resultado (el Job no las ejecutó)",
+      "metric": "metrics.json:$.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "false-negatives",
+      "description": "Falsos negativos (acceso indebido concedido, respecto de lo esperado)",
+      "metric": "metrics.json:$.false_negatives",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "false-positives",
+      "description": "Falsos positivos (acceso legítimo denegado)",
+      "metric": "metrics.json:$.false_positives",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "mismatches",
+      "description": "Celdas cuyo resultado real difiere del esperado",
+      "metric": "metrics.json:$.mismatches_vs_expected",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "positives-allowed",
+      "description": "Celdas legítimas del diseño que el bus permitió (de 14)",
+      "metric": "metrics.json:$.positives.allowed",
+      "observed": 14,
+      "op": "eq",
+      "expected": 14,
+      "verdict": "PASS"
+    },
+    {
+      "id": "plain-no-sidecar",
+      "description": "Conexiones/operaciones exitosas desde el pod sin sidecar (con credenciales válidas)",
+      "metric": "metrics.json:$.plain.successes",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "plain-cells",
+      "description": "Celdas intentadas desde el pod sin sidecar",
+      "metric": "metrics.json:$.plain.cells",
+      "observed": 15,
+      "op": "ge",
+      "expected": 15,
+      "verdict": "PASS"
+    },
+    {
+      "id": "kafka-topic-gap",
+      "description": "Celdas Kafka que Istio no puede distinguir por topic (diseño deny, L4 allow) y se comportaron como se predijo",
+      "metric": "metrics.json:$.design_gap.behaved_as_predicted",
+      "observed": 9,
+      "op": "eq",
+      "expected": 9,
+      "verdict": "PASS"
+    },
+    {
+      "id": "stolen-credential-control-rabbit",
+      "description": "Control sin políticas - con la credencial de meter-sim desde otra SA, la publicación en meter-declarations pasa",
+      "metric": "metrics.json:$.control_without_policy.thief_rabbit_publish_allowed",
+      "observed": 1,
+      "op": "eq",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "stolen-credential-control-nats",
+      "description": "Control sin políticas - con la credencial de bridge-r1 desde otra SA, la publicación en energy.matched.r1 pasa",
+      "metric": "metrics.json:$.control_without_policy.thief_nats_publish_allowed",
+      "observed": 1,
+      "op": "eq",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "rbac-denied-kafka",
+      "description": "Contadores rbac denied del sidecar de Kafka (incremento)",
+      "metric": "metrics.json:$.rbac_denied_delta.kafka",
+      "observed": 42,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "rbac-denied-rabbitmq",
+      "description": "Contadores rbac denied del sidecar de RabbitMQ (incremento)",
+      "metric": "metrics.json:$.rbac_denied_delta.rabbitmq",
+      "observed": 42,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "rbac-denied-nats",
+      "description": "Contadores rbac denied de los sidecars de NATS (incremento)",
+      "metric": "metrics.json:$.rbac_denied_delta.nats",
+      "observed": 45,
+      "op": "ge",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "flow-r1-matches",
+      "description": "El flujo legítimo con las políticas aplicadas produjo matches en r1",
+      "metric": "metrics.json:$.flow.r1_matches",
+      "observed": 100,
+      "op": "ge",
+      "expected": 50,
+      "verdict": "PASS"
+    },
+    {
+      "id": "flow-r2-matches",
+      "description": "El flujo legítimo con las políticas aplicadas produjo matches en r2",
+      "metric": "metrics.json:$.flow.r2_matches",
+      "observed": 40,
+      "op": "ge",
+      "expected": 20,
+      "verdict": "PASS"
+    },
+    {
+      "id": "flow-r1-billing",
+      "description": "Matches de r1 que no llegaron a billing con las políticas aplicadas",
+      "metric": "metrics.json:$.flow.r1_missing_in_billing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "flow-r2-billing",
+      "description": "Matches de r2 que no llegaron a billing con las políticas aplicadas",
+      "metric": "metrics.json:$.flow.r2_missing_in_billing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "flow-device",
+      "description": "Matches del flujo sin efecto en device-sim (energy-transfer escalado por KEDA bajo las políticas)",
+      "metric": "metrics.json:$.flow.missing_in_device",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "policies-removed",
+      "description": "Políticas del bus que quedan al terminar (deben ser 0 salvo E09_KEEP_POLICIES=1)",
+      "metric": "metrics.json:$.policies.left_after_run",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    }
+  ]
+}

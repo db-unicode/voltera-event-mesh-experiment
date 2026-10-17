@@ -1,0 +1,6 @@
+NAMESPACE        NAME                ACTION   AGE
+voltera-global   nats-bus            ALLOW    0s
+voltera-infra    kafka-bus           ALLOW    0s
+voltera-infra    rabbitmq-amqp-bus   DENY     0s
+voltera-r1       nats-bus            ALLOW    0s
+voltera-r2       nats-bus            ALLOW    0s

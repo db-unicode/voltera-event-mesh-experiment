@@ -1,0 +1,15 @@
+mesh-bridge.rabbitmq.meter-declarations.publish,rabbitmq,publish,r1:meter-declarations
+mesh-bridge.rabbitmq.meter-declarations.consume,rabbitmq,consume,r1:meter-declarations
+mesh-bridge.rabbitmq.energy-positions.publish,rabbitmq,publish,r1:energy-positions
+mesh-bridge.rabbitmq.energy-positions.consume,rabbitmq,consume,r1:energy-positions
+mesh-bridge.rabbitmq.kwh-prices.publish,rabbitmq,publish,r1:kwh-prices
+mesh-bridge.rabbitmq.kwh-prices.consume,rabbitmq,consume,r1:kwh-prices
+mesh-bridge.kafka.r1.energy-matched.publish,kafka,publish,r1.energy-matched
+mesh-bridge.kafka.r1.energy-matched.consume,kafka,consume,r1.energy-matched
+mesh-bridge.kafka.r2.energy-matched.publish,kafka,publish,r2.energy-matched
+mesh-bridge.kafka.r2.energy-matched.consume,kafka,consume,r2.energy-matched
+mesh-bridge.nats.connect.connect,nats,connect,
+mesh-bridge.nats.energy.matched.r1.>.publish,nats,publish,energy.matched.r1.zt-probe
+mesh-bridge.nats.energy.matched.r2.>.publish,nats,publish,energy.matched.r2.zt-probe
+mesh-bridge.nats.energy.matched.>.subscribe,nats,subscribe,energy.matched.>
+mesh-bridge.nats.BILLING_MATCHED/billing.consumer-info,nats,consumer-info,BILLING_MATCHED/billing

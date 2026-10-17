@@ -1,0 +1,5 @@
+{"id":"nocred-nats.nats.BILLING_MATCHED/billing.consumer-info","broker":"nats","op":"consumer-info","target":"BILLING_MATCHED/billing","outcome":"denied","class":"authn","error":"conectar: nats: Authorization Violation","ms":17}
+{"id":"nocred-nats.nats.connect.connect","broker":"nats","op":"connect","target":"","outcome":"denied","class":"authn","error":"conectar: nats: Authorization Violation","ms":22}
+{"id":"nocred-nats.nats.energy.matched.\u003e.subscribe","broker":"nats","op":"subscribe","target":"energy.matched.\u003e","outcome":"denied","class":"authn","error":"conectar: nats: Authorization Violation","ms":24}
+{"id":"nocred-nats.nats.energy.matched.r1.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r1.zt-probe","outcome":"denied","class":"authn","error":"conectar: nats: Authorization Violation","ms":23}
+{"id":"nocred-nats.nats.energy.matched.r2.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r2.zt-probe","outcome":"denied","class":"authn","error":"conectar: nats: Authorization Violation","ms":24}

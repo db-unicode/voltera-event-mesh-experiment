@@ -1,0 +1,15 @@
+{"id":"energy-transfer.kafka.r1.energy-matched.consume","broker":"kafka","op":"consume","target":"r1.energy-matched","outcome":"allowed","ms":72}
+{"id":"energy-transfer.kafka.r1.energy-matched.publish","broker":"kafka","op":"publish","target":"r1.energy-matched","outcome":"allowed","ms":66}
+{"id":"energy-transfer.kafka.r2.energy-matched.consume","broker":"kafka","op":"consume","target":"r2.energy-matched","outcome":"allowed","ms":71}
+{"id":"energy-transfer.kafka.r2.energy-matched.publish","broker":"kafka","op":"publish","target":"r2.energy-matched","outcome":"allowed","ms":62}
+{"id":"energy-transfer.nats.BILLING_MATCHED/billing.consumer-info","broker":"nats","op":"consumer-info","target":"BILLING_MATCHED/billing","outcome":"denied","class":"network","error":"conectar: EOF","ms":27}
+{"id":"energy-transfer.nats.connect.connect","broker":"nats","op":"connect","target":"","outcome":"denied","class":"network","error":"conectar: EOF","ms":7}
+{"id":"energy-transfer.nats.energy.matched.\u003e.subscribe","broker":"nats","op":"subscribe","target":"energy.matched.\u003e","outcome":"denied","class":"network","error":"conectar: EOF","ms":15}
+{"id":"energy-transfer.nats.energy.matched.r1.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r1.zt-probe","outcome":"denied","class":"network","error":"conectar: EOF","ms":16}
+{"id":"energy-transfer.nats.energy.matched.r2.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r2.zt-probe","outcome":"denied","class":"network","error":"conectar: EOF","ms":10}
+{"id":"energy-transfer.rabbitmq.energy-positions.consume","broker":"rabbitmq","op":"consume","target":"r1:energy-positions","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":14}
+{"id":"energy-transfer.rabbitmq.energy-positions.publish","broker":"rabbitmq","op":"publish","target":"r1:energy-positions","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":15}
+{"id":"energy-transfer.rabbitmq.kwh-prices.consume","broker":"rabbitmq","op":"consume","target":"r1:kwh-prices","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":15}
+{"id":"energy-transfer.rabbitmq.kwh-prices.publish","broker":"rabbitmq","op":"publish","target":"r1:kwh-prices","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":14}
+{"id":"energy-transfer.rabbitmq.meter-declarations.consume","broker":"rabbitmq","op":"consume","target":"r1:meter-declarations","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":13}
+{"id":"energy-transfer.rabbitmq.meter-declarations.publish","broker":"rabbitmq","op":"publish","target":"r1:meter-declarations","outcome":"denied","class":"network","error":"conectar: Exception (501) Reason: \"EOF\"","ms":10}

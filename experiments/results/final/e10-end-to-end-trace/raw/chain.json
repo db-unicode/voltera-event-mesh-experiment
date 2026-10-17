@@ -1,0 +1,223 @@
+{
+  "critical_declaration": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+  "end_hop": "device_command",
+  "chain": [
+    {
+      "name": "sent",
+      "service": "meter-sim",
+      "stage": "publish",
+      "pod": "meter-sim-1792218583-6041-1-dsfqm",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "broker": "rabbitmq",
+      "ts": "2026-10-17T06:29:46.867784993Z",
+      "offset_s": 0,
+      "violated": []
+    },
+    {
+      "name": "gateway_consume",
+      "service": "declaration-gateway",
+      "stage": "consume",
+      "pod": "declaration-gateway-57d49f98ff-9xc2s",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "broker": "rabbitmq",
+      "ts": "2026-10-17T06:29:51.96537129Z",
+      "offset_s": 5.097586393356323,
+      "violated": []
+    },
+    {
+      "name": "gateway_commit",
+      "service": "declaration-gateway",
+      "stage": "commit",
+      "pod": "declaration-gateway-57d49f98ff-9xc2s",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "broker": "",
+      "ts": "2026-10-17T06:29:51.966999965Z",
+      "offset_s": 5.099215030670166,
+      "violated": []
+    },
+    {
+      "name": "gateway_publish",
+      "service": "declaration-gateway",
+      "stage": "publish",
+      "pod": "declaration-gateway-57d49f98ff-9xc2s",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "broker": "rabbitmq",
+      "ts": "2026-10-17T06:29:51.96901935Z",
+      "offset_s": 5.101234436035156,
+      "violated": []
+    },
+    {
+      "name": "projector_consume",
+      "service": "market-projector",
+      "stage": "consume",
+      "pod": "market-projector-74b76774c7-tmdfd",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "broker": "rabbitmq",
+      "ts": "2026-10-17T06:29:51.969127267Z",
+      "offset_s": 5.10134220123291,
+      "violated": []
+    },
+    {
+      "name": "projector_apply",
+      "service": "market-projector",
+      "stage": "apply",
+      "pod": "market-projector-74b76774c7-tmdfd",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "broker": "",
+      "ts": "2026-10-17T06:29:51.969354101Z",
+      "offset_s": 5.101569175720215,
+      "violated": []
+    },
+    {
+      "name": "match_commit",
+      "service": "matching-engine",
+      "stage": "commit",
+      "pod": "matching-engine-55487d7dbc-gjnpz",
+      "eventId": "01a1488d-749f-7321-b8a7-311dc02dd992",
+      "broker": "",
+      "ts": "2026-10-17T06:29:52.419643931Z",
+      "offset_s": 5.551858901977539,
+      "violated": []
+    },
+    {
+      "name": "match_publish",
+      "service": "matching-engine",
+      "stage": "publish",
+      "pod": "matching-engine-55487d7dbc-gjnpz",
+      "eventId": "01a1488d-749f-7321-b8a7-311dc02dd992",
+      "broker": "kafka",
+      "ts": "2026-10-17T06:29:52.425450752Z",
+      "offset_s": 5.557665824890137,
+      "violated": []
+    },
+    {
+      "name": "bridge_consume",
+      "service": "mesh-bridge",
+      "stage": "consume",
+      "pod": "mesh-bridge-576c68d9f7-8vgx9",
+      "eventId": "01a1488d-749f-7321-b8a7-311dc02dd992",
+      "broker": "kafka",
+      "ts": "2026-10-17T06:29:52.42725126Z",
+      "offset_s": 5.559466361999512,
+      "violated": []
+    },
+    {
+      "name": "bridge_publish",
+      "service": "mesh-bridge",
+      "stage": "publish",
+      "pod": "mesh-bridge-576c68d9f7-8vgx9",
+      "eventId": "01a1488d-749f-7321-b8a7-311dc02dd992",
+      "broker": "nats",
+      "ts": "2026-10-17T06:29:52.435797844Z",
+      "offset_s": 5.568012952804565,
+      "violated": []
+    },
+    {
+      "name": "billing_received",
+      "service": "billing-sim",
+      "stage": "received",
+      "pod": "billing-sim-7dbd445698-qdvwx",
+      "eventId": "01a1488d-749f-7321-b8a7-311dc02dd992",
+      "broker": "nats",
+      "ts": "2026-10-17T06:29:52.436634431Z",
+      "offset_s": 5.568849563598633,
+      "violated": []
+    },
+    {
+      "name": "transfer_consume",
+      "service": "energy-transfer",
+      "stage": "consume",
+      "pod": "energy-transfer-cd6b4bbf9-7xqhw",
+      "eventId": "01a1488d-749f-7321-b8a7-311dc02dd992",
+      "broker": "kafka",
+      "ts": "2026-10-17T06:29:55.941140552Z",
+      "offset_s": 9.073355674743652,
+      "violated": []
+    },
+    {
+      "name": "device_command",
+      "service": "device-sim",
+      "stage": "command",
+      "pod": "device-sim-748b7bc894-8xmvm",
+      "eventId": null,
+      "broker": "",
+      "ts": "2026-10-17T06:29:55.945442406Z",
+      "offset_s": 9.077657461166382,
+      "violated": []
+    },
+    {
+      "name": "transfer_command",
+      "service": "energy-transfer",
+      "stage": "command",
+      "pod": "energy-transfer-cd6b4bbf9-7xqhw",
+      "eventId": "01a1488d-749f-7321-b8a7-311dc02dd992",
+      "broker": "",
+      "ts": "2026-10-17T06:29:55.947158998Z",
+      "offset_s": 9.079374074935913,
+      "violated": []
+    }
+  ],
+  "hops_present": 14,
+  "order_violations": [],
+  "ordered": true,
+  "services": [
+    "billing-sim",
+    "declaration-gateway",
+    "device-sim",
+    "energy-transfer",
+    "market-projector",
+    "matching-engine",
+    "mesh-bridge",
+    "meter-sim"
+  ],
+  "brokers": [
+    "kafka",
+    "nats",
+    "rabbitmq"
+  ],
+  "total_s": 9.077657461166382,
+  "segments": [
+    {
+      "name": "cold_start_gateway",
+      "from": "sent",
+      "to": "gateway_consume",
+      "seconds": 5.097586393356323
+    },
+    {
+      "name": "gateway_process",
+      "from": "gateway_consume",
+      "to": "gateway_commit",
+      "seconds": 0.0016286373138427734
+    },
+    {
+      "name": "outbox_to_projection",
+      "from": "gateway_commit",
+      "to": "projector_apply",
+      "seconds": 0.002354145050048828
+    },
+    {
+      "name": "match_window",
+      "from": "projector_apply",
+      "to": "match_commit",
+      "seconds": 0.4502897262573242
+    },
+    {
+      "name": "kafka_to_transfer",
+      "from": "match_commit",
+      "to": "transfer_consume",
+      "seconds": 3.5214967727661133
+    },
+    {
+      "name": "transfer_to_device",
+      "from": "transfer_consume",
+      "to": "device_command",
+      "seconds": 0.004301786422729492
+    }
+  ],
+  "segments_sum_s": 9.077657461166382,
+  "segments_error_pct": 0,
+  "branch_s": {
+    "transfer": 9.077657461166382,
+    "mesh": 5.568849563598633
+  }
+}

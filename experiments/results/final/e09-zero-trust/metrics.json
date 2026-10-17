@@ -1,0 +1,108 @@
+{
+  "run": "17055349",
+  "policies_on": "2026-10-17T05:54:15.791918000Z",
+  "matrix_done": "2026-10-17T05:54:54.581824000Z",
+  "cells": 187,
+  "missing": 0,
+  "matched": 187,
+  "false_negatives": 0,
+  "false_positives": 0,
+  "mismatches_vs_expected": 0,
+  "by_layer": {
+    "-": {
+      "cells": 23,
+      "matched": 23,
+      "classes": {
+        "allowed": 23
+      }
+    },
+    "broker-acl": {
+      "cells": 23,
+      "matched": 23,
+      "classes": {
+        "acl": 23
+      }
+    },
+    "broker-authn": {
+      "cells": 11,
+      "matched": 11,
+      "classes": {
+        "authn": 11
+      }
+    },
+    "istio-l4": {
+      "cells": 115,
+      "matched": 115,
+      "classes": {
+        "network": 115
+      }
+    },
+    "mtls": {
+      "cells": 15,
+      "matched": 15,
+      "classes": {
+        "network": 15
+      }
+    }
+  },
+  "by_broker": {
+    "kafka": {
+      "cells": 44,
+      "matched": 44
+    },
+    "nats": {
+      "cells": 65,
+      "matched": 65
+    },
+    "rabbitmq": {
+      "cells": 78,
+      "matched": 78
+    }
+  },
+  "positives": {
+    "cells": 14,
+    "allowed": 14
+  },
+  "plain": {
+    "cells": 15,
+    "successes": 0
+  },
+  "design_gap": {
+    "cells": 9,
+    "behaved_as_predicted": 9,
+    "cells_list": [
+      "matching-engine.kafka.r1.energy-matched.consume",
+      "matching-engine.kafka.r2.energy-matched.publish",
+      "matching-engine.kafka.r2.energy-matched.consume",
+      "energy-transfer.kafka.r1.energy-matched.publish",
+      "energy-transfer.kafka.r2.energy-matched.publish",
+      "energy-transfer.kafka.r2.energy-matched.consume",
+      "mesh-bridge.kafka.r1.energy-matched.publish",
+      "mesh-bridge.kafka.r2.energy-matched.publish",
+      "mesh-bridge.kafka.r2.energy-matched.consume"
+    ],
+    "by_broker": {
+      "kafka": 9
+    }
+  },
+  "control_without_policy": {
+    "thief_rabbit_publish_allowed": 1,
+    "thief_nats_publish_allowed": 1
+  },
+  "rbac_denied_delta": {
+    "kafka": 42,
+    "rabbitmq": 42,
+    "nats": 45
+  },
+  "flow": {
+    "r1_matches": 100,
+    "r2_matches": 40,
+    "r1_missing_in_billing": 0,
+    "r2_missing_in_billing": 0,
+    "missing_in_device": 0
+  },
+  "policies": {
+    "before_run": 0,
+    "left_after_run": 0
+  }
+}

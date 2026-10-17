@@ -1,0 +1,37 @@
+{
+  "server_id": "NCJNS7V2TNYD4TX46PWZ5SMM7PFKRXSDPSWHMHG7IHY7MNBVV5IT2E46",
+  "now": "2026-10-17T04:58:49.926729492Z",
+  "leafnodes": 2,
+  "leafs": [
+    {
+      "id": 385,
+      "name": "nats-r1",
+      "is_spoke": false,
+      "account": "MESH",
+      "ip": "127.0.0.6",
+      "port": 44139,
+      "rtt": "777µs",
+      "in_msgs": 174,
+      "out_msgs": 174,
+      "in_bytes": 127443,
+      "out_bytes": 6960,
+      "subscriptions": 2,
+      "compression": "s2_uncompressed"
+    },
+    {
+      "id": 474,
+      "name": "nats-r2",
+      "is_spoke": false,
+      "account": "MESH",
+      "ip": "127.0.0.6",
+      "port": 53483,
+      "rtt": "1.369131ms",
+      "in_msgs": 360,
+      "out_msgs": 360,
+      "in_bytes": 263440,
+      "out_bytes": 14400,
+      "subscriptions": 2,
+      "compression": "s2_uncompressed"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+declaration-gateway.rabbitmq.meter-declarations.publish,rabbitmq,publish,r1:meter-declarations
+declaration-gateway.rabbitmq.meter-declarations.consume,rabbitmq,consume,r1:meter-declarations
+declaration-gateway.rabbitmq.energy-positions.publish,rabbitmq,publish,r1:energy-positions
+declaration-gateway.rabbitmq.energy-positions.consume,rabbitmq,consume,r1:energy-positions
+declaration-gateway.rabbitmq.kwh-prices.publish,rabbitmq,publish,r1:kwh-prices
+declaration-gateway.rabbitmq.kwh-prices.consume,rabbitmq,consume,r1:kwh-prices
+declaration-gateway.kafka.r1.energy-matched.publish,kafka,publish,r1.energy-matched
+declaration-gateway.kafka.r1.energy-matched.consume,kafka,consume,r1.energy-matched
+declaration-gateway.kafka.r2.energy-matched.publish,kafka,publish,r2.energy-matched
+declaration-gateway.kafka.r2.energy-matched.consume,kafka,consume,r2.energy-matched
+declaration-gateway.nats.connect.connect,nats,connect,
+declaration-gateway.nats.energy.matched.r1.>.publish,nats,publish,energy.matched.r1.zt-probe
+declaration-gateway.nats.energy.matched.r2.>.publish,nats,publish,energy.matched.r2.zt-probe
+declaration-gateway.nats.energy.matched.>.subscribe,nats,subscribe,energy.matched.>
+declaration-gateway.nats.BILLING_MATCHED/billing.consumer-info,nats,consumer-info,BILLING_MATCHED/billing

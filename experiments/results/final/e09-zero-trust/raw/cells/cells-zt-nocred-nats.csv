@@ -1,0 +1,5 @@
+nocred-nats.nats.connect.connect,nats,connect,
+nocred-nats.nats.energy.matched.r1.>.publish,nats,publish,energy.matched.r1.zt-probe
+nocred-nats.nats.energy.matched.r2.>.publish,nats,publish,energy.matched.r2.zt-probe
+nocred-nats.nats.energy.matched.>.subscribe,nats,subscribe,energy.matched.>
+nocred-nats.nats.BILLING_MATCHED/billing.consumer-info,nats,consumer-info,BILLING_MATCHED/billing

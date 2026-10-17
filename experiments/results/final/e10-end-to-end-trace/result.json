@@ -1,0 +1,114 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/exp-e08-e09-e10/experiments/results/e10-end-to-end-trace/20261017T062645Z-b5e155b-r1",
+  "criteria": [
+    {
+      "id": "pair-exact",
+      "description": "El par enviado produce exactamente un match entre sus dos medidores (zona única sin posiciones ajenas)",
+      "metric": "metrics.json:$.pair_exact",
+      "observed": 1,
+      "op": "eq",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "hops-present",
+      "description": "Hops de la cadena presentes en los logs (\u003e= 12)",
+      "metric": "metrics.json:$.hops_present",
+      "observed": 14,
+      "op": "ge",
+      "expected": 12,
+      "verdict": "PASS"
+    },
+    {
+      "id": "hops-ordered",
+      "description": "Todos los hops respetan su orden causal (1 = en orden estrictamente creciente de tiempo)",
+      "metric": "metrics.json:$.ordered",
+      "observed": 1,
+      "op": "eq",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "services",
+      "description": "Servicios distintos en la cadena (\u003e= 5)",
+      "metric": "metrics.json:$.services_count",
+      "observed": 8,
+      "op": "ge",
+      "expected": 5,
+      "verdict": "PASS"
+    },
+    {
+      "id": "brokers",
+      "description": "Brokers por los que pasa la cadena (\u003e= 2)",
+      "metric": "metrics.json:$.brokers_count",
+      "observed": 3,
+      "op": "ge",
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "decomposition-sum",
+      "description": "Error entre la suma de los tramos y la latencia total (%)",
+      "metric": "metrics.json:$.segments_error_pct",
+      "observed": 0,
+      "op": "le",
+      "expected": 5,
+      "verdict": "PASS"
+    },
+    {
+      "id": "cold-start-gateway-components",
+      "description": "Error entre los componentes del arranque en frío del gateway y su total (%)",
+      "metric": "metrics.json:$.cold_start.gateway.error_pct",
+      "observed": 0,
+      "op": "le",
+      "expected": 5,
+      "verdict": "PASS"
+    },
+    {
+      "id": "cold-start-gateway-seen",
+      "description": "El gateway arrancó en frío (s entre el envío y su primer consumo; \u003e 2 s)",
+      "metric": "metrics.json:$.cold_start.gateway.total_s",
+      "observed": 5.097586393356323,
+      "op": "gt",
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "cold-start-transfer-components",
+      "description": "Error entre los componentes del arranque en frío de energy-transfer y su total (%)",
+      "metric": "metrics.json:$.cold_start.transfer.error_pct",
+      "observed": 0,
+      "op": "le",
+      "expected": 5,
+      "verdict": "PASS"
+    },
+    {
+      "id": "k8s-events",
+      "description": "Eventos de k8s del arranque del gateway y de energy-transfer capturados (pods iniciados)",
+      "metric": "metrics.json:$.k8s_events.pods_started",
+      "observed": 6,
+      "op": "ge",
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "keda-activation",
+      "description": "Eventos de activación de KEDA capturados (KEDAScaleTargetActivated)",
+      "metric": "metrics.json:$.k8s_events.keda_activation",
+      "observed": 2,
+      "op": "ge",
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "total-latency",
+      "description": "Latencia total de la cadena, del envío a su último hop (s; arranques en frío incluidos)",
+      "metric": "metrics.json:$.total_s",
+      "observed": 9.077657461166382,
+      "op": "le",
+      "expected": 120,
+      "verdict": "PASS"
+    }
+  ]
+}

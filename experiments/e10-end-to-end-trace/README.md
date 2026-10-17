@@ -55,4 +55,41 @@ Ver `criteria.yaml`: ≥ 12 hops presentes y en orden, ≥ 5 servicios, ≥ 2 br
 
 `trace_<eventId>.txt/json` (cada declaración y el matchId), `trace_all.txt/json`, `hops.csv`, `keda_events.txt`, `metrics.json`, `result.json`, `figures/hops.png`.
 
-<!-- RESULT -->
+## Resultado
+
+Corrida `20261017T062645Z-b5e155b-r1` (veredicto PASS). Evidencia versionada en `experiments/results/final/e10-end-to-end-trace/`.
+
+| Criterio | Observado | Umbral | Veredicto |
+|---|---|---|---|
+| El par enviado produce exactamente un match entre sus dos medidores (zona única sin posiciones ajenas) | 1 | eq 1 | PASS |
+| Hops de la cadena presentes en los logs (>= 12) | 14 | ge 12 | PASS |
+| Todos los hops respetan su orden causal (1 = en orden estrictamente creciente de tiempo) | 1 | eq 1 | PASS |
+| Servicios distintos en la cadena (>= 5) | 8 | ge 5 | PASS |
+| Brokers por los que pasa la cadena (>= 2) | 3 | ge 2 | PASS |
+| Error entre la suma de los tramos y la latencia total (%) | 0 | le 5 | PASS |
+| Error entre los componentes del arranque en frío del gateway y su total (%) | 0 | le 5 | PASS |
+| El gateway arrancó en frío (s entre el envío y su primer consumo; > 2 s) | 5.1 | gt 2 | PASS |
+| Error entre los componentes del arranque en frío de energy-transfer y su total (%) | 0 | le 5 | PASS |
+| Eventos de k8s del arranque del gateway y de energy-transfer capturados (pods iniciados) | 6 | ge 2 | PASS |
+| Eventos de activación de KEDA capturados (KEDAScaleTargetActivated) | 2 | ge 2 | PASS |
+| Latencia total de la cadena, del envío a su último hop (s; arranques en frío incluidos) | 9.08 | le 120 | PASS |
+
+Notas de la corrida:
+
+- 14 hops, 8 servicios (billing-sim, declaration-gateway, device-sim, energy-transfer, market-projector, matching-engine, mesh-bridge, meter-sim), brokers kafka, nats, rabbitmq. Todos respetan su orden causal; latencia total 9,08 s hasta `device_command` (rama de transferencia 9,08 s, rama del mesh 5,57 s).
+- Arranque en frío del gateway: 5,10 s (keda_detect_and_scale 3,13 s, pod_start_to_app_ready 1,90 s, app_ready_to_first_message 0,06 s). De `energy-transfer`: 3,52 s (keda_detect_and_scale 0,00 s, pod_start_to_app_ready 3,51 s, app_ready_to_first_message 0,02 s).
+
+| Tramo | Hops | s |
+|---|---|---|
+| cold_start_gateway | sent → gateway_consume | 5,098 |
+| gateway_process | gateway_consume → gateway_commit | 0,002 |
+| outbox_to_projection | gateway_commit → projector_apply | 0,002 |
+| match_window | projector_apply → match_commit | 0,450 |
+| kafka_to_transfer | match_commit → transfer_consume | 3,521 |
+| transfer_to_device | transfer_consume → device_command | 0,004 |
+
+## Fila de la tabla final
+
+| Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
+|---|---|---|---|---|
+| **E10 Seguimiento de un evento:** un `eventId` con gateway en 0 réplicas. **Patrones:** EDA + KEDA + CQRS + trazabilidad. | Se puede seguir el evento de punta a punta. | Nº de hops, orden temporal, latencia por tramo. | >= 12 hops ordenados, >= 5 servicios, 2 brokers, suma +/- 5 %. | 14 hops en orden, 8 servicios, 3 brokers, suma de tramos error 0 %, 9,08 s con arranque en frío de 5,10 s; PASS (`experiments/results/final/e10-end-to-end-trace/`) |
