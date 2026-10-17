@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S3: KEDA con trigger Kafka escala 0 -> N -> 0 (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s03-keda-kafka/run.sh"

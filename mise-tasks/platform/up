@@ -20,9 +20,13 @@ istioctl --context "$KUBE_CONTEXT" install -y -f "$P/istio/istio-operator.yaml"
 k apply -f "$P/istio/peer-authentication.yaml" -f "$P/istio/telemetry.yaml"
 
 log "keda $KEDA_CHART_VERSION"
+# sin etiqueta istio-injection: solo el operador (etiqueta de pod en values.yaml) lleva sidecar.
+# La etiqueta debe faltar antes de que Helm cree los pods.
+k get namespace keda >/dev/null 2>&1 || k create namespace keda
+k label namespace keda istio-injection- --overwrite
 h upgrade --install keda keda --repo "$KEDA_REPO" --version "$KEDA_CHART_VERSION" \
   --namespace keda --create-namespace -f "$P/keda/values.yaml" --wait --timeout 5m
-k label namespace keda istio-injection=disabled --overwrite
+k apply -f "$P/keda/peer-authentication.yaml"
 
 log "observabilidad (prometheus, kiali, grafana, jaeger)"
 k apply -f "$P/observability/"

@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S2: lag de Kafka en Prometheus con kafka-exporter (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s02-kafka-lag/run.sh"

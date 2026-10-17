@@ -1,0 +1,25 @@
+# Headless: DNS estable por pod (kafka-0.kafka-headless...), que es lo que anuncia el broker.
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-headless
+  namespace: voltera-infra
+  labels: {app: kafka}
+spec:
+  clusterIP: None
+  publishNotReadyAddresses: true
+  selector: {app: kafka}
+  ports:
+    - {name: tcp-kafka, port: 9092, targetPort: tcp-kafka}
+---
+# Bootstrap para los clientes: kafka.voltera-infra.svc:9092
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka
+  namespace: voltera-infra
+  labels: {app: kafka}
+spec:
+  selector: {app: kafka}
+  ports:
+    - {name: tcp-kafka, port: 9092, targetPort: tcp-kafka}

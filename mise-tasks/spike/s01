@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S1: Kafka produce/consume/replay con sidecar Istio (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s01-kafka/run.sh"
