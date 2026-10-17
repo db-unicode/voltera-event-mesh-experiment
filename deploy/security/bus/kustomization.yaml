@@ -1,0 +1,8 @@
+# Zero Trust del bus (E9): identidad por ServiceAccount y puerto en Kafka, RabbitMQ y NATS.
+# `mise run security:bus on|off|status`. Las políticas llevan la etiqueta zero-trust=bus.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - kafka.yaml
+  - rabbitmq.yaml
+  - nats.yaml
