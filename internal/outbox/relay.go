@@ -291,4 +291,3 @@ func (r *Relay) publishOne(ctx context.Context, x row) error {
 	}
 	return nil
 }
-

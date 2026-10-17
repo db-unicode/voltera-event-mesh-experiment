@@ -4,6 +4,9 @@ set -eu
 cd "${MISE_PROJECT_ROOT:-.}"
 
 if [ -f go.mod ]; then
+  echo "==> gofmt"
+  unformatted=$(gofmt -l cmd internal)
+  [ -z "$unformatted" ] || { echo "sin formato: $unformatted"; exit 1; }
   echo "==> go vet"
   go vet ./...
   echo "==> golangci-lint"
