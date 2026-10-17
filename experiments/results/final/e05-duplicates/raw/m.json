@@ -1,7 +1,7 @@
 {
-  "prefixA": "e05-17062025-a-",
-  "prefixB": "e05-17062025-b-",
-  "prefixC": "e05-17062025-c-",
+  "prefixA": "e05-17080046-a-",
+  "prefixB": "e05-17080046-b-",
+  "prefixC": "e05-17080046-c-",
   "b_matches": 100,
   "a_published_errors": 0,
   "a_deliveries": 2400,
@@ -11,6 +11,7 @@
   "a_duplicates_dropped": 0,
   "a_balance_diff": 0,
   "a_meters": 300,
+  "a_v3_meters": 150,
   "a_outbox_rows": 300,
   "a_outbox_dup_groups": 0,
   "a_outbox_not_v5": 0,
@@ -22,7 +23,7 @@
   "c_gw_crashes": 3,
   "c_tr_crashes": 3,
   "c_gw_redelivered": 3,
-  "c_tr_redelivered": 3,
+  "c_tr_redelivered": 4,
   "c_outbox_rows": 600,
   "c_outbox_dup_groups": 0,
   "c_outbox_pending": 0,
@@ -47,5 +48,6 @@
   "d_distinct_mine_before": 100,
   "d_distinct_mine_after": 100,
   "reconciliation_mismatches": 0,
-  "reconciliation_rows": 200
+  "reconciliation_rows": 1250,
+  "reconciliation_rows_expected": 1250
 }

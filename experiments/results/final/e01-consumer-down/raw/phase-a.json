@@ -1,21 +1,21 @@
 {
-  "prefix": "e01a-1792218610-",
+  "prefix": "e01a-1792223484-",
   "kind": "transfer",
   "device0": {
-    "total": 138911,
-    "distinct": 138910,
-    "duplicates": 1
+    "total": 0,
+    "distinct": 0,
+    "duplicates": 0
   },
   "billing0": {
-    "total": 3817,
-    "distinct": 3717,
-    "duplicates": 100
+    "total": 0,
+    "distinct": 0,
+    "duplicates": 0
   },
-  "tStart": 1792218610,
-  "tLoad0": 1792218612,
-  "tPause": 1792218642,
-  "tResume": 1792218702,
-  "tLoadEnd": 1792218796,
-  "tSettled": 1792218842,
+  "tStart": 1792223485,
+  "tLoad0": 1792223495,
+  "tPause": 1792223525,
+  "tResume": 1792223585,
+  "tLoadEnd": 1792223671,
+  "tSettled": 1792223717,
   "settled": true
 }

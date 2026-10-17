@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "data": "/Users/diego/Developer/voltera-wt/exp-e05-e06/experiments/results/e05-duplicates/20261017T062024Z-2f3dfd0-r3",
+  "data": "/Users/diego/Developer/voltera-wt/final-run-2/experiments/results/e05-duplicates/20261017T080045Z-c79d389-r1",
   "criteria": [
     {
       "id": "a-sender-clean",
@@ -177,7 +177,7 @@
       "id": "c-tr-redelivered",
       "description": "(c) energy-transfer vio reentregas (duplicados de inbox registrados tras el crash)",
       "metric": "metrics.json:$.c_tr_redelivered",
-      "observed": 3,
+      "observed": 4,
       "op": "ge",
       "expected": 1,
       "verdict": "PASS"
@@ -276,6 +276,15 @@
       "id": "reconciliation",
       "description": "conciliación por eventId/matchId sin discrepancias entre entregas y efectos esperados",
       "metric": "metrics.json:$.reconciliation_mismatches",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "reconciliation-complete",
+      "description": "la conciliación cubre todos los ids esperados (declaraciones únicas de (a) y (c), matches de (b) en transfer y billing)",
+      "metric": "metrics.json:$.reconciliation_rows_diff",
       "observed": 0,
       "op": "eq",
       "expected": 0,
