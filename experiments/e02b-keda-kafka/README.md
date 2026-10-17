@@ -47,10 +47,14 @@ El lag se lee del exporter en cada muestra, no de Prometheus (scrape de 15 s), p
 
 ## Resultado
 
-Corrida que pasa (15/15 criterios): `experiments/results/final/e02b-keda-kafka/` (origen `20261017T060655Z-f02de76-r3`; sin los dumps completos de device-sim/billing-sim).
-Pico de lag 1865, réplicas 0 -> 5 -> 0, primera réplica a los 5 s, lag 0 a los 18 s, 0 réplicas 26 s después, 3000 transferencias `SENT`, 0 pérdidas, 0 duplicados.
-Los criterios definitivos (pico de lag >= 1000) se fijaron antes de esa corrida; r2 (lag 1714) también pasó.
+Corrida final `20261017T070630Z-18789b0-dirty-r1` (`experiments/results/final/e02b-keda-kafka/`, ronda `final-run-18789b0.tsv`): 15/15 criterios en PASS.
+
+- 3000 transferencias `SENT` de 3000 publicadas; device-sim con 3000 efectos distintos (0 perdidos, 0 duplicados); billing-sim sin pérdidas.
+- Réplicas 0 -> 5 (máximo 6) -> 0; primera réplica a los 4 s; pico de lag 1081; lag 0 a los 12 s; scale-to-zero 28 s.
+- Se podó `raw/billing-prefix.json` por tamaño (`PRUNED.txt`); los conteos están en `metrics.json`.
+
+La marca `-dirty` se debe solo a la evidencia promovida a `results/final` durante la corrida; el código es el del commit indicado.
 
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| E2B KEDA Kafka | `energy-transfer` 0 -> <= 6 -> 0 por lag | réplicas pico, lag final, scale-to-zero, efectos | <= 6; lag 0; <= 90 s; 3000 efectos únicos | 5; 0; 26 s; 3000: PASS (`results/final/e02b-keda-kafka/`) |
+| E2B KEDA Kafka | `energy-transfer` 0 -> <= 6 -> 0 por lag | réplicas pico, lag final, scale-to-zero, efectos | <= 6; lag 0; <= 90 s; 3000 efectos únicos | PASS 15/15: pico 5 réplicas, lag 0, 28 s a 0 réplicas; 3000 de 3000 efectos únicos · `experiments/results/final/e02b-keda-kafka/` (corrida `18789b0-dirty-r1`) |

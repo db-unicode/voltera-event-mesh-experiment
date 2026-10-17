@@ -64,10 +64,15 @@ Redis conserva v5; device-sim aplica cada `matchId` exactamente una vez; transfe
 
 ## Resultado
 
+Corrida final `20261017T080045Z-c79d389-r1` (`experiments/results/final/e05-duplicates/`, ronda `final-run-c79d389.tsv`): 32/32 criterios en PASS.
+
+- Gateway (a): 2400 entregas = 300 aplicadas + 2100 `stale`, 0 errores; 300 filas de outbox, todas en v5; Redis con 300/300 en v5.
+- energy-transfer (b): 100 matches reenviados 5 veces cada uno: 500 duplicados descartados (`b_dup_dropped_delta`), 0 efectos duplicados en device-sim, 100 transferencias `SENT`.
+- Crashes (c): 3 del gateway y 3 de energy-transfer, con 3 y 4 reentregas; 300 matches con 300 transferencias `SENT` y 0 efectos duplicados en device-sim; 0 pérdidas.
+- billing-sim (d): 100 matches con 2 entregas (`distinct` sin cambios, `duplicates` +100).
+- Reconciliación: `reconciliation.csv` con 1250 filas de 1250 esperadas, 0 discrepancias.
+- La primera corrida de la ronda (`18789b0-dirty-r1`) falló por un bug del script (102 sobres frente a 100 ids, por matches tardíos con el mismo prefijo), corregido en main.
+
 | Experimento | Hipótesis | Métrica | Criterio de éxito | Resultado |
 |---|---|---|---|---|
-| E5 Duplicados | Cada efecto ocurre una vez con duplicados, desorden y redelivery | efectos vs entregas, descartes, v5 en Redis | igualdades exactas (ver arriba) | PASS (31/31): 2400 entregas = 300 aplicadas + 2100 stale; 300 filas de outbox; Redis 300/300 en v5; reenvío 100 matches x 5: duplicados descartados 500, device-sim 1 efecto cada uno; crashes 3 (gateway) y 3 (transfer) con 3 y 3 reentregas vistas y 0 pérdidas; billing 2 entregas por match. `experiments/results/final/e05-duplicates/` |
-
-Nota: la corrida final es la r3; su `reconciliation.csv` se completó a mano con las filas del gateway (1251 filas, 0 discrepancias) porque
-un bug de nombres de archivo en `run.sh` las omitió en esa corrida; el bug está corregido (y `criteria.yaml` ahora exige la cantidad
-esperada de filas), pero no hubo una corrida posterior por falta de lock del cluster.
+| E5 Duplicados | Cada efecto ocurre una vez con duplicados, desorden y redelivery | efectos vs entregas, descartes, v5 en Redis | igualdades exactas (ver arriba) | PASS 32/32: 2400 entregas = 300 aplicadas + 2100 stale; 300 filas de outbox; Redis 300/300 en v5; reenvío 100 x 5 con 500 duplicados descartados y 0 efectos duplicados; crashes 3 (gateway) y 3 (energy-transfer) con 0 pérdidas; billing 100 matches con 2 entregas; reconciliación 1250/1250 · `experiments/results/final/e05-duplicates/` (corrida `c79d389-r1`) |
