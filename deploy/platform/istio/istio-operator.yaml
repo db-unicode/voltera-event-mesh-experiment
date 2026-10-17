@@ -1,0 +1,28 @@
+# Perfil minimal: solo istiod, sin gateways. Los sidecars se inyectan por namespace.
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: voltera
+  namespace: istio-system
+spec:
+  profile: minimal
+  meshConfig:
+    enableTracing: true
+    defaultConfig:
+      # Evita que la app arranque (p. ej. Kafka) antes de que Envoy esté listo
+      holdApplicationUntilProxyStarts: true
+    defaultProviders:
+      tracing:
+        - jaeger-otel
+    extensionProviders:
+      - name: jaeger-otel
+        opentelemetry:
+          service: jaeger-collector.istio-system.svc.cluster.local
+          port: 4317
+  components:
+    pilot:
+      k8s:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
