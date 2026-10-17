@@ -1,0 +1,12 @@
+#!/bin/sh
+#MISE description="Despliega RabbitMQ 4.3.6 (colas durables, usuarios y definiciones) en voltera-infra (idempotente)"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+
+need kubectl
+require_cluster
+
+log "rabbitmq (voltera-infra)"
+k apply -k "$ROOT/deploy/brokers/rabbitmq"
+wait_rollout statefulset/rabbitmq voltera-infra 300s

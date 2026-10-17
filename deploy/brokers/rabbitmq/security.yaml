@@ -1,0 +1,36 @@
+# KEDA corre fuera de la malla (ns keda, sin sidecar) y consulta el management API por HTTP plano.
+# Se abre SOLO el puerto 15672 a texto plano; el resto del workload sigue en mTLS STRICT.
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: rabbitmq
+spec:
+  selector:
+    matchLabels: {app: rabbitmq}
+  mtls:
+    mode: STRICT
+  portLevelMtls:
+    "15672":
+      mode: PERMISSIVE
+---
+# Con una política ALLOW, lo que no coincide con ninguna regla se rechaza.
+#  1. Cualquier workload con identidad mTLS de la malla (principals "*"): AMQP y el resto. El control fino
+#     por servicio (SPIFFE) queda para la matriz Zero Trust; hoy la restricción efectiva son los permisos de RabbitMQ.
+#  2. Cualquier origen (también texto plano) únicamente hacia el puerto 15672 (management API de KEDA).
+# Un origen sin mTLS no puede llegar a 5672 ni a 15692 (el texto plano no tiene identidad). El origen en 15672 se
+# limita además por NetworkPolicy (network-policy.yaml) y por las credenciales del usuario `keda` (tag monitoring).
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: rabbitmq
+spec:
+  selector:
+    matchLabels: {app: rabbitmq}
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals: ["*"]
+    - to:
+        - operation:
+            ports: ["15672"]

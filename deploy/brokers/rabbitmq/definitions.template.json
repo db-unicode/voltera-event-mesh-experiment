@@ -1,0 +1,63 @@
+{
+  "users": [
+    {"name": "admin", "password": "@@admin@@", "tags": ["administrator"]},
+    {"name": "keda", "password": "@@keda@@", "tags": ["monitoring"]},
+    {"name": "meter-sim-r1", "password": "@@meter-sim-r1@@", "tags": []},
+    {"name": "meter-sim-r2", "password": "@@meter-sim-r2@@", "tags": []},
+    {"name": "declaration-gateway-r1", "password": "@@declaration-gateway-r1@@", "tags": []},
+    {"name": "declaration-gateway-r2", "password": "@@declaration-gateway-r2@@", "tags": []},
+    {"name": "price-feed-r1", "password": "@@price-feed-r1@@", "tags": []},
+    {"name": "price-feed-r2", "password": "@@price-feed-r2@@", "tags": []},
+    {"name": "market-projector-r1", "password": "@@market-projector-r1@@", "tags": []},
+    {"name": "market-projector-r2", "password": "@@market-projector-r2@@", "tags": []}
+  ],
+  "vhosts": [
+    {"name": "/"},
+    {"name": "r1"},
+    {"name": "r2"}
+  ],
+  "permissions": [
+    {"user": "admin", "vhost": "/", "configure": ".*", "write": ".*", "read": ".*"},
+    {"user": "admin", "vhost": "r1", "configure": ".*", "write": ".*", "read": ".*"},
+    {"user": "admin", "vhost": "r2", "configure": ".*", "write": ".*", "read": ".*"},
+
+    {"user": "keda", "vhost": "r1", "configure": "^$", "write": "^$", "read": "^$"},
+    {"user": "keda", "vhost": "r2", "configure": "^$", "write": "^$", "read": "^$"},
+
+    {"user": "meter-sim-r1", "vhost": "r1", "configure": "^$", "write": "^meter-declarations\\.x$", "read": "^$"},
+    {"user": "meter-sim-r2", "vhost": "r2", "configure": "^$", "write": "^meter-declarations\\.x$", "read": "^$"},
+
+    {"user": "declaration-gateway-r1", "vhost": "r1", "configure": "^$", "write": "^energy-positions\\.x$", "read": "^meter-declarations$"},
+    {"user": "declaration-gateway-r2", "vhost": "r2", "configure": "^$", "write": "^energy-positions\\.x$", "read": "^meter-declarations$"},
+
+    {"user": "price-feed-r1", "vhost": "r1", "configure": "^$", "write": "^kwh-prices\\.x$", "read": "^$"},
+    {"user": "price-feed-r2", "vhost": "r2", "configure": "^$", "write": "^kwh-prices\\.x$", "read": "^$"},
+
+    {"user": "market-projector-r1", "vhost": "r1", "configure": "^$", "write": "^$", "read": "^(energy-positions|kwh-prices)$"},
+    {"user": "market-projector-r2", "vhost": "r2", "configure": "^$", "write": "^$", "read": "^(energy-positions|kwh-prices)$"}
+  ],
+  "queues": [
+    {"name": "meter-declarations", "vhost": "r1", "durable": true, "auto_delete": false, "arguments": {"x-queue-type": "quorum"}},
+    {"name": "energy-positions", "vhost": "r1", "durable": true, "auto_delete": false, "arguments": {"x-queue-type": "quorum"}},
+    {"name": "kwh-prices", "vhost": "r1", "durable": true, "auto_delete": false, "arguments": {"x-queue-type": "quorum"}},
+    {"name": "meter-declarations", "vhost": "r2", "durable": true, "auto_delete": false, "arguments": {"x-queue-type": "quorum"}},
+    {"name": "energy-positions", "vhost": "r2", "durable": true, "auto_delete": false, "arguments": {"x-queue-type": "quorum"}},
+    {"name": "kwh-prices", "vhost": "r2", "durable": true, "auto_delete": false, "arguments": {"x-queue-type": "quorum"}}
+  ],
+  "exchanges": [
+    {"name": "meter-declarations.x", "vhost": "r1", "type": "direct", "durable": true, "auto_delete": false, "internal": false, "arguments": {}},
+    {"name": "energy-positions.x", "vhost": "r1", "type": "direct", "durable": true, "auto_delete": false, "internal": false, "arguments": {}},
+    {"name": "kwh-prices.x", "vhost": "r1", "type": "direct", "durable": true, "auto_delete": false, "internal": false, "arguments": {}},
+    {"name": "meter-declarations.x", "vhost": "r2", "type": "direct", "durable": true, "auto_delete": false, "internal": false, "arguments": {}},
+    {"name": "energy-positions.x", "vhost": "r2", "type": "direct", "durable": true, "auto_delete": false, "internal": false, "arguments": {}},
+    {"name": "kwh-prices.x", "vhost": "r2", "type": "direct", "durable": true, "auto_delete": false, "internal": false, "arguments": {}}
+  ],
+  "bindings": [
+    {"source": "meter-declarations.x", "vhost": "r1", "destination": "meter-declarations", "destination_type": "queue", "routing_key": "meter-declarations", "arguments": {}},
+    {"source": "energy-positions.x", "vhost": "r1", "destination": "energy-positions", "destination_type": "queue", "routing_key": "energy-positions", "arguments": {}},
+    {"source": "kwh-prices.x", "vhost": "r1", "destination": "kwh-prices", "destination_type": "queue", "routing_key": "kwh-prices", "arguments": {}},
+    {"source": "meter-declarations.x", "vhost": "r2", "destination": "meter-declarations", "destination_type": "queue", "routing_key": "meter-declarations", "arguments": {}},
+    {"source": "energy-positions.x", "vhost": "r2", "destination": "energy-positions", "destination_type": "queue", "routing_key": "energy-positions", "arguments": {}},
+    {"source": "kwh-prices.x", "vhost": "r2", "destination": "kwh-prices", "destination_type": "queue", "routing_key": "kwh-prices", "arguments": {}}
+  ]
+}

@@ -1,0 +1,30 @@
+# RabbitMQ 4.3.6 de un nodo para las colas durables (S4). Se aplica con: mise run brokers:rabbitmq
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: voltera-infra
+resources:
+  - statefulset.yaml
+  - service.yaml
+  - security.yaml
+configMapGenerator:
+  - name: rabbitmq-config
+    files:
+      - rabbitmq.conf
+      - render-definitions.sh
+      - definitions.template.json
+secretGenerator:
+  # Una clave por usuario, con el nombre del usuario. Contraseñas de laboratorio (hex), solo para este cluster kind.
+  - name: rabbitmq-users
+    options:
+      disableNameSuffixHash: true   # los clientes de otros namespaces copian este Secret por nombre
+    literals:
+      - admin=430b0fab6aa8900e406e60d3
+      - keda=d9929b225afd1958d4220a9c
+      - meter-sim-r1=ddd40e46319238037eac0919
+      - meter-sim-r2=c49f76a9bdc12f3bd871140d
+      - declaration-gateway-r1=fa7ad9968b882e8b767daea0
+      - declaration-gateway-r2=1181540b2d3a70fd67f1ed07
+      - price-feed-r1=a0ee97fa9ed2a1bf8150c076
+      - price-feed-r2=8a1d20b4352fea1519d6ad9f
+      - market-projector-r1=e7b8003c17a1b2c0323af03d
+      - market-projector-r2=77bc86b8c59da60ffffa068d
