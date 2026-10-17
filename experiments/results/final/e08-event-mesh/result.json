@@ -1,0 +1,258 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/exp-e08-e09-e10/experiments/results/e08-event-mesh/20261017T045215Z-58a9758-dirty-r1",
+  "criteria": [
+    {
+      "id": "normal-r1-delivered",
+      "description": "r1 normal - todo match de r1 llega a billing (matches sin entregar)",
+      "metric": "metrics.json:$.normal.r1.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "normal-r1-matches",
+      "description": "r1 normal - la carga produjo matches (ratio matches/pares enviados)",
+      "metric": "metrics.json:$.normal.r1.match_ratio",
+      "observed": 1,
+      "op": "ge",
+      "expected": 0.9,
+      "verdict": "PASS"
+    },
+    {
+      "id": "normal-r2-delivered",
+      "description": "r2 normal - todo match de r2 llega a billing (matches sin entregar)",
+      "metric": "metrics.json:$.normal.r2.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "normal-r2-matches",
+      "description": "r2 normal - la carga produjo matches (ratio matches/pares enviados)",
+      "metric": "metrics.json:$.normal.r2.match_ratio",
+      "observed": 1,
+      "op": "ge",
+      "expected": 0.9,
+      "verdict": "PASS"
+    },
+    {
+      "id": "normal-r1-p99",
+      "description": "r1 normal - p99 de receivedAt - emittedAt (s)",
+      "metric": "metrics.json:$.normal.r1.emit_p99_s",
+      "observed": 0.025468439619999998,
+      "op": "le",
+      "expected": 10,
+      "verdict": "PASS"
+    },
+    {
+      "id": "normal-r2-p99",
+      "description": "r2 normal - p99 de receivedAt - emittedAt (s)",
+      "metric": "metrics.json:$.normal.r2.emit_p99_s",
+      "observed": 0.008135306390000008,
+      "op": "le",
+      "expected": 10,
+      "verdict": "PASS"
+    },
+    {
+      "id": "normal-r1-e2e-p99",
+      "description": "r1 normal - p99 de receivedAt - occurredAt (s)",
+      "metric": "metrics.json:$.normal.r1.e2e_p99_s",
+      "observed": 0.05100264094999961,
+      "op": "le",
+      "expected": 10,
+      "verdict": "PASS"
+    },
+    {
+      "id": "normal-r2-e2e-p99",
+      "description": "r2 normal - p99 de receivedAt - occurredAt (s)",
+      "metric": "metrics.json:$.normal.r2.e2e_p99_s",
+      "observed": 0.02078300800000001,
+      "op": "le",
+      "expected": 10,
+      "verdict": "PASS"
+    },
+    {
+      "id": "normal-duplicates",
+      "description": "Efectos duplicados en billing en todas las fases",
+      "metric": "metrics.json:$.partition.billing_duplicates",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "normal-false-rejects",
+      "description": "Falsos rechazos del flujo legítimo (mesh_publish_rejected_total durante la fase normal)",
+      "metric": "metrics.json:$.normal.false_rejects",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "neg-attempts",
+      "description": "Intentos negativos ejecutados (4 casos x 20)",
+      "metric": "metrics.json:$.negatives.attempts",
+      "observed": 80,
+      "op": "eq",
+      "expected": 80,
+      "verdict": "PASS"
+    },
+    {
+      "id": "neg-rejected",
+      "description": "Intentos rechazados (80/80)",
+      "metric": "metrics.json:$.negatives.rejected",
+      "observed": 80,
+      "op": "eq",
+      "expected": 80,
+      "verdict": "PASS"
+    },
+    {
+      "id": "neg-rejected-by-authz",
+      "description": "Rechazados por autorización (acl o authn), no por fallos de red",
+      "metric": "metrics.json:$.negatives.rejected_by_authorization",
+      "observed": 80,
+      "op": "eq",
+      "expected": 80,
+      "verdict": "PASS"
+    },
+    {
+      "id": "neg-stream-untouched",
+      "description": "Mensajes nuevos en el stream BILLING_MATCHED durante los negativos (last_seq)",
+      "metric": "metrics.json:$.negatives.stream_seq_delta",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "neg-billing-untouched",
+      "description": "Entregas nuevas en billing durante los negativos",
+      "metric": "metrics.json:$.negatives.billing_total_delta",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-link-down",
+      "description": "El timeline de /leafz muestra el enlace caído (muestras con global=1 y r2=0)",
+      "metric": "metrics.json:$.partition.leafz.down_samples",
+      "observed": 114,
+      "op": "ge",
+      "expected": 3,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-duration",
+      "description": "Duración del corte (s)",
+      "metric": "metrics.json:$.partition.duration_s",
+      "observed": 135,
+      "op": "ge",
+      "expected": 120,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-local-transfer",
+      "description": "Transferencia local de r2 durante el corte (matches vencidos ya aplicados en device-sim r2 / matches vencidos)",
+      "metric": "metrics.json:$.partition.local_ratio",
+      "observed": 1,
+      "op": "eq",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-device-growth",
+      "description": "device-sim r2 crece durante el corte (comandos distintos nuevos)",
+      "metric": "metrics.json:$.partition.device_growth_during_cut",
+      "observed": 356,
+      "op": "ge",
+      "expected": 50,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-bridge-retains",
+      "description": "El lag del grupo mesh-bridge de r2 crece durante el corte (máximo de mensajes en espera)",
+      "metric": "metrics.json:$.partition.lag_r2_max_during_cut",
+      "observed": 353,
+      "op": "ge",
+      "expected": 20,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-lag-recovered",
+      "description": "El lag del grupo mesh-bridge de r2 vuelve a 0",
+      "metric": "metrics.json:$.partition.lag_r2_last",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-r2-loss",
+      "description": "Matches de r2 creados en la partición que no llegan a billing (pérdida)",
+      "metric": "metrics.json:$.partition.r2.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-r2-matches",
+      "description": "La carga de r2 durante el corte produjo matches",
+      "metric": "metrics.json:$.partition.r2.matches",
+      "observed": 360,
+      "op": "ge",
+      "expected": 100,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-drain",
+      "description": "Drenado de r2 tras restaurar el enlace (s hasta el último match en billing)",
+      "metric": "metrics.json:$.partition.drain_s",
+      "observed": 3.308,
+      "op": "le",
+      "expected": 60,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-r1-unaffected",
+      "description": "r1 sigue entregando durante el corte (matches sin entregar)",
+      "metric": "metrics.json:$.partition.r1.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-r1-p99",
+      "description": "p99 de r1 durante el corte (s)",
+      "metric": "metrics.json:$.partition.r1.emit_p99_s",
+      "observed": 3.43306705548,
+      "op": "le",
+      "expected": 10,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-device-duplicates",
+      "description": "Efectos duplicados en device-sim r2 de los matches de la partición",
+      "metric": "metrics.json:$.partition.device_duplicates_final",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "part-links-restored",
+      "description": "Leafnodes del hub al final (2) y de r2 (1)",
+      "metric": "metrics.json:$.partition.leafz.final_global_leafs",
+      "observed": 2,
+      "op": "eq",
+      "expected": 2,
+      "verdict": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+# E9: Zero Trust sobre el bus. Esperado = lo que las capas configuradas (ACL del broker + política L4 de Istio + mTLS) deben hacer;
+# diseño = la intención de negocio. Las celdas donde difieren (Kafka por topic) son el límite declarado y se miden aparte.
+- id: matrix-complete
+  description: Celdas de la matriz sin resultado (el Job no las ejecutó)
+  metric: "metrics.json:$.missing"
+  op: eq
+  value: 0
+- id: false-negatives
+  description: Falsos negativos (acceso indebido concedido, respecto de lo esperado)
+  metric: "metrics.json:$.false_negatives"
+  op: eq
+  value: 0
+- id: false-positives
+  description: Falsos positivos (acceso legítimo denegado)
+  metric: "metrics.json:$.false_positives"
+  op: eq
+  value: 0
+- id: mismatches
+  description: Celdas cuyo resultado real difiere del esperado
+  metric: "metrics.json:$.mismatches_vs_expected"
+  op: eq
+  value: 0
+- id: positives-allowed
+  description: Celdas legítimas del diseño que el bus permitió (de 14)
+  metric: "metrics.json:$.positives.allowed"
+  op: eq
+  value: 14
+- id: plain-no-sidecar
+  description: Conexiones/operaciones exitosas desde el pod sin sidecar (con credenciales válidas)
+  metric: "metrics.json:$.plain.successes"
+  op: eq
+  value: 0
+- id: plain-cells
+  description: Celdas intentadas desde el pod sin sidecar
+  metric: "metrics.json:$.plain.cells"
+  op: ge
+  value: 15
+- id: kafka-topic-gap
+  description: Celdas Kafka que Istio no puede distinguir por topic (diseño deny, L4 allow) y se comportaron como se predijo
+  metric: "metrics.json:$.design_gap.behaved_as_predicted"
+  op: eq
+  value: 9
+- id: stolen-credential-control-rabbit
+  description: Control sin políticas - con la credencial de meter-sim desde otra SA, la publicación en meter-declarations pasa
+  metric: "metrics.json:$.control_without_policy.thief_rabbit_publish_allowed"
+  op: eq
+  value: 1
+- id: stolen-credential-control-nats
+  description: Control sin políticas - con la credencial de bridge-r1 desde otra SA, la publicación en energy.matched.r1 pasa
+  metric: "metrics.json:$.control_without_policy.thief_nats_publish_allowed"
+  op: eq
+  value: 1
+- id: rbac-denied-kafka
+  description: Contadores rbac denied del sidecar de Kafka (incremento)
+  metric: "metrics.json:$.rbac_denied_delta.kafka"
+  op: ge
+  value: 1
+- id: rbac-denied-rabbitmq
+  description: Contadores rbac denied del sidecar de RabbitMQ (incremento)
+  metric: "metrics.json:$.rbac_denied_delta.rabbitmq"
+  op: ge
+  value: 1
+- id: rbac-denied-nats
+  description: Contadores rbac denied de los sidecars de NATS (incremento)
+  metric: "metrics.json:$.rbac_denied_delta.nats"
+  op: ge
+  value: 1
+- id: flow-r1-matches
+  description: El flujo legítimo con las políticas aplicadas produjo matches en r1
+  metric: "metrics.json:$.flow.r1_matches"
+  op: ge
+  value: 50
+- id: flow-r2-matches
+  description: El flujo legítimo con las políticas aplicadas produjo matches en r2
+  metric: "metrics.json:$.flow.r2_matches"
+  op: ge
+  value: 20
+- id: flow-r1-billing
+  description: Matches de r1 que no llegaron a billing con las políticas aplicadas
+  metric: "metrics.json:$.flow.r1_missing_in_billing"
+  op: eq
+  value: 0
+- id: flow-r2-billing
+  description: Matches de r2 que no llegaron a billing con las políticas aplicadas
+  metric: "metrics.json:$.flow.r2_missing_in_billing"
+  op: eq
+  value: 0
+- id: flow-device
+  description: Matches del flujo sin efecto en device-sim (energy-transfer escalado por KEDA bajo las políticas)
+  metric: "metrics.json:$.flow.missing_in_device"
+  op: eq
+  value: 0
+- id: policies-removed
+  description: Políticas del bus que quedan al terminar (deben ser 0 salvo E09_KEEP_POLICIES=1)
+  metric: "metrics.json:$.policies.left_after_run"
+  op: eq
+  value: 0

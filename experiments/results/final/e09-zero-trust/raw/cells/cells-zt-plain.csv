@@ -1,0 +1,15 @@
+plain.rabbitmq.meter-declarations.publish,rabbitmq,publish,r1:meter-declarations
+plain.rabbitmq.meter-declarations.consume,rabbitmq,consume,r1:meter-declarations
+plain.rabbitmq.energy-positions.publish,rabbitmq,publish,r1:energy-positions
+plain.rabbitmq.energy-positions.consume,rabbitmq,consume,r1:energy-positions
+plain.rabbitmq.kwh-prices.publish,rabbitmq,publish,r1:kwh-prices
+plain.rabbitmq.kwh-prices.consume,rabbitmq,consume,r1:kwh-prices
+plain.kafka.r1.energy-matched.publish,kafka,publish,r1.energy-matched
+plain.kafka.r1.energy-matched.consume,kafka,consume,r1.energy-matched
+plain.kafka.r2.energy-matched.publish,kafka,publish,r2.energy-matched
+plain.kafka.r2.energy-matched.consume,kafka,consume,r2.energy-matched
+plain.nats.connect.connect,nats,connect,
+plain.nats.energy.matched.r1.>.publish,nats,publish,energy.matched.r1.zt-probe
+plain.nats.energy.matched.r2.>.publish,nats,publish,energy.matched.r2.zt-probe
+plain.nats.energy.matched.>.subscribe,nats,subscribe,energy.matched.>
+plain.nats.BILLING_MATCHED/billing.consumer-info,nats,consumer-info,BILLING_MATCHED/billing

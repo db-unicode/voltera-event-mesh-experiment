@@ -1,0 +1,6 @@
+thief-rabbit.rabbitmq.meter-declarations.publish,rabbitmq,publish,r1:meter-declarations
+thief-rabbit.rabbitmq.meter-declarations.consume,rabbitmq,consume,r1:meter-declarations
+thief-rabbit.rabbitmq.energy-positions.publish,rabbitmq,publish,r1:energy-positions
+thief-rabbit.rabbitmq.energy-positions.consume,rabbitmq,consume,r1:energy-positions
+thief-rabbit.rabbitmq.kwh-prices.publish,rabbitmq,publish,r1:kwh-prices
+thief-rabbit.rabbitmq.kwh-prices.consume,rabbitmq,consume,r1:kwh-prices

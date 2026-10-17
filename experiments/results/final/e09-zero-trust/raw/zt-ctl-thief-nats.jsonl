@@ -1,0 +1,5 @@
+{"id":"thief-nats.nats.BILLING_MATCHED/billing.consumer-info","broker":"nats","op":"consumer-info","target":"BILLING_MATCHED/billing","outcome":"denied","class":"acl","error":"nats: permissions violation: Permissions Violation for Publish to \"$JS.API.CONSUMER.INFO.BILLING_MATCHED.billing\"","ms":8003}
+{"id":"thief-nats.nats.connect.connect","broker":"nats","op":"connect","target":"","outcome":"allowed","ms":9}
+{"id":"thief-nats.nats.energy.matched.\u003e.subscribe","broker":"nats","op":"subscribe","target":"energy.matched.\u003e","outcome":"denied","class":"acl","error":"nats: permissions violation: Permissions Violation for Subscription to \"energy.matched.\u003e\"","ms":813}
+{"id":"thief-nats.nats.energy.matched.r1.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r1.zt-probe","outcome":"allowed","ms":814}
+{"id":"thief-nats.nats.energy.matched.r2.\u003e.publish","broker":"nats","op":"publish","target":"energy.matched.r2.zt-probe","outcome":"denied","class":"acl","error":"nats: permissions violation: Permissions Violation for Publish to \"energy.matched.r2.zt-probe\"","ms":813}

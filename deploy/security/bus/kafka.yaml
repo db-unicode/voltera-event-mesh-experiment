@@ -1,0 +1,41 @@
+# Kafka 9092: solo las identidades que producen o consumen. Istio decide por identidad y puerto, no por topic:
+# quien entra puede producir y consumir en cualquier topic (el control por topic exige SASL + ACL de Kafka).
+#
+# ALLOW: lo que no coincide con ninguna regla se rechaza, de modo que la segunda regla deja pasar al resto de puertos
+# del pod (solo identidades mTLS, como antes). Otro experimento que necesite Kafka añade su propia
+# AuthorizationPolicy ALLOW con su ServiceAccount; las ALLOW se suman.
+#
+# - matching-engine produce; energy-transfer y mesh-bridge consumen (r1 y r2).
+# - keda-operator: el scaler kafka de energy-transfer lee offsets y lag.
+# - voltera-infra/default: kafka-exporter (métrica de lag), el Job de topics y el propio broker comparten ese SA.
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: kafka-bus
+  namespace: voltera-infra
+  labels: {zero-trust: bus}
+spec:
+  selector:
+    matchLabels: {app: kafka}
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/voltera-r1/sa/matching-engine
+              - cluster.local/ns/voltera-r2/sa/matching-engine
+              - cluster.local/ns/voltera-r1/sa/energy-transfer
+              - cluster.local/ns/voltera-r2/sa/energy-transfer
+              - cluster.local/ns/voltera-r1/sa/mesh-bridge
+              - cluster.local/ns/voltera-r2/sa/mesh-bridge
+              - cluster.local/ns/keda/sa/keda-operator
+              - cluster.local/ns/voltera-infra/sa/default
+      to:
+        - operation:
+            ports: ["9092"]
+    - from:
+        - source:
+            principals: ["*"]
+      to:
+        - operation:
+            notPorts: ["9092"]

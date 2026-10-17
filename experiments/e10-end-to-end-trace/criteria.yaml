@@ -1,0 +1,61 @@
+# E10: seguimiento de un evento de punta a punta con KEDA en el camino. Umbrales de 03-experiments.md (E10).
+- id: pair-exact
+  description: El par enviado produce exactamente un match entre sus dos medidores (zona única sin posiciones ajenas)
+  metric: "metrics.json:$.pair_exact"
+  op: eq
+  value: 1
+- id: hops-present
+  description: Hops de la cadena presentes en los logs (>= 12)
+  metric: "metrics.json:$.hops_present"
+  op: ge
+  value: 12
+- id: hops-ordered
+  description: Todos los hops respetan su orden causal (1 = en orden estrictamente creciente de tiempo)
+  metric: "metrics.json:$.ordered"
+  op: eq
+  value: 1
+- id: services
+  description: Servicios distintos en la cadena (>= 5)
+  metric: "metrics.json:$.services_count"
+  op: ge
+  value: 5
+- id: brokers
+  description: Brokers por los que pasa la cadena (>= 2)
+  metric: "metrics.json:$.brokers_count"
+  op: ge
+  value: 2
+- id: decomposition-sum
+  description: Error entre la suma de los tramos y la latencia total (%)
+  metric: "metrics.json:$.segments_error_pct"
+  op: le
+  value: 5
+- id: cold-start-gateway-components
+  description: Error entre los componentes del arranque en frío del gateway y su total (%)
+  metric: "metrics.json:$.cold_start.gateway.error_pct"
+  op: le
+  value: 5
+- id: cold-start-gateway-seen
+  description: El gateway arrancó en frío (s entre el envío y su primer consumo; > 2 s)
+  metric: "metrics.json:$.cold_start.gateway.total_s"
+  op: gt
+  value: 2
+- id: cold-start-transfer-components
+  description: Error entre los componentes del arranque en frío de energy-transfer y su total (%)
+  metric: "metrics.json:$.cold_start.transfer.error_pct"
+  op: le
+  value: 5
+- id: k8s-events
+  description: Eventos de k8s del arranque del gateway y de energy-transfer capturados (pods iniciados)
+  metric: "metrics.json:$.k8s_events.pods_started"
+  op: ge
+  value: 2
+- id: keda-activation
+  description: Eventos de activación de KEDA capturados (KEDAScaleTargetActivated)
+  metric: "metrics.json:$.k8s_events.keda_activation"
+  op: ge
+  value: 2
+- id: total-latency
+  description: Latencia total de la cadena, del envío a su último hop (s; arranques en frío incluidos)
+  metric: "metrics.json:$.total_s"
+  op: le
+  value: 120

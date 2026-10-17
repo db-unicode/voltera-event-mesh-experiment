@@ -1,0 +1,31 @@
+# RabbitMQ 5672 (AMQP): solo los ServiceAccounts que tienen usuario. Complementa los permisos por usuario del broker:
+# una credencial robada no sirve desde otra identidad.
+#
+# El ALLOW existente (deploy/brokers/rabbitmq/security.yaml) admite cualquier identidad mTLS fuera del 15672 y las
+# políticas ALLOW se suman, así que aquí se usa DENY: rechaza el 5672 a toda identidad que no esté en la lista y no
+# toca el 15672 (KEDA) ni las métricas.
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: rabbitmq-amqp-bus
+  namespace: voltera-infra
+  labels: {zero-trust: bus}
+spec:
+  selector:
+    matchLabels: {app: rabbitmq}
+  action: DENY
+  rules:
+    - from:
+        - source:
+            notPrincipals:
+              - cluster.local/ns/voltera-r1/sa/meter-sim
+              - cluster.local/ns/voltera-r2/sa/meter-sim
+              - cluster.local/ns/voltera-r1/sa/declaration-gateway
+              - cluster.local/ns/voltera-r2/sa/declaration-gateway
+              - cluster.local/ns/voltera-r1/sa/price-feed-simulator
+              - cluster.local/ns/voltera-r2/sa/price-feed-simulator
+              - cluster.local/ns/voltera-r1/sa/market-projector
+              - cluster.local/ns/voltera-r2/sa/market-projector
+      to:
+        - operation:
+            ports: ["5672"]

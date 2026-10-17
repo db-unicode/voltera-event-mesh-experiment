@@ -1,0 +1,41 @@
+# contadores rbac...denied de los sidecars (antes de aplicar las políticas / después de la matriz y el flujo)
+## antes
+voltera-infra/rabbitmq-0 http.InboundPassthroughCluster;.rbac.denied: 0
+voltera-infra/rabbitmq-0 http.InboundPassthroughCluster;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15672;.rbac.denied: 1
+voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15672;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15692;.rbac.denied: 0
+voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15692;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-infra/rabbitmq-0 tcp.rbac.denied: 84
+voltera-infra/rabbitmq-0 tcp.rbac.istio_dry_run_allow_.shadow_denied: 0
+## después
+voltera-infra/kafka-0 http.InboundPassthroughCluster;.rbac.denied: 0
+voltera-infra/kafka-0 http.InboundPassthroughCluster;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-infra/kafka-0 tcp.rbac.denied: 42
+voltera-infra/kafka-0 tcp.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-infra/rabbitmq-0 http.InboundPassthroughCluster;.rbac.denied: 0
+voltera-infra/rabbitmq-0 http.InboundPassthroughCluster;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15672;.rbac.denied: 1
+voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15672;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15692;.rbac.denied: 0
+voltera-infra/rabbitmq-0 http.inbound_0.0.0.0_15692;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-infra/rabbitmq-0 tcp.rbac.denied: 126
+voltera-infra/rabbitmq-0 tcp.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-r1/nats http.InboundPassthroughCluster;.rbac.denied: 0
+voltera-r1/nats http.InboundPassthroughCluster;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-r1/nats http.inbound_0.0.0.0_8222;.rbac.denied: 0
+voltera-r1/nats http.inbound_0.0.0.0_8222;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-r1/nats tcp.rbac.denied: 45
+voltera-r1/nats tcp.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-r2/nats http.InboundPassthroughCluster;.rbac.denied: 0
+voltera-r2/nats http.InboundPassthroughCluster;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-r2/nats http.inbound_0.0.0.0_8222;.rbac.denied: 0
+voltera-r2/nats http.inbound_0.0.0.0_8222;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-r2/nats tcp.rbac.denied: 0
+voltera-r2/nats tcp.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-global/nats http.InboundPassthroughCluster;.rbac.denied: 0
+voltera-global/nats http.InboundPassthroughCluster;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-global/nats http.inbound_0.0.0.0_8222;.rbac.denied: 0
+voltera-global/nats http.inbound_0.0.0.0_8222;.rbac.istio_dry_run_allow_.shadow_denied: 0
+voltera-global/nats tcp.rbac.denied: 0
+voltera-global/nats tcp.rbac.istio_dry_run_allow_.shadow_denied: 0

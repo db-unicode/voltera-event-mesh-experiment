@@ -1,0 +1,33 @@
+2026-10-17T06:29:50.237711Z	ScaledObject	declaration-gateway	KEDAScaleTargetActivated	Scaled apps/v1.Deployment voltera-r1/declaration-gateway from 0 to 1, triggered by s0-rabbitmq-meter-declarations
+2026-10-17T06:29:50.501248Z	ScaledObject	declaration-gateway	ScaledObjectPaused	ScaledObject is paused
+2026-10-17T06:29:50.501307Z	ScaledObject	declaration-gateway	KEDAScalersStopped	Stopped scalers watch
+2026-10-17T06:29:50Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Scheduled	Successfully assigned voltera-r1/declaration-gateway-57d49f98ff-9xc2s to voltera-control-plane
+2026-10-17T06:29:50Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Pulled	Container image "docker.io/istio/proxyv2:1.31.2" already present on machine and can be accessed by the pod
+2026-10-17T06:29:50Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Created	Container created
+2026-10-17T06:29:50Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Started	Container started
+2026-10-17T06:29:50Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Pulled	Container image "docker.io/istio/proxyv2:1.31.2" already present on machine and can be accessed by the pod
+2026-10-17T06:29:50Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Created	Container created
+2026-10-17T06:29:50Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Started	Container started
+2026-10-17T06:29:50Z	Deployment	declaration-gateway	ScalingReplicaSet	Scaled up replica set declaration-gateway-57d49f98ff from 0 to 1
+2026-10-17T06:29:51Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Pulled	Container image "voltera/declaration-gateway:dev" already present on machine and can be accessed by the pod
+2026-10-17T06:29:51Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Created	Container created
+2026-10-17T06:29:51Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Started	Container started
+2026-10-17T06:29:51Z	Pod	declaration-gateway-57d49f98ff-9xc2s	Unhealthy	Readiness probe failed: HTTP probe failed with statuscode: 500
+2026-10-17T06:29:52.760892Z	ScaledObject	energy-transfer	KEDAScaleTargetActivated	Scaled apps/v1.Deployment voltera-r1/energy-transfer from 0 to 1, triggered by s0-kafka-r1-energy-matched
+2026-10-17T06:29:52Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Scheduled	Successfully assigned voltera-r1/energy-transfer-cd6b4bbf9-7xqhw to voltera-control-plane
+2026-10-17T06:29:52Z	ReplicaSet	energy-transfer-cd6b4bbf9	SuccessfulCreate	(combined from similar events): Created pod: energy-transfer-cd6b4bbf9-7xqhw
+2026-10-17T06:29:53.751657Z	ScaledObject	energy-transfer	ScaledObjectPaused	ScaledObject is paused
+2026-10-17T06:29:53.751721Z	ScaledObject	energy-transfer	KEDAScalersStopped	Stopped scalers watch
+2026-10-17T06:29:53Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Pulled	Container image "docker.io/istio/proxyv2:1.31.2" already present on machine and can be accessed by the pod
+2026-10-17T06:29:53Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Created	Container created
+2026-10-17T06:29:53Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Started	Container started
+2026-10-17T06:29:53Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Pulled	Container image "docker.io/istio/proxyv2:1.31.2" already present on machine and can be accessed by the pod
+2026-10-17T06:29:53Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Created	Container created
+2026-10-17T06:29:53Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Started	Container started
+2026-10-17T06:29:54Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Unhealthy	Startup probe failed: Get "http://10.244.0.163:15021/healthz/ready": dial tcp 10.244.0.163:15021: connect: connection refused
+2026-10-17T06:29:55Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Pulled	Container image "voltera/energy-transfer:dev" already present on machine and can be accessed by the pod
+2026-10-17T06:29:55Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Created	Container created
+2026-10-17T06:29:55Z	Pod	energy-transfer-cd6b4bbf9-7xqhw	Started	Container started
+NAME                  SCALETARGETKIND      SCALETARGETNAME       MIN   MAX   READY   ACTIVE   FALLBACK   PAUSED   TRIGGERS   AUTHENTICATIONS   AGE
+declaration-gateway   apps/v1.Deployment   declaration-gateway   0     10    True    True     False      True     rabbitmq   rabbitmq-http     3h13m
+energy-transfer       apps/v1.Deployment   energy-transfer       0     6     True    True     False      True     kafka                        3h29m

@@ -1,0 +1,173 @@
+{
+  "count": 6,
+  "hops": [
+    {
+      "ts": "2026-10-17T06:29:46.867784993Z",
+      "offsetMs": 0,
+      "deltaMs": 0,
+      "service": "meter-sim",
+      "namespace": "voltera-r1",
+      "pod": "meter-sim-1792218583-6041-1-dsfqm",
+      "container": "meter-sim",
+      "stage": "publish",
+      "result": "ok",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+      "msg": "publish",
+      "line": {
+        "ts": "2026-10-17T06:29:46.867784993Z",
+        "level": "info",
+        "msg": "publish",
+        "service": "meter-sim",
+        "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+        "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+        "stage": "publish",
+        "result": "ok",
+        "meterId": "e10-17062646-0002",
+        "version": 1792218585,
+        "side": "DEFICIT",
+        "vendor": "voltix-2",
+        "sentAt": "2026-10-17T06:29:46.864059142Z"
+      }
+    },
+    {
+      "ts": "2026-10-17T06:29:51.96537129Z",
+      "offsetMs": 5097.586297,
+      "deltaMs": 5097.586297,
+      "service": "declaration-gateway",
+      "namespace": "voltera-r1",
+      "pod": "declaration-gateway-57d49f98ff-9xc2s",
+      "container": "declaration-gateway",
+      "stage": "consume",
+      "result": "ok",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+      "msg": "consume",
+      "line": {
+        "ts": "2026-10-17T06:29:51.96537129Z",
+        "level": "info",
+        "msg": "consume",
+        "service": "declaration-gateway",
+        "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+        "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+        "stage": "consume",
+        "result": "ok",
+        "vendor": "voltix-2",
+        "meterId": "e10-17062646-0002",
+        "version": 1792218585
+      }
+    },
+    {
+      "ts": "2026-10-17T06:29:51.966999965Z",
+      "offsetMs": 5099.214972,
+      "deltaMs": 1.628675,
+      "service": "declaration-gateway",
+      "namespace": "voltera-r1",
+      "pod": "declaration-gateway-57d49f98ff-9xc2s",
+      "container": "declaration-gateway",
+      "stage": "commit",
+      "result": "ok",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+      "msg": "commit",
+      "line": {
+        "ts": "2026-10-17T06:29:51.966999965Z",
+        "level": "info",
+        "msg": "commit",
+        "service": "declaration-gateway",
+        "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+        "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+        "stage": "commit",
+        "result": "ok",
+        "meterId": "e10-17062646-0002",
+        "version": 1792218585
+      }
+    },
+    {
+      "ts": "2026-10-17T06:29:51.96901935Z",
+      "offsetMs": 5101.234357,
+      "deltaMs": 2.019385,
+      "service": "declaration-gateway",
+      "namespace": "voltera-r1",
+      "pod": "declaration-gateway-57d49f98ff-9xc2s",
+      "container": "declaration-gateway",
+      "stage": "publish",
+      "result": "ok",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+      "msg": "publish",
+      "line": {
+        "ts": "2026-10-17T06:29:51.96901935Z",
+        "level": "info",
+        "msg": "publish",
+        "service": "declaration-gateway",
+        "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+        "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+        "stage": "publish",
+        "result": "ok",
+        "topic": "energy-positions"
+      }
+    },
+    {
+      "ts": "2026-10-17T06:29:51.969127267Z",
+      "offsetMs": 5101.342274,
+      "deltaMs": 0.107917,
+      "service": "market-projector",
+      "namespace": "voltera-r1",
+      "pod": "market-projector-74b76774c7-tmdfd",
+      "container": "market-projector",
+      "stage": "consume",
+      "result": "ok",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+      "msg": "consume",
+      "line": {
+        "ts": "2026-10-17T06:29:51.969127267Z",
+        "level": "info",
+        "msg": "consume",
+        "service": "market-projector",
+        "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+        "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+        "stage": "consume",
+        "result": "ok",
+        "meterId": "e10-17062646-0002",
+        "version": 1792218585
+      }
+    },
+    {
+      "ts": "2026-10-17T06:29:51.969354101Z",
+      "offsetMs": 5101.569108,
+      "deltaMs": 0.226834,
+      "service": "market-projector",
+      "namespace": "voltera-r1",
+      "pod": "market-projector-74b76774c7-tmdfd",
+      "container": "market-projector",
+      "stage": "apply",
+      "result": "ok",
+      "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+      "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+      "msg": "apply",
+      "line": {
+        "ts": "2026-10-17T06:29:51.969354101Z",
+        "level": "info",
+        "msg": "apply",
+        "service": "market-projector",
+        "eventId": "69688a7b-64e5-53e3-bda8-9d9545f1be06",
+        "traceId": "02975f3f5e953b5c16e58f953e235c8d",
+        "stage": "apply",
+        "result": "ok",
+        "key": "pos:z-1:e10-17062646-0002",
+        "version": 1792218585
+      }
+    }
+  ],
+  "ids": [
+    "69688a7b-64e5-53e3-bda8-9d9545f1be06"
+  ],
+  "services": [
+    "declaration-gateway",
+    "market-projector",
+    "meter-sim"
+  ],
+  "totalMs": 5101.569108
+}

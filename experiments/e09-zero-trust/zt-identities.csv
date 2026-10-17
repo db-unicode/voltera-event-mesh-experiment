@@ -1,0 +1,16 @@
+identity,namespace,sa,sidecar,amqp_cred,nats_cred,nats_node
+meter-sim,voltera-r1,meter-sim,yes,secret:meter-sim-rabbitmq,none,r1
+declaration-gateway,voltera-r1,declaration-gateway,yes,secret:declaration-gateway-rabbitmq,none,r1
+price-feed-simulator,voltera-r1,price-feed-simulator,yes,secret:price-feed-simulator-rabbitmq,none,r1
+market-projector,voltera-r1,market-projector,yes,secret:market-projector-rabbitmq,none,r1
+matching-engine,voltera-r1,matching-engine,yes,none,none,r1
+energy-transfer,voltera-r1,energy-transfer,yes,none,none,r1
+device-sim,voltera-r1,device-sim,yes,none,none,r1
+mesh-bridge,voltera-r1,mesh-bridge,yes,none,secret:mesh-bridge-credentials,r1
+billing-sim,voltera-global,billing-sim,yes,none,secret:billing-nats-credentials,global
+stranger,voltera-r1,zt-stranger,yes,none,literal:rogue:dev-rogue-77d2,r1
+thief-rabbit,voltera-r1,energy-transfer,yes,secret:meter-sim-rabbitmq,none,r1
+thief-nats,voltera-r1,device-sim,yes,none,secret:mesh-bridge-credentials,r1
+badpass-rabbit,voltera-r1,meter-sim,yes,literal:meter-sim-r1:contrasena-incorrecta,none,r1
+nocred-nats,voltera-r1,mesh-bridge,yes,none,none,r1
+plain,e09-plain,default,no,secret:meter-sim-rabbitmq,secret:mesh-bridge-credentials,r1

@@ -1,0 +1,23 @@
+#!/bin/sh
+#MISE description="Zero Trust del bus: políticas por identidad en Kafka, RabbitMQ y NATS (on|off|status)"
+#USAGE arg "<action>" help="on aplica deploy/security/bus; off borra las políticas con la etiqueta zero-trust=bus; status las lista"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+
+need kubectl
+require_cluster
+
+case "${1:-status}" in
+  on)
+    k apply -k "$ROOT/deploy/security/bus"
+    log "políticas aplicadas; los sidecars tardan unos segundos en recibirlas. Para desactivar: mise run security:bus off"
+    ;;
+  off)
+    k delete authorizationpolicy -A -l zero-trust=bus --ignore-not-found
+    ;;
+  status)
+    k get authorizationpolicy -A -l zero-trust=bus
+    ;;
+  *) die "uso: security:bus on|off|status" ;;
+esac

@@ -1,0 +1,60 @@
+[1] 2026/10/17 04:55:58.118346 [ERR] 127.0.0.6:54227 - cid:211 - "v1.54.0:go:zt-probe-neg-rogue-06" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.119219 [ERR] 127.0.0.6:57529 - cid:210 - "v1.54.0:go:zt-probe-neg-rogue-01" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.120693 [ERR] 127.0.0.6:44619 - cid:213 - "v1.54.0:go:zt-probe-neg-rogue-05" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.119488 [ERR] 127.0.0.6:46979 - cid:212 - "v1.54.0:go:zt-probe-neg-rogue-02" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.119553 [ERR] 127.0.0.6:54319 - cid:215 - "v1.54.0:go:zt-probe-neg-rogue-03" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.120800 [ERR] 127.0.0.6:50005 - cid:217 - "v1.54.0:go:zt-probe-neg-rogue-04" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.935031 [ERR] 127.0.0.6:43969 - cid:237 - "v1.54.0:go:zt-probe-neg-rogue-08" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.942639 [ERR] 127.0.0.6:51913 - cid:239 - "v1.54.0:go:zt-probe-neg-rogue-09" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.943084 [ERR] 127.0.0.6:33239 - cid:236 - "v1.54.0:go:zt-probe-neg-rogue-07" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.944777 [ERR] 127.0.0.6:37933 - cid:238 - "v1.54.0:go:zt-probe-neg-rogue-11" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.945122 [ERR] 127.0.0.6:34657 - cid:240 - "v1.54.0:go:zt-probe-neg-rogue-10" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.945420 [ERR] 127.0.0.6:55925 - cid:241 - "v1.54.0:go:zt-probe-neg-rogue-12" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:59.740267 [ERR] 127.0.0.6:56563 - cid:242 - "v1.54.0:go:zt-probe-neg-rogue-13" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:59.750454 [ERR] 127.0.0.6:35847 - cid:244 - "v1.54.0:go:zt-probe-neg-rogue-14" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:59.751330 [ERR] 127.0.0.6:56207 - cid:246 - "v1.54.0:go:zt-probe-neg-rogue-17" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:59.751404 [ERR] 127.0.0.6:54529 - cid:243 - "v1.54.0:go:zt-probe-neg-rogue-15" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:59.751422 [ERR] 127.0.0.6:42537 - cid:247 - "v1.54.0:go:zt-probe-neg-rogue-18" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:59.751616 [ERR] 127.0.0.6:43931 - cid:245 - "v1.54.0:go:zt-probe-neg-rogue-16" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:56:00.545261 [ERR] 127.0.0.6:55397 - cid:248 - "v1.54.0:go:zt-probe-neg-rogue-19" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:56:00.554098 [ERR] 127.0.0.6:46111 - cid:249 - "v1.54.0:go:zt-probe-neg-rogue-20" - "MESH/user:rogue" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.088586 [ERR] 127.0.0.6:36789 - cid:155 - "v1.54.0:go:zt-probe-neg-bridge-r2-02" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.088987 [ERR] 127.0.0.6:42317 - cid:158 - "v1.54.0:go:zt-probe-neg-bridge-r2-03" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.089144 [ERR] 127.0.0.6:54873 - cid:157 - "v1.54.0:go:zt-probe-neg-bridge-r2-04" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.089361 [ERR] 127.0.0.6:58233 - cid:156 - "v1.54.0:go:zt-probe-neg-bridge-r2-01" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.089500 [ERR] 127.0.0.6:58603 - cid:154 - "v1.54.0:go:zt-probe-neg-bridge-r2-05" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.089666 [ERR] 127.0.0.6:60483 - cid:153 - "v1.54.0:go:zt-probe-neg-bridge-r2-06" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.899729 [ERR] 127.0.0.6:38269 - cid:159 - "v1.54.0:go:zt-probe-neg-bridge-r2-08" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.902407 [ERR] 127.0.0.6:49609 - cid:162 - "v1.54.0:go:zt-probe-neg-bridge-r2-11" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.902418 [ERR] 127.0.0.6:39679 - cid:160 - "v1.54.0:go:zt-probe-neg-bridge-r2-07" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.903148 [ERR] 127.0.0.6:42825 - cid:161 - "v1.54.0:go:zt-probe-neg-bridge-r2-09" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.903250 [ERR] 127.0.0.6:53531 - cid:164 - "v1.54.0:go:zt-probe-neg-bridge-r2-10" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:57.903769 [ERR] 127.0.0.6:41837 - cid:163 - "v1.54.0:go:zt-probe-neg-bridge-r2-12" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.121473 [ERR] 127.0.0.6:45279 - cid:167 - "v1.54.0:go:zt-probe-neg-sub-06" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.121600 [ERR] 127.0.0.6:35049 - cid:170 - "v1.54.0:go:zt-probe-neg-sub-02" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.128879 [ERR] 127.0.0.6:60633 - cid:168 - "v1.54.0:go:zt-probe-neg-sub-05" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.129784 [ERR] 127.0.0.6:50433 - cid:165 - "v1.54.0:go:zt-probe-neg-sub-03" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.132103 [ERR] 127.0.0.6:36699 - cid:169 - "v1.54.0:go:zt-probe-neg-sub-04" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.132385 [ERR] 127.0.0.6:43097 - cid:166 - "v1.54.0:go:zt-probe-neg-sub-01" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.720832 [ERR] 127.0.0.6:33259 - cid:176 - "v1.54.0:go:zt-probe-neg-bridge-r2-13" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.726152 [ERR] 127.0.0.6:47889 - cid:174 - "v1.54.0:go:zt-probe-neg-bridge-r2-15" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.726176 [ERR] 127.0.0.6:36593 - cid:175 - "v1.54.0:go:zt-probe-neg-bridge-r2-18" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.726227 [ERR] 127.0.0.6:41913 - cid:173 - "v1.54.0:go:zt-probe-neg-bridge-r2-17" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.726484 [ERR] 127.0.0.6:55213 - cid:171 - "v1.54.0:go:zt-probe-neg-bridge-r2-16" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.726592 [ERR] 127.0.0.6:55801 - cid:172 - "v1.54.0:go:zt-probe-neg-bridge-r2-14" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:58.942362 [ERR] 127.0.0.6:33379 - cid:178 - "v1.54.0:go:zt-probe-neg-sub-11" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.947350 [ERR] 127.0.0.6:42157 - cid:179 - "v1.54.0:go:zt-probe-neg-sub-09" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.949894 [ERR] 127.0.0.6:50239 - cid:182 - "v1.54.0:go:zt-probe-neg-sub-10" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.950198 [ERR] 127.0.0.6:44685 - cid:181 - "v1.54.0:go:zt-probe-neg-sub-08" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.950371 [ERR] 127.0.0.6:51173 - cid:180 - "v1.54.0:go:zt-probe-neg-sub-12" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:58.950400 [ERR] 127.0.0.6:51169 - cid:177 - "v1.54.0:go:zt-probe-neg-sub-07" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:59.524720 [ERR] 127.0.0.6:38061 - cid:183 - "v1.54.0:go:zt-probe-neg-bridge-r2-19" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:59.530908 [ERR] 127.0.0.6:38411 - cid:184 - "v1.54.0:go:zt-probe-neg-bridge-r2-20" - "MESH/user:bridge-r2" - Publish Violation - Subject "energy.matched.r1.zt-17045216"
+[1] 2026/10/17 04:55:59.746638 [ERR] 127.0.0.6:55371 - cid:185 - "v1.54.0:go:zt-probe-neg-sub-13" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:59.757147 [ERR] 127.0.0.6:34063 - cid:187 - "v1.54.0:go:zt-probe-neg-sub-14" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:59.758389 [ERR] 127.0.0.6:43413 - cid:190 - "v1.54.0:go:zt-probe-neg-sub-18" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:59.758479 [ERR] 127.0.0.6:49497 - cid:188 - "v1.54.0:go:zt-probe-neg-sub-15" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:59.758706 [ERR] 127.0.0.6:42863 - cid:189 - "v1.54.0:go:zt-probe-neg-sub-17" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:55:59.758908 [ERR] 127.0.0.6:50751 - cid:186 - "v1.54.0:go:zt-probe-neg-sub-16" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:56:00.554004 [ERR] 127.0.0.6:54185 - cid:191 - "v1.54.0:go:zt-probe-neg-sub-19" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1
+[1] 2026/10/17 04:56:00.563105 [ERR] 127.0.0.6:32857 - cid:192 - "v1.54.0:go:zt-probe-neg-sub-20" - "MESH/user:bridge-r2" - Subscription Violation - Subject "energy.matched.>", SID 1

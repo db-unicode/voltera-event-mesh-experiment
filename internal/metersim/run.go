@@ -200,6 +200,12 @@ func (r *Runner) Run(ctx context.Context) (Summary, error) {
 				}
 				published.Add(1)
 				r.Svc.Metrics.EventsPublished.WithLabelValues(o.publishedLabels()).Inc()
+				if o.LogPublish {
+					traceparent, _ := out.Headers["traceparent"].(string)
+					telemetry.LogStage(r.Log, telemetry.StagePublish, events.Envelope{EventID: d.EventID, Traceparent: traceparent},
+						telemetry.ResultOK, "meterId", d.MeterID, "version", d.Version, "side", d.Side, "vendor", d.Vendor,
+						"sentAt", sentAt.UTC().Format(time.RFC3339Nano))
+				}
 				vendorMu.Lock()
 				sum.ByVendor[d.Vendor]++
 				vendorMu.Unlock()

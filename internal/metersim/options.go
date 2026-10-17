@@ -60,9 +60,12 @@ type Options struct {
 	Workers  int
 	// VersionBase es la primera versión de cada medidor; 0 = 1 en once/dup y el unix time en el resto.
 	VersionBase int64
-	Region      string
-	AMQP        amqpx.Config
-	OpsAddr     string
+	// LogPublish emite un log de etapa (stage=publish, eventId, traceId) por declaración confirmada: para
+	// seguir un evento con `expctl trace`. Con cargas altas son demasiadas líneas: déjalo apagado.
+	LogPublish bool
+	Region     string
+	AMQP       amqpx.Config
+	OpsAddr    string
 	// Solo probe: lectura de la vista Redis (credenciales del Secret de market-view; ver README de E3).
 	RedisAddr     string
 	RedisPassword string
@@ -131,6 +134,7 @@ const usage = `uso: meter-sim [flags]   (cada flag tiene su variable METERSIM_<N
   --ramp S            rampa de spike (5s)
   --workers N         publicadores concurrentes (16)
   --version-base N    primera versión de cada medidor (0 = 1 en once/dup, unix time en el resto)
+  --log-publish       un log de etapa (eventId, traceId) por declaración publicada; para expctl trace con cargas pequeñas
 
 probe (--rate = sondeos/s, 1 por defecto; 0 solo con --read-rate; --prefix debe empezar por probe-):
   --probe-timeout S   espera máxima de cada sondeo (60s)
@@ -171,6 +175,7 @@ func ParseOptions(args []string, getenv func(string) string, stderr io.Writer) (
 	}
 	o.ReadRate = pe.Float("READ_RATE", 0, 0)
 	o.Rate = pe.Float("RATE", -1, 0)
+	o.LogPublish = pe.String("LOG_PUBLISH", "") == "1"
 
 	fs := flag.NewFlagSet("meter-sim", flag.ContinueOnError)
 	fs.SetOutput(stderr)
@@ -195,6 +200,7 @@ func ParseOptions(args []string, getenv func(string) string, stderr io.Writer) (
 	fs.Var(secs{&o.ProbePoll}, "poll", "")
 	fs.Float64Var(&o.ReadRate, "read-rate", o.ReadRate, "")
 	fs.StringVar(&o.ReadOut, "read-out", o.ReadOut, "")
+	fs.BoolVar(&o.LogPublish, "log-publish", o.LogPublish, "")
 	if err := fs.Parse(args); err != nil {
 		return Options{}, err
 	}

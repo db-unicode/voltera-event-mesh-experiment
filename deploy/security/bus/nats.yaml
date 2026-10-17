@@ -1,0 +1,88 @@
+# NATS: cliente 4222 solo para el ServiceAccount que lo usa en cada nodo; leafnode 7422 del global solo para los
+# nodos regionales. Los usuarios y permisos por subject siguen en nats.conf (ADR 0005).
+# Los demás puertos (8222 de monitoreo) quedan abiertos a identidades mTLS, como antes.
+#
+# - r1 y r2: mesh-bridge de la propia región.
+# - global: billing-sim (4222), nats-setup que corre como default (4222, crea el stream con mesh:up) y los nodos
+#   regionales (7422).
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: nats-bus
+  namespace: voltera-r1
+  labels: {zero-trust: bus}
+spec:
+  selector:
+    matchLabels: {app: nats}
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals: [cluster.local/ns/voltera-r1/sa/mesh-bridge]
+      to:
+        - operation:
+            ports: ["4222"]
+    - from:
+        - source:
+            principals: ["*"]
+      to:
+        - operation:
+            notPorts: ["4222"]
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: nats-bus
+  namespace: voltera-r2
+  labels: {zero-trust: bus}
+spec:
+  selector:
+    matchLabels: {app: nats}
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals: [cluster.local/ns/voltera-r2/sa/mesh-bridge]
+      to:
+        - operation:
+            ports: ["4222"]
+    - from:
+        - source:
+            principals: ["*"]
+      to:
+        - operation:
+            notPorts: ["4222"]
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: nats-bus
+  namespace: voltera-global
+  labels: {zero-trust: bus}
+spec:
+  selector:
+    matchLabels: {app: nats}
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/voltera-global/sa/billing-sim
+              - cluster.local/ns/voltera-global/sa/default
+      to:
+        - operation:
+            ports: ["4222"]
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/voltera-r1/sa/nats
+              - cluster.local/ns/voltera-r2/sa/nats
+      to:
+        - operation:
+            ports: ["7422"]
+    - from:
+        - source:
+            principals: ["*"]
+      to:
+        - operation:
+            notPorts: ["4222", "7422"]

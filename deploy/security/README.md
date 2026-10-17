@@ -1,6 +1,13 @@
 # Seguridad (Zero Trust L4)
 
-`mise run security:up [r1|r2|all]` aplica `deploy/security/<región>/`. Hoy:
+Dos grupos de políticas de Istio por identidad (SPIFFE del ServiceAccount):
+
+| Grupo | Task | Estado por defecto | Qué cubre |
+|---|---|---|---|
+| `deploy/security/<región>/` | `mise run security:up [r1\|r2\|all]` | aplicado | Database per Service: solo el dueño abre conexiones a su base (E4) |
+| `deploy/security/bus/` | `mise run security:bus on\|off\|status` | apagado (E9 lo enciende) | quién publica y quién se suscribe en Kafka, RabbitMQ y NATS ([README](bus/README.md)) |
+
+Políticas de `security:up`:
 
 | Política | Destino | Permite |
 |---|---|---|

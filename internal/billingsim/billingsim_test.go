@@ -51,7 +51,10 @@ func TestBillingIsIdempotentPerMatchIDAndSplitsRegions(t *testing.T) {
 	require.Equal(t, 1, st.Duplicates)
 	require.Equal(t, RegionStats{Total: 3, Distinct: 2, Duplicates: 1}, st.ByRegion["r1"])
 	require.Equal(t, RegionStats{Total: 1, Distinct: 1}, st.ByRegion["r2"])
-	require.Equal(t, map[string]MatchEntry{"m1": {Region: "r1", Count: 2}, "m2": {Region: "r1", Count: 1}, "m3": {Region: "r2", Count: 1}}, st.ByMatchID)
+	require.Equal(t, 2, st.ByMatchID["m1"].Count)
+	require.Equal(t, "r1", st.ByMatchID["m1"].Region)
+	require.Equal(t, 1, st.ByMatchID["m2"].Count)
+	require.Equal(t, "r2", st.ByMatchID["m3"].Region)
 	require.Nil(t, b.Ledger.Snapshot(false).ByMatchID)
 
 	require.Equal(t, 3.0, promtest.ToFloat64(b.Metrics.BillingReceived.WithLabelValues("r1")))
@@ -82,7 +85,50 @@ func TestStateEndpoint(t *testing.T) {
 	st := get("/state")
 	require.Equal(t, 1, st.Distinct)
 	require.Nil(t, st.ByMatchID)
-	require.Equal(t, map[string]MatchEntry{"m1": {Region: "r1", Count: 1}}, get("/state?detail=1").ByMatchID)
+	e := get("/state?detail=1").ByMatchID["m1"]
+	require.Equal(t, "r1", e.Region)
+	require.Equal(t, 1, e.Count)
+}
+
+func TestLedgerKeepsFirstDeliveryTimesAndLatencies(t *testing.T) {
+	l := NewLedger()
+	occurred := time.Date(2026, 10, 16, 10, 0, 0, 0, time.UTC)
+	emitted := occurred.Add(100 * time.Millisecond)
+	first := occurred.Add(350 * time.Millisecond)
+
+	require.False(t, l.RecordAt("r2", "m1", Times{ReceivedAt: first, EmittedAt: emitted, OccurredAt: occurred}))
+	// el duplicado llega mucho después y no mueve los sellos de la primera entrega
+	require.True(t, l.RecordAt("r2", "m1", Times{ReceivedAt: first.Add(time.Minute), EmittedAt: emitted, OccurredAt: occurred}))
+
+	e := l.Snapshot(true).ByMatchID["m1"]
+	require.Equal(t, 2, e.Count)
+	require.True(t, first.Equal(e.ReceivedAt))
+	require.InDelta(t, 250.0, e.EmitLagMs, 0.001)
+	require.InDelta(t, 350.0, e.E2ELagMs, 0.001)
+
+	// sin sellos (Record) no hay latencias y los tiempos no salen en el JSON
+	l.Record("r1", "m2")
+	raw, err := json.Marshal(l.Snapshot(true).ByMatchID["m2"])
+	require.NoError(t, err)
+	require.JSONEq(t, `{"region":"r1","count":1}`, string(raw))
+}
+
+func TestHandleRecordsLatencyFromEnvelope(t *testing.T) {
+	b := newBiller()
+	received := time.Date(2026, 10, 16, 10, 0, 1, 0, time.UTC)
+	b.Now = func() time.Time { return received }
+	d := delivery(t, "r1", "m1")
+	env, err := events.Unmarshal(d.Data)
+	require.NoError(t, err)
+	env.OccurredAt = received.Add(-900 * time.Millisecond)
+	env.EmittedAt = received.Add(-400 * time.Millisecond)
+	d.Data, err = events.Marshal(env)
+	require.NoError(t, err)
+
+	require.NoError(t, b.Handle(context.Background(), d))
+	e := b.Ledger.Snapshot(true).ByMatchID["m1"]
+	require.InDelta(t, 400.0, e.EmitLagMs, 0.001)
+	require.InDelta(t, 900.0, e.E2ELagMs, 0.001)
 }
 
 func TestRegionOf(t *testing.T) {
