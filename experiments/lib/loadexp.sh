@@ -31,7 +31,8 @@ lx_bg() {
 }
 
 lx_stop() {
-  for _p in $LX_PIDS; do kill "$_p" 2>/dev/null || true; done
+  # el wait dentro del grupo con 2>/dev/null evita que el shell imprima "Terminated" por cada proceso matado
+  for _p in $LX_PIDS; do { kill "$_p"; wait "$_p"; } 2>/dev/null || true; done
   LX_PIDS=""
 }
 
