@@ -1,0 +1,21 @@
+{
+  "prefix": "e01a-1792218610-",
+  "kind": "transfer",
+  "device0": {
+    "total": 138911,
+    "distinct": 138910,
+    "duplicates": 1
+  },
+  "billing0": {
+    "total": 3817,
+    "distinct": 3717,
+    "duplicates": 100
+  },
+  "tStart": 1792218610,
+  "tLoad0": 1792218612,
+  "tPause": 1792218642,
+  "tResume": 1792218702,
+  "tLoadEnd": 1792218796,
+  "tSettled": 1792218842,
+  "settled": true
+}
