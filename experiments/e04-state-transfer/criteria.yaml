@@ -1,0 +1,96 @@
+# E4: criterios fijados antes de la corrida final.
+- id: policy-attempts
+  description: (1) El pod con SA market-projector hizo 20 intentos de conexión a positions-db:5432
+  metric: "metrics.json:$.policy.attempts"
+  op: eq
+  value: 20
+- id: policy-rejected
+  description: (1) Los 20 intentos fueron rechazados (rc != 0)
+  metric: "metrics.json:$.policy.rejected"
+  op: eq
+  value: 20
+- id: policy-not-auth
+  description: (1) Ningún rechazo es un error de autenticación de Postgres (el rechazo es de red, no de contraseña)
+  metric: "metrics.json:$.policy.auth_errors"
+  op: eq
+  value: 0
+- id: policy-rbac-denied
+  description: (1) El contador tcp.rbac.denied del sidecar de positions-db sube al menos 20
+  metric: "metrics.json:$.policy.rbac_denied_delta"
+  op: ge
+  value: 20
+- id: policy-control
+  description: (1) Control, el mismo intento con SA declaration-gateway conecta 20 de 20
+  metric: "metrics.json:$.policy.control_connected"
+  op: eq
+  value: 20
+- id: pg-samples
+  description: (2) pg_stat_activity muestreada con clientes al menos 10 veces durante la carga
+  metric: "metrics.json:$.connections.pg_stat_samples"
+  op: ge
+  value: 10
+- id: pg-clients
+  description: (2) Clientes de pg_stat_activity distintos de declaration-gateway = 0
+  metric: "metrics.json:$.connections.pg_foreign_rows"
+  op: eq
+  value: 0
+- id: prom-foreign-sources
+  description: (2) Orígenes distintos de declaration-gateway en istio_tcp_connections_opened_total hacia positions-db = 0
+  metric: "metrics.json:$.connections.prom_foreign_sources"
+  op: eq
+  value: 0
+- id: prom-projector
+  description: (2) Conexiones con origen market-project hacia positions-db = 0
+  metric: "metrics.json:$.connections.prom_projector_connections"
+  op: eq
+  value: 0
+- id: prom-gateway
+  description: (2) declaration-gateway sí aparece como origen (control de la consulta)
+  metric: "metrics.json:$.connections.prom_gateway_connections"
+  op: gt
+  value: 0
+- id: static-projector-deps
+  description: (3) go list -deps ./cmd/market-projector sin drivers de Postgres (pgx, jackc, lib/pq); database/sql de la stdlib entra por prometheus/collectors y se informa aparte
+  metric: "metrics.json:$.static.projector_db_deps"
+  op: eq
+  value: 0
+- id: static-grep-control
+  description: (3) Control, el mismo grep sobre cmd/declaration-gateway sí encuentra drivers
+  metric: "metrics.json:$.static.gateway_db_deps_control"
+  op: gt
+  value: 0
+- id: static-env
+  description: (3) El Deployment del proyector no tiene variables ni Secrets de positions-db / Postgres
+  metric: "metrics.json:$.static.projector_env_matches"
+  op: eq
+  value: 0
+- id: autonomy-published
+  description: (4) Se publicaron 500 PositionDeclared directos a energy-positions
+  metric: "metrics.json:$.autonomy.published"
+  op: eq
+  value: 500
+- id: autonomy-in-redis
+  description: (4) 500 de 500 posiciones en Redis con positions-db en 0 réplicas
+  metric: "metrics.json:$.autonomy.in_redis"
+  op: eq
+  value: 500
+- id: autonomy-time
+  description: (4) 500/500 en Redis en <= 10 s desde el inicio de la publicación
+  metric: "metrics.json:$.autonomy.seconds_to_full"
+  op: le
+  value: 10
+- id: autonomy-time-found
+  description: (4) Las 500 se observaron (seconds_to_full >= 0)
+  metric: "metrics.json:$.autonomy.seconds_to_full"
+  op: ge
+  value: 0
+- id: kiali-no-edge
+  description: Grafo de Kiali sin arista market-projector -> positions-db
+  metric: "metrics.json:$.kiali.edges_projector_to_db"
+  op: eq
+  value: 0
+- id: kiali-gateway-edge
+  description: Grafo de Kiali con arista declaration-gateway -> positions-db (control del grafo)
+  metric: "metrics.json:$.kiali.edges_gateway_to_db"
+  op: ge
+  value: 1

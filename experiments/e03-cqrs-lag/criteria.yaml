@@ -1,0 +1,152 @@
+# E3: criterios fijados antes de la corrida final (tolerancias de la sección 1 de 03-experiments.md).
+# Latencias = committed (outbox.created_at) -> visible (sondeo probe sobre Redis), en segundos.
+- id: base-noread-p95
+  description: Carga base sin lectura concurrente, p95 committed->visible <= 2 s
+  metric: "raw/latency_base_noread.csv:p95(committed_to_visible_s)"
+  op: le
+  value: 2
+- id: base-noread-p99
+  description: Carga base sin lectura concurrente, p99 <= 5 s
+  metric: "raw/latency_base_noread.csv:p99(committed_to_visible_s)"
+  op: le
+  value: 5
+- id: base-read-p95
+  description: Carga base con 200 lecturas/s, p95 <= 2 s
+  metric: "raw/latency_base_read.csv:p95(committed_to_visible_s)"
+  op: le
+  value: 2
+- id: base-read-p99
+  description: Carga base con 200 lecturas/s, p99 <= 5 s
+  metric: "raw/latency_base_read.csv:p99(committed_to_visible_s)"
+  op: le
+  value: 5
+- id: base-probes-enough
+  description: Al menos 55 sondeos medidos en la carga base sin lecturas (de 60)
+  metric: "raw/latency_base_noread.csv:count(committed_to_visible_s)"
+  op: ge
+  value: 55
+- id: base-no-timeouts
+  description: Ningún sondeo de la carga base expira (A y B)
+  metric: "metrics.json:$.base_noread.probes.timeouts"
+  op: eq
+  value: 0
+- id: base-read-no-timeouts
+  description: Ningún sondeo de B expira
+  metric: "metrics.json:$.base_read.probes.timeouts"
+  op: eq
+  value: 0
+- id: peak-p99
+  description: Durante el pico, p99 committed->visible <= 30 s
+  metric: "raw/latency_peak_during.csv:p99(committed_to_visible_s)"
+  op: le
+  value: 30
+- id: peak-during-enough
+  description: Al menos 40 sondeos enviados durante el pico (de ~60)
+  metric: "raw/latency_peak_during.csv:count(committed_to_visible_s)"
+  op: ge
+  value: 40
+- id: peak-recovery-time
+  description: Último sondeo con retraso > 5 s se envió <= 60 s después del fin del pico
+  metric: "metrics.json:$.peak.recovery_s"
+  op: le
+  value: 60
+- id: peak-recovered-p99
+  description: Sondeos enviados 60 s después del pico, p99 <= 5 s
+  metric: "raw/latency_peak_recovered.csv:p99(committed_to_visible_s)"
+  op: le
+  value: 5
+- id: peak-recovered-enough
+  description: Al menos 20 sondeos enviados 60 s después del pico
+  metric: "raw/latency_peak_recovered.csv:count(committed_to_visible_s)"
+  op: ge
+  value: 20
+- id: peak-no-timeouts
+  description: Ningún sondeo del pico expira
+  metric: "metrics.json:$.peak.all.probes.timeouts"
+  op: eq
+  value: 0
+- id: isolation-reads-ran
+  description: Con positions-db en 0 el lector hizo al menos 4000 lecturas (200/s durante ~25 s)
+  metric: "metrics.json:$.isolation.positions_db_down.reads"
+  op: ge
+  value: 4000
+- id: isolation-read-errors
+  description: Lecturas de Redis sin errores durante todo el Job de lectura (incluida la caída de positions-db)
+  metric: "metrics.json:$.isolation.reader_job_total.errors"
+  op: eq
+  value: 0
+- id: isolation-read-p95
+  description: p95 de lectura con positions-db caída vs en pie, variación <= 20% (se ignora una diferencia < 0,5 ms)
+  metric: "metrics.json:$.isolation.p95_change_pct_abs"
+  op: le
+  value: 20
+- id: write-p95-increase
+  description: La lectura concurrente sube el p95 de procesamiento del gateway <= 20% (se ignora una diferencia < 5 ms, resolución del bucket)
+  metric: "metrics.json:$.write.increase_pct_effective"
+  op: le
+  value: 20
+- id: load-not-saturated
+  description: El generador de la carga base no descartó declaraciones
+  metric: "metrics.json:$.load.base.dropped"
+  op: eq
+  value: 0
+- id: convergence-base-steady-checked
+  description: Convergencia de la carga base (medidores steady), al menos 3000 medidores comprobados
+  metric: "metrics.json:$.convergence.base_steady.checked"
+  op: ge
+  value: 3000
+- id: convergence-base-steady-different
+  description: Convergencia de la carga base (medidores steady), medidores con side/kwh/validUntil/version distintos en Redis = 0
+  metric: "metrics.json:$.convergence.base_steady.different"
+  op: eq
+  value: 0
+- id: convergence-base-steady-missing
+  description: Convergencia de la carga base (medidores steady), medidores ausentes de Redis sin haber expirado = 0
+  metric: "metrics.json:$.convergence.base_steady.missing"
+  op: eq
+  value: 0
+- id: convergence-base-probe-checked
+  description: Convergencia de los sondeos de la carga base, al menos 20 medidores comprobados
+  metric: "metrics.json:$.convergence.base_probe.checked"
+  op: ge
+  value: 20
+- id: convergence-base-probe-different
+  description: Convergencia de los sondeos de la carga base, medidores con side/kwh/validUntil/version distintos en Redis = 0
+  metric: "metrics.json:$.convergence.base_probe.different"
+  op: eq
+  value: 0
+- id: convergence-base-probe-missing
+  description: Convergencia de los sondeos de la carga base, medidores ausentes de Redis sin haber expirado = 0
+  metric: "metrics.json:$.convergence.base_probe.missing"
+  op: eq
+  value: 0
+- id: convergence-peak-steady-checked
+  description: Convergencia tras el pico (medidores del spike), al menos 3000 medidores comprobados
+  metric: "metrics.json:$.convergence.peak_steady.checked"
+  op: ge
+  value: 3000
+- id: convergence-peak-steady-different
+  description: Convergencia tras el pico (medidores del spike), medidores con side/kwh/validUntil/version distintos en Redis = 0
+  metric: "metrics.json:$.convergence.peak_steady.different"
+  op: eq
+  value: 0
+- id: convergence-peak-steady-missing
+  description: Convergencia tras el pico (medidores del spike), medidores ausentes de Redis sin haber expirado = 0
+  metric: "metrics.json:$.convergence.peak_steady.missing"
+  op: eq
+  value: 0
+- id: convergence-peak-probe-checked
+  description: Convergencia de los sondeos del pico, al menos 40 medidores comprobados
+  metric: "metrics.json:$.convergence.peak_probe.checked"
+  op: ge
+  value: 40
+- id: convergence-peak-probe-different
+  description: Convergencia de los sondeos del pico, medidores con side/kwh/validUntil/version distintos en Redis = 0
+  metric: "metrics.json:$.convergence.peak_probe.different"
+  op: eq
+  value: 0
+- id: convergence-peak-probe-missing
+  description: Convergencia de los sondeos del pico, medidores ausentes de Redis sin haber expirado = 0
+  metric: "metrics.json:$.convergence.peak_probe.missing"
+  op: eq
+  value: 0

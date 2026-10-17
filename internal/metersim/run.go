@@ -17,6 +17,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/broker/amqpx"
+	"github.com/db-unicode/voltera-event-mesh-experiment/internal/events"
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/telemetry"
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/w3c"
 )
@@ -60,6 +61,47 @@ type Summary struct {
 	ElapsedSec    float64        `json:"elapsedSec"`
 	AchievedRate  float64        `json:"achievedRate"`
 	CSV           string         `json:"csv,omitempty"`
+}
+
+// DirectChannel es el canal al que publica direct-positions (salta el gateway).
+const DirectChannel = "energy-positions"
+
+// outgoing arma el mensaje de d: una declaración de fabricante en meter-declarations o, en direct-positions, un
+// PositionDeclared con el estado completo en energy-positions (eventId = el de la declaración; committedAt y
+// emittedAt = instante de envío, como si el gateway ya hubiera confirmado).
+func (o Options) outgoing(d Declaration, sentAt time.Time) (amqpx.Outgoing, error) {
+	if o.Profile == ProfileDirectPositions {
+		env, err := events.NewPositionDeclared(o.Region, d.Version, sentAt, events.PositionDeclared{
+			MeterID: d.MeterID, Side: d.Side, KWh: d.KWh, ValidUntil: sentAt.Add(d.Horizon).UTC(), Zone: "z-" + strconv.Itoa(d.Zone)})
+		if err != nil {
+			return amqpx.Outgoing{}, err
+		}
+		env.EventID = d.EventID
+		env.CommittedAt, env.EmittedAt, env.Traceparent = sentAt.UTC(), sentAt.UTC(), w3c.NewTraceparent()
+		body, err := events.Marshal(env)
+		if err != nil {
+			return amqpx.Outgoing{}, err
+		}
+		out := amqpx.EnvelopeOutgoing(DirectChannel, env, body)
+		out.Timestamp = sentAt
+		return out, nil
+	}
+	body, err := d.Encode(sentAt)
+	if err != nil {
+		return amqpx.Outgoing{}, err
+	}
+	return amqpx.Outgoing{
+		Exchange: Exchange, RoutingKey: QueueName, Body: body, MessageID: d.EventID, Type: EventType, Timestamp: sentAt,
+		Headers: map[string]any{"x-vendor": d.Vendor, "traceparent": w3c.NewTraceparent(), "eventId": d.EventID},
+	}, nil
+}
+
+// publishedLabels son (event_type, channel) de events_published_total.
+func (o Options) publishedLabels() (string, string) {
+	if o.Profile == ProfileDirectPositions {
+		return events.TypePositionDeclared, DirectChannel
+	}
+	return EventType, QueueName
 }
 
 // Runner ejecuta una corrida.
@@ -144,12 +186,9 @@ func (r *Runner) Run(ctx context.Context) (Summary, error) {
 						break
 					}
 				}
-				body, err := d.Encode(sentAt)
+				out, err := o.outgoing(d, sentAt)
 				if err == nil {
-					err = r.Sender.Send(ctx, amqpx.Outgoing{
-						Exchange: Exchange, RoutingKey: QueueName, Body: body, MessageID: d.EventID, Type: EventType, Timestamp: sentAt,
-						Headers: map[string]any{"x-vendor": d.Vendor, "traceparent": w3c.NewTraceparent(), "eventId": d.EventID},
-					})
+					err = r.Sender.Send(ctx, out)
 				}
 				if err != nil {
 					errCount.Add(1)
@@ -160,7 +199,7 @@ func (r *Runner) Run(ctx context.Context) (Summary, error) {
 					continue
 				}
 				published.Add(1)
-				r.Svc.Metrics.EventsPublished.WithLabelValues(EventType, QueueName).Inc()
+				r.Svc.Metrics.EventsPublished.WithLabelValues(o.publishedLabels()).Inc()
 				vendorMu.Lock()
 				sum.ByVendor[d.Vendor]++
 				vendorMu.Unlock()

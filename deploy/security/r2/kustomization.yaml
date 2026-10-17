@@ -1,0 +1,12 @@
+# Políticas de seguridad de la región r2 (mise run security:up r2).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: voltera-r2
+resources:
+  - ../positions-db
+patches:
+  - target: {kind: AuthorizationPolicy, name: positions-db}
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/from/0/source/principals/0
+        value: cluster.local/ns/voltera-r2/sa/declaration-gateway

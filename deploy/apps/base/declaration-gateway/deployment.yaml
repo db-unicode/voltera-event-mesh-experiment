@@ -33,8 +33,9 @@ spec:
               valueFrom: {secretKeyRef: {name: positions-db-credentials, key: POSTGRES_PASSWORD}}
             - name: PG_DB
               valueFrom: {secretKeyRef: {name: positions-db-credentials, key: POSTGRES_DB}}
+            # application_name identifica al cliente en pg_stat_activity (con el sidecar, client_addr es siempre 127.0.0.6; E4)
             - name: DATABASE_URL
-              value: postgres://$(PG_USER):$(PG_PASSWORD)@positions-db:5432/$(PG_DB)?sslmode=disable
+              value: postgres://$(PG_USER):$(PG_PASSWORD)@positions-db:5432/$(PG_DB)?sslmode=disable&application_name=declaration-gateway
             - name: AMQP_USER
               valueFrom: {secretKeyRef: {name: declaration-gateway-rabbitmq, key: AMQP_USER}}
             - name: AMQP_PASSWORD

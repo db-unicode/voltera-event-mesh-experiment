@@ -1,0 +1,49 @@
+{
+  "policy": {
+    "attempts": 20,
+    "rejected": 20,
+    "connected": 0,
+    "auth_errors": 0,
+    "control_attempts": 20,
+    "control_connected": 20,
+    "rbac_denied_delta": 20,
+    "rbac_allowed_delta": 20
+  },
+  "connections": {
+    "pg_stat_samples": 20,
+    "pg_foreign_rows": 0,
+    "pg_clients": [
+      "voltera/declaration-gateway"
+    ],
+    "prom_sources": [
+      "declaration-gateway"
+    ],
+    "prom_foreign_sources": 0,
+    "prom_projector_connections": 0,
+    "prom_gateway_connections": 83,
+    "prom_sources_after_deny_test": {
+      "declaration-gateway": 112,
+      "e04-control-261017054449": 20,
+      "e04-deny-261017054449": 20
+    }
+  },
+  "static": {
+    "projector_db_deps": 0,
+    "gateway_db_deps_control": 16,
+    "projector_deps_total": 284,
+    "projector_env_matches": 0,
+    "stdlib_database_sql_importers": [
+      "github.com/prometheus/client_golang/prometheus/collectors"
+    ]
+  },
+  "autonomy": {
+    "published": 500,
+    "in_redis": 500,
+    "seconds_to_full": 1.086
+  },
+  "kiali": {
+    "positions_db_nodes": 1,
+    "edges_projector_to_db": 0,
+    "edges_gateway_to_db": 1
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "base_steady": {
+    "checked": 3000,
+    "equal": 3000,
+    "missing": 0,
+    "different": 0,
+    "expired_excluded": 0,
+    "waited_s": 0
+  },
+  "base_probe": {
+    "checked": 100,
+    "equal": 50,
+    "missing": 0,
+    "different": 0,
+    "expired_excluded": 50,
+    "waited_s": 0
+  },
+  "peak_steady": {
+    "checked": 3000,
+    "equal": 3000,
+    "missing": 0,
+    "different": 0,
+    "expired_excluded": 0,
+    "waited_s": 0
+  },
+  "peak_probe": {
+    "checked": 50,
+    "equal": 50,
+    "missing": 0,
+    "different": 0,
+    "expired_excluded": 0,
+    "waited_s": 0
+  }
+}

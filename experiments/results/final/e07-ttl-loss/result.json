@@ -1,0 +1,123 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/exp-e03-e04-e07/experiments/results/e07-ttl-loss/20261017T060348Z-1a3b937-dirty-r1",
+  "criteria": [
+    {
+      "id": "ttl-applied",
+      "description": "El proyector corre con VIEW_TTL_S = 25 durante la corrida",
+      "metric": "metrics.json:$.setup.view_ttl_s",
+      "observed": 25,
+      "op": "eq",
+      "expected": 25,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7a-lost-one-cycle",
+      "description": "7a perdió el mensaje de al menos el 90% de los medidores (drop_position durante 9,5 s)",
+      "metric": "metrics.json:$.a.dropped_meters",
+      "observed": 193,
+      "op": "ge",
+      "expected": 180,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7a-no-double-loss",
+      "description": "7a ningún medidor perdió dos mensajes seguidos",
+      "metric": "metrics.json:$.a.max_drops_per_meter",
+      "observed": 1,
+      "op": "eq",
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7a-min-keys",
+      "description": "7a keys mínimas == M (cero medidores expulsados)",
+      "metric": "metrics.json:$.a.min_keys",
+      "observed": 200,
+      "op": "eq",
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7a-min-ttl",
+      "description": "7a TTL mínimo observado (s) \u003e 0",
+      "metric": "metrics.json:$.a.min_ttl_s",
+      "observed": 5.008,
+      "op": "gt",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7b-all-expired",
+      "description": "7b las M keys vencen tras perder 3 ciclos",
+      "metric": "metrics.json:$.b.vanished",
+      "observed": 200,
+      "op": "eq",
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7b-expiry-late-max",
+      "description": "7b desaparición - (projectedAt + TTL) \u003c= 2 s (s)",
+      "metric": "metrics.json:$.b.err_max_s",
+      "observed": 1.006,
+      "op": "le",
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7b-expiry-early-min",
+      "description": "7b ninguna key desaparece antes de TTL - 2 s (s)",
+      "metric": "metrics.json:$.b.err_min_s",
+      "observed": 0.004,
+      "op": "ge",
+      "expected": -2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7b-reappear",
+      "description": "7b las M keys reaparecen en \u003c= P + 5 s tras terminar la pérdida (s)",
+      "metric": "metrics.json:$.b.reappear_s",
+      "observed": 10.311,
+      "op": "le",
+      "expected": 15,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7b-reappear-found",
+      "description": "7b las M keys reaparecieron (reappear_s \u003e= 0)",
+      "metric": "metrics.json:$.b.reappear_s",
+      "observed": 10.311,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7c-deleted",
+      "description": "7c se borraron las M keys del prefijo",
+      "metric": "metrics.json:$.c.deleted",
+      "observed": 200,
+      "op": "eq",
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7c-repopulate",
+      "description": "7c keys == M de nuevo en \u003c= P + 5 s sin intervención (s)",
+      "metric": "metrics.json:$.c.repopulate_s",
+      "observed": 10.049,
+      "op": "le",
+      "expected": 15,
+      "verdict": "PASS"
+    },
+    {
+      "id": "7c-repopulate-found",
+      "description": "7c las M keys reaparecieron (repopulate_s \u003e= 0)",
+      "metric": "metrics.json:$.c.repopulate_s",
+      "observed": 10.049,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    }
+  ]
+}

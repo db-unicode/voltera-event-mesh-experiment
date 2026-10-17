@@ -31,6 +31,12 @@ const (
 	ProfileDup Profile = "dup"
 	// ProfileOnce: cada medidor declara exactamente una vez.
 	ProfileOnce Profile = "once"
+	// ProfileProbe (E3): medidores probe-* que declaran a --rate sondeos/s con versión única; tras publicar, cada sondeo
+	// lee la vista Redis cada --poll hasta ver su versión. Es una herramienta de medición, no parte del dominio.
+	ProfileProbe Profile = "probe"
+	// ProfileDirectPositions (E4): publica PositionDeclared completos directo en energy-positions, saltando el
+	// gateway y positions-db (como once: cada medidor una vez). Herramienta de medición, no parte del dominio.
+	ProfileDirectPositions Profile = "direct-positions"
 )
 
 // Vendor mixto por defecto: la mitad de los medidores de cada zona usa cada formato.
@@ -57,10 +63,19 @@ type Options struct {
 	Region      string
 	AMQP        amqpx.Config
 	OpsAddr     string
+	// Solo probe: lectura de la vista Redis (credenciales del Secret de market-view; ver README de E3).
+	RedisAddr     string
+	RedisPassword string
+	ProbeTimeout  time.Duration // tiempo máximo que un sondeo espera ver su versión
+	ProbePoll     time.Duration // periodo de lectura de cada sondeo
+	ReadRate      float64       // lecturas/s de fondo (estilo matching) mientras dura la corrida
+	ReadOut       string        // CSV por segundo de las lecturas ("-" = stdout con prefijo READS)
 }
 
 const (
 	defaultRate = 100.0
+	// defaultProbeRate: sondeos por segundo.
+	defaultProbeRate = 1.0
 	// QueueName y Exchange del canal de entrada.
 	QueueName = "meter-declarations"
 	Exchange  = "meter-declarations.x"
@@ -101,7 +116,7 @@ func durationEnv(r *envcfg.Reader, name string, def time.Duration) time.Duration
 
 const usage = `uso: meter-sim [flags]   (cada flag tiene su variable METERSIM_<NOMBRE>; el flag manda)
 
-  --profile steady|pairs|spike|dup|once   forma de la carga (steady)
+  --profile steady|pairs|spike|dup|once|probe|direct-positions   forma de la carga (steady)
   --rate N            declaraciones/s (steady/pairs/spike: por defecto meters/period o 100; once/dup: 100; 0 = sin límite)
   --duration D        duración en s o 1m30s (steady, pairs, spike) (30s)
   --meters N          medidores (100)
@@ -109,7 +124,7 @@ const usage = `uso: meter-sim [flags]   (cada flag tiene su variable METERSIM_<N
   --zones N           zonas del mercado (4); debe coincidir con ZONES del gateway
   --seed N            semilla (1): fija sides, kWh, eventIds y el orden de dup
   --dup-k N           copias de cada declaración en dup (2)
-  --out FILE          CSV eventId,meterId,version,sentAt (vacío = sin CSV)
+  --out FILE          CSV eventId,meterId,version,sentAt (vacío = sin CSV; en probe, un CSV por sondeo; "-" = stdout con prefijo PROBE)
   --prefix P          prefijo de los ids de medidor (m-): m-0001
   --vendor V          mixed (por defecto), acme-v1, voltix-2 u otro valor (header desconocido, cuerpo acme)
   --horizon S         vigencia de cada posición (120s)
@@ -117,7 +132,15 @@ const usage = `uso: meter-sim [flags]   (cada flag tiene su variable METERSIM_<N
   --workers N         publicadores concurrentes (16)
   --version-base N    primera versión de cada medidor (0 = 1 en once/dup, unix time en el resto)
 
+probe (--rate = sondeos/s, 1 por defecto; 0 solo con --read-rate; --prefix debe empezar por probe-):
+  --probe-timeout S   espera máxima de cada sondeo (60s)
+  --poll S            periodo de lectura de cada sondeo (20ms)
+  --read-rate N       lecturas/s de fondo sobre la vista (HGETALL de keys pos:* al azar; 0 = ninguna)
+  --read-out FILE     CSV por segundo de las lecturas ("-" = stdout con prefijo READS)
+direct-positions: como once, pero publica PositionDeclared en energy-positions (usuario con write sobre energy-positions.x).
+
 Entorno: REGION (r1|r2), AMQP_HOST, AMQP_USER, AMQP_PASSWORD, AMQP_VHOST (por defecto REGION), OPS_ADDR (:9090).
+  probe además: REDIS_ADDR (market-view.voltera-<región>:6379) y REDIS_PASSWORD (Secret market-view-credentials).
 `
 
 // ParseOptions lee los flags (con las variables METERSIM_* como valores por defecto) y el entorno.
@@ -127,22 +150,26 @@ func ParseOptions(args []string, getenv func(string) string, stderr io.Writer) (
 	pe := envcfg.New(env)
 
 	o := Options{
-		Profile:     Profile(pe.String("PROFILE", string(ProfileSteady))),
-		Rate:        -1,
-		Duration:    durationEnv(pe, "DURATION", 30*time.Second),
-		Meters:      pe.Int("METERS", 100, 1),
-		Period:      durationEnv(pe, "PERIOD", 0),
-		Zones:       pe.Int("ZONES", 4, 1),
-		Seed:        pe.Int64("SEED", 1),
-		DupK:        pe.Int("DUP_K", 2, 1),
-		Out:         pe.String("OUT", ""),
-		Prefix:      pe.String("PREFIX", "m-"),
-		Vendor:      pe.String("VENDOR", VendorMixed),
-		Horizon:     durationEnv(pe, "HORIZON", 120*time.Second),
-		Ramp:        durationEnv(pe, "RAMP", 5*time.Second),
-		Workers:     pe.Int("WORKERS", 16, 1),
-		VersionBase: pe.Int64("VERSION_BASE", 0),
+		Profile:      Profile(pe.String("PROFILE", string(ProfileSteady))),
+		Rate:         -1,
+		Duration:     durationEnv(pe, "DURATION", 30*time.Second),
+		Meters:       pe.Int("METERS", 100, 1),
+		Period:       durationEnv(pe, "PERIOD", 0),
+		Zones:        pe.Int("ZONES", 4, 1),
+		Seed:         pe.Int64("SEED", 1),
+		DupK:         pe.Int("DUP_K", 2, 1),
+		Out:          pe.String("OUT", ""),
+		Prefix:       pe.String("PREFIX", "m-"),
+		Vendor:       pe.String("VENDOR", VendorMixed),
+		Horizon:      durationEnv(pe, "HORIZON", 120*time.Second),
+		Ramp:         durationEnv(pe, "RAMP", 5*time.Second),
+		Workers:      pe.Int("WORKERS", 16, 1),
+		VersionBase:  pe.Int64("VERSION_BASE", 0),
+		ProbeTimeout: durationEnv(pe, "PROBE_TIMEOUT", 60*time.Second),
+		ProbePoll:    durationEnv(pe, "POLL", 20*time.Millisecond),
+		ReadOut:      pe.String("READ_OUT", ""),
 	}
+	o.ReadRate = pe.Float("READ_RATE", 0, 0)
 	o.Rate = pe.Float("RATE", -1, 0)
 
 	fs := flag.NewFlagSet("meter-sim", flag.ContinueOnError)
@@ -164,6 +191,10 @@ func ParseOptions(args []string, getenv func(string) string, stderr io.Writer) (
 	fs.Var(secs{&o.Ramp}, "ramp", "")
 	fs.IntVar(&o.Workers, "workers", o.Workers, "")
 	fs.Int64Var(&o.VersionBase, "version-base", o.VersionBase, "")
+	fs.Var(secs{&o.ProbeTimeout}, "probe-timeout", "")
+	fs.Var(secs{&o.ProbePoll}, "poll", "")
+	fs.Float64Var(&o.ReadRate, "read-rate", o.ReadRate, "")
+	fs.StringVar(&o.ReadOut, "read-out", o.ReadOut, "")
 	if err := fs.Parse(args); err != nil {
 		return Options{}, err
 	}
@@ -174,6 +205,10 @@ func ParseOptions(args []string, getenv func(string) string, stderr io.Writer) (
 	amqpCfg, amqpErr := amqpx.ConfigFromEnv(getenv)
 	amqpCfg.ConnectionName = "meter-sim"
 	o.AMQP = amqpCfg
+	if o.Profile == ProfileProbe {
+		o.RedisAddr = r.String("REDIS_ADDR", "market-view.voltera-"+o.Region+":6379")
+		o.RedisPassword = r.Required("REDIS_PASSWORD")
+	}
 	if err := envcfg.JoinErrs(pe.Err(), r.Err(), amqpErr, o.validate()); err != nil {
 		return Options{}, err
 	}
@@ -185,9 +220,9 @@ func ParseOptions(args []string, getenv func(string) string, stderr io.Writer) (
 func (o *Options) validate() error {
 	var errs []error
 	switch o.Profile {
-	case ProfileSteady, ProfilePairs, ProfileSpike, ProfileDup, ProfileOnce:
+	case ProfileSteady, ProfilePairs, ProfileSpike, ProfileDup, ProfileOnce, ProfileProbe, ProfileDirectPositions:
 	default:
-		errs = append(errs, fmt.Errorf("unknown profile %q (steady|pairs|spike|dup|once)", o.Profile))
+		errs = append(errs, fmt.Errorf("unknown profile %q (steady|pairs|spike|dup|once|probe|direct-positions)", o.Profile))
 	}
 	if o.Meters < 1 || o.Zones < 1 || o.DupK < 1 || o.Workers < 1 {
 		errs = append(errs, errors.New("--meters, --zones, --dup-k and --workers must be >= 1"))
@@ -207,6 +242,9 @@ func (o *Options) validate() error {
 	if o.Profile == ProfilePairs && o.Meters < 2 {
 		errs = append(errs, errors.New("pairs needs --meters >= 2"))
 	}
+	if o.Profile == ProfileProbe {
+		errs = append(errs, o.validateProbe())
+	}
 	switch o.Profile {
 	case ProfileSteady, ProfilePairs, ProfileSpike:
 		if o.Duration <= 0 {
@@ -225,10 +263,36 @@ func (o *Options) validate() error {
 	return errors.Join(errs...)
 }
 
+// validateProbe comprueba los parámetros del perfil probe.
+func (o *Options) validateProbe() error {
+	var errs []error
+	if !strings.HasPrefix(o.Prefix, ProbePrefix) {
+		errs = append(errs, fmt.Errorf("probe needs --prefix starting with %q", ProbePrefix))
+	}
+	if o.Duration <= 0 {
+		errs = append(errs, errors.New("probe needs --duration > 0"))
+	}
+	if o.Rate == 0 && o.ReadRate <= 0 {
+		errs = append(errs, errors.New("probe needs --rate > 0 or --read-rate > 0"))
+	}
+	if o.Rate < 0 && o.Rate != -1 {
+		errs = append(errs, errors.New("--rate must be >= 0"))
+	}
+	if o.ProbeTimeout <= 0 || o.ProbePoll <= 0 {
+		errs = append(errs, errors.New("--probe-timeout and --poll must be > 0"))
+	}
+	if o.ReadRate < 0 {
+		errs = append(errs, errors.New("--read-rate must be >= 0"))
+	}
+	return errors.Join(errs...)
+}
+
 // resolve rellena los valores derivados: tasa por defecto y versión inicial.
 func (o *Options) resolve() {
 	if o.Rate < 0 {
 		switch {
+		case o.Profile == ProfileProbe:
+			o.Rate = defaultProbeRate
 		case (o.Profile == ProfileSteady || o.Profile == ProfilePairs || o.Profile == ProfileSpike) && o.Period > 0:
 			o.Rate = float64(o.Meters) / o.Period.Seconds()
 		default:

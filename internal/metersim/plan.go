@@ -60,7 +60,7 @@ type Plan interface {
 // NewPlan construye el plan y su curva a partir de las opciones ya resueltas.
 func NewPlan(o Options) (Plan, Curve, error) {
 	switch o.Profile {
-	case ProfileSteady:
+	case ProfileSteady, ProfileProbe:
 		c := Curve{Rate: o.Rate}
 		return &cyclePlan{o: o, total: c.Count(o.Duration)}, c, nil
 	case ProfileSpike:
@@ -70,7 +70,7 @@ func NewPlan(o Options) (Plan, Curve, error) {
 		c := Curve{Rate: o.Rate}
 		p, err := newPairsPlan(o, c.Count(o.Duration))
 		return p, c, err
-	case ProfileOnce:
+	case ProfileOnce, ProfileDirectPositions:
 		return &oncePlan{o: o}, Curve{Rate: o.Rate}, nil
 	case ProfileDup:
 		return newDupPlan(o), Curve{Rate: o.Rate}, nil

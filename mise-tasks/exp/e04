@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Experimento e04: el proyector nunca toca positions-db (PASS/FAIL)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e04-state-transfer "$@"

@@ -1,0 +1,6 @@
+#!/bin/sh
+#MISE description="Experimento e07: pérdida de un mensaje de posición sin expulsar al medidor (TTL) (PASS/FAIL)"
+#USAGE arg "[rep]" help="número de repetición" default="1"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e07-ttl-loss "$@"
