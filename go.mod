@@ -3,6 +3,7 @@ module github.com/db-unicode/voltera-event-mesh-experiment
 go 1.27
 
 require (
+	github.com/expr-lang/expr v1.17.8
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.11.0
 	github.com/nats-io/nats-server/v2 v2.15.1
@@ -13,6 +14,7 @@ require (
 	github.com/stretchr/testify v1.12.1
 	github.com/twmb/franz-go v1.22.2
 	github.com/twmb/franz-go/pkg/kadm v1.19.0
+	go.yaml.in/yaml/v3 v3.0.5
 )
 
 require (
@@ -35,7 +37,6 @@ require (
 	github.com/prometheus/procfs v0.22.0 // indirect
 	github.com/twmb/franz-go/pkg/kmsg v1.15.0 // indirect
 	go.uber.org/atomic v1.12.0 // indirect
-	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/crypto v0.57.0 // indirect
 	golang.org/x/sync v0.23.0 // indirect
 	golang.org/x/sys v0.48.0 // indirect
