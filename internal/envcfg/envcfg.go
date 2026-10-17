@@ -94,3 +94,17 @@ func (r *Reader) Float(name string, def, minV float64) float64 {
 
 // JoinErrs une los errores no nil de errs (nil si no hay ninguno).
 func JoinErrs(errs ...error) error { return errors.Join(errs...) }
+
+// Parse devuelve name convertido con parse (def si está vacía); un valor inválido acumula un error.
+func Parse[T any](r *Reader, name string, def T, parse func(string) (T, error)) T {
+	v := r.get(name)
+	if v == "" {
+		return def
+	}
+	out, err := parse(v)
+	if err != nil {
+		r.fail("%s: %v", name, err)
+		return def
+	}
+	return out
+}
