@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S15: lado de lectura r1/r2 (matching -> Kafka -> transfer/device y bridge -> NATS -> billing) (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s15-match-side/run.sh"

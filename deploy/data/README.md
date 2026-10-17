@@ -14,14 +14,16 @@ reemplazo directo (misma API; solo cambia la imagen y el comando).
 
 ## Instancias
 
-| Región | Namespace | Servicios | Dueño |
+Cada región corre el mismo stack con los mismos nombres de instancia; cambia solo el namespace. r2 recibe poca carga.
+
+| Región | Namespace | Instancias | Dueño |
 |---|---|---|---|
 | r1 | `voltera-r1` | `positions-db`, `matches-db`, `transfer-db` (Postgres), `market-view` (Redis) | gateway, matching-engine, energy-transfer, market-projector |
-| r2 | `voltera-r2` | `matches-db-r2`, `market-view-r2` | matching-engine y market-projector de r2 |
+| r2 | `voltera-r2` | `positions-db`, `matches-db`, `transfer-db` (Postgres), `market-view` (Redis) | los mismos servicios de r2 |
 
-r2 recibe poca carga y solo necesita las dos instancias que cierran el camino de E8 (matching local y vista); cada
-instancia extra cuesta ~100 MiB con su sidecar. Para añadir `positions-db-r2` o `transfer-db-r2`, copiar el
-directorio de r1 con `namespace: voltera-r2` y `nameSuffix: -r2` y listarlo en `r2/kustomization.yaml`.
+Cada instancia extra cuesta ~100 MiB con su sidecar; r2 tiene 4, como r1. Antes de esta
+versión r2 solo tenía `matches-db-r2` y `market-view-r2` (sufijo `-r2`): esos recursos, sus Secrets y su PVC se
+borraron del cluster al unificar los nombres.
 
 ## Credenciales y conexión
 
@@ -32,6 +34,7 @@ contraseña `voltera-dev`.
 ```
 postgres://voltera:voltera-dev@positions-db.voltera-r1:5432/voltera?sslmode=disable
 market-view.voltera-r1:6379   (password voltera-dev)
+# r2: el mismo nombre en voltera-r2 (positions-db.voltera-r2, market-view.voltera-r2, ...)
 ```
 
 `sslmode=disable`: el cifrado lo pone el mTLS de Istio. Los puertos `tcp-*` hacen que Istio trate el tráfico como TCP.

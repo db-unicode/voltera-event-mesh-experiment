@@ -1,0 +1,35 @@
+# Reenvía a Kafka un EnergyMatched ya procesado (misma clave y mismo cuerpo). El
+# ConfigMap s15-resend (key, value, topic) lo crea run.sh con el sobre guardado en la outbox.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: s15-resend
+  namespace: s15-match-side
+  labels: {app: s15-resend}
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels: {app: s15-resend}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: producer
+          image: apache/kafka:4.3.1
+          command: [sh, -c]
+          args:
+            - |
+              printf '%s|%s\n' "$KEY" "$VALUE" | /opt/kafka/bin/kafka-console-producer.sh \
+                --bootstrap-server kafka.voltera-infra.svc:9092 --topic "$TOPIC" \
+                --property parse.key=true --property 'key.separator=|'
+          env:
+            - {name: KAFKA_HEAP_OPTS, value: "-Xms64m -Xmx192m"}
+            - name: KEY
+              valueFrom: {configMapKeyRef: {name: s15-resend, key: key}}
+            - name: VALUE
+              valueFrom: {configMapKeyRef: {name: s15-resend, key: value}}
+            - name: TOPIC
+              valueFrom: {configMapKeyRef: {name: s15-resend, key: topic}}
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {memory: 384Mi}

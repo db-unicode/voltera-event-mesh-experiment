@@ -1,0 +1,25 @@
+# Patrón validado en experiments/spikes/s03-keda-kafka/. El overlay de cada región
+# cambia el topic (<region>.energy-matched).
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: energy-transfer
+spec:
+  scaleTargetRef: {name: energy-transfer}
+  pollingInterval: 5
+  cooldownPeriod: 30
+  minReplicaCount: 0
+  maxReplicaCount: 6   # = particiones del topic
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown: {stabilizationWindowSeconds: 30}
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: kafka.voltera-infra.svc:9092
+        consumerGroup: energy-transfer
+        topic: r1.energy-matched
+        lagThreshold: "50"
+        offsetResetPolicy: earliest
+        limitToPartitionsWithLag: "true"

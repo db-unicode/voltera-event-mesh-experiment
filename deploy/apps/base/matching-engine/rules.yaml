@@ -1,0 +1,14 @@
+# Reglas de matching (expr-lang). Se recargan sin reiniciar el pod: si el archivo nuevo no
+# compila, el motor conserva las reglas anteriores y lo registra (matching_rules_reload_total{result="error"}).
+#
+# params     constantes visibles como "params" en ambas expresiones
+# eligible   por posición -> bool. Variables: position, price, params
+# pair       por par oferente/demandante -> bool. Variables: seller, buyer, price, params
+#
+# position/seller/buyer: meterId, side (SURPLUS|DEFICIT), kwh, validUntil, zone, version
+# price: pricePerKwh, validUntil, version
+params:
+  minKwh: 0.1
+  maxPricePerKwh: 1.0
+eligible: "position.kwh >= params.minKwh && price.pricePerKwh <= params.maxPricePerKwh"
+pair: "seller.zone == buyer.zone && seller.meterId != buyer.meterId"

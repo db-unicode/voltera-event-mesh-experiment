@@ -1,0 +1,14 @@
+# Facturación simulada en el nodo global (voltera-global).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: voltera-global
+resources:
+  - ../../base/billing-sim
+# Mismas credenciales de desarrollo que el usuario "billing" de deploy/mesh/nats/global/nats.conf.
+secretGenerator:
+  - name: billing-nats-credentials
+    literals:
+      - NATS_USER=billing
+      - NATS_PASSWORD=dev-billing-2a94
+generatorOptions:
+  disableNameSuffixHash: true

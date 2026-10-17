@@ -1,0 +1,60 @@
+# Escala por lag de Kafka con KEDA (scaledobject.yaml); arranca en 0 réplicas.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: energy-transfer
+spec:
+  replicas: 0
+  selector:
+    matchLabels: {}
+  template:
+    metadata:
+      labels: {}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      serviceAccountName: energy-transfer
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: energy-transfer
+          image: voltera/energy-transfer:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: PG_USER
+              valueFrom: {secretKeyRef: {name: transfer-db-credentials, key: POSTGRES_USER}}
+            - name: PG_PASSWORD
+              valueFrom: {secretKeyRef: {name: transfer-db-credentials, key: POSTGRES_PASSWORD}}
+            - name: PG_DB
+              valueFrom: {secretKeyRef: {name: transfer-db-credentials, key: POSTGRES_DB}}
+            - name: DATABASE_URL
+              value: postgres://$(PG_USER):$(PG_PASSWORD)@transfer-db:5432/$(PG_DB)?sslmode=disable
+            - {name: KAFKA_BROKERS, value: "kafka.voltera-infra.svc:9092"}
+            - {name: KAFKA_GROUP, value: energy-transfer}
+            - {name: DEVICE_SIM_URL, value: "http://device-sim:8080"}
+            - name: DEVICE_COMMAND_KEY
+              valueFrom: {secretKeyRef: {name: device-command-key, key: DEVICE_COMMAND_KEY}}
+            - {name: FAILPOINT_STATE_DIR, value: /var/run/failpoints}
+            - {name: EXPERIMENTS, value: "1"}
+            - {name: GOMEMLIMIT, value: 100MiB}
+          ports:
+            - {name: http-ops, containerPort: 9090}
+          readinessProbe:
+            httpGet: {path: /readyz, port: http-ops}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /healthz, port: http-ops}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 25m, memory: 32Mi}
+            limits: {memory: 128Mi}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          volumeMounts:
+            - {name: failpoints, mountPath: /var/run/failpoints}
+      volumes:
+        - name: failpoints
+          emptyDir: {}

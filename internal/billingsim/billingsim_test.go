@@ -51,7 +51,7 @@ func TestBillingIsIdempotentPerMatchIDAndSplitsRegions(t *testing.T) {
 	require.Equal(t, 1, st.Duplicates)
 	require.Equal(t, RegionStats{Total: 3, Distinct: 2, Duplicates: 1}, st.ByRegion["r1"])
 	require.Equal(t, RegionStats{Total: 1, Distinct: 1}, st.ByRegion["r2"])
-	require.Equal(t, map[string]int{"m1": 2, "m2": 1, "m3": 1}, st.ByMatchID)
+	require.Equal(t, map[string]MatchEntry{"m1": {Region: "r1", Count: 2}, "m2": {Region: "r1", Count: 1}, "m3": {Region: "r2", Count: 1}}, st.ByMatchID)
 	require.Nil(t, b.Ledger.Snapshot(false).ByMatchID)
 
 	require.Equal(t, 3.0, promtest.ToFloat64(b.Metrics.BillingReceived.WithLabelValues("r1")))
@@ -82,7 +82,7 @@ func TestStateEndpoint(t *testing.T) {
 	st := get("/state")
 	require.Equal(t, 1, st.Distinct)
 	require.Nil(t, st.ByMatchID)
-	require.Equal(t, map[string]int{"m1": 1}, get("/state?detail=1").ByMatchID)
+	require.Equal(t, map[string]MatchEntry{"m1": {Region: "r1", Count: 1}}, get("/state?detail=1").ByMatchID)
 }
 
 func TestRegionOf(t *testing.T) {

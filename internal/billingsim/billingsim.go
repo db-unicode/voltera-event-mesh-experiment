@@ -37,21 +37,27 @@ type State struct {
 	Distinct   int                    `json:"distinct"`
 	Duplicates int                    `json:"duplicates"`
 	ByRegion   map[string]RegionStats `json:"byRegion"`
-	// ByMatchID (solo con ?detail=1) son las entregas por matchId.
-	ByMatchID map[string]int `json:"byMatchId,omitempty"`
+	// ByMatchID (solo con ?detail=1) son las entregas por matchId y su región.
+	ByMatchID map[string]MatchEntry `json:"byMatchId,omitempty"`
+}
+
+// MatchEntry es lo facturado de un matchId.
+type MatchEntry struct {
+	Region string `json:"region"`
+	Count  int    `json:"count"`
 }
 
 // Ledger es el libro de facturación idempotente por matchId.
 type Ledger struct {
 	mu      sync.Mutex
-	byMatch map[string]int
+	byMatch map[string]*MatchEntry
 	region  map[string]*RegionStats
 	total   int
 }
 
 // NewLedger crea un libro vacío.
 func NewLedger() *Ledger {
-	return &Ledger{byMatch: map[string]int{}, region: map[string]*RegionStats{}}
+	return &Ledger{byMatch: map[string]*MatchEntry{}, region: map[string]*RegionStats{}}
 }
 
 // Record registra una entrega y devuelve true si matchId ya estaba facturado.
@@ -65,8 +71,13 @@ func (l *Ledger) Record(region, matchID string) (duplicate bool) {
 	}
 	l.total++
 	rs.Total++
-	l.byMatch[matchID]++
-	if l.byMatch[matchID] > 1 {
+	e := l.byMatch[matchID]
+	if e == nil {
+		e = &MatchEntry{Region: region}
+		l.byMatch[matchID] = e
+	}
+	e.Count++
+	if e.Count > 1 {
 		rs.Duplicates++
 		return true
 	}
@@ -84,9 +95,9 @@ func (l *Ledger) Snapshot(detail bool) State {
 		st.ByRegion[r] = *rs
 	}
 	if detail {
-		st.ByMatchID = make(map[string]int, len(l.byMatch))
+		st.ByMatchID = make(map[string]MatchEntry, len(l.byMatch))
 		for k, v := range l.byMatch {
-			st.ByMatchID[k] = v
+			st.ByMatchID[k] = *v
 		}
 	}
 	return st
