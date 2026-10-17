@@ -64,7 +64,12 @@ e1_effects() {
        device:  {missing: [$I[] as $i | select(($dev[0].byMatchId[$i] // 0) == 0)] | length,
                  dups:    [$I[] as $i | select(($dev[0].byMatchId[$i] // 0) > 1)] | length},
        billing: {missing: [$I[] as $i | select(($bil[0].byMatchId[$i].count // 0) == 0)] | length,
-                 dups:    [$I[] as $i | select(($bil[0].byMatchId[$i].count // 0) > 1)] | length}}' >"$3"
+                 dups:    [$I[] as $i | select(($bil[0].byMatchId[$i].count // 0) > 1)] | length}}' >"$3" || return 1
+  # los /state completos pesan MB: se conservan solo los matchId del prefijo y los totales
+  jq --slurpfile ids "$OUT/raw/ids-$1.json" '{total, distinct, duplicates, rejected, byMatchId: ([$ids[0][] as $i | {key: $i, value: (.byMatchId[$i] // 0)}] | from_entries)}' \
+    "$OUT/raw/device-$1.json" >"$OUT/raw/device-$1.slim" || return 1
+  jq --slurpfile ids "$OUT/raw/ids-$1.json" '{total, distinct, duplicates, byRegion, byMatchId: ([$ids[0][] as $i | {key: $i, value: .byMatchId[$i]}] | from_entries)}' \
+    "$OUT/raw/billing-$1.json" >"$OUT/raw/billing-$1.slim" || return 1
 }
 
 # e1_settled <tag> <prefix>: todo drenado (lag 0, outbox vacías, cola 0, efectos completos)
@@ -320,6 +325,11 @@ collect() {
   done
   jq -n --slurpfile a "$OUT/raw/metrics-a.json" --slurpfile b "$OUT/raw/metrics-b.json" \
     '{a: $a[0], b: $b[0]}' >"$OUT/metrics.json" || return 1
+  for _t in a b; do
+    for _f in device billing; do
+      [ ! -f "$OUT/raw/$_f-$_t.slim" ] || mv "$OUT/raw/$_f-$_t.slim" "$OUT/raw/$_f-$_t.json"
+    done
+  done
   # figuras: lag/cola y réplicas con la ventana de caída (columna down = 1)
   for _t in a b; do
     [ -f "$OUT/raw/phase-$_t.json" ] || continue

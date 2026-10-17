@@ -99,7 +99,9 @@ e2_phase() {
   if [ "$_mode" = keda ]; then
     k -n "$E2_NS" get scaledobject "$E2_GW" -o json >"$OUT/raw/keda-$_tag-scaledobject.json" || true
     k -n "$E2_NS" get hpa -o json >"$OUT/raw/keda-$_tag-hpa.json" || true
-    k -n "$E2_NS" get events --sort-by=.lastTimestamp -o json >"$OUT/raw/keda-$_tag-events.json" || true
+    k -n "$E2_NS" get events --sort-by=.lastTimestamp -o json \
+      | jq '[.items[] | select(.involvedObject.name | test("declaration-gateway"))
+             | {time: (.lastTimestamp // .eventTime), type, reason, object: .involvedObject.name, message}]' >"$OUT/raw/keda-$_tag-events.json" || true
   fi
   sleep 4
   kill "$_s1" "$_s2" 2>/dev/null || true

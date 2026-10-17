@@ -126,7 +126,9 @@ drive() {
   _t_zero=$(lx_now)
   k -n "$E2B_NS" get scaledobject energy-transfer -o json >"$OUT/raw/keda-scaledobject.json" || true
   k -n "$E2B_NS" get hpa -o json >"$OUT/raw/keda-hpa.json" || true
-  k -n "$E2B_NS" get events --sort-by=.lastTimestamp -o json >"$OUT/raw/keda-events.json" || true
+  k -n "$E2B_NS" get events --sort-by=.lastTimestamp -o json \
+    | jq '[.items[] | select(.involvedObject.name | test("energy-transfer"))
+           | {time: (.lastTimestamp // .eventTime), type, reason, object: .involvedObject.name, message}]' >"$OUT/raw/keda-events.json" || true
   sleep 4
   kill "$_s1" "$_s2" 2>/dev/null || true
   jq -n --arg prefix "$E2B_PREFIX" --argjson dev0 "$_dev0" --argjson tProd "$_t_prod" --argjson tProdEnd "$_t_prod_end" \
@@ -184,6 +186,11 @@ collect() {
        replicasStart: $r0, peakReplicas: $pr, maxReplicas: $max, replicasEnd: $lastR,
        peakLag: $pl, lagEnd: $lastLag,
        timeToFirstReplicaS: $firstS, timeToLagZeroS: $lag0S, scaleToZeroS: $zeroS}' >"$OUT/metrics.json" || return 1
+  # los /state completos pesan MB: se conservan solo los matchId del prefijo y los totales
+  jq --slurpfile ids "$OUT/raw/ids.json" '{total, distinct, duplicates, rejected, byMatchId: ([$ids[0][] as $i | {key: $i, value: (.byMatchId[$i] // 0)}] | from_entries)}' \
+    "$OUT/raw/device.json" >"$OUT/raw/device-prefix.json" && rm "$OUT/raw/device.json"
+  jq --slurpfile ids "$OUT/raw/ids.json" '{total, distinct, duplicates, byRegion, byMatchId: ([$ids[0][] as $i | {key: $i, value: .byMatchId[$i]}] | from_entries)}' \
+    "$OUT/raw/billing.json" >"$OUT/raw/billing-prefix.json" && rm "$OUT/raw/billing.json"
   # figura: lag y réplicas x500 en el mismo eje
   awk -F, 'NR == 1 { print "ts,lag,replicas_x500"; next } $2 == "" || $3 == "" { next } { print $1 "," $2 "," $3 * 500 }' "$OUT/raw/series.csv" >"$OUT/figures/lag_replicas.csv"
   expctl plot --csv "$OUT/figures/lag_replicas.csv" --x ts --title "E2B: lag de energy-transfer y réplicas x500" \
