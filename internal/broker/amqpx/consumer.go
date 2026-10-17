@@ -54,7 +54,9 @@ func (e *InvalidError) Unwrap() error { return e.Err }
 func Invalid(err error) error { return &InvalidError{Err: err} }
 
 // InvalidAs es como Invalid pero fija el event_type de la métrica.
-func InvalidAs(eventType string, err error) error { return &InvalidError{Err: err, EventType: eventType} }
+func InvalidAs(eventType string, err error) error {
+	return &InvalidError{Err: err, EventType: eventType}
+}
 
 // ConsumerConfig configura un Consumer.
 type ConsumerConfig struct {
