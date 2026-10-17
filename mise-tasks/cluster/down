@@ -1,0 +1,13 @@
+#!/bin/sh
+#MISE description="Elimina el cluster kind 'voltera'"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+
+need kind
+
+if kind get clusters 2>/dev/null | grep -qx "$CLUSTER_NAME"; then
+  kind delete cluster --name "$CLUSTER_NAME"
+else
+  log "el cluster '$CLUSTER_NAME' no existe"
+fi
