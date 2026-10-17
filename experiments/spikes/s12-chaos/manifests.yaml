@@ -1,0 +1,139 @@
+# Cargas de prueba de S12: httpbin (kill/down/up/failpoint/partición), un worker gobernado
+# por KEDA (cron, mínimo 2) y un cliente en otro namespace.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: s12-chaos
+  labels:
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: s12-client
+  labels:
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: httpbin
+  namespace: s12-chaos
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: curl
+  namespace: s12-client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpbin
+  namespace: s12-chaos
+spec:
+  selector:
+    app: httpbin
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpbin
+  namespace: s12-chaos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpbin
+  template:
+    metadata:
+      labels:
+        app: httpbin
+    spec:
+      serviceAccountName: httpbin
+      containers:
+        - name: httpbin
+          image: mccutchen/go-httpbin:2.26.0
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet: {path: /status/200, port: 8080}
+            periodSeconds: 2
+          resources:
+            requests: {cpu: 10m, memory: 32Mi}
+            limits: {memory: 64Mi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: s12-chaos
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      serviceAccountName: httpbin
+      containers:
+        - name: httpbin
+          image: mccutchen/go-httpbin:2.26.0
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet: {path: /status/200, port: 8080}
+            periodSeconds: 2
+          resources:
+            requests: {cpu: 10m, memory: 32Mi}
+            limits: {memory: 64Mi}
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: worker
+  namespace: s12-chaos
+spec:
+  scaleTargetRef:
+    name: worker
+  minReplicaCount: 2
+  maxReplicaCount: 3
+  triggers:
+    - type: cron
+      metadata:
+        timezone: UTC
+        start: "0 0 * * *"
+        end: "59 23 * * *"
+        desiredReplicas: "2"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curl
+  namespace: s12-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curl
+  template:
+    metadata:
+      labels:
+        app: curl
+    spec:
+      serviceAccountName: curl
+      terminationGracePeriodSeconds: 1
+      containers:
+        - name: curl
+          image: curlimages/curl:8.23.0
+          command: ["sleep", "infinity"]
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 32Mi}

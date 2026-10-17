@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S12: primitivas de caos con kubectl (kill, down/up, KEDA, failpoint, partición) (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s12-chaos/run.sh"

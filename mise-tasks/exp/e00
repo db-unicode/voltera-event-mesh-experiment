@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Experimento E00: humo del arnés de experimentos (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/run.sh" e00-harness "$@"
