@@ -1,5 +1,7 @@
 # Arnés de experimentos
 
+Resultados de la corrida final (12 experimentos) y cómo reproducirlos: [RESULTS.md](RESULTS.md).
+
 ```sh
 mise run exp:run <id> [rep]   # p. ej. exp:run e00 2; id = carpeta experiments/<id>*/
 mise run exp:e00              # alias de exp:run e00-harness
