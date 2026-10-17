@@ -1,0 +1,47 @@
+# 1 réplica (grupo Kafka mesh-bridge; hasta 6 si hiciera falta caudal). Las credenciales
+# NATS (usuario bridge-<region>) vienen del Secret mesh-bridge-credentials del overlay.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mesh-bridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {}
+  template:
+    metadata:
+      labels: {}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      serviceAccountName: mesh-bridge
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: mesh-bridge
+          image: voltera/mesh-bridge:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - {name: KAFKA_BROKERS, value: "kafka.voltera-infra.svc:9092"}
+            - {name: NATS_URL, value: "nats://nats:4222"}
+            - name: NATS_USER
+              valueFrom: {secretKeyRef: {name: mesh-bridge-credentials, key: NATS_USER}}
+            - name: NATS_PASSWORD
+              valueFrom: {secretKeyRef: {name: mesh-bridge-credentials, key: NATS_PASSWORD}}
+            - {name: GOMEMLIMIT, value: 100MiB}
+          ports:
+            - {name: http-ops, containerPort: 9090}
+          readinessProbe:
+            httpGet: {path: /readyz, port: http-ops}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /healthz, port: http-ops}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 25m, memory: 32Mi}
+            limits: {memory: 128Mi}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}

@@ -3,6 +3,7 @@ module github.com/db-unicode/voltera-event-mesh-experiment
 go 1.27
 
 require (
+	github.com/expr-lang/expr v1.17.8
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.11.0
 	github.com/nats-io/nats-server/v2 v2.15.1

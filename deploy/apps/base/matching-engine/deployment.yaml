@@ -1,0 +1,65 @@
+# 1 réplica: es el único escritor de matches. Particionar por zona permitiría N réplicas.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matching-engine
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {}
+  template:
+    metadata:
+      labels: {}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      serviceAccountName: matching-engine
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: matching-engine
+          image: voltera/matching-engine:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: PG_USER
+              valueFrom: {secretKeyRef: {name: matches-db-credentials, key: POSTGRES_USER}}
+            - name: PG_PASSWORD
+              valueFrom: {secretKeyRef: {name: matches-db-credentials, key: POSTGRES_PASSWORD}}
+            - name: PG_DB
+              valueFrom: {secretKeyRef: {name: matches-db-credentials, key: POSTGRES_DB}}
+            - name: DATABASE_URL
+              value: postgres://$(PG_USER):$(PG_PASSWORD)@matches-db:5432/$(PG_DB)?sslmode=disable
+            - {name: REDIS_ADDR, value: "market-view:6379"}
+            - name: REDIS_PASSWORD
+              valueFrom: {secretKeyRef: {name: market-view-credentials, key: REDIS_PASSWORD}}
+            - {name: KAFKA_BROKERS, value: "kafka.voltera-infra.svc:9092"}
+            - {name: MATCH_WINDOW_S, value: "2"}
+            - {name: RULES_DIR, value: /etc/matching-rules}
+            - {name: FAILPOINT_STATE_DIR, value: /var/run/failpoints}
+            - {name: EXPERIMENTS, value: "1"}
+            - {name: GOMEMLIMIT, value: 100MiB}
+          ports:
+            - {name: http-ops, containerPort: 9090}
+          readinessProbe:
+            httpGet: {path: /readyz, port: http-ops}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /healthz, port: http-ops}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 25m, memory: 32Mi}
+            limits: {memory: 128Mi}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+          volumeMounts:
+            - {name: rules, mountPath: /etc/matching-rules, readOnly: true}
+            - {name: failpoints, mountPath: /var/run/failpoints}
+      volumes:
+        - name: rules
+          configMap: {name: matching-rules}
+        - name: failpoints
+          emptyDir: {}

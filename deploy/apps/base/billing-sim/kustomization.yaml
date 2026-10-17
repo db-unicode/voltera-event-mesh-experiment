@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - serviceaccount.yaml
+  - deployment.yaml
+  - service.yaml
+labels:
+  - pairs:
+      app: billing-sim
+      app.kubernetes.io/name: billing-sim
+      app.kubernetes.io/part-of: voltera
+      app.kubernetes.io/component: billing
+    includeSelectors: true

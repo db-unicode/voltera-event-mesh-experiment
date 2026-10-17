@@ -1,0 +1,63 @@
+#!/bin/sh
+#MISE description="Construye y despliega el lado de lectura (matching-engine, energy-transfer, device-sim, mesh-bridge) y billing-sim (idempotente; arg: r1|r2|all)"
+#USAGE arg "[region]" help="región a desplegar (r1, r2 o all)" default="all"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+need kubectl
+need docker
+need kind
+require_cluster
+
+region=${1:-all}
+case $region in
+  r1 | r2) regions=$region ;;
+  all) regions="r1 r2" ;;
+  *) die "región desconocida '$region' (r1, r2 o all)" ;;
+esac
+
+images="matching-engine energy-transfer device-sim mesh-bridge billing-sim"
+
+# id de la imagen antes y después: solo se reinicia lo que cambió (el tag :dev no cambia)
+image_id() { docker image inspect -f '{{.Id}}' "voltera/$1:dev" 2>/dev/null || echo none; }
+
+ids=$(mktemp -d)
+trap 'rm -rf "$ids"' EXIT INT TERM
+for img in $images; do image_id "$img" >"$ids/$img"; done
+# shellcheck disable=SC2086  # $images se trocea a propósito: un argumento por imagen
+MISE_PROJECT_ROOT=$ROOT sh "$ROOT/mise-tasks/images/build" $images
+changed=""
+for img in $images; do
+  [ "$(cat "$ids/$img")" = "$(image_id "$img")" ] || changed="$changed $img"
+done
+[ -z "$changed" ] || log "imágenes nuevas:$changed"
+
+k apply -f "$ROOT/deploy/base/namespaces.yaml" >/dev/null
+
+restart_if_changed() { # <deployment> <namespace>
+  case " $changed " in
+    *" $1 "*) k -n "$2" get deployment "$1" >/dev/null 2>&1 && k -n "$2" rollout restart "deployment/$1" >/dev/null ;;
+  esac
+}
+
+for r in $regions; do
+  ns=voltera-$r
+  log "overlay deploy/apps/$r/match-side en $ns"
+  k apply -k "$ROOT/deploy/apps/$r/match-side"
+  for d in matching-engine device-sim mesh-bridge energy-transfer; do restart_if_changed "$d" "$ns"; done
+  for d in matching-engine device-sim mesh-bridge; do wait_rollout "deployment/$d" "$ns" 180s; done
+  # energy-transfer arranca en 0 réplicas: lo gobierna KEDA
+  i=0
+  until k -n "$ns" get scaledobject energy-transfer -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}' 2>/dev/null | grep -qx True; do
+    i=$((i + 1))
+    [ "$i" -lt 30 ] || die "ScaledObject energy-transfer no llegó a Ready en $ns"
+    sleep 2
+  done
+  log "ScaledObject energy-transfer Ready en $ns"
+done
+
+log "overlay deploy/apps/global/billing en voltera-global"
+k apply -k "$ROOT/deploy/apps/global/billing"
+restart_if_changed billing-sim voltera-global
+wait_rollout deployment/billing-sim voltera-global 180s
+log "lado de lectura listo ($regions + billing)"

@@ -1,0 +1,45 @@
+# Estado en memoria: 1 réplica.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: device-sim
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {}
+  template:
+    metadata:
+      labels: {}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      serviceAccountName: device-sim
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: device-sim
+          image: voltera/device-sim:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: DEVICE_COMMAND_KEY
+              valueFrom: {secretKeyRef: {name: device-command-key, key: DEVICE_COMMAND_KEY}}
+            - {name: EXPERIMENTS, value: "1"}
+            - {name: GOMEMLIMIT, value: 50MiB}
+          ports:
+            - {name: http-api, containerPort: 8080}
+            - {name: http-ops, containerPort: 9090}
+          readinessProbe:
+            httpGet: {path: /readyz, port: http-ops}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /healthz, port: http-ops}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 64Mi}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}

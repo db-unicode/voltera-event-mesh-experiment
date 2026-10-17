@@ -1,0 +1,32 @@
+# Lado de lectura de la región r1: matching-engine, energy-transfer (KEDA), device-sim y mesh-bridge.
+# Mismos nombres de recursos en r1 y r2; cambian namespace, REGION, topic y credenciales NATS.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: voltera-r1
+resources:
+  - ../../base/matching-engine
+  - ../../base/energy-transfer
+  - ../../base/device-sim
+  - ../../base/mesh-bridge
+# Credenciales de desarrollo (mismas que deploy/mesh/nats/r1/nats.conf): este repo es un experimento.
+secretGenerator:
+  - name: device-command-key
+    literals:
+      - DEVICE_COMMAND_KEY=dev-device-command-key-7c1d
+  - name: mesh-bridge-credentials
+    literals:
+      - NATS_USER=bridge-r1
+      - NATS_PASSWORD=dev-bridge-r1-41c7
+generatorOptions:
+  disableNameSuffixHash: true
+patches:
+  - target: {kind: Deployment}
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value: {name: REGION, value: r1}
+  - target: {kind: ScaledObject, name: energy-transfer}
+    patch: |-
+      - op: replace
+        path: /spec/triggers/0/metadata/topic
+        value: r1.energy-matched

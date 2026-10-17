@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - serviceaccount.yaml
+  - deployment.yaml
+# El nombre del ConfigMap no lleva hash: el Deployment lo monta como directorio y el
+# servicio recarga el archivo en caliente (kubelet actualiza el volumen en ~1 min); un
+# nombre con hash forzaría un rollout en cada cambio de reglas.
+configMapGenerator:
+  - name: matching-rules
+    files: [rules.yaml=rules.cfg]   # .cfg: kubeconform no lo trata como manifiesto
+generatorOptions:
+  disableNameSuffixHash: true
+labels:
+  - pairs:
+      app: matching-engine
+      app.kubernetes.io/name: matching-engine
+      app.kubernetes.io/part-of: voltera
+      app.kubernetes.io/component: match-side
+    includeSelectors: true

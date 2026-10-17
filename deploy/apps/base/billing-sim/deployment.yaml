@@ -1,0 +1,49 @@
+# Estado en memoria: 1 réplica. Consume el durable "billing" del stream BILLING_MATCHED
+# con el usuario "billing" (Secret billing-nats-credentials del overlay).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: billing-sim
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {}
+  template:
+    metadata:
+      labels: {}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+    spec:
+      serviceAccountName: billing-sim
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: billing-sim
+          image: voltera/billing-sim:dev
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - {name: REGION, value: global}
+            - {name: NATS_URL, value: "nats://nats:4222"}
+            - name: NATS_USER
+              valueFrom: {secretKeyRef: {name: billing-nats-credentials, key: NATS_USER}}
+            - name: NATS_PASSWORD
+              valueFrom: {secretKeyRef: {name: billing-nats-credentials, key: NATS_PASSWORD}}
+            - {name: GOMEMLIMIT, value: 50MiB}
+          ports:
+            - {name: http-api, containerPort: 8080}
+            - {name: http-ops, containerPort: 9090}
+          readinessProbe:
+            httpGet: {path: /readyz, port: http-ops}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /healthz, port: http-ops}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {memory: 64Mi}
+          securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
