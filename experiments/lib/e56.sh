@@ -32,6 +32,7 @@ e56_stop_bg() {
   for _p in $E56_PIDS; do
     pkill -P "$_p" 2>/dev/null || true
     kill "$_p" 2>/dev/null || true
+    { wait "$_p"; } 2>/dev/null || true
   done
   E56_PIDS=""
 }
