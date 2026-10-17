@@ -1,0 +1,53 @@
+#!/bin/sh
+#MISE description="Verifica herramientas, Docker activo, RAM de Docker y límites inotify"
+set -eu
+
+MIN_DOCKER_GIB=10
+fail=0
+
+for tool in docker go kind kubectl helm istioctl golangci-lint shellcheck kubeconform jq nats; do
+  if command -v "$tool" >/dev/null 2>&1; then
+    echo "OK      $tool: $(command -v "$tool")"
+  else
+    echo "MISSING $tool (ejecuta: mise install)"
+    fail=1
+  fi
+done
+
+if command -v docker >/dev/null 2>&1; then
+  if mem=$(docker info --format '{{.MemTotal}}' 2>/dev/null); then
+    gib=$((mem / 1024 / 1024 / 1024))
+    if [ "$gib" -ge "$MIN_DOCKER_GIB" ]; then
+      echo "OK      docker activo, RAM ${gib} GiB (mínimo ${MIN_DOCKER_GIB})"
+    else
+      echo "FAIL    docker tiene ${gib} GiB de RAM; se necesitan >= ${MIN_DOCKER_GIB}"
+      fail=1
+    fi
+  else
+    echo "FAIL    el daemon de docker no responde"
+    fail=1
+  fi
+fi
+
+if [ "$(uname -s)" = "Linux" ]; then
+  check_sysctl() {
+    path=/proc/sys/fs/inotify/$1
+    min=$2
+    [ -r "$path" ] || return 0
+    val=$(cat "$path")
+    if [ "$val" -ge "$min" ]; then
+      echo "OK      fs.inotify.$1=$val"
+    else
+      echo "WARN    fs.inotify.$1=$val (< $min); kind puede fallar con 'too many open files'. Sube con: sudo sysctl fs.inotify.$1=$min"
+    fi
+  }
+  check_sysctl max_user_instances 512
+  check_sysctl max_user_watches 524288
+fi
+
+if [ "$fail" -eq 0 ]; then
+  echo "doctor: todo en orden"
+else
+  echo "doctor: hay problemas" >&2
+fi
+exit "$fail"
