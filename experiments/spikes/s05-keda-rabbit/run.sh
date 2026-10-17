@@ -116,6 +116,17 @@ setup_namespace() {
     --from-literal="host=http://keda:$KEDA_PW@rabbitmq.voltera-infra.svc:15672/$VHOST"
 }
 
+# mgmt_denied_for_others: un workload de otro namespace no llega al 15672. Lo corta la NetworkPolicy (sin respuesta, HTTP 000);
+# si la pasara, la AuthorizationPolicy respondería 403 porque solo admite la identidad keda-operator.
+mgmt_denied_for_others() {
+  k -n "$NS" run curl-denied --image=curlimages/curl:8.23.0 --restart=Never --command -- sleep 3600
+  k -n "$NS" wait --for=condition=Ready pod/curl-denied --timeout=120s
+  code=$(k -n "$NS" exec curl-denied -c curl-denied -- curl -s -m 10 -o /dev/null -w '%{http_code}' -u "keda:$KEDA_PW" "http://rabbitmq.voltera-infra.svc:15672/api/queues/$VHOST/$QUEUE" || true)
+  k -n "$NS" delete pod curl-denied --wait=false
+  echo "HTTP $code desde $NS (000 = NetworkPolicy, 403 = AuthorizationPolicy)"
+  [ "$code" = 000 ] || [ "$code" = 403 ]
+}
+
 fill_queue() {
   amqp_run "$NS" meter-sim-r1 "$VHOST" publish --queue "$QUEUE" --count "$FILL" | jq -e --argjson c "$FILL" '.confirmed == $c'
 }
@@ -231,6 +242,8 @@ check "RabbitMQ rabbitmq-0 Ready" rabbit_ready
 check "KEDA operator Available" keda_ready
 check "management API accesible (usuario keda) por port-forward" start_mgmt_forward
 check "namespace $NS, Deployment, TriggerAuthentication y Secrets" setup_namespace
+
+check "un workload de otro namespace NO llega al management API (NetworkPolicy o AuthorizationPolicy)" mgmt_denied_for_others
 
 log "S5: C_pod con 1 réplica fija y la cola llena"
 check "cola vacía antes de empezar (purga si hace falta)" empty_start

@@ -1,6 +1,6 @@
-# Capa L3/L4 del acceso de KEDA. El management API (15672) admite texto plano (security.yaml), y el texto
-# plano no trae identidad que una AuthorizationPolicy pueda comparar. Aquí se limita el origen: solo los pods del
-# operador de KEDA. El resto de puertos queda abierto a la red de pods porque ahí manda mTLS STRICT + AuthorizationPolicy.
+# Capa L3/L4 sobre el acceso de KEDA al management API (15672): solo los pods del operador de KEDA.
+# Es defensa en profundidad junto a la AuthorizationPolicy por identidad (security.yaml). El resto de puertos queda
+# abierto a la red de pods porque ahí mandan mTLS STRICT y la AuthorizationPolicy.
 # kindnet aplica NetworkPolicy (comprobado: un curl desde otro namespace a 15672 expira).
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
