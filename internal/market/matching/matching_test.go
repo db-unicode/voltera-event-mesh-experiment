@@ -15,6 +15,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/events"
+	"github.com/db-unicode/voltera-event-mesh-experiment/internal/failpoint"
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/migrate"
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/outbox"
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/telemetry"
@@ -313,4 +314,96 @@ func TestEngineSkipsWindowWithoutValidPrice(t *testing.T) {
 	require.NoError(t, eng.RunWindow(context.Background()))
 	require.Zero(t, count(`SELECT count(*) FROM matches`))
 	require.True(t, eng.LastWindow().NoPrice)
+}
+
+// --- control de E6: OUTBOX_MODE=direct (escritura dual ingenua) ---
+
+func TestParseOutboxMode(t *testing.T) {
+	for in, want := range map[string]OutboxMode{"": ModeOutbox, "outbox": ModeOutbox, "direct": ModeDirect} {
+		got, err := ParseOutboxMode(in)
+		require.NoError(t, err)
+		require.Equal(t, want, got)
+	}
+	_, err := ParseOutboxMode("off")
+	require.Error(t, err)
+}
+
+func TestLoadConfigOutboxMode(t *testing.T) {
+	env := map[string]string{"REGION": "r1", "DATABASE_URL": "postgres://x", "REDIS_ADDR": "redis:6379"}
+	get := func(k string) string { return env[k] }
+	c, err := LoadConfig(get)
+	require.NoError(t, err)
+	require.Equal(t, ModeOutbox, c.OutboxMode, "default")
+	env["OUTBOX_MODE"] = "direct"
+	c, err = LoadConfig(get)
+	require.NoError(t, err)
+	require.Equal(t, ModeDirect, c.OutboxMode)
+	env["OUTBOX_MODE"] = "nope"
+	_, err = LoadConfig(get)
+	require.ErrorContains(t, err, "OUTBOX_MODE")
+}
+
+type recPublisher struct{ msgs []outbox.Message }
+
+func (r *recPublisher) Publish(_ context.Context, m outbox.Message) error {
+	r.msgs = append(r.msgs, m)
+	return nil
+}
+
+func directEngine(t *testing.T, st *Store, pub outbox.Publisher, fp *failpoint.Registry, n int) *Engine {
+	t.Helper()
+	st.Mode = ModeDirect
+	dir := t.TempDir()
+	require.NoError(t, os.WriteFile(filepath.Join(dir, RulesFileName), []byte(validRules), 0o600))
+	rl, err := NewRulesLoader(dir, quiet, nil)
+	require.NoError(t, err)
+	src := fakeSource{price: Price{PricePerKWh: 0.3, ValidUntil: t0.Add(time.Hour)}, positions: map[string][]Position{}}
+	for i := 0; i < n; i++ {
+		src.positions["z-1"] = append(src.positions["z-1"],
+			pos(fmt.Sprintf("s%d", i), events.SideSurplus, 5, 1), pos(fmt.Sprintf("d%d", i), events.SideDeficit, 5, 1))
+	}
+	return &Engine{Region: "r1", Window: 2 * time.Second, Source: src, Store: st, Rules: rl,
+		Metrics: telemetry.NewDomainMetrics(prometheus.NewRegistry()), Log: quiet, Now: func() time.Time { return t0 },
+		Direct: pub, Failpoints: fp}
+}
+
+func TestDirectModeCommitsWithoutOutboxAndPublishesDirectly(t *testing.T) {
+	st, count := newStore(t)
+	pub := &recPublisher{}
+	eng := directEngine(t, st, pub, nil, 3)
+	require.NoError(t, eng.RunWindow(context.Background()))
+	require.Equal(t, 3, count(`SELECT count(*) FROM matches`))
+	require.Zero(t, count(`SELECT count(*) FROM outbox`), "direct mode leaves no outbox row")
+	require.Len(t, pub.msgs, 3)
+	require.Equal(t, "r1.energy-matched", pub.msgs[0].Topic)
+	require.Equal(t, events.TypeEnergyMatched, pub.msgs[0].Type)
+}
+
+func TestDirectModeCrashBetweenCommitAndPublishLosesTheEvent(t *testing.T) {
+	st, count := newStore(t)
+	pub := &recPublisher{}
+	fp := failpoint.New(failpoint.WithExit(func(int) { panic("crash") }))
+	require.NoError(t, fp.Set(outbox.FPAfterCommitBeforePublish, "crash-after:1"))
+	eng := directEngine(t, st, pub, fp, 3)
+
+	require.PanicsWithValue(t, "crash", func() { _ = eng.RunWindow(context.Background()) })
+	require.Equal(t, 3, count(`SELECT count(*) FROM matches`), "the matches were committed")
+	require.Len(t, pub.msgs, 1, "only the first one made it out")
+
+	// tras el reinicio nada reenvía los otros dos: están emparejados y no hay outbox
+	eng2 := directEngine(t, st, pub, nil, 3)
+	require.NoError(t, eng2.RunWindow(context.Background()))
+	require.Len(t, pub.msgs, 1, "lost matches are never republished")
+	require.Equal(t, 3, count(`SELECT count(*) FROM matches`))
+}
+
+func TestOutboxModeStoresEventWithTheMatch(t *testing.T) {
+	st, count := newStore(t)
+	eng := directEngine(t, st, nil, nil, 3)
+	st.Mode = ModeOutbox
+	eng.Direct = nil
+	require.NoError(t, eng.RunWindow(context.Background()))
+	// match y evento se confirman juntos: aunque el proceso muera, el relay encontrará la fila
+	require.Equal(t, 3, count(`SELECT count(*) FROM matches`))
+	require.Equal(t, 3, count(`SELECT count(*) FROM outbox WHERE published_at IS NULL`))
 }

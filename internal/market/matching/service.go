@@ -2,6 +2,7 @@ package matching
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log/slog"
 	"time"
@@ -29,11 +30,13 @@ type Config struct {
 	RulesDir      string
 	RulesPoll     time.Duration
 	OpsAddr       string
+	OutboxMode    OutboxMode
 }
 
 // LoadConfig lee la configuración. Vars: REGION, DATABASE_URL, REDIS_ADDR,
 // REDIS_PASSWORD, KAFKA_BROKERS, MATCH_WINDOW_S (2), RULES_DIR (/etc/matching-rules),
-// RULES_POLL_S (2), OPS_ADDR (:9090).
+// RULES_POLL_S (2), OPS_ADDR (:9090), OUTBOX_MODE (outbox|direct, por defecto outbox;
+// direct es solo el control de E6: escritura dual sin outbox).
 func LoadConfig(getenv func(string) string) (Config, error) {
 	e := boot.NewEnv(getenv)
 	c := Config{
@@ -47,7 +50,10 @@ func LoadConfig(getenv func(string) string) (Config, error) {
 		RulesPoll:     e.Seconds("RULES_POLL_S", 2, 1),
 		OpsAddr:       e.Addr("OPS_ADDR", ":9090"),
 	}
-	return c, e.Err()
+	err := e.Err()
+	mode, merr := ParseOutboxMode(e.String("OUTBOX_MODE", "outbox"))
+	c.OutboxMode = mode
+	return c, errors.Join(err, merr)
 }
 
 // Run arranca el servicio y bloquea hasta que ctx se cancele.
@@ -104,15 +110,21 @@ func Run(ctx context.Context, getenv func(string) string) error {
 	relay := outbox.NewRelay(pool, pub, outbox.Config{Telemetry: svc, Failpoints: fp})
 	svc.AddState("outbox", relay.StateProvider())
 	store := NewStore(pool, cfg.Region)
+	store.Mode = cfg.OutboxMode
 	eng := &Engine{
 		Region: cfg.Region, Window: cfg.Window, Source: ViewSource{Store: view.New(rdb, svc.Reg)},
 		Store: store, Rules: rules, Metrics: telemetry.NewDomainMetrics(svc.Reg), Log: log, OnCommit: relay.Wake,
 	}
+	if cfg.OutboxMode == ModeDirect {
+		log.Warn("OUTBOX_MODE=direct: control de E6, los matches se publican sin outbox", "stage", "start", "result", "ok")
+		eng.Direct, eng.Failpoints, eng.Published = pub, fp, svc.Published
+	}
+	svc.AddState("outboxMode", func(context.Context) any { return string(cfg.OutboxMode) })
 	svc.AddState("rules", func(context.Context) any { return rules.State() })
 	svc.AddState("lastWindow", func(context.Context) any { return eng.LastWindow() })
 
 	log.Info("matching-engine started", "stage", "start", "result", "ok", "region", cfg.Region,
-		"window", cfg.Window.String(), "topic", store.Topic(), "rules", rules.Current().Version)
+		"window", cfg.Window.String(), "topic", store.Topic(), "outboxMode", string(cfg.OutboxMode), "rules", rules.Current().Version)
 
 	errc := make(chan error, 2)
 	go func() { errc <- relay.Run(ctx) }()

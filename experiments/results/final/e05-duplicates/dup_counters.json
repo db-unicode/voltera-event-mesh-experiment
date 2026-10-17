@@ -1,0 +1,17 @@
+{
+  "gateway": {
+    "deliveries": 2400,
+    "applied": 300,
+    "stale": 2100,
+    "errors": 0,
+    "balance_diff": 0
+  },
+  "energy_transfer": {
+    "resent": 500,
+    "duplicates_dropped_delta": 500,
+    "consumed_duplicate_delta": 500
+  },
+  "billing": {
+    "duplicates_delta": 100
+  }
+}

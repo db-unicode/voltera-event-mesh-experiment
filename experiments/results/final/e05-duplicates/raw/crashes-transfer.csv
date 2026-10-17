@@ -1,0 +1,4 @@
+ts,deploy,failpoint,restarts,new
+2026-10-17T06:21:44Z,energy-transfer,before_ack,1,1
+2026-10-17T06:22:29Z,energy-transfer,before_ack,2,1
+2026-10-17T06:22:29Z,energy-transfer,before_ack,3,1

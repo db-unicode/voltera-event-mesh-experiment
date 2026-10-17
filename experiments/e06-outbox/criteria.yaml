@@ -1,0 +1,133 @@
+# E6: outbox transaccional. Los valores salen de metrics.json (los arma run.sh).
+# Fases 1 y 2 (OUTBOX_MODE=outbox): after_commit_before_publish / after_publish_before_mark. Fase 3: control OUTBOX_MODE=direct.
+# El umbral p?_matches >= 1000 es una comprobación de cordura: 20 pares/s x 120 s esperan 2400 matches (60 s de control: 1200).
+- id: p1-matches
+  description: "fase 1 (after_commit_before_publish, con outbox): la carga produjo matches (cordura)"
+  metric: "metrics.json:$.p1_matches"
+  op: ge
+  value: 1000
+- id: p1-crashed
+  description: "fase 1 (after_commit_before_publish, con outbox): el motor murió al menos una vez"
+  metric: "metrics.json:$.p1_crashes"
+  op: ge
+  value: 1
+- id: p1-orphans
+  description: "fase 1 (after_commit_before_publish, con outbox): matches sin fila de outbox = 0 (atomicidad)"
+  metric: "metrics.json:$.p1_orphans"
+  op: eq
+  value: 0
+- id: p1-pending
+  description: "fase 1 (after_commit_before_publish, con outbox): pendientes finales de la outbox = 0"
+  metric: "metrics.json:$.p1_outbox_pending_final"
+  op: eq
+  value: 0
+- id: p1-lost
+  description: "fase 1 (after_commit_before_publish, con outbox): matches en BD sin evento en el topic = 0 (pérdida 0)"
+  metric: "metrics.json:$.p1_lost"
+  op: eq
+  value: 0
+- id: p1-spurious
+  description: "fase 1 (after_commit_before_publish, con outbox): eventos en el topic sin match en BD = 0"
+  metric: "metrics.json:$.p1_spurious"
+  op: eq
+  value: 0
+- id: p1-effects-missing
+  description: "fase 1 (after_commit_before_publish, con outbox): todo match tiene su efecto en device-sim"
+  metric: "metrics.json:$.p1_device_missing"
+  op: eq
+  value: 0
+- id: p1-effects-dup
+  description: "fase 1 (after_commit_before_publish, con outbox): efectos duplicados en device-sim = 0"
+  metric: "metrics.json:$.p1_device_duplicated"
+  op: eq
+  value: 0
+- id: p1-device-dups
+  description: "fase 1 (after_commit_before_publish, con outbox): device-sim no recibe comandos repetidos nuevos"
+  metric: "metrics.json:$.p1_device_dups_delta"
+  op: eq
+  value: 0
+- id: p1-transfers-dups
+  description: "fase 1 (after_commit_before_publish, con outbox): transfers sin duplicados"
+  metric: "metrics.json:$.p1_transfers_dup_groups"
+  op: eq
+  value: 0
+- id: p1-recovery
+  description: "fase 1 (after_commit_before_publish, con outbox): recuperación (crash a outbox vacía) <= 30 s en todos los crashes"
+  metric: "metrics.json:$.p1_recovery_max_s"
+  op: le
+  value: 30
+- id: p2-matches
+  description: "fase 2 (after_publish_before_mark, con outbox): la carga produjo matches (cordura)"
+  metric: "metrics.json:$.p2_matches"
+  op: ge
+  value: 1000
+- id: p2-crashed
+  description: "fase 2 (after_publish_before_mark, con outbox): el motor murió al menos una vez"
+  metric: "metrics.json:$.p2_crashes"
+  op: ge
+  value: 1
+- id: p2-orphans
+  description: "fase 2 (after_publish_before_mark, con outbox): matches sin fila de outbox = 0 (atomicidad)"
+  metric: "metrics.json:$.p2_orphans"
+  op: eq
+  value: 0
+- id: p2-pending
+  description: "fase 2 (after_publish_before_mark, con outbox): pendientes finales de la outbox = 0"
+  metric: "metrics.json:$.p2_outbox_pending_final"
+  op: eq
+  value: 0
+- id: p2-lost
+  description: "fase 2 (after_publish_before_mark, con outbox): matches en BD sin evento en el topic = 0 (pérdida 0)"
+  metric: "metrics.json:$.p2_lost"
+  op: eq
+  value: 0
+- id: p2-spurious
+  description: "fase 2 (after_publish_before_mark, con outbox): eventos en el topic sin match en BD = 0"
+  metric: "metrics.json:$.p2_spurious"
+  op: eq
+  value: 0
+- id: p2-effects-missing
+  description: "fase 2 (after_publish_before_mark, con outbox): todo match tiene su efecto en device-sim"
+  metric: "metrics.json:$.p2_device_missing"
+  op: eq
+  value: 0
+- id: p2-effects-dup
+  description: "fase 2 (after_publish_before_mark, con outbox): efectos duplicados en device-sim = 0"
+  metric: "metrics.json:$.p2_device_duplicated"
+  op: eq
+  value: 0
+- id: p2-device-dups
+  description: "fase 2 (after_publish_before_mark, con outbox): device-sim no recibe comandos repetidos nuevos"
+  metric: "metrics.json:$.p2_device_dups_delta"
+  op: eq
+  value: 0
+- id: p2-transfers-dups
+  description: "fase 2 (after_publish_before_mark, con outbox): transfers sin duplicados"
+  metric: "metrics.json:$.p2_transfers_dup_groups"
+  op: eq
+  value: 0
+- id: p2-recovery
+  description: "fase 2 (after_publish_before_mark, con outbox): recuperación (crash a outbox vacía) <= 30 s en todos los crashes"
+  metric: "metrics.json:$.p2_recovery_max_s"
+  op: le
+  value: 30
+- id: p2-broker-duplicates
+  description: "fase 2 (after_publish_before_mark): el broker recibe eventId repetidos (permitido; el efecto sigue siendo único)"
+  metric: "metrics.json:$.p2_kafka_dup_events"
+  op: ge
+  value: 1
+- id: p3-crashed
+  description: "fase 3 (control OUTBOX_MODE=direct): el motor murió al menos una vez entre el commit y la publicación"
+  metric: "metrics.json:$.p3_crashes"
+  op: ge
+  value: 1
+- id: p3-no-outbox
+  description: "fase 3 (control OUTBOX_MODE=direct): sin outbox hay matches sin fila de outbox (>= 1)"
+  metric: "metrics.json:$.p3_orphans"
+  op: ge
+  value: 1
+- id: p3-lost
+  description: "fase 3 (control OUTBOX_MODE=direct): pérdida >= 1 (matches en BD sin evento en el topic)"
+  metric: "metrics.json:$.p3_lost"
+  op: ge
+  value: 1

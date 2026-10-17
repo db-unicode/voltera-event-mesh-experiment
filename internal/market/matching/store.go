@@ -29,11 +29,13 @@ type Store struct {
 	region string
 	topic  string
 	now    func() time.Time
+	// Mode es ModeOutbox salvo en el control de E6 (ModeDirect: sin fila de outbox).
+	Mode OutboxMode
 }
 
 // NewStore crea el Store; los eventos se encolan en la outbox con topic <region>.energy-matched.
 func NewStore(pool *pgxpool.Pool, region string) *Store {
-	return &Store{pool: pool, region: region, topic: region + ".energy-matched", now: time.Now}
+	return &Store{pool: pool, region: region, topic: region + ".energy-matched", now: time.Now, Mode: ModeOutbox}
 }
 
 // Topic es el topic de Kafka de los EnergyMatched de la región.
@@ -145,6 +147,9 @@ func (s *Store) persistPair(ctx context.Context, tx pgx.Tx, window, zone string,
 			if tag.RowsAffected() == 0 {
 				return errPairTaken
 			}
+		}
+		if s.Mode == ModeDirect {
+			return nil // control de E6: el evento no se registra en la misma transacción
 		}
 		return outbox.Append(ctx, sp, env, s.topic, matchID)
 	}()

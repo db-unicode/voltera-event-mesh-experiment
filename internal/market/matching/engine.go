@@ -8,6 +8,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/db-unicode/voltera-event-mesh-experiment/internal/events"
+	"github.com/db-unicode/voltera-event-mesh-experiment/internal/failpoint"
+	"github.com/db-unicode/voltera-event-mesh-experiment/internal/outbox"
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/telemetry"
 	"github.com/db-unicode/voltera-event-mesh-experiment/internal/view"
 )
@@ -24,6 +27,13 @@ type Engine struct {
 	// OnCommit se invoca tras confirmar matches (despierta al relay de la outbox).
 	OnCommit func()
 	Now      func() time.Time
+
+	// Solo con Store.Mode == ModeDirect (control de E6, escritura dual ingenua): tras el
+	// commit se publica cada match directo con Direct, con el failpoint
+	// after_commit_before_publish entre ambos pasos. Published cuenta lo publicado.
+	Direct     outbox.Publisher
+	Failpoints *failpoint.Registry
+	Published  func(env events.Envelope, topic string)
 
 	mu   sync.Mutex
 	last WindowStats
@@ -159,9 +169,43 @@ func (e *Engine) RunWindow(ctx context.Context) error {
 			e.Log.Info("pairs discarded: position already matched", "stage", "apply", "result", telemetry.ResultDuplicate,
 				"zone", zone, "window", windowID, "discarded", discarded)
 		}
-		if len(created) > 0 && e.OnCommit != nil {
+		if e.Store.Mode == ModeDirect {
+			e.publishDirect(ctx, created)
+		} else if len(created) > 0 && e.OnCommit != nil {
 			e.OnCommit()
 		}
 	}
 	return firstErr
+}
+
+// publishDirect es el control de E6: publica cada match ya confirmado sin pasar por la
+// outbox. Si el proceso muere antes (failpoint) o Kafka falla, el evento se pierde:
+// el match ya está en matches-db y matched_positions impide volver a proponerlo.
+func (e *Engine) publishDirect(ctx context.Context, created []Created) {
+	for _, c := range created {
+		if e.Failpoints != nil {
+			e.Failpoints.Hit(ctx, outbox.FPAfterCommitBeforePublish)
+		}
+		if e.Direct == nil {
+			continue
+		}
+		env := c.Event
+		env.CommittedAt = e.Now().UTC()
+		env.EmittedAt = env.CommittedAt
+		body, err := events.Marshal(env)
+		if err != nil {
+			e.Log.Error("direct publish: marshal failed", "stage", telemetry.StagePublish, "result", telemetry.ResultError, "error", err)
+			continue
+		}
+		msg := outbox.Message{EventID: env.EventID, Type: env.Type, Topic: e.Store.Topic(), Key: c.Payload.MatchID,
+			Traceparent: env.Traceparent, Body: body, Envelope: env}
+		if err := e.Direct.Publish(ctx, msg); err != nil {
+			telemetry.LogStage(e.Log, telemetry.StagePublish, env, telemetry.ResultError, "topic", msg.Topic, "mode", string(ModeDirect), "error", err)
+			continue
+		}
+		if e.Published != nil {
+			e.Published(env, msg.Topic)
+		}
+		telemetry.LogStage(e.Log, telemetry.StagePublish, env, telemetry.ResultOK, "topic", msg.Topic, "mode", string(ModeDirect))
+	}
 }
