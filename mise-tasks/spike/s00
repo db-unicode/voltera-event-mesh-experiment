@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S0: valida la plataforma base (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s00-platform/run.sh"
