@@ -103,7 +103,7 @@
             "type": "prometheus",
             "uid": "${ds}"
           },
-          "expr": "count by (namespace, app)(up{app=~\"declaration-gateway|energy-transfer|market-projector|matching-engine\", namespace=~\"voltera-($region)\"})",
+          "expr": "count by (namespace, app)(up{app=~\"declaration-gateway|energy-transfer|market-projector|matching-engine\", namespace=~\"voltera-($region)\"} == 1) or 0 * count by (namespace, app)(max_over_time(up{app=~\"declaration-gateway|energy-transfer|market-projector|matching-engine\", namespace=~\"voltera-($region)\"}[6h]))",
           "legendFormat": "{{app}} · {{namespace}}",
           "refId": "A",
           "editorMode": "code",
@@ -171,7 +171,7 @@
             "type": "prometheus",
             "uid": "${ds}"
           },
-          "expr": "count by (namespace)(up{app=\"declaration-gateway\", namespace=~\"voltera-($region)\"})",
+          "expr": "count by (namespace)(up{app=\"declaration-gateway\", namespace=~\"voltera-($region)\"} == 1) or 0 * count by (namespace)(up{namespace=~\"voltera-($region)\"})",
           "legendFormat": "réplicas {{namespace}}",
           "refId": "B",
           "editorMode": "code",
@@ -270,7 +270,7 @@
             "type": "prometheus",
             "uid": "${ds}"
           },
-          "expr": "count by (namespace)(up{app=\"energy-transfer\", namespace=~\"voltera-($region)\"})",
+          "expr": "count by (namespace)(up{app=\"energy-transfer\", namespace=~\"voltera-($region)\"} == 1) or 0 * count by (namespace)(up{namespace=~\"voltera-($region)\"})",
           "legendFormat": "réplicas {{namespace}}",
           "refId": "B",
           "editorMode": "code",
