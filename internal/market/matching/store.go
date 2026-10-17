@@ -39,6 +39,37 @@ func NewStore(pool *pgxpool.Pool, region string) *Store {
 // Topic es el topic de Kafka de los EnergyMatched de la región.
 func (s *Store) Topic() string { return s.topic }
 
+// MatchedRefs devuelve de las posiciones dadas las (meterId, version) que ya están en
+// matched_positions: el motor las descarta antes de planificar para no volver a
+// proponerlas ventana tras ventana mientras la posición siga viva en la vista.
+func (s *Store) MatchedRefs(ctx context.Context, positions []Position) (map[string]struct{}, error) {
+	if len(positions) == 0 {
+		return nil, nil
+	}
+	ids := make([]string, len(positions))
+	vers := make([]int64, len(positions))
+	for i, p := range positions {
+		ids[i], vers[i] = p.MeterID, p.Version
+	}
+	rows, err := s.pool.Query(ctx, `
+		SELECT mp.meter_id, mp.version FROM matched_positions mp
+		JOIN unnest($1::text[], $2::bigint[]) AS q(meter_id, version) USING (meter_id, version)`, ids, vers)
+	if err != nil {
+		return nil, fmt.Errorf("matching: matched refs: %w", err)
+	}
+	defer rows.Close()
+	out := map[string]struct{}{}
+	for rows.Next() {
+		var id string
+		var v int64
+		if err := rows.Scan(&id, &v); err != nil {
+			return nil, err
+		}
+		out[Position{MeterID: id, Version: v}.Ref()] = struct{}{}
+	}
+	return out, rows.Err()
+}
+
 // Created es un match confirmado.
 type Created struct {
 	Event   events.Envelope

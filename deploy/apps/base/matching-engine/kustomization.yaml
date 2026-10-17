@@ -8,7 +8,7 @@ resources:
 # nombre con hash forzaría un rollout en cada cambio de reglas.
 configMapGenerator:
   - name: matching-rules
-    files: [rules.yaml]
+    files: [rules.yaml=rules.cfg]   # .cfg: kubeconform no lo trata como manifiesto
 generatorOptions:
   disableNameSuffixHash: true
 labels:

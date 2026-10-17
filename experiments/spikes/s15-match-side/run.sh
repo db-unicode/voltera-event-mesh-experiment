@@ -37,7 +37,7 @@ zone_r1=z-s15-$run-a
 zone_r2=z-s15-$run-b
 csv="$out/s15-replicas-r1.csv"
 pids=""
-rules_orig=$ROOT/deploy/apps/base/matching-engine/rules.yaml
+rules_orig=$ROOT/deploy/apps/base/matching-engine/rules.cfg
 
 cleanup() {
   for p in $pids; do kill "$p" 2>/dev/null || true; done
@@ -194,6 +194,7 @@ wait_scaled_cycle() {
 
 # set_rules <archivo>: reemplaza rules.yaml en el ConfigMap matching-rules de r1
 set_rules() {
+  [ -s "$1" ] || return 1
   patch=$(jq -n --rawfile r "$1" '{data: {"rules.yaml": $r}}')
   k -n voltera-r1 patch configmap matching-rules --type merge -p "$patch"
 }
@@ -203,9 +204,9 @@ rules_state() { curl -fsS "http://127.0.0.1:$PF_ENGINE_R1/debug/state" | jq -c '
 # rules_is <versión|!versión> <error: yes|no>
 rules_is() {
   s=$(rules_state) || return 1
-  echo "$s"
-  ver=$(echo "$s" | jq -r .version)
-  err=$(echo "$s" | jq -r '.lastReloadError // ""')
+  printf '%s\n' "$s"
+  ver=$(printf '%s\n' "$s" | jq -r .version)
+  err=$(printf '%s\n' "$s" | jq -r '.lastReloadError // ""')
   case $1 in
     !*) [ "$ver" != "${1#!}" ] || return 1 ;;
     *) [ "$ver" = "$1" ] || return 1 ;;
@@ -268,8 +269,8 @@ device_repost_is_duplicate() { # <port> <matchId> <key>
   body=$(printf '{"matchId":"%s","seller":"s","buyer":"b","kwh":1,"issuedAt":"%s"}' "$2" "$(date -u +%Y-%m-%dT%H:%M:%SZ)")
   sig=$(printf '%s' "$body" | openssl dgst -sha256 -hmac "$3" | awk '{print $NF}')
   resp=$(curl -fsS -X POST -H "X-Signature: $sig" -d "$body" "http://127.0.0.1:$1/commands")
-  echo "$resp"
-  echo "$resp" | jq -e '.status == "duplicate"' || return 1
+  printf '%s\n' "$resp"
+  printf '%s\n' "$resp" | jq -e '.status == "duplicate"' || return 1
   bad=$(curl -s -o /dev/null -w '%{http_code}' -X POST -H "X-Signature: deadbeef" -d "$body" "http://127.0.0.1:$1/commands")
   echo "firma inválida -> HTTP $bad"
   [ "$bad" = 401 ] || return 1
@@ -284,7 +285,7 @@ check "port-forwards a device-sim r1/r2, billing-sim y matching-engine (puertos 
 check "energy-transfer r1 en 0 réplicas (KEDA sin backlog)" retry 300 idle_at_zero
 
 device_before=$(state "$PF_DEVICE_R1" || echo '{}')
-echo "$device_before" >"$out/device-r1-before.json"
+printf '%s\n' "$device_before" >"$out/device-r1-before.json"
 sample_loop &
 pids="$pids $!"
 sleep 4
@@ -330,13 +331,13 @@ wait_dedupe
 
 id1=$(jq -r '.[0]' "$out/ids-r1.json")
 dev=$(state "$PF_DEVICE_R1" || echo '{}')
-d_distinct=$(echo "$dev" | jq .distinct)
-d_total=$(echo "$dev" | jq .total)
+d_distinct=$(printf '%s\n' "$dev" | jq .distinct)
+d_total=$(printf '%s\n' "$dev" | jq .total)
 bil=$(state "$PF_BILLING" || echo '{}')
-b_distinct=$(echo "$bil" | jq .distinct)
-b_dups=$(echo "$bil" | jq .duplicates)
-echo "$dev" >"$out/device-r1-before-resend.json"
-echo "$bil" >"$out/billing-before-resend.json"
+b_distinct=$(printf '%s\n' "$bil" | jq .distinct)
+b_dups=$(printf '%s\n' "$bil" | jq .duplicates)
+printf '%s\n' "$dev" >"$out/device-r1-before-resend.json"
+printf '%s\n' "$bil" >"$out/billing-before-resend.json"
 key=$(k -n voltera-r1 get secret device-command-key -o jsonpath='{.data.DEVICE_COMMAND_KEY}' | base64 -d)
 
 log "S15: (e) reenvío de $id1 a Kafka"

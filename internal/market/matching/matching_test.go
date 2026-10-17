@@ -283,11 +283,21 @@ func TestEngineRunWindowCreatesMatchesPerZone(t *testing.T) {
 	require.Equal(t, 6, eng.LastWindow().Created)
 	require.Equal(t, "2026-10-16T12:00:00Z", eng.LastWindow().Window)
 
-	// misma vista en la ventana siguiente: nada nuevo (matched_positions)
+	// misma vista en la ventana siguiente: las posiciones ya emparejadas ni se proponen
 	eng.Now = func() time.Time { return t0.Add(2 * time.Second) }
 	require.NoError(t, eng.RunWindow(context.Background()))
 	require.Equal(t, 6, count(`SELECT count(*) FROM matches`))
-	require.Equal(t, 6, eng.LastWindow().Discarded)
+	require.Zero(t, eng.LastWindow().Created)
+	require.Zero(t, eng.LastWindow().Discarded)
+	require.Zero(t, eng.LastWindow().Eligible)
+
+	// una versión nueva de una posición ya emparejada sí entra otra vez
+	again := src.positions["z-1"][0]
+	again.Version++
+	src.positions["z-1"][0] = again
+	eng.Now = func() time.Time { return t0.Add(4 * time.Second) }
+	require.NoError(t, eng.RunWindow(context.Background()))
+	require.Equal(t, 1, eng.LastWindow().Eligible)
 }
 
 func TestEngineSkipsWindowWithoutValidPrice(t *testing.T) {

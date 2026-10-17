@@ -107,6 +107,23 @@ func (e *Engine) RunWindow(ctx context.Context) error {
 		return err
 	}
 	stats.Invalid = invalid
+	var all []Position
+	for _, ps := range byZone {
+		all = append(all, ps...)
+	}
+	matched, err := e.Store.MatchedRefs(ctx, all)
+	if err != nil {
+		return err
+	}
+	open := make(map[string][]Position, len(byZone))
+	for z, ps := range byZone {
+		for _, p := range ps {
+			if _, done := matched[p.Ref()]; !done {
+				open[z] = append(open[z], p)
+			}
+		}
+	}
+	byZone = open
 	zones := make([]string, 0, len(byZone))
 	for z := range byZone {
 		zones = append(zones, z)
