@@ -3,6 +3,7 @@ package expctl
 import (
 	"bytes"
 	"context"
+	"image/png"
 	"os"
 	"path/filepath"
 	"strings"
@@ -35,6 +36,33 @@ func TestPlotCSV(t *testing.T) {
 	require.Error(t, err)
 	_, err = PlotCSV(csvPath, "zz", nil, png, "t")
 	require.Error(t, err)
+}
+
+func TestPlotDPISize(t *testing.T) {
+	dir := t.TempDir()
+	csvPath := filepath.Join(dir, "s.csv")
+	writeFile(t, csvPath, "x,y\n1,2\n2,4\n")
+	dims := func(out string, args ...string) (int, int) {
+		t.Helper()
+		var o, e bytes.Buffer
+		argv := append([]string{"plot", "--csv", csvPath, "--x", "x", "--out", out}, args...)
+		require.Equal(t, 0, Run(context.Background(), argv, &o, &e, &fakeKube{}), e.String())
+		f, err := os.Open(out)
+		require.NoError(t, err)
+		defer func() { _ = f.Close() }()
+		cfg, err := png.DecodeConfig(f)
+		require.NoError(t, err)
+		return cfg.Width, cfg.Height
+	}
+	w, h := dims(filepath.Join(dir, "a.png"))
+	require.Equal(t, [2]int{768, 384}, [2]int{w, h}, "defaults sin cambio")
+	w, h = dims(filepath.Join(dir, "b.png"), "--dpi", "192")
+	require.Equal(t, [2]int{1536, 768}, [2]int{w, h})
+	w, h = dims(filepath.Join(dir, "c.png"), "--dpi", "200", "--size", "9x4.5")
+	require.Equal(t, [2]int{1800, 900}, [2]int{w, h})
+
+	var o, e bytes.Buffer
+	require.Equal(t, 2, Run(context.Background(), []string{"plot", "--csv", csvPath, "--x", "x", "--out", filepath.Join(dir, "d.png"), "--size", "9"}, &o, &e, &fakeKube{}))
 }
 
 func TestPlotNumericX(t *testing.T) {
