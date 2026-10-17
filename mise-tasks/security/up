@@ -1,0 +1,28 @@
+#!/bin/sh
+#MISE description="Aplica las políticas de seguridad L4 (AuthorizationPolicy de positions-db) (idempotente; arg: r1|r2|all)"
+#USAGE arg "[region]" help="región (r1, r2 o all)" default="all"
+set -eu
+# shellcheck source=experiments/lib/common.sh
+. "${MISE_PROJECT_ROOT:?}/experiments/lib/common.sh"
+need kubectl
+require_cluster
+
+region=${1:-all}
+case $region in
+  r1 | r2) regions=$region ;;
+  all) regions="r1 r2" ;;
+  *) die "región desconocida '$region' (r1, r2 o all)" ;;
+esac
+
+for r in $regions; do
+  ns=voltera-$r
+  k get statefulset positions-db -n "$ns" >/dev/null 2>&1 || {
+    log "AVISO: no hay positions-db en $ns; política no aplicada (ejecuta: mise run data:up $r)"
+    continue
+  }
+  log "políticas de seguridad de $r (deploy/security/$r)"
+  k apply -k "$ROOT/deploy/security/$r"
+  principal=$(k -n "$ns" get authorizationpolicy positions-db -o jsonpath='{.spec.rules[0].from[0].source.principals[0]}')
+  [ "$principal" = "cluster.local/ns/$ns/sa/declaration-gateway" ] || die "principal inesperado en $ns: $principal"
+  log "positions-db de $ns: solo $principal"
+done

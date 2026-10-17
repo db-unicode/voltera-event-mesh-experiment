@@ -1,0 +1,20 @@
+# Zero Trust sobre positions-db (E4): solo declaration-gateway, su dueño, abre conexiones al puerto 5432.
+# Con una política ALLOW, cualquier otra identidad (p. ej. market-projector) recibe un rechazo L4 (rbac denied).
+# Lo que no pasa por el sidecar sigue funcionando: kubectl exec (psql por socket Unix) y kubectl port-forward
+# (`mise run data:test`) entran por el loopback del pod.
+# La región se fija en los overlays r1/r2 (namespace y principal).
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: positions-db
+spec:
+  selector:
+    matchLabels: {app: positions-db}
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals: ["cluster.local/ns/voltera-REGION/sa/declaration-gateway"]
+      to:
+        - operation:
+            ports: ["5432"]

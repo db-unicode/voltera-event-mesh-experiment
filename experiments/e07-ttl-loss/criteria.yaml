@@ -1,0 +1,66 @@
+# E7: criterios fijados antes de la corrida final. P = 10 s, TTL = 25 s, M = 200.
+- id: ttl-applied
+  description: El proyector corre con VIEW_TTL_S = 25 durante la corrida
+  metric: "metrics.json:$.setup.view_ttl_s"
+  op: eq
+  value: 25
+- id: 7a-lost-one-cycle
+  description: 7a perdió el mensaje de al menos el 90% de los medidores (drop_position durante 9,5 s)
+  metric: "metrics.json:$.a.dropped_meters"
+  op: ge
+  value: 180
+- id: 7a-no-double-loss
+  description: 7a ningún medidor perdió dos mensajes seguidos
+  metric: "metrics.json:$.a.max_drops_per_meter"
+  op: eq
+  value: 1
+- id: 7a-min-keys
+  description: 7a keys mínimas == M (cero medidores expulsados)
+  metric: "metrics.json:$.a.min_keys"
+  op: eq
+  value: 200
+- id: 7a-min-ttl
+  description: 7a TTL mínimo observado (s) > 0
+  metric: "metrics.json:$.a.min_ttl_s"
+  op: gt
+  value: 0
+- id: 7b-all-expired
+  description: 7b las M keys vencen tras perder 3 ciclos
+  metric: "metrics.json:$.b.vanished"
+  op: eq
+  value: 200
+- id: 7b-expiry-late-max
+  description: 7b desaparición - (projectedAt + TTL) <= 2 s (s)
+  metric: "metrics.json:$.b.err_max_s"
+  op: le
+  value: 2
+- id: 7b-expiry-early-min
+  description: 7b ninguna key desaparece antes de TTL - 2 s (s)
+  metric: "metrics.json:$.b.err_min_s"
+  op: ge
+  value: -2
+- id: 7b-reappear
+  description: 7b las M keys reaparecen en <= P + 5 s tras terminar la pérdida (s)
+  metric: "metrics.json:$.b.reappear_s"
+  op: le
+  value: 15
+- id: 7b-reappear-found
+  description: 7b las M keys reaparecieron (reappear_s >= 0)
+  metric: "metrics.json:$.b.reappear_s"
+  op: ge
+  value: 0
+- id: 7c-deleted
+  description: 7c se borraron las M keys del prefijo
+  metric: "metrics.json:$.c.deleted"
+  op: eq
+  value: 200
+- id: 7c-repopulate
+  description: 7c keys == M de nuevo en <= P + 5 s sin intervención (s)
+  metric: "metrics.json:$.c.repopulate_s"
+  op: le
+  value: 15
+- id: 7c-repopulate-found
+  description: 7c las M keys reaparecieron (repopulate_s >= 0)
+  metric: "metrics.json:$.c.repopulate_s"
+  op: ge
+  value: 0
