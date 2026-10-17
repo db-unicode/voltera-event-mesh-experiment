@@ -1,7 +1,12 @@
-# KEDA queda fuera de la malla: sus pods consultan Kafka/RabbitMQ y el API server directamente.
-podAnnotations:
+# Solo el operador entra en la malla: es quien consulta Kafka/RabbitMQ (mTLS STRICT en los brokers)
+# y obtiene identidad SPIFFE (ns/keda/sa/keda-operator). El adaptador de métricas y los webhooks
+# reciben llamadas del API server (fuera de la malla), así que quedan sin sidecar.
+# El namespace `keda` no lleva etiqueta istio-injection: el opt-in es la etiqueta del pod.
+podLabels:
   keda:
-    sidecar.istio.io/inject: "false"
+    sidecar.istio.io/inject: "true"
+podAnnotations:
+  keda: {}
   metricsAdapter:
     sidecar.istio.io/inject: "false"
   webhooks:

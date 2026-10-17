@@ -1,0 +1,15 @@
+# El adaptador de métricas (sin sidecar) llama al operador por gRPC con TLS propio de KEDA (9666).
+# Solo ese puerto del operador admite tráfico que no es mTLS de Istio; el resto sigue en STRICT.
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: keda-operator-grpc
+  namespace: keda
+spec:
+  selector:
+    matchLabels: {app: keda-operator}
+  mtls:
+    mode: STRICT
+  portLevelMtls:
+    9666:
+      mode: PERMISSIVE
