@@ -159,3 +159,8 @@
   metric: "metrics.json:$.reconciliation_mismatches"
   op: eq
   value: 0
+- id: reconciliation-complete
+  description: "la conciliación cubre todos los ids esperados (declaraciones únicas de (a) y (c), matches de (b) en transfer y billing)"
+  metric: "metrics.json:$.reconciliation_rows_diff"
+  op: eq
+  value: 0

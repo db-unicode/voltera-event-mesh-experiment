@@ -79,7 +79,7 @@ run_load() {
   shift
   metersim_run r1 "$@" --out /dev/stdout >"$_f" 2>&1 || { log "meter-sim falló: $_f"; return 1; }
   metersim_summary <"$_f" >"$_f.json"
-  grep -E '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' "$_f" >"$_f.csv" || true
+  grep -E '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12},' "$_f" >"${_f%.log}.sent" || true
 }
 
 # --- esperas -------------------------------------------------------------------------------
@@ -161,6 +161,7 @@ phase_a() {
   # balance: aplicados + descartados (stale incluye los duplicados exactos: misma versión) - entregas
   mset a_balance_diff "$((_ok + _st + _er - _deliveries))"
   mset a_meters "$E5_METERS"
+  mset a_v3_meters "$E5_METERS_V3"
 
   e56_wait 60 outbox_pending_zero || true
   mset a_outbox_rows "$(psql_pos "SELECT count(*) FROM outbox WHERE aggregate_id LIKE '$PFX_A%'")"
@@ -345,6 +346,8 @@ collect() {
     "$_dir/raw/billing-after.json" | sort >>"$_rec"
   mset reconciliation_mismatches "$(awk -F, 'NR > 1 && $4 != $5 { n++ } END { print n + 0 }' "$_rec")"
   mset reconciliation_rows "$(($(wc -l <"$_rec") - 1))"
+  # filas esperadas: una por declaración única de (a) v5 y v3, una por declaración de (c), y un match por transfer y billing de (b)
+  mset reconciliation_rows_expected "$(jq '.a_meters + .a_v3_meters + .c_published + 2 * .b_matches' "$_dir/raw/m.json")"
 
   jq -n --slurpfile m "$_dir/raw/m.json" '$m[0] | {device: {b_not_once: .b_device_not_once, c_not_once: .c_device_not_once, b_dups_delta: .b_device_dups_delta},
     transfers: {b_rows: .b_transfers_rows, b_sent: .b_transfers_sent, c_sent: .c_transfers_sent, c_not_sent: .c_transfers_not_sent},
@@ -360,5 +363,5 @@ collect() {
     b_transfers_sent_diff: (.b_transfers_sent - .b_matches), b_inbox_diff: (.b_inbox_rows - .b_matches),
     b_dup_dropped_diff: (.b_dup_dropped_delta - .b_resent), d_two_diff: (.d_ids_with_two - .b_matches),
     d_distinct_diff: (.d_distinct_mine_after - .b_matches), d_dups_diff: (.d_duplicates_delta - .b_matches),
-    c_outbox_rows_diff: (.c_outbox_rows - .c_published)}' "$_dir/raw/m.json" >"$_dir/metrics.json"
+    c_outbox_rows_diff: (.c_outbox_rows - .c_published), reconciliation_rows_diff: (.reconciliation_rows - .reconciliation_rows_expected)}' "$_dir/raw/m.json" >"$_dir/metrics.json"
 }
