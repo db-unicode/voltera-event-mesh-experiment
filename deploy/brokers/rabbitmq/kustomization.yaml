@@ -6,6 +6,7 @@ resources:
   - statefulset.yaml
   - service.yaml
   - security.yaml
+  - network-policy.yaml
 configMapGenerator:
   - name: rabbitmq-config
     files:

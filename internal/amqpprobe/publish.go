@@ -19,6 +19,8 @@ type PublishOptions struct {
 	Exchange   string
 	RoutingKey string
 	Count      int
+	// Rate limita el envío a Rate mensajes por segundo (0 = sin límite).
+	Rate int
 }
 
 // PublishResult resume una publicación. Published cuenta los envíos; Confirmed, los ack del broker;
@@ -85,6 +87,13 @@ func Publish(ctx context.Context, conn *amqp.Connection, opts PublishOptions) (P
 	}
 
 	for i := 1; i <= opts.Count; i++ {
+		if wait := paceDelay(i-1, opts.Rate, time.Since(start)); wait > 0 {
+			select {
+			case <-ctx.Done():
+				return res, ctx.Err()
+			case <-time.After(wait):
+			}
+		}
 		body, err := buildBody(runID, i, time.Now())
 		if err != nil {
 			return res, err
@@ -133,4 +142,13 @@ func channelError(err error, closed <-chan *amqp.Error) error {
 	case <-time.After(2 * time.Second):
 	}
 	return err
+}
+
+// paceDelay devuelve cuánto esperar antes de enviar el mensaje número sent+1 para mantener rate msgs/s
+// desde el inicio (elapsed ya transcurrido). Con rate <= 0 no espera.
+func paceDelay(sent, rate int, elapsed time.Duration) time.Duration {
+	if rate <= 0 {
+		return 0
+	}
+	return max(time.Duration(sent)*time.Second/time.Duration(rate)-elapsed, 0)
 }

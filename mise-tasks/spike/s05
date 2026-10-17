@@ -1,0 +1,5 @@
+#!/bin/sh
+#MISE description="Spike S5: KEDA escala declaration-gateway con la cola RabbitMQ, 0 -> N -> 0 (PASS/FAIL)"
+set -eu
+
+exec sh "${MISE_PROJECT_ROOT:?}/experiments/spikes/s05-keda-rabbit/run.sh"

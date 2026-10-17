@@ -17,6 +17,13 @@ func TestParsePublish(t *testing.T) {
 		require.Equal(t, "r1", a.vhost)
 		require.Equal(t, PublishOptions{Exchange: "meter-declarations.x", RoutingKey: "meter-declarations", Count: 2000}, a.opts)
 	})
+	t.Run("rate", func(t *testing.T) {
+		a, err := parsePublish(cfg, []string{"--queue", "q", "--count", "500", "--rate", "50"}, &bytes.Buffer{})
+		require.NoError(t, err)
+		require.Equal(t, 50, a.opts.Rate)
+		_, err = parsePublish(cfg, []string{"--queue", "q", "--rate", "-1"}, &bytes.Buffer{})
+		require.ErrorIs(t, err, errUsage)
+	})
 	t.Run("exchange por defecto explícito", func(t *testing.T) {
 		a, err := parsePublish(cfg, []string{"--queue", "q", "--exchange="}, &bytes.Buffer{})
 		require.NoError(t, err)

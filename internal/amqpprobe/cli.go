@@ -15,7 +15,7 @@ import (
 
 const usage = `uso: amqp-probe <publish|consume|work> [flags]
 
-  publish --vhost V --queue Q [--exchange X] [--count N]
+  publish --vhost V --queue Q [--exchange X] [--count N] [--rate MSGS_POR_S]
           publica N mensajes persistentes con confirms. Sin --exchange usa "<Q>.x"; --exchange="" usa el exchange por defecto.
   consume --vhost V --queue Q --expect N [--prefetch P] [--timeout D]
           consume N mensajes con ack manual y termina.
@@ -85,6 +85,7 @@ func parsePublish(cfg Config, args []string, stderr io.Writer) (publishArgs, err
 	exchange := fs.String("exchange", "", `exchange (por defecto "<queue>.x")`)
 	queue := fs.String("queue", "", "cola destino (routing key)")
 	count := fs.Int("count", 1, "mensajes a publicar")
+	rate := fs.Int("rate", 0, "mensajes por segundo (0 = sin límite)")
 	timeout := fs.Duration("timeout", 2*time.Minute, "tiempo máximo")
 	if err := fs.Parse(args); err != nil {
 		return publishArgs{}, err
@@ -96,11 +97,11 @@ func parsePublish(cfg Config, args []string, stderr io.Writer) (publishArgs, err
 		_, _ = fmt.Fprintln(stderr, err)
 		return publishArgs{}, errUsage
 	}
-	if *vhost == "" || *count < 1 {
-		_, _ = fmt.Fprintln(stderr, "faltan --vhost o --count >= 1")
+	if *vhost == "" || *count < 1 || *rate < 0 {
+		_, _ = fmt.Fprintln(stderr, "faltan --vhost, o --count < 1, o --rate < 0")
 		return publishArgs{}, errUsage
 	}
-	return publishArgs{vhost: *vhost, timeout: *timeout, opts: PublishOptions{Exchange: ex, RoutingKey: key, Count: *count}}, nil
+	return publishArgs{vhost: *vhost, timeout: *timeout, opts: PublishOptions{Exchange: ex, RoutingKey: key, Count: *count, Rate: *rate}}, nil
 }
 
 func runPublish(ctx context.Context, cfg Config, args []string, stdout, stderr io.Writer) error {

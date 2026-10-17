@@ -65,3 +65,12 @@ func TestClampPrefetch(t *testing.T) {
 	require.Equal(t, 10, clampPrefetch(10, 100))
 	require.Equal(t, 5, clampPrefetch(10, 5))
 }
+
+func TestPaceDelay(t *testing.T) {
+	require.Zero(t, paceDelay(10, 0, 0), "sin límite")
+	require.Equal(t, time.Duration(0), paceDelay(0, 50, 0), "el primero sale ya")
+	require.Equal(t, 20*time.Millisecond, paceDelay(1, 50, 0))
+	require.Equal(t, 10*time.Millisecond, paceDelay(1, 50, 10*time.Millisecond))
+	require.Equal(t, time.Duration(0), paceDelay(1, 50, time.Second), "ya va atrasado")
+	require.Equal(t, 9*time.Second, paceDelay(450, 50, 0))
+}
