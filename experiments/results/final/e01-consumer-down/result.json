@@ -1,0 +1,231 @@
+{
+  "verdict": "PASS",
+  "data": "/Users/diego/Developer/voltera-wt/exp-e01-s2/experiments/results/e01-consumer-down/20261017T063004Z-56cc7ba-r1",
+  "criteria": [
+    {
+      "id": "a-settled",
+      "description": "A. Sistema asentado tras la caída (lag 0, outbox vacías, efectos completos) dentro del plazo",
+      "metric": "metrics.json:$.a.settled",
+      "observed": true,
+      "op": "eq",
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-matches",
+      "description": "A. Matches creados con el prefijo (20 pares/s durante 180 s esperan ~3600)",
+      "metric": "metrics.json:$.a.matches",
+      "observed": 3599,
+      "op": "ge",
+      "expected": 3000,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-loss-device",
+      "description": "A. Matches sin efecto en device-sim (pérdida)",
+      "metric": "metrics.json:$.a.device.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-dup-device",
+      "description": "A. Matches con efecto duplicado en device-sim",
+      "metric": "metrics.json:$.a.device.dups",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-loss-billing",
+      "description": "A. Matches sin registro en billing-sim",
+      "metric": "metrics.json:$.a.billing.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-dup-billing",
+      "description": "A. Matches duplicados en billing-sim",
+      "metric": "metrics.json:$.a.billing.dups",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-emitter-errors",
+      "description": "A. Errores de publicación de matching-engine durante toda la fase",
+      "metric": "metrics.json:$.a.emitter.publishErrors",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-emitter-p95",
+      "description": "A. p95 de match_window_seconds durante la caída / antes",
+      "metric": "metrics.json:$.a.emitter.p95Ratio",
+      "observed": 1.1010101010101012,
+      "op": "le",
+      "expected": 1.2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-lag-grows",
+      "description": "A. El lag crece durante la caída (valor al reanudar - valor al caer \u003e 0)",
+      "metric": "metrics.json:$.a.growth",
+      "observed": 1200,
+      "op": "gt",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-drain",
+      "description": "A. Segundos desde Ready de energy-transfer hasta lag 0 (\u003c= 60; -1 = nunca)",
+      "metric": "metrics.json:$.a.drainS",
+      "observed": 4,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-drain-max",
+      "description": "A. Segundos desde Ready de energy-transfer hasta lag 0",
+      "metric": "metrics.json:$.a.drainS",
+      "observed": 4,
+      "op": "le",
+      "expected": 60,
+      "verdict": "PASS"
+    },
+    {
+      "id": "a-lag-end",
+      "description": "A. Lag final",
+      "metric": "metrics.json:$.a.final",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-settled",
+      "description": "B. Sistema asentado tras la caída",
+      "metric": "metrics.json:$.b.settled",
+      "observed": true,
+      "op": "eq",
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-matches",
+      "description": "B. Matches creados con el prefijo",
+      "metric": "metrics.json:$.b.matches",
+      "observed": 2495,
+      "op": "ge",
+      "expected": 2000,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-loss-device",
+      "description": "B. Matches sin efecto en device-sim",
+      "metric": "metrics.json:$.b.device.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-dup-device",
+      "description": "B. Matches con efecto duplicado en device-sim",
+      "metric": "metrics.json:$.b.device.dups",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-loss-billing",
+      "description": "B. Matches sin registro en billing-sim",
+      "metric": "metrics.json:$.b.billing.missing",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-keys-before",
+      "description": "B. Medidores del prefijo en la vista antes de la caída (todos los de la carga)",
+      "metric": "metrics.json:$.b.keys.before",
+      "observed": 400,
+      "op": "ge",
+      "expected": 400,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-keys-lost",
+      "description": "B. Medidores que salen de la vista (antes - mínimo durante la caída y la recuperación)",
+      "metric": "metrics.json:$.b.keys.lost",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-keys-end",
+      "description": "B. Medidores del prefijo en la vista al terminar la carga",
+      "metric": "metrics.json:$.b.keys.atLoadEnd",
+      "observed": 400,
+      "op": "ge",
+      "expected": 400,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-emitter-errors",
+      "description": "B. Errores de publicación del gateway durante toda la fase",
+      "metric": "metrics.json:$.b.emitter.publishErrors",
+      "observed": 0,
+      "op": "eq",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-emitter-p95",
+      "description": "B. p95 de event_processing_seconds del gateway durante la caída / antes",
+      "metric": "metrics.json:$.b.emitter.p95Ratio",
+      "observed": 0.9406906953028049,
+      "op": "le",
+      "expected": 1.2,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-depth-grows",
+      "description": "B. La cola energy-positions crece durante la caída (valor al reanudar - valor al caer \u003e 0)",
+      "metric": "metrics.json:$.b.growth",
+      "observed": 2323,
+      "op": "gt",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-drain",
+      "description": "B. Segundos desde Ready del proyector hasta cola 0 (-1 = nunca)",
+      "metric": "metrics.json:$.b.drainS",
+      "observed": 2,
+      "op": "ge",
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "b-drain-max",
+      "description": "B. Segundos desde Ready del proyector hasta cola 0",
+      "metric": "metrics.json:$.b.drainS",
+      "observed": 2,
+      "op": "le",
+      "expected": 60,
+      "verdict": "PASS"
+    }
+  ]
+}

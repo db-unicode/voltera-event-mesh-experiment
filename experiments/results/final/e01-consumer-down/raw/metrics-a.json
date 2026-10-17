@@ -1,0 +1,47 @@
+{
+  "kind": "transfer",
+  "prefix": "e01a-1792218610-",
+  "settled": true,
+  "matches": 3599,
+  "device": {
+    "missing": 0,
+    "dups": 0
+  },
+  "billing": {
+    "missing": 0,
+    "dups": 0
+  },
+  "created": 3599,
+  "deviceDeltaDistinct": 3599,
+  "billingDeltaDistinct": 3599,
+  "deviceDeltaGap": 0,
+  "billingDeltaGap": 0,
+  "deviceDeltaDuplicates": 0,
+  "downS": 60,
+  "producedInOutage": 1200,
+  "peak": 1219,
+  "valueWhenDown": 19,
+  "valueAtResume": 1219,
+  "final": 0,
+  "growth": 1200,
+  "growthRatio": 1,
+  "drainS": 4,
+  "emitter": {
+    "p95Before": 0.08249999999999999,
+    "p95During": 0.09083333333333334,
+    "p95Ratio": 1.1010101010101012,
+    "rateBefore": 18.666666666666668,
+    "rateDuring": 19.555555555555554,
+    "rateRatio": 1.0476190476190474,
+    "publishErrors": 0,
+    "outboxPendingBefore": 0,
+    "outboxPendingDuring": 0,
+    "outboxPendingMax": 0
+  },
+  "keys": {
+    "before": -1,
+    "minDuring": -1,
+    "atLoadEnd": -1,
+    "lost": -1
+  }
+}

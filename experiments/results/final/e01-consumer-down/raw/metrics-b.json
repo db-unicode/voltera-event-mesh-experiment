@@ -1,0 +1,47 @@
+{
+  "kind": "projector",
+  "prefix": "e01b-1792218847-",
+  "settled": true,
+  "matches": 2495,
+  "device": {
+    "missing": 0,
+    "dups": 0
+  },
+  "billing": {
+    "missing": 0,
+    "dups": 0
+  },
+  "created": 2495,
+  "deviceDeltaDistinct": 2495,
+  "billingDeltaDistinct": 2495,
+  "deviceDeltaGap": 0,
+  "billingDeltaGap": 0,
+  "deviceDeltaDuplicates": 0,
+  "downS": 60,
+  "producedInOutage": 2459,
+  "peak": 2526,
+  "valueWhenDown": 0,
+  "valueAtResume": 2323,
+  "final": 0,
+  "growth": 2323,
+  "growthRatio": 0.9446929646197642,
+  "drainS": 2,
+  "emitter": {
+    "p95Before": 0.04606837606837606,
+    "p95During": 0.043336092715231776,
+    "p95Ratio": 0.9406906953028049,
+    "rateBefore": 37.86666666666667,
+    "rateDuring": 40.66485933958491,
+    "rateRatio": 1.073895933263686,
+    "publishErrors": 0,
+    "outboxPendingBefore": 0,
+    "outboxPendingDuring": 0,
+    "outboxPendingMax": 0
+  },
+  "keys": {
+    "before": 400,
+    "minDuring": 400,
+    "atLoadEnd": 400,
+    "lost": 0
+  }
+}

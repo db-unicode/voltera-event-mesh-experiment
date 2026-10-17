@@ -1,0 +1,21 @@
+{
+  "prefix": "e01b-1792218847-",
+  "kind": "projector",
+  "device0": {
+    "total": 142510,
+    "distinct": 142509,
+    "duplicates": 1
+  },
+  "billing0": {
+    "total": 7416,
+    "distinct": 7316,
+    "duplicates": 100
+  },
+  "tStart": 1792218872,
+  "tLoad0": 1792218876,
+  "tPause": 1792218906,
+  "tResume": 1792218966,
+  "tLoadEnd": 1792219060,
+  "tSettled": 1792219167,
+  "settled": true
+}

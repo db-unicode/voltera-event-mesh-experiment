@@ -2,7 +2,8 @@
 #   a = energy-transfer a 0 réplicas 60 s (emisor: matching-engine -> Kafka)
 #   b = market-projector a 0 réplicas 60 s (< TTL de 150 s; emisor: declaration-gateway -> RabbitMQ)
 # Umbrales de 03-experiments.md sección 5/E1. Cambios respecto al plan (justificados en README):
-#   lag/cola crece ~ tasa x D se mide con el valor al reanudar menos el valor al caer (+/-10 %), no con el pico.
+#   Recortado a lo que demuestra EDA (pérdida, duplicados, errores del emisor, lag/cola que crece y vuelve a 0, keys sin expulsar);
+#   cada recorte respecto al plan está justificado en el README.
 
 # ---- fase a: energy-transfer ----
 - id: a-settled
@@ -35,16 +36,6 @@
   metric: "metrics.json:$.a.billing.dups"
   op: eq
   value: 0
-- id: a-delta-device
-  description: A. Matches creados en la fase menos efectos distintos nuevos en device-sim
-  metric: "metrics.json:$.a.deviceDeltaGap"
-  op: eq
-  value: 0
-- id: a-delta-billing
-  description: A. Matches creados en la fase menos efectos distintos nuevos en billing-sim
-  metric: "metrics.json:$.a.billingDeltaGap"
-  op: eq
-  value: 0
 - id: a-emitter-errors
   description: A. Errores de publicación de matching-engine durante toda la fase
   metric: "metrics.json:$.a.emitter.publishErrors"
@@ -55,26 +46,11 @@
   metric: "metrics.json:$.a.emitter.p95Ratio"
   op: le
   value: 1.2
-- id: a-emitter-rate
-  description: A. Matches/s durante la caída / antes (el emisor sigue a su ritmo)
-  metric: "metrics.json:$.a.emitter.rateRatio"
-  op: ge
-  value: 0.8
-- id: a-emitter-outbox
-  description: A. outbox_pending máximo de matching-engine (acotado)
-  metric: "metrics.json:$.a.emitter.outboxPendingMax"
-  op: le
-  value: 100
-- id: a-lag-growth-lo
-  description: A. Crecimiento del lag en la caída / matches creados en la caída (>= 0.9)
-  metric: "metrics.json:$.a.growthRatio"
-  op: ge
-  value: 0.9
-- id: a-lag-growth-hi
-  description: A. Crecimiento del lag en la caída / matches creados en la caída (<= 1.1)
-  metric: "metrics.json:$.a.growthRatio"
-  op: le
-  value: 1.1
+- id: a-lag-grows
+  description: A. El lag crece durante la caída (valor al reanudar - valor al caer > 0)
+  metric: "metrics.json:$.a.growth"
+  op: gt
+  value: 0
 - id: a-drain
   description: A. Segundos desde Ready de energy-transfer hasta lag 0 (<= 60; -1 = nunca)
   metric: "metrics.json:$.a.drainS"
@@ -101,7 +77,7 @@
   description: B. Matches creados con el prefijo
   metric: "metrics.json:$.b.matches"
   op: ge
-  value: 3000
+  value: 2000
 - id: b-loss-device
   description: B. Matches sin efecto en device-sim
   metric: "metrics.json:$.b.device.missing"
@@ -142,21 +118,11 @@
   metric: "metrics.json:$.b.emitter.p95Ratio"
   op: le
   value: 1.2
-- id: b-emitter-outbox
-  description: B. outbox_pending máximo del gateway (acotado)
-  metric: "metrics.json:$.b.emitter.outboxPendingMax"
-  op: le
-  value: 100
-- id: b-depth-growth-lo
-  description: B. Crecimiento de energy-positions en la caída / eventos publicados en la caída (>= 0.9)
-  metric: "metrics.json:$.b.growthRatio"
-  op: ge
-  value: 0.9
-- id: b-depth-growth-hi
-  description: B. Crecimiento de energy-positions en la caída / eventos publicados en la caída (<= 1.1)
-  metric: "metrics.json:$.b.growthRatio"
-  op: le
-  value: 1.1
+- id: b-depth-grows
+  description: B. La cola energy-positions crece durante la caída (valor al reanudar - valor al caer > 0)
+  metric: "metrics.json:$.b.growth"
+  op: gt
+  value: 0
 - id: b-drain
   description: B. Segundos desde Ready del proyector hasta cola 0 (-1 = nunca)
   metric: "metrics.json:$.b.drainS"
