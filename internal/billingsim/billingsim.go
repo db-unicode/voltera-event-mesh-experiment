@@ -41,10 +41,23 @@ type State struct {
 	ByMatchID map[string]MatchEntry `json:"byMatchId,omitempty"`
 }
 
-// MatchEntry es lo facturado de un matchId.
+// MatchEntry es lo facturado de un matchId. Los sellos y latencias son los de la primera
+// entrega: un duplicado no los mueve.
 type MatchEntry struct {
-	Region string `json:"region"`
-	Count  int    `json:"count"`
+	Region     string    `json:"region"`
+	Count      int       `json:"count"`
+	ReceivedAt time.Time `json:"receivedAt,omitzero"`
+	EmittedAt  time.Time `json:"emittedAt,omitzero"`
+	OccurredAt time.Time `json:"occurredAt,omitzero"`
+	// EmitLagMs = receivedAt - emittedAt (Kafka + mesh-bridge + NATS + leafnode); 0 si el sobre no trae emittedAt.
+	EmitLagMs float64 `json:"emitLagMs,omitempty"`
+	// E2ELagMs = receivedAt - occurredAt (desde que el motor decide el match).
+	E2ELagMs float64 `json:"e2eLagMs,omitempty"`
+}
+
+// Times son los sellos de una entrega.
+type Times struct {
+	ReceivedAt, EmittedAt, OccurredAt time.Time
 }
 
 // Ledger es el libro de facturación idempotente por matchId.
@@ -60,8 +73,14 @@ func NewLedger() *Ledger {
 	return &Ledger{byMatch: map[string]*MatchEntry{}, region: map[string]*RegionStats{}}
 }
 
-// Record registra una entrega y devuelve true si matchId ya estaba facturado.
+// Record registra una entrega sin sellos y devuelve true si matchId ya estaba facturado.
 func (l *Ledger) Record(region, matchID string) (duplicate bool) {
+	return l.RecordAt(region, matchID, Times{})
+}
+
+// RecordAt registra una entrega con sus sellos (solo la primera los fija) y devuelve true si
+// matchId ya estaba facturado.
+func (l *Ledger) RecordAt(region, matchID string, t Times) (duplicate bool) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	rs := l.region[region]
@@ -73,7 +92,13 @@ func (l *Ledger) Record(region, matchID string) (duplicate bool) {
 	rs.Total++
 	e := l.byMatch[matchID]
 	if e == nil {
-		e = &MatchEntry{Region: region}
+		e = &MatchEntry{Region: region, ReceivedAt: t.ReceivedAt, EmittedAt: t.EmittedAt, OccurredAt: t.OccurredAt}
+		if !t.ReceivedAt.IsZero() && !t.EmittedAt.IsZero() {
+			e.EmitLagMs = float64(t.ReceivedAt.Sub(t.EmittedAt)) / float64(time.Millisecond)
+		}
+		if !t.ReceivedAt.IsZero() && !t.OccurredAt.IsZero() {
+			e.E2ELagMs = float64(t.ReceivedAt.Sub(t.OccurredAt)) / float64(time.Millisecond)
+		}
 		l.byMatch[matchID] = e
 	}
 	e.Count++
@@ -130,18 +155,19 @@ func (b *Biller) Handle(_ context.Context, d natsx.Delivery) error {
 	}
 	region := regionOf(d.Subject, env.Region)
 
-	dup := b.Ledger.Record(region, m.MatchID)
+	now := time.Now
+	if b.Now != nil {
+		now = b.Now
+	}
+	received := now()
+	dup := b.Ledger.RecordAt(region, m.MatchID, Times{ReceivedAt: received, EmittedAt: env.EmittedAt, OccurredAt: env.OccurredAt})
 	b.Metrics.BillingReceived.WithLabelValues(region).Inc()
 	result := telemetry.ResultOK
 	if dup {
 		result = telemetry.ResultDuplicate
 		b.Metrics.BillingDuplicates.WithLabelValues(region).Inc()
 	} else {
-		now := time.Now
-		if b.Now != nil {
-			now = b.Now
-		}
-		b.Svc.Metrics.ObserveLag(env, now())
+		b.Svc.Metrics.ObserveLag(env, received)
 	}
 	b.Svc.Consumed(env, d.Subject, result)
 	telemetry.LogStage(b.Log, telemetry.StageReceived, env, result,
